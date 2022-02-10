@@ -1,0 +1,20 @@
+# Image values
+REGISTRY := "quay.io"
+PROJECT := ${USER}
+IMAGE := "httpd-debug"
+TAG := "latest"
+IMAGE_REF := $(REGISTRY)/$(PROJECT)/$(IMAGE):$(TAG)
+
+# Choose docker if install, if not, use podman
+ENGINE=$(shell command -v docker &> /dev/null && echo docker || echo podman)
+
+# Default build and then push
+default: all
+all: build push
+
+build:
+	$(ENGINE) build -f Dockerfile -t $(IMAGE_REF) .
+
+push:
+	$(ENGINE) login quay.io
+	$(ENGINE) push $(IMAGE_REF)
