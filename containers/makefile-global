@@ -1,8 +1,7 @@
-ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 # Image values
 REGISTRY := "quay.io"
 PROJECT := ${USER}
-IMAGE := $(shell basename ${ROOT_DIR})
+IMAGE := $(shell basename ${PWD})
 TAG := "latest"
 IMAGE_REF := $(REGISTRY)/$(PROJECT)/$(IMAGE):$(TAG)
 
