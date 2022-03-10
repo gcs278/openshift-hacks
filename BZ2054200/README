@@ -1,0 +1,4 @@
+1. Edit router-private.yaml to have the right domain name
+2. oc apply -f router-private.yaml
+3. oc create svc nodeport router-example-service-testing --tcp=80 -n openshift-ingress
+4. oc delete pod -n openshift-ingress-operator ingress-operator-...

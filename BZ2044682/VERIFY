@@ -1,0 +1,17 @@
+# Setup: Scale down ingress operator, go unmanaged, and make router privileged
+oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+oc scale --replicas 0 -n openshift-ingress-operator deployments ingress-operator
+oc patch clusterversions/version --type=json --patch='[{"op":"add","path":"/spec/overrides","value":[{"kind":"Deployment","group":"apps/v1","name":"ingress-operator","namespace":"openshift-ingress-operator","unmanaged":true}]}]'
+oc scale --replicas 0 -n openshift-ingress-operator deployments ingress-operator
+oc patch clusterrole/openshift-ingress-router --type=strategic --patch='{"rules":[{"apiGroups":[""],"resources":["endpoints","namespaces","services"],"verbs":["list","watch"]},{"apiGroups":["authentication.k8s.io"],"resources":["tokenreviews"],"verbs":["create"]},{"apiGroups":["authorization.k8s.io"],"resources":["subjectaccessreviews"],"verbs":["create"]},{"apiGroups":["route.openshift.io"],"resources":["routes"],"verbs":["list","watch"]},{"apiGroups":["route.openshift.io"],"resources":["routes/status"],"verbs":["update"]},{"apiGroups":["security.openshift.io"],"resourceNames":["privileged"],"resources":["securitycontextconstraints"],"verbs":["use"]},{"apiGroups":["discovery.k8s.io"],"resources":["endpointslices"],"verbs":["list","watch"]}]}'
+oc patch -n openshift-ingress deployment/router-default --patch='{"spec":{"template":{"spec":{"securityContext":{"runAsUser":0}}}}}'
+oc scale --replicas=1 -n openshift-ingress deployment/router-default
+
+# Wait 3 seconds for router to start scaling down
+sleep 3
+
+# Start Haproxy with debugging and non-forking option so we can see the stacktrace
+oc rsh -n openshift-ingress $(oc get pods -n openshift-ingress | grep Running | head -1 | awk '{print $1}')
+pkill haproxy; haproxy -f /var/lib/haproxy/conf/haproxy.config -V -d
+
+# Copy the stack trace, from bottom up, with a reasonable amount of history (e.g. the last request MAY not have caused the problem)

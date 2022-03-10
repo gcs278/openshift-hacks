@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: ${IMAGE_NAME}-build
+  annotations:
+    description: "Template for building the ${IMAGE_NAME} container."
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    name: ${IMAGE_NAME}
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    name: ${IMAGE_NAME}
+  spec:
+    output:
+      to:
+       kind: DockerImage
+       name: quay.io/gspence/${IMAGE_NAME}:test
+      pushSecret:
+        name: "quay"
+     # to:
+     #   kind: ImageStreamTag
+     #   name: ${IMAGE_NAME}:latest
+    source:
+      git:
+        uri: ${GIT_URL}
+        ref: ${GIT_BRANCH}
+      type: Git
+      contextDir: containers/${IMAGE_NAME}
+      secrets:
+        - secret:
+            name: etc-pki-entitlement
+          destinationDir: etc-pki-entitlement
+        - secret:
+            name: rhsm-ca
+          destinationDir: rhsm-ca
+        - secret:
+            name: rhsm-conf
+          destinationDir: .
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+      type: Docker
+parameters:
+- description: 'URL for the ingress operator Git repository'
+  name: GIT_URL
+- description: 'Git branch'
+  name: GIT_BRANCH
+  value: master
+- description: 'Image Name'
+  name: IMAGE_NAME

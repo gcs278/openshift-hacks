@@ -1,0 +1,5 @@
+FROM quay.io/amcdermo/openshift-router-bz2044682:haproxy-v2.2.13-debug
+
+RUN git clone http://git.haproxy.org/git/haproxy-2.0.git
+
+RUN for i in 2.0.{1..27}; do (cd ./haproxy-2.0; git checkout v${i}; /haproxy-openshift/build-haproxy-2.0.sh && mv haproxy haproxy-${i}); done

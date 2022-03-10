@@ -1,0 +1,39 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: mywebsite
+  labels:
+    app: mywebsite
+spec:
+  source:
+    images:
+    - from:
+        kind: DockerImage
+        name: quay.io/gspence/image-bundle:latest
+      paths:
+      - destinationDir: ./
+        sourcePath: /bundle/.
+    dockerfile:
+    #type: Git
+    #git:
+    #  uri: https://github.com/monodot/container-up
+    #  ref: master
+    #contextDir: httpd-hello-world
+  strategy:
+    type: Docker                      
+    dockerStrategy:
+      dockerfilePath: Dockerfile    # Look for Dockerfile in: gitUri/contextDir/dockerfilePath
+  output:
+#    to:
+#      kind: ImageStreamTag
+#      name: httpd-hello-world:latest
+    to:
+       kind: DockerImage
+       name: quay.io/gspence/test:test
+    pushSecret:
+      name: quay
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: httpd-hello-world

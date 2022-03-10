@@ -1,0 +1,6 @@
+FROM quay.io/gspence/openshift-router-bz2044682:haproxy-v2.2.13-debug as router
+
+FROM registry.ci.openshift.org/ocp/4.8-art-assembly-4.8.8@sha256:19b2171529f7fb92114feb087d55bdc374ce128d76c041a0aedfe177aa336f77 
+
+COPY --from=router /var/lib/haproxy/conf/haproxy-2.0/haproxy-2.0.* /
+COPY /haproxy-2.0.16-official /

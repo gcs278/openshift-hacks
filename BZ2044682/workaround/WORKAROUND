@@ -1,0 +1,13 @@
+oc cp -n openshift-ingress $(oc get pods -n openshift-ingress | grep Running | grep default | head -1 | awk '{print $1}'):/var/lib/haproxy/conf/haproxy-config.template ./haproxy-config.template 
+# Patch haproxy-config.template to add "http-response del-header Set-Cookie2" to all 3 frontends
+
+# Set unmanaged
+oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+oc scale --replicas 0 -n openshift-ingress-operator deployments ingress-operator
+oc patch clusterversions/version --type=json --patch='[{"op":"add","path":"/spec/overrides","value":[{"kind":"Deployment","group":"apps/v1","name":"ingress-operator","namespace":"openshift-ingress-operator","unmanaged":true}]}]'
+oc scale --replicas 0 -n openshift-ingress-operator deployments ingress-operator
+
+# Set router to use new custom template
+oc create configmap -n openshift-ingress customrouter --from-file=haproxy-config.template 
+oc set volumes -n openshift-ingress deployment --add --overwrite --name config-volume --mount-path=/var/lib/haproxy/conf/custom --source='{"configMap": { "name": "customrouter"}}' router-default
+oc set env -n openshift-ingress deployment router-default TEMPLATE_FILE=/var/lib/haproxy/conf/custom/haproxy-config.template

@@ -1,0 +1,2005 @@
+desc: (none)
+cmd: /home/gspence/src/haproxy.org/haproxy-2.0/haproxy-2.0.16 -f haproxy.config.500backends.random.128weight -V -d
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=6600103
+mem_heap_B=473898
+mem_heap_extra_B=74494
+mem_stacks_B=0
+heap_tree=detailed
+n13: 473898 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 149960 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 149960 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 149960 0x493D2B: init (haproxy.c:1839)
+    n0: 149960 0x40931A: main (haproxy.c:2920)
+ n1: 78240 0x5CC5815: OPENSSL_LH_insert (in /usr/lib64/libcrypto.so.1.1.1k)
+  n2: 78240 0x5C95DA2: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+   n3: 73080 0x5C961BF: ERR_load_strings_const (in /usr/lib64/libcrypto.so.1.1.1k)
+    n0: 55296 in 57 places, all below massif's threshold (1.00%)
+    n1: 10224 0x58E0023: ERR_load_SSL_strings (in /usr/lib64/libssl.so.1.1.1k)
+     n1: 10224 0x40910D: __ssl_sock_init (ssl_sock.c:10095)
+      n1: 10224 0x54BF2C: __libc_csu_init (in /home/gspence/src/haproxy.org/haproxy-2.0/haproxy-2.0.16)
+       n0: 10224 0x64BD41D: (below main) (in /usr/lib64/libc-2.28.so)
+    n1: 7560 0x58E002F: ERR_load_SSL_strings (in /usr/lib64/libssl.so.1.1.1k)
+     n1: 7560 0x40910D: __ssl_sock_init (ssl_sock.c:10095)
+      n1: 7560 0x54BF2C: __libc_csu_init (in /home/gspence/src/haproxy.org/haproxy-2.0/haproxy-2.0.16)
+       n0: 7560 0x64BD41D: (below main) (in /usr/lib64/libc-2.28.so)
+   n0: 5160 in 4 places, all below massif's threshold (1.00%)
+ n1: 62168 0x480822: new_server (server.c:1833)
+  n1: 62168 0x481708: parse_server (server.c:2090)
+   n1: 62168 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 62168 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 62168 0x493D2B: init (haproxy.c:1839)
+      n0: 62168 0x40931A: main (haproxy.c:2920)
+ n0: 55666 in 49 places, all below massif's threshold (1.00%)
+ n1: 32256 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 32256 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 32256 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 32256 0x493D2B: init (haproxy.c:1839)
+     n0: 32256 0x40931A: main (haproxy.c:2920)
+ n1: 16384 0x534B91: my_realloc2 (standard.h:1474)
+  n1: 16384 0x534B91: alloc_trash_buffers (chunk.c:71)
+   n1: 16384 0x534D53: init_trash_buffers (chunk.c:99)
+    n1: 16384 0x492DA0: init (haproxy.c:1533)
+     n0: 16384 0x40931A: main (haproxy.c:2920)
+ n1: 16384 0x534BEF: my_realloc2 (standard.h:1474)
+  n1: 16384 0x534BEF: alloc_trash_buffers (chunk.c:73)
+   n1: 16384 0x534D53: init_trash_buffers (chunk.c:99)
+    n1: 16384 0x492DA0: init (haproxy.c:1533)
+     n0: 16384 0x40931A: main (haproxy.c:2920)
+ n1: 16384 0x534C19: my_realloc2 (standard.h:1474)
+  n1: 16384 0x534C19: alloc_trash_buffers (chunk.c:74)
+   n1: 16384 0x534D53: init_trash_buffers (chunk.c:99)
+    n1: 16384 0x492DA0: init (haproxy.c:1533)
+     n0: 16384 0x40931A: main (haproxy.c:2920)
+ n1: 16384 0x5CC57BB: OPENSSL_LH_insert (in /usr/lib64/libcrypto.so.1.1.1k)
+  n2: 16384 0x5C95DA2: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+   n2: 16384 0x5C961BF: ERR_load_strings_const (in /usr/lib64/libcrypto.so.1.1.1k)
+    n1: 16384 0x5C91FB3: ERR_load_ENGINE_strings (in /usr/lib64/libcrypto.so.1.1.1k)
+     n1: 16384 0x5C974F5: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+      n1: 16384 0x5CBECAC: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+       n1: 16384 0x5490DD6: __pthread_once_slow (in /usr/lib64/libpthread-2.28.so)
+        n1: 16384 0x5D2CF5C: CRYPTO_THREAD_run_once (in /usr/lib64/libcrypto.so.1.1.1k)
+         n1: 16384 0x5CBF1A2: OPENSSL_init_crypto (in /usr/lib64/libcrypto.so.1.1.1k)
+          n1: 16384 0x5C9678D: ERR_get_state (in /usr/lib64/libcrypto.so.1.1.1k)
+           n1: 16384 0x5C968CC: ERR_clear_error (in /usr/lib64/libcrypto.so.1.1.1k)
+            n1: 16384 0x5CBEBBC: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+             n1: 16384 0x5490DD6: __pthread_once_slow (in /usr/lib64/libpthread-2.28.so)
+              n1: 16384 0x5D2CF5C: CRYPTO_THREAD_run_once (in /usr/lib64/libcrypto.so.1.1.1k)
+               n1: 16384 0x5CBF373: OPENSSL_init_crypto (in /usr/lib64/libcrypto.so.1.1.1k)
+                n1: 16384 0x4090B3: __ssl_sock_init (ssl_sock.c:10077)
+                 n1: 16384 0x54BF2C: __libc_csu_init (in /home/gspence/src/haproxy.org/haproxy-2.0/haproxy-2.0.16)
+                  n0: 16384 0x64BD41D: (below main) (in /usr/lib64/libc-2.28.so)
+    n0: 0 in 3 places, all below massif's threshold (1.00%)
+   n0: 0 in 3 places, all below massif's threshold (1.00%)
+ n1: 11960 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 11960 in 30 places, all below massif's threshold (1.00%)
+ n1: 6520 0x4D3677: alloc_stats_fe.isra.48 (cli.c:201)
+  n1: 6520 0x4D3DA1: stats_parse_global (cli.c:332)
+   n1: 6520 0x4FFEF8: cfg_parse_global (cfgparse-global.c:1185)
+    n1: 6520 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 6520 0x493D2B: init (haproxy.c:1839)
+      n0: 6520 0x40931A: main (haproxy.c:2920)
+ n1: 5952 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n0: 5952 in 2 places, all below massif's threshold (1.00%)
+ n1: 5640 0x542454: make_arg_list (arg.c:128)
+  n1: 5640 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 5640 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 5640 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 5640 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 5640 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 5640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 5640 0x493D2B: init (haproxy.c:1839)
+         n0: 5640 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=2
+#-----------
+time=11238788
+mem_heap_B=935966
+mem_heap_extra_B=112546
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=17849796
+mem_heap_B=1596196
+mem_heap_extra_B=166484
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=23496906
+mem_heap_B=2157113
+mem_heap_extra_B=212815
+mem_stacks_B=0
+heap_tree=detailed
+n14: 2157113 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 860640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 860640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 860640 0x493D2B: init (haproxy.c:1839)
+    n0: 860640 0x40931A: main (haproxy.c:2920)
+ n1: 422088 0x480822: new_server (server.c:1833)
+  n1: 422088 0x481708: parse_server (server.c:2090)
+   n1: 422088 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 422088 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 422088 0x493D2B: init (haproxy.c:1839)
+      n0: 422088 0x40931A: main (haproxy.c:2920)
+ n1: 252000 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 252000 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 252000 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 252000 0x493D2B: init (haproxy.c:1839)
+     n0: 252000 0x40931A: main (haproxy.c:2920)
+ n0: 175833 in 48 places, all below massif's threshold (1.00%)
+ n2: 86136 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 57962 in 29 places, all below massif's threshold (1.00%)
+  n1: 28174 0x4E84E1: pat_ref_newid (pattern.c:1872)
+   n2: 28174 0x51634A: parse_acl_expr (acl.c:537)
+    n1: 28094 0x516E5A: parse_acl (acl.c:730)
+     n1: 28094 0x517249: parse_acl_cond (acl.c:981)
+      n2: 28094 0x51764B: build_acl_cond (acl.c:1084)
+       n1: 28010 0x506290: parse_http_req_cond (http_rules.c:550)
+        n1: 28010 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+         n1: 28010 0x49A1CA: readcfgfile (cfgparse.c:2188)
+          n1: 28010 0x493D2B: init (haproxy.c:1839)
+           n0: 28010 0x40931A: main (haproxy.c:2920)
+       n0: 84 in 1 place, below massif's threshold (1.00%)
+    n0: 80 in 1 place, below massif's threshold (1.00%)
+ n1: 78240 0x5CC5815: OPENSSL_LH_insert (in /usr/lib64/libcrypto.so.1.1.1k)
+  n2: 78240 0x5C95DA2: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+   n1: 73080 0x5C961BF: ERR_load_strings_const (in /usr/lib64/libcrypto.so.1.1.1k)
+    n0: 73080 in 59 places, all below massif's threshold (1.00%)
+   n0: 5160 in 4 places, all below massif's threshold (1.00%)
+ n2: 47856 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n1: 29904 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+   n1: 29904 0x4DA284: parse_logformat_string (log.c:681)
+    n1: 29904 0x506A2A: parse_http_req_cond (http_rules.c:239)
+     n1: 29904 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+      n1: 29904 0x49A1CA: readcfgfile (cfgparse.c:2188)
+       n1: 29904 0x493D2B: init (haproxy.c:1839)
+        n0: 29904 0x40931A: main (haproxy.c:2920)
+  n0: 17952 in 1 place, below massif's threshold (1.00%)
+ n1: 45000 0x542454: make_arg_list (arg.c:128)
+  n1: 45000 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 45000 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 45000 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 45000 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 45000 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 45000 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 45000 0x493D2B: init (haproxy.c:1839)
+         n0: 45000 0x40931A: main (haproxy.c:2920)
+ n1: 38896 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 38896 0x516371: parse_acl_expr (acl.c:544)
+   n1: 38792 0x516E5A: parse_acl (acl.c:730)
+    n1: 38792 0x517249: parse_acl_cond (acl.c:981)
+     n2: 38792 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 38688 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 38688 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 38688 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 38688 0x493D2B: init (haproxy.c:1839)
+          n0: 38688 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 38896 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 38792 0x516E5A: parse_acl (acl.c:730)
+   n1: 38792 0x517249: parse_acl_cond (acl.c:981)
+    n2: 38792 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 38688 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 38688 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 38688 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 38688 0x493D2B: init (haproxy.c:1839)
+         n0: 38688 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+ n1: 32912 0x4E84CC: pat_ref_newid (pattern.c:1867)
+  n2: 32912 0x51634A: parse_acl_expr (acl.c:537)
+   n1: 32824 0x516E5A: parse_acl (acl.c:730)
+    n1: 32824 0x517249: parse_acl_cond (acl.c:981)
+     n2: 32824 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 32736 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 32736 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 32736 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 32736 0x493D2B: init (haproxy.c:1839)
+          n0: 32736 0x40931A: main (haproxy.c:2920)
+      n0: 88 in 1 place, below massif's threshold (1.00%)
+   n0: 88 in 1 place, below massif's threshold (1.00%)
+ n1: 29760 0x4D8AC4: add_to_logformat_list (log.c:447)
+  n0: 29760 in 2 places, all below massif's threshold (1.00%)
+ n1: 24920 0x4D8BFC: add_sample_to_logformat_list (log.c:494)
+  n1: 24920 0x4DA284: parse_logformat_string (log.c:681)
+   n1: 24920 0x506A2A: parse_http_req_cond (http_rules.c:239)
+    n1: 24920 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 24920 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 24920 0x493D2B: init (haproxy.c:1839)
+       n0: 24920 0x40931A: main (haproxy.c:2920)
+ n1: 23936 0x5170B5: parse_acl_cond (acl.c:919)
+  n2: 23936 0x51764B: build_acl_cond (acl.c:1084)
+   n1: 23808 0x506290: parse_http_req_cond (http_rules.c:550)
+    n1: 23808 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 23808 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 23808 0x493D2B: init (haproxy.c:1839)
+       n0: 23808 0x40931A: main (haproxy.c:2920)
+   n0: 128 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=5
+#-----------
+time=33952312
+mem_heap_B=3198774
+mem_heap_extra_B=298210
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=39137467
+mem_heap_B=3713472
+mem_heap_extra_B=340744
+mem_stacks_B=0
+heap_tree=detailed
+n14: 3713472 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1519160 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 1519160 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 1519160 0x493D2B: init (haproxy.c:1839)
+    n0: 1519160 0x40931A: main (haproxy.c:2920)
+ n1: 752560 0x480822: new_server (server.c:1833)
+  n1: 752560 0x481708: parse_server (server.c:2090)
+   n1: 752560 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 752560 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 752560 0x493D2B: init (haproxy.c:1839)
+      n0: 752560 0x40931A: main (haproxy.c:2920)
+ n1: 455616 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 455616 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 455616 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 455616 0x493D2B: init (haproxy.c:1839)
+     n0: 455616 0x40931A: main (haproxy.c:2920)
+ n0: 242190 in 48 places, all below massif's threshold (1.00%)
+ n2: 154866 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 103765 in 29 places, all below massif's threshold (1.00%)
+  n1: 51101 0x4E84E1: pat_ref_newid (pattern.c:1872)
+   n2: 51101 0x51634A: parse_acl_expr (acl.c:537)
+    n1: 51021 0x516E5A: parse_acl (acl.c:730)
+     n1: 51021 0x517249: parse_acl_cond (acl.c:981)
+      n2: 51021 0x51764B: build_acl_cond (acl.c:1084)
+       n1: 50937 0x506290: parse_http_req_cond (http_rules.c:550)
+        n1: 50937 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+         n1: 50937 0x49A1CA: readcfgfile (cfgparse.c:2188)
+          n1: 50937 0x493D2B: init (haproxy.c:1839)
+           n0: 50937 0x40931A: main (haproxy.c:2920)
+       n0: 84 in 1 place, below massif's threshold (1.00%)
+    n0: 80 in 1 place, below massif's threshold (1.00%)
+ n2: 86640 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n1: 54144 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+   n1: 54144 0x4DA284: parse_logformat_string (log.c:681)
+    n1: 54144 0x506A2A: parse_http_req_cond (http_rules.c:239)
+     n1: 54144 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+      n1: 54144 0x49A1CA: readcfgfile (cfgparse.c:2188)
+       n1: 54144 0x493D2B: init (haproxy.c:1839)
+        n0: 54144 0x40931A: main (haproxy.c:2920)
+  n0: 32496 in 1 place, below massif's threshold (1.00%)
+ n1: 81360 0x542454: make_arg_list (arg.c:128)
+  n1: 81360 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 81360 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 81360 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 81360 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 81360 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 81360 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 81360 0x493D2B: init (haproxy.c:1839)
+         n0: 81360 0x40931A: main (haproxy.c:2920)
+ n1: 78240 0x5CC5815: OPENSSL_LH_insert (in /usr/lib64/libcrypto.so.1.1.1k)
+  n2: 78240 0x5C95DA2: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+   n1: 73080 0x5C961BF: ERR_load_strings_const (in /usr/lib64/libcrypto.so.1.1.1k)
+    n0: 73080 in 59 places, all below massif's threshold (1.00%)
+   n0: 5160 in 4 places, all below massif's threshold (1.00%)
+ n1: 70408 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 70408 0x516371: parse_acl_expr (acl.c:544)
+   n1: 70304 0x516E5A: parse_acl (acl.c:730)
+    n1: 70304 0x517249: parse_acl_cond (acl.c:981)
+     n2: 70304 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 70200 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 70200 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 70200 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 70200 0x493D2B: init (haproxy.c:1839)
+          n0: 70200 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 70408 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 70304 0x516E5A: parse_acl (acl.c:730)
+   n1: 70304 0x517249: parse_acl_cond (acl.c:981)
+    n2: 70304 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 70200 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 70200 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 70200 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 70200 0x493D2B: init (haproxy.c:1839)
+         n0: 70200 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+ n1: 59576 0x4E84CC: pat_ref_newid (pattern.c:1867)
+  n2: 59576 0x51634A: parse_acl_expr (acl.c:537)
+   n1: 59488 0x516E5A: parse_acl (acl.c:730)
+    n1: 59488 0x517249: parse_acl_cond (acl.c:981)
+     n2: 59488 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 59400 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 59400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 59400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 59400 0x493D2B: init (haproxy.c:1839)
+          n0: 59400 0x40931A: main (haproxy.c:2920)
+      n0: 88 in 1 place, below massif's threshold (1.00%)
+   n0: 88 in 1 place, below massif's threshold (1.00%)
+ n1: 54000 0x4D8AC4: add_to_logformat_list (log.c:447)
+  n0: 54000 in 2 places, all below massif's threshold (1.00%)
+ n1: 45120 0x4D8BFC: add_sample_to_logformat_list (log.c:494)
+  n1: 45120 0x4DA284: parse_logformat_string (log.c:681)
+   n1: 45120 0x506A2A: parse_http_req_cond (http_rules.c:239)
+    n1: 45120 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 45120 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 45120 0x493D2B: init (haproxy.c:1839)
+       n0: 45120 0x40931A: main (haproxy.c:2920)
+ n1: 43328 0x5170B5: parse_acl_cond (acl.c:919)
+  n2: 43328 0x51764B: build_acl_cond (acl.c:1084)
+   n1: 43200 0x506290: parse_http_req_cond (http_rules.c:550)
+    n1: 43200 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 43200 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 43200 0x493D2B: init (haproxy.c:1839)
+       n0: 43200 0x40931A: main (haproxy.c:2920)
+   n0: 128 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=7
+#-----------
+time=46145557
+mem_heap_B=4413954
+mem_heap_extra_B=397862
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=54621724
+mem_heap_B=5254424
+mem_heap_extra_B=467408
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=63645423
+mem_heap_B=6155349
+mem_heap_extra_B=541027
+mem_stacks_B=0
+heap_tree=detailed
+n14: 6155349 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2555840 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 2555840 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 2555840 0x493D2B: init (haproxy.c:1839)
+    n0: 2555840 0x40931A: main (haproxy.c:2920)
+ n1: 1269536 0x480822: new_server (server.c:1833)
+  n1: 1269536 0x481708: parse_server (server.c:2090)
+   n1: 1269536 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1269536 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1269536 0x493D2B: init (haproxy.c:1839)
+      n0: 1269536 0x40931A: main (haproxy.c:2920)
+ n1: 774480 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 774480 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 774480 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 774480 0x493D2B: init (haproxy.c:1839)
+     n0: 774480 0x40931A: main (haproxy.c:2920)
+ n0: 346009 in 48 places, all below massif's threshold (1.00%)
+ n2: 262524 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 175557 in 29 places, all below massif's threshold (1.00%)
+  n1: 86967 0x4E84E1: pat_ref_newid (pattern.c:1872)
+   n2: 86967 0x51634A: parse_acl_expr (acl.c:537)
+    n1: 86887 0x516E5A: parse_acl (acl.c:730)
+     n1: 86887 0x517249: parse_acl_cond (acl.c:981)
+      n2: 86887 0x51764B: build_acl_cond (acl.c:1084)
+       n1: 86803 0x506290: parse_http_req_cond (http_rules.c:550)
+        n1: 86803 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+         n1: 86803 0x49A1CA: readcfgfile (cfgparse.c:2188)
+          n1: 86803 0x493D2B: init (haproxy.c:1839)
+           n0: 86803 0x40931A: main (haproxy.c:2920)
+       n0: 84 in 1 place, below massif's threshold (1.00%)
+    n0: 80 in 1 place, below massif's threshold (1.00%)
+ n2: 147360 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n1: 92112 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+   n1: 92112 0x4DA284: parse_logformat_string (log.c:681)
+    n1: 92112 0x506A2A: parse_http_req_cond (http_rules.c:239)
+     n1: 92112 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+      n1: 92112 0x49A1CA: readcfgfile (cfgparse.c:2188)
+       n1: 92112 0x493D2B: init (haproxy.c:1839)
+        n0: 92112 0x40931A: main (haproxy.c:2920)
+  n0: 55248 in 1 place, below massif's threshold (1.00%)
+ n1: 138360 0x542454: make_arg_list (arg.c:128)
+  n1: 138360 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 138360 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 138360 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 138360 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 138360 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 138360 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 138360 0x493D2B: init (haproxy.c:1839)
+         n0: 138360 0x40931A: main (haproxy.c:2920)
+ n1: 119704 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 119704 0x516371: parse_acl_expr (acl.c:544)
+   n1: 119600 0x516E5A: parse_acl (acl.c:730)
+    n1: 119600 0x517249: parse_acl_cond (acl.c:981)
+     n2: 119600 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 119496 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 119496 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 119496 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 119496 0x493D2B: init (haproxy.c:1839)
+          n0: 119496 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 119704 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 119600 0x516E5A: parse_acl (acl.c:730)
+   n1: 119600 0x517249: parse_acl_cond (acl.c:981)
+    n2: 119600 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 119496 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 119496 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 119496 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 119496 0x493D2B: init (haproxy.c:1839)
+         n0: 119496 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+ n1: 101288 0x4E84CC: pat_ref_newid (pattern.c:1867)
+  n2: 101288 0x51634A: parse_acl_expr (acl.c:537)
+   n1: 101200 0x516E5A: parse_acl (acl.c:730)
+    n1: 101200 0x517249: parse_acl_cond (acl.c:981)
+     n2: 101200 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 101112 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 101112 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 101112 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 101112 0x493D2B: init (haproxy.c:1839)
+          n0: 101112 0x40931A: main (haproxy.c:2920)
+      n0: 88 in 1 place, below massif's threshold (1.00%)
+   n0: 88 in 1 place, below massif's threshold (1.00%)
+ n1: 91920 0x4D8AC4: add_to_logformat_list (log.c:447)
+  n0: 91920 in 2 places, all below massif's threshold (1.00%)
+ n1: 78240 0x5CC5815: OPENSSL_LH_insert (in /usr/lib64/libcrypto.so.1.1.1k)
+  n2: 78240 0x5C95DA2: ??? (in /usr/lib64/libcrypto.so.1.1.1k)
+   n1: 73080 0x5C961BF: ERR_load_strings_const (in /usr/lib64/libcrypto.so.1.1.1k)
+    n0: 73080 in 59 places, all below massif's threshold (1.00%)
+   n0: 5160 in 4 places, all below massif's threshold (1.00%)
+ n1: 76720 0x4D8BFC: add_sample_to_logformat_list (log.c:494)
+  n1: 76720 0x4DA284: parse_logformat_string (log.c:681)
+   n1: 76720 0x506A2A: parse_http_req_cond (http_rules.c:239)
+    n1: 76720 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 76720 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 76720 0x493D2B: init (haproxy.c:1839)
+       n0: 76720 0x40931A: main (haproxy.c:2920)
+ n1: 73664 0x5170B5: parse_acl_cond (acl.c:919)
+  n2: 73664 0x51764B: build_acl_cond (acl.c:1084)
+   n1: 73536 0x506290: parse_http_req_cond (http_rules.c:550)
+    n1: 73536 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 73536 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 73536 0x493D2B: init (haproxy.c:1839)
+       n0: 73536 0x40931A: main (haproxy.c:2920)
+   n0: 128 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=10
+#-----------
+time=72368434
+mem_heap_B=7021180
+mem_heap_extra_B=612436
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=81852806
+mem_heap_B=7962770
+mem_heap_extra_B=690158
+mem_stacks_B=0
+heap_tree=detailed
+n13: 7962770 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 3318680 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3318680 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3318680 0x493D2B: init (haproxy.c:1839)
+    n0: 3318680 0x40931A: main (haproxy.c:2920)
+ n1: 1652360 0x480822: new_server (server.c:1833)
+  n1: 1652360 0x481708: parse_server (server.c:2090)
+   n1: 1652360 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1652360 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1652360 0x493D2B: init (haproxy.c:1839)
+      n0: 1652360 0x40931A: main (haproxy.c:2920)
+ n1: 1012032 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1012032 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1012032 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1012032 0x493D2B: init (haproxy.c:1839)
+     n0: 1012032 0x40931A: main (haproxy.c:2920)
+ n0: 501744 in 49 places, all below massif's threshold (1.00%)
+ n2: 342538 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 228785 in 29 places, all below massif's threshold (1.00%)
+  n1: 113753 0x4E84E1: pat_ref_newid (pattern.c:1872)
+   n2: 113753 0x51634A: parse_acl_expr (acl.c:537)
+    n1: 113673 0x516E5A: parse_acl (acl.c:730)
+     n1: 113673 0x517249: parse_acl_cond (acl.c:981)
+      n2: 113673 0x51764B: build_acl_cond (acl.c:1084)
+       n1: 113589 0x506290: parse_http_req_cond (http_rules.c:550)
+        n1: 113589 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+         n1: 113589 0x49A1CA: readcfgfile (cfgparse.c:2188)
+          n1: 113589 0x493D2B: init (haproxy.c:1839)
+           n0: 113589 0x40931A: main (haproxy.c:2920)
+       n0: 84 in 1 place, below massif's threshold (1.00%)
+    n0: 80 in 1 place, below massif's threshold (1.00%)
+ n2: 192576 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n1: 120336 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+   n1: 120336 0x4DA284: parse_logformat_string (log.c:681)
+    n1: 120336 0x506A2A: parse_http_req_cond (http_rules.c:239)
+     n1: 120336 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+      n1: 120336 0x49A1CA: readcfgfile (cfgparse.c:2188)
+       n1: 120336 0x493D2B: init (haproxy.c:1839)
+        n0: 120336 0x40931A: main (haproxy.c:2920)
+  n0: 72240 in 1 place, below massif's threshold (1.00%)
+ n1: 180600 0x542454: make_arg_list (arg.c:128)
+  n1: 180600 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 180600 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 180600 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 180600 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 180600 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 180600 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 180600 0x493D2B: init (haproxy.c:1839)
+         n0: 180600 0x40931A: main (haproxy.c:2920)
+ n1: 156520 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 156520 0x516371: parse_acl_expr (acl.c:544)
+   n1: 156416 0x516E5A: parse_acl (acl.c:730)
+    n1: 156416 0x517249: parse_acl_cond (acl.c:981)
+     n2: 156416 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 156312 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 156312 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 156312 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 156312 0x493D2B: init (haproxy.c:1839)
+          n0: 156312 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 156520 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 156416 0x516E5A: parse_acl (acl.c:730)
+   n1: 156416 0x517249: parse_acl_cond (acl.c:981)
+    n2: 156416 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 156312 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 156312 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 156312 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 156312 0x493D2B: init (haproxy.c:1839)
+         n0: 156312 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+ n1: 132440 0x4E84CC: pat_ref_newid (pattern.c:1867)
+  n2: 132440 0x51634A: parse_acl_expr (acl.c:537)
+   n1: 132352 0x516E5A: parse_acl (acl.c:730)
+    n1: 132352 0x517249: parse_acl_cond (acl.c:981)
+     n2: 132352 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 132264 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 132264 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 132264 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 132264 0x493D2B: init (haproxy.c:1839)
+          n0: 132264 0x40931A: main (haproxy.c:2920)
+      n0: 88 in 1 place, below massif's threshold (1.00%)
+   n0: 88 in 1 place, below massif's threshold (1.00%)
+ n1: 120200 0x4D8AC4: add_to_logformat_list (log.c:447)
+  n0: 120200 in 2 places, all below massif's threshold (1.00%)
+ n1: 100240 0x4D8BFC: add_sample_to_logformat_list (log.c:494)
+  n1: 100240 0x4DA284: parse_logformat_string (log.c:681)
+   n1: 100240 0x506A2A: parse_http_req_cond (http_rules.c:239)
+    n1: 100240 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 100240 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 100240 0x493D2B: init (haproxy.c:1839)
+       n0: 100240 0x40931A: main (haproxy.c:2920)
+ n1: 96320 0x5170B5: parse_acl_cond (acl.c:919)
+  n2: 96320 0x51764B: build_acl_cond (acl.c:1084)
+   n1: 96192 0x506290: parse_http_req_cond (http_rules.c:550)
+    n1: 96192 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 96192 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 96192 0x493D2B: init (haproxy.c:1839)
+       n0: 96192 0x40931A: main (haproxy.c:2920)
+   n0: 128 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=12
+#-----------
+time=87756179
+mem_heap_B=8709134
+mem_heap_extra_B=719554
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=92543893
+mem_heap_B=9596674
+mem_heap_extra_B=719894
+mem_stacks_B=0
+heap_tree=detailed
+n13: 9596674 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1277952 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 1277952 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 1277952 0x4932A4: init (haproxy.c:1939)
+    n0: 1277952 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n0: 615950 in 56 places, all below massif's threshold (1.00%)
+ n2: 357804 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 238830 in 29 places, all below massif's threshold (1.00%)
+  n1: 118974 0x4E84E1: pat_ref_newid (pattern.c:1872)
+   n2: 118974 0x51634A: parse_acl_expr (acl.c:537)
+    n1: 118894 0x516E5A: parse_acl (acl.c:730)
+     n1: 118894 0x517249: parse_acl_cond (acl.c:981)
+      n2: 118894 0x51764B: build_acl_cond (acl.c:1084)
+       n1: 118810 0x506290: parse_http_req_cond (http_rules.c:550)
+        n1: 118810 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+         n1: 118810 0x49A1CA: readcfgfile (cfgparse.c:2188)
+          n1: 118810 0x493D2B: init (haproxy.c:1839)
+           n0: 118810 0x40931A: main (haproxy.c:2920)
+       n0: 84 in 1 place, below massif's threshold (1.00%)
+    n0: 80 in 1 place, below massif's threshold (1.00%)
+ n2: 201456 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n1: 125904 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+   n1: 125904 0x4DA284: parse_logformat_string (log.c:681)
+    n1: 125904 0x506A2A: parse_http_req_cond (http_rules.c:239)
+     n1: 125904 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+      n1: 125904 0x49A1CA: readcfgfile (cfgparse.c:2188)
+       n1: 125904 0x493D2B: init (haproxy.c:1839)
+        n0: 125904 0x40931A: main (haproxy.c:2920)
+  n0: 75552 in 1 place, below massif's threshold (1.00%)
+ n1: 189000 0x542454: make_arg_list (arg.c:128)
+  n1: 189000 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 189000 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 189000 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 189000 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 189000 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 189000 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 189000 0x493D2B: init (haproxy.c:1839)
+         n0: 189000 0x40931A: main (haproxy.c:2920)
+ n1: 163696 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 163696 0x516371: parse_acl_expr (acl.c:544)
+   n1: 163592 0x516E5A: parse_acl (acl.c:730)
+    n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+     n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 163488 0x493D2B: init (haproxy.c:1839)
+          n0: 163488 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 163696 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 163592 0x516E5A: parse_acl (acl.c:730)
+   n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+    n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 163488 0x493D2B: init (haproxy.c:1839)
+         n0: 163488 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+ n1: 138512 0x4E84CC: pat_ref_newid (pattern.c:1867)
+  n2: 138512 0x51634A: parse_acl_expr (acl.c:537)
+   n1: 138424 0x516E5A: parse_acl (acl.c:730)
+    n1: 138424 0x517249: parse_acl_cond (acl.c:981)
+     n2: 138424 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 138336 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 138336 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 138336 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 138336 0x493D2B: init (haproxy.c:1839)
+          n0: 138336 0x40931A: main (haproxy.c:2920)
+      n0: 88 in 1 place, below massif's threshold (1.00%)
+   n0: 88 in 1 place, below massif's threshold (1.00%)
+ n1: 125760 0x4D8AC4: add_to_logformat_list (log.c:447)
+  n0: 125760 in 2 places, all below massif's threshold (1.00%)
+ n1: 104920 0x4D8BFC: add_sample_to_logformat_list (log.c:494)
+  n1: 104920 0x4DA284: parse_logformat_string (log.c:681)
+   n1: 104920 0x506A2A: parse_http_req_cond (http_rules.c:239)
+    n1: 104920 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+     n1: 104920 0x49A1CA: readcfgfile (cfgparse.c:2188)
+      n1: 104920 0x493D2B: init (haproxy.c:1839)
+       n0: 104920 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=14
+#-----------
+time=101051793
+mem_heap_B=11172978
+mem_heap_extra_B=720182
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=107434230
+mem_heap_B=12355570
+mem_heap_extra_B=720454
+mem_stacks_B=0
+heap_tree=detailed
+n11: 12355570 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4030464 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 4030464 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 4030464 0x4932A4: init (haproxy.c:1939)
+    n0: 4030464 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n0: 854246 in 58 places, all below massif's threshold (1.00%)
+ n1: 356572 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 356572 in 30 places, all below massif's threshold (1.00%)
+ n1: 201456 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n0: 201456 in 2 places, all below massif's threshold (1.00%)
+ n1: 189000 0x542454: make_arg_list (arg.c:128)
+  n1: 189000 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 189000 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 189000 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 189000 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 189000 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 189000 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 189000 0x493D2B: init (haproxy.c:1839)
+         n0: 189000 0x40931A: main (haproxy.c:2920)
+ n1: 163696 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 163696 0x516371: parse_acl_expr (acl.c:544)
+   n1: 163592 0x516E5A: parse_acl (acl.c:730)
+    n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+     n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 163488 0x493D2B: init (haproxy.c:1839)
+          n0: 163488 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 163696 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 163592 0x516E5A: parse_acl (acl.c:730)
+   n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+    n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 163488 0x493D2B: init (haproxy.c:1839)
+         n0: 163488 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+ n1: 138512 0x4E84CC: pat_ref_newid (pattern.c:1867)
+  n2: 138512 0x51634A: parse_acl_expr (acl.c:537)
+   n1: 138424 0x516E5A: parse_acl (acl.c:730)
+    n1: 138424 0x517249: parse_acl_cond (acl.c:981)
+     n2: 138424 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 138336 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 138336 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 138336 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 138336 0x493D2B: init (haproxy.c:1839)
+          n0: 138336 0x40931A: main (haproxy.c:2920)
+      n0: 88 in 1 place, below massif's threshold (1.00%)
+   n0: 88 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=16
+#-----------
+time=115943453
+mem_heap_B=13932082
+mem_heap_extra_B=720774
+mem_stacks_B=0
+heap_tree=detailed
+n10: 13932082 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 5603328 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 5603328 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 5603328 0x4932A4: init (haproxy.c:1939)
+    n0: 5603328 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n0: 997110 in 59 places, all below massif's threshold (1.00%)
+ n1: 355868 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 355868 in 30 places, all below massif's threshold (1.00%)
+ n1: 201456 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n0: 201456 in 2 places, all below massif's threshold (1.00%)
+ n1: 189000 0x542454: make_arg_list (arg.c:128)
+  n1: 189000 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 189000 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 189000 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 189000 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 189000 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 189000 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 189000 0x493D2B: init (haproxy.c:1839)
+         n0: 189000 0x40931A: main (haproxy.c:2920)
+ n1: 163696 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 163696 0x516371: parse_acl_expr (acl.c:544)
+   n1: 163592 0x516E5A: parse_acl (acl.c:730)
+    n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+     n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 163488 0x493D2B: init (haproxy.c:1839)
+          n0: 163488 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 163696 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 163592 0x516E5A: parse_acl (acl.c:730)
+   n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+    n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 163488 0x493D2B: init (haproxy.c:1839)
+         n0: 163488 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=17
+#-----------
+time=123388548
+mem_heap_B=15311530
+mem_heap_extra_B=721054
+mem_stacks_B=0
+heap_tree=detailed
+n10: 15311530 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 6979584 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 6979584 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 6979584 0x4932A4: init (haproxy.c:1939)
+    n0: 6979584 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n0: 1000918 in 59 places, all below massif's threshold (1.00%)
+ n1: 355252 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 355252 in 30 places, all below massif's threshold (1.00%)
+ n1: 201456 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n0: 201456 in 2 places, all below massif's threshold (1.00%)
+ n1: 189000 0x542454: make_arg_list (arg.c:128)
+  n1: 189000 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 189000 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 189000 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 189000 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 189000 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 189000 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 189000 0x493D2B: init (haproxy.c:1839)
+         n0: 189000 0x40931A: main (haproxy.c:2920)
+ n1: 163696 0x4E8CA9: pattern_new_expr (pattern.c:2231)
+  n2: 163696 0x516371: parse_acl_expr (acl.c:544)
+   n1: 163592 0x516E5A: parse_acl (acl.c:730)
+    n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+     n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+      n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+       n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+        n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+         n1: 163488 0x493D2B: init (haproxy.c:1839)
+          n0: 163488 0x40931A: main (haproxy.c:2920)
+      n0: 104 in 1 place, below massif's threshold (1.00%)
+   n0: 104 in 1 place, below massif's threshold (1.00%)
+ n2: 163696 0x5161EF: parse_acl_expr (acl.c:362)
+  n1: 163592 0x516E5A: parse_acl (acl.c:730)
+   n1: 163592 0x517249: parse_acl_cond (acl.c:981)
+    n2: 163592 0x51764B: build_acl_cond (acl.c:1084)
+     n1: 163488 0x506290: parse_http_req_cond (http_rules.c:550)
+      n1: 163488 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 163488 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 163488 0x493D2B: init (haproxy.c:1839)
+         n0: 163488 0x40931A: main (haproxy.c:2920)
+     n0: 104 in 1 place, below massif's threshold (1.00%)
+  n0: 104 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=18
+#-----------
+time=132961425
+mem_heap_B=17085106
+mem_heap_extra_B=721414
+mem_stacks_B=0
+heap_tree=detailed
+n8: 17085106 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 8749056 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 8749056 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 8749056 0x4932A4: init (haproxy.c:1939)
+    n0: 8749056 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n0: 1333206 in 61 places, all below massif's threshold (1.00%)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 354460 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 354460 in 30 places, all below massif's threshold (1.00%)
+ n1: 201456 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n0: 201456 in 2 places, all below massif's threshold (1.00%)
+ n1: 189000 0x542454: make_arg_list (arg.c:128)
+  n1: 189000 0x4EE735: sample_parse_expr (sample.c:898)
+   n1: 189000 0x4D8BE1: add_sample_to_logformat_list (log.c:488)
+    n1: 189000 0x4DA284: parse_logformat_string (log.c:681)
+     n1: 189000 0x506A2A: parse_http_req_cond (http_rules.c:239)
+      n1: 189000 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+       n1: 189000 0x49A1CA: readcfgfile (cfgparse.c:2188)
+        n1: 189000 0x493D2B: init (haproxy.c:1839)
+         n0: 189000 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=19
+#-----------
+time=140407024
+mem_heap_B=18464554
+mem_heap_extra_B=721694
+mem_stacks_B=0
+heap_tree=detailed
+n7: 18464554 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 10125312 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 10125312 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 10125312 0x4932A4: init (haproxy.c:1939)
+    n0: 10125312 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n0: 1526014 in 62 places, all below massif's threshold (1.00%)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 353844 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 353844 in 30 places, all below massif's threshold (1.00%)
+ n1: 201456 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n0: 201456 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=20
+#-----------
+time=145193688
+mem_heap_B=19351342
+mem_heap_extra_B=721874
+mem_stacks_B=0
+heap_tree=detailed
+n7: 19351342 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 11010048 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 11010048 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 11010048 0x4932A4: init (haproxy.c:1939)
+    n0: 11010048 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n0: 1528462 in 62 places, all below massif's threshold (1.00%)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 353448 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 353448 in 30 places, all below massif's threshold (1.00%)
+ n1: 201456 0x4EE6CE: sample_parse_expr (sample.c:884)
+  n0: 201456 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=21
+#-----------
+time=153171127
+mem_heap_B=20829322
+mem_heap_extra_B=722174
+mem_stacks_B=0
+heap_tree=detailed
+n6: 20829322 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 12484608 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 12484608 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 12484608 0x4932A4: init (haproxy.c:1939)
+    n0: 12484608 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1733998 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 352788 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 352788 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=22
+#-----------
+time=157957431
+mem_heap_B=21716110
+mem_heap_extra_B=722354
+mem_stacks_B=0
+heap_tree=detailed
+n6: 21716110 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 13369344 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 13369344 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 13369344 0x4932A4: init (haproxy.c:1939)
+    n0: 13369344 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1736446 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 352392 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 352392 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=23
+#-----------
+time=164339229
+mem_heap_B=22898494
+mem_heap_extra_B=722594
+mem_stacks_B=0
+heap_tree=detailed
+n6: 22898494 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 14548992 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 14548992 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 14548992 0x4932A4: init (haproxy.c:1939)
+    n0: 14548992 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1739710 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 351864 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 351864 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=24
+#-----------
+time=173912178
+mem_heap_B=24672070
+mem_heap_extra_B=722954
+mem_stacks_B=0
+heap_tree=detailed
+n6: 24672070 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 16318464 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 16318464 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 16318464 0x4932A4: init (haproxy.c:1939)
+    n0: 16318464 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1744606 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 351072 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 351072 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=25
+#-----------
+time=180294408
+mem_heap_B=25854454
+mem_heap_extra_B=723194
+mem_stacks_B=0
+heap_tree=detailed
+n6: 25854454 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 17498112 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 17498112 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 17498112 0x4932A4: init (haproxy.c:1939)
+    n0: 17498112 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1747870 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 350544 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 350544 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=26
+#-----------
+time=186676566
+mem_heap_B=27036838
+mem_heap_extra_B=723434
+mem_stacks_B=0
+heap_tree=detailed
+n6: 27036838 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 18677760 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 18677760 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 18677760 0x4932A4: init (haproxy.c:1939)
+    n0: 18677760 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1751134 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 350016 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 350016 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=27
+#-----------
+time=194654182
+mem_heap_B=28514818
+mem_heap_extra_B=723734
+mem_stacks_B=0
+heap_tree=detailed
+n6: 28514818 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 20152320 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 20152320 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 20152320 0x4932A4: init (haproxy.c:1939)
+    n0: 20152320 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1755214 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 349356 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 349356 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=28
+#-----------
+time=199972935
+mem_heap_B=29500138
+mem_heap_extra_B=723950
+mem_stacks_B=0
+heap_tree=detailed
+n6: 29500138 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 21135360 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 21135360 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 21135360 0x4932A4: init (haproxy.c:1939)
+    n0: 21135360 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1757934 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 348916 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 348916 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=29
+#-----------
+time=208482767
+mem_heap_B=31076650
+mem_heap_extra_B=724270
+mem_stacks_B=0
+heap_tree=detailed
+n6: 31076650 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 22708224 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 22708224 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 22708224 0x4932A4: init (haproxy.c:1939)
+    n0: 22708224 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1762286 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 348212 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 348212 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=30
+#-----------
+time=212737827
+mem_heap_B=31864906
+mem_heap_extra_B=724430
+mem_stacks_B=0
+heap_tree=detailed
+n6: 31864906 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 23494656 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 23494656 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 23494656 0x4932A4: init (haproxy.c:1939)
+    n0: 23494656 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1764462 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 347860 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 347860 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=31
+#-----------
+time=219120348
+mem_heap_B=33047290
+mem_heap_extra_B=724686
+mem_stacks_B=0
+heap_tree=detailed
+n6: 33047290 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 24674304 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 24674304 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 24674304 0x4932A4: init (haproxy.c:1939)
+    n0: 24674304 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 1767726 in 63 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+ n1: 347332 0x652380D: strdup (in /usr/lib64/libc-2.28.so)
+  n0: 347332 in 30 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=32
+#-----------
+time=227629136
+mem_heap_B=34623802
+mem_heap_extra_B=725006
+mem_stacks_B=0
+heap_tree=detailed
+n5: 34623802 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 26247168 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 26247168 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 26247168 0x4932A4: init (haproxy.c:1939)
+    n0: 26247168 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2118706 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=33
+#-----------
+time=238265670
+mem_heap_B=36594442
+mem_heap_extra_B=725406
+mem_stacks_B=0
+heap_tree=detailed
+n5: 36594442 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 28213248 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 28213248 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 28213248 0x4932A4: init (haproxy.c:1939)
+    n0: 28213248 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2123266 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=34
+#-----------
+time=244647756
+mem_heap_B=37776826
+mem_heap_extra_B=725646
+mem_stacks_B=0
+heap_tree=detailed
+n5: 37776826 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 29392896 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 29392896 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 29392896 0x4932A4: init (haproxy.c:1939)
+    n0: 29392896 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2126002 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=35
+#-----------
+time=253689300
+mem_heap_B=39451870
+mem_heap_extra_B=725986
+mem_stacks_B=0
+heap_tree=detailed
+n5: 39451870 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 31064064 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 31064064 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 31064064 0x4932A4: init (haproxy.c:1939)
+    n0: 31064064 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2129878 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=36
+#-----------
+time=259007621
+mem_heap_B=40437190
+mem_heap_extra_B=726186
+mem_stacks_B=0
+heap_tree=detailed
+n5: 40437190 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 32047104 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 32047104 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 32047104 0x4932A4: init (haproxy.c:1939)
+    n0: 32047104 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2132158 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=37
+#-----------
+time=266985489
+mem_heap_B=41915170
+mem_heap_extra_B=726486
+mem_stacks_B=0
+heap_tree=detailed
+n5: 41915170 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 33521664 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 33521664 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 33521664 0x4932A4: init (haproxy.c:1939)
+    n0: 33521664 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2135578 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=38
+#-----------
+time=277622887
+mem_heap_B=43885810
+mem_heap_extra_B=726886
+mem_stacks_B=0
+heap_tree=detailed
+n5: 43885810 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 35487744 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 35487744 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 35487744 0x4932A4: init (haproxy.c:1939)
+    n0: 35487744 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2140138 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=39
+#-----------
+time=282941784
+mem_heap_B=44871130
+mem_heap_extra_B=727086
+mem_stacks_B=0
+heap_tree=detailed
+n5: 44871130 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 36470784 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 36470784 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 36470784 0x4932A4: init (haproxy.c:1939)
+    n0: 36470784 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2142418 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=40
+#-----------
+time=290919563
+mem_heap_B=46349110
+mem_heap_extra_B=727386
+mem_stacks_B=0
+heap_tree=detailed
+n5: 46349110 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 37945344 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 37945344 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 37945344 0x4932A4: init (haproxy.c:1939)
+    n0: 37945344 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2145838 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=41
+#-----------
+time=301556709
+mem_heap_B=48319750
+mem_heap_extra_B=727786
+mem_stacks_B=0
+heap_tree=detailed
+n5: 48319750 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 39911424 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 39911424 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 39911424 0x4932A4: init (haproxy.c:1939)
+    n0: 39911424 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2150398 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=42
+#-----------
+time=310598450
+mem_heap_B=49994794
+mem_heap_extra_B=728126
+mem_stacks_B=0
+heap_tree=detailed
+n5: 49994794 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 41582592 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 41582592 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 41582592 0x4932A4: init (haproxy.c:1939)
+    n0: 41582592 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2154274 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=43
+#-----------
+time=316980475
+mem_heap_B=51177162
+mem_heap_extra_B=728358
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=323363666
+mem_heap_B=52359562
+mem_heap_extra_B=728606
+mem_stacks_B=0
+heap_tree=detailed
+n5: 52359562 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 43941888 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 43941888 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 43941888 0x4932A4: init (haproxy.c:1939)
+    n0: 43941888 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2159746 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=45
+#-----------
+time=329745696
+mem_heap_B=53541946
+mem_heap_extra_B=728846
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=336128389
+mem_heap_B=54724314
+mem_heap_extra_B=729078
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=342511123
+mem_heap_B=55906698
+mem_heap_extra_B=729318
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=348894818
+mem_heap_B=57089098
+mem_heap_extra_B=729566
+mem_stacks_B=0
+heap_tree=detailed
+n5: 57089098 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 48660480 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 48660480 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 48660480 0x4932A4: init (haproxy.c:1939)
+    n0: 48660480 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2170690 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=49
+#-----------
+time=352085575
+mem_heap_B=57680146
+mem_heap_extra_B=729662
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=352086473
+mem_heap_B=57680290
+mem_heap_extra_B=729686
+mem_stacks_B=0
+heap_tree=detailed
+n5: 57680290 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 49250304 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 49250304 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 49250304 0x4932A4: init (haproxy.c:1939)
+    n0: 49250304 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2172058 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=51
+#-----------
+time=355277663
+mem_heap_B=58271482
+mem_heap_extra_B=729806
+mem_stacks_B=0
+heap_tree=detailed
+n5: 58271482 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 49840128 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 49840128 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 49840128 0x4932A4: init (haproxy.c:1939)
+    n0: 49840128 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2173426 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=52
+#-----------
+time=358468382
+mem_heap_B=58862674
+mem_heap_extra_B=729926
+mem_stacks_B=0
+heap_tree=detailed
+n5: 58862674 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 50429952 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 50429952 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 50429952 0x4932A4: init (haproxy.c:1939)
+    n0: 50429952 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2174794 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=53
+#-----------
+time=362191101
+mem_heap_B=59552398
+mem_heap_extra_B=730066
+mem_stacks_B=0
+heap_tree=detailed
+n5: 59552398 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 51118080 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 51118080 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 51118080 0x4932A4: init (haproxy.c:1939)
+    n0: 51118080 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2176390 in 64 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=54
+#-----------
+time=366691433
+mem_heap_B=60845583
+mem_heap_extra_B=734713
+mem_stacks_B=0
+heap_tree=detailed
+n5: 60845583 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 51806208 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 51806208 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 51806208 0x4932A4: init (haproxy.c:1939)
+    n0: 51806208 0x40931A: main (haproxy.c:2920)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n0: 2781447 in 68 places, all below massif's threshold (1.00%)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=55
+#-----------
+time=367275100
+mem_heap_B=64590917
+mem_heap_extra_B=735099
+mem_stacks_B=0
+heap_tree=detailed
+n6: 64590917 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 51806208 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 51806208 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 51806208 0x4932A4: init (haproxy.c:1939)
+    n0: 51806208 0x40931A: main (haproxy.c:2920)
+ n0: 3964285 in 76 places, all below massif's threshold (1.00%)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 2562496 0x5210BD: init_pollers (fd.c:637)
+  n1: 2562496 0x493CA3: init (haproxy.c:2300)
+   n0: 2562496 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)
+#-----------
+snapshot=56
+#-----------
+time=370366424
+mem_heap_B=65703200
+mem_heap_extra_B=735784
+mem_stacks_B=0
+heap_tree=peak
+n6: 65703200 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 51806208 0x527C79: chash_init_server_tree (lb_chash.c:501)
+  n1: 51806208 0x49E237: check_config_validity (cfgparse.c:3366)
+   n1: 51806208 0x4932A4: init (haproxy.c:1939)
+    n0: 51806208 0x40931A: main (haproxy.c:2920)
+ n0: 5076568 in 82 places, all below massif's threshold (1.00%)
+ n1: 3468640 0x430FC4: cfg_parse_listen (cfgparse-listen.c:361)
+  n1: 3468640 0x49A1CA: readcfgfile (cfgparse.c:2188)
+   n1: 3468640 0x493D2B: init (haproxy.c:1839)
+    n0: 3468640 0x40931A: main (haproxy.c:2920)
+ n1: 2562496 0x5210BD: init_pollers (fd.c:637)
+  n1: 2562496 0x493CA3: init (haproxy.c:2300)
+   n0: 2562496 0x40931A: main (haproxy.c:2920)
+ n1: 1730888 0x480822: new_server (server.c:1833)
+  n1: 1730888 0x481708: parse_server (server.c:2090)
+   n1: 1730888 0x431ED1: cfg_parse_listen (cfgparse-listen.c:696)
+    n1: 1730888 0x49A1CA: readcfgfile (cfgparse.c:2188)
+     n1: 1730888 0x493D2B: init (haproxy.c:1839)
+      n0: 1730888 0x40931A: main (haproxy.c:2920)
+ n1: 1058400 0x5060C8: parse_http_req_cond (http_rules.c:74)
+  n1: 1058400 0x43338F: cfg_parse_listen (cfgparse-listen.c:1542)
+   n1: 1058400 0x49A1CA: readcfgfile (cfgparse.c:2188)
+    n1: 1058400 0x493D2B: init (haproxy.c:1839)
+     n0: 1058400 0x40931A: main (haproxy.c:2920)

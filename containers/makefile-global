@@ -5,6 +5,8 @@ IMAGE := $(shell basename ${PWD})
 TAG := "latest"
 IMAGE_REF := $(REGISTRY)/$(PROJECT)/$(IMAGE):$(TAG)
 
+SCRIPTS := ../scripts
+
 # Choose docker if install, if not, use podman
 ENGINE=$(shell command -v docker &> /dev/null && echo docker || echo podman)
 
@@ -13,8 +15,17 @@ default: all
 all: build push
 
 build:
+	cp /etc/pki/entitlement -r etc-pki-entitlement
+	cp /etc/rhsm/rhsm.conf rhsm-conf
+	cp -r /etc/rhsm/ca rhsm-ca
 	$(ENGINE) build -f Dockerfile -t $(IMAGE_REF) .
 
 push:
 	$(ENGINE) login $(REGISTRY)
 	$(ENGINE) push $(IMAGE_REF)
+
+cluster-build-push:
+	$(SCRIPTS)/create-entitlements.sh
+	$(SCRIPTS)/quay-login.sh
+	$(SCRIPTS)/create-buildconfig.sh ${IMAGE}
+	$(SCRIPTS)/start-build.sh ${IMAGE}
