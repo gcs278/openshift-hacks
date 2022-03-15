@@ -23,7 +23,7 @@ type Message struct {
 const PORT = "8081" // Haproxy
 //const PORT = "4040" // Server direct
 
-const clients = 100
+const clients = 10
 
 // Client.
 func main() {

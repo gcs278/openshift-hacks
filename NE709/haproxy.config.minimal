@@ -24,7 +24,9 @@ frontend public
 
 backend openshift_default
   mode http
-  server web00 127.0.0.1:4040
+  balance random
+  server web00 127.0.0.1:4040 weight 2.567
+  server web01 127.0.0.1:4040 weight 0.9
 
 listen stats
   bind :1937

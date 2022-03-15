@@ -127,6 +127,16 @@ function oc_ingress_edit_ingresscontroller() {
   oc edit -n openshift-ingress-operator ingresscontrollers/${IC}
 }
 
+
+function oc_ingress_delete_ingresscontroller() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide an ingress controller name"
+    return 1
+  fi
+
+  oc delete -n openshift-ingress-operator ingresscontroller $@
+}
+
 function oc_ingress_logs_any_router_default_access() {
   oc logs -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-default" | grep Running | head -1 | awk '{print $1}') -c logs --follow $@
 }
