@@ -52,9 +52,15 @@ function oc_ingress_scale_ingress_operator() {
   oc scale --replicas $1 -n openshift-ingress-operator deployments ingress-operator
 }
 
-function oc_ingress_rsh_only_router_default() {
-  if [[ $(oc get pods -n openshift-ingress --no-headers | grep "^router-default" | grep Running |  wc -l) -ne 1 ]]; then
-    echo "ERROR: There are either 0 or more than 1 default routers running"
+function oc_ingress_rsh_only_router() {
+  if [[ "$1" == "" ]]; then
+    router="default"
+  else
+    router="$1"
+  fi
+
+  if [[ $(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running |  wc -l) -ne 1 ]]; then
+    echo "ERROR: There are either 0 or more than 1 ${router} routers running"
     oc get pods -n openshift-ingress
     return 1
   fi
@@ -62,8 +68,13 @@ function oc_ingress_rsh_only_router_default() {
   oc rsh -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-default" | grep Running | head -1 | awk '{print $1}')
 }
 
-function oc_ingress_rsh_any_router_default() {
-  oc rsh -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-default" | grep Running | head -1 | awk '{print $1}')
+function oc_ingress_rsh_any_router() {
+  if [[ "$1" == "" ]]; then
+    router="default"
+  else
+    router="$1"
+  fi
+  oc rsh -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running | head -1 | awk '{print $1}')
 }
 
 function oc_ingress_exec_any_router() {
@@ -101,6 +112,11 @@ function oc_ingress_get_router_pods() {
   oc get pods -n openshift-ingress $@
 }
 
+
+function oc_ingress_get_router_deployments() {
+  oc get deployments -n openshift-ingress $@
+}
+
 function oc_ingress_get_ingress_operator() {
   oc get pods -n openshift-ingress-operator $@
 }
@@ -127,6 +143,16 @@ function oc_ingress_edit_ingresscontroller() {
   oc edit -n openshift-ingress-operator ingresscontrollers/${IC}
 }
 
+function oc_ingress_edit_router_deployment() {
+  if [[ "$1" == "" ]]; then
+    IC="default"
+  else
+    IC="$1"
+  fi
+
+  oc edit -n openshift-ingress deployments/router-${IC}
+}
+
 
 function oc_ingress_delete_ingresscontroller() {
   if [[ "$1" == "" ]]; then
@@ -140,3 +166,10 @@ function oc_ingress_delete_ingresscontroller() {
 function oc_ingress_logs_any_router_default_access() {
   oc logs -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-default" | grep Running | head -1 | awk '{print $1}') -c logs --follow $@
 }
+
+function oc_ingress_force_delete_terminating_router_pods() {
+  for i in $(oc get pods -n openshift-ingress --no-headers | grep Terminating | awk '{print $1}'); do
+    oc delete -n openshift-ingress pod $i --force
+  done
+}
+

@@ -3,7 +3,7 @@ items:
 - apiVersion: operator.openshift.io/v1
   kind: IngressController
   metadata:
-    name: example-service-testing
+    name: nodeport
     namespace: openshift-ingress-operator
   spec:
     domain: test-apps.gspence-2022-02-14-1013.gcp.devcluster.openshift.com

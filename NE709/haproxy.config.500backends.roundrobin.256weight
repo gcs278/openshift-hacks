@@ -168,7 +168,7 @@ backend be_http:apache:httpd-example
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -197,7 +197,7 @@ backend be_http:test-sharding:django-psql-example
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -215,7 +215,7 @@ backend be_edge_http:test-sharding:helloworld-0-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -233,7 +233,7 @@ backend be_http:test-sharding:helloworld-0-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -251,7 +251,7 @@ backend be_edge_http:test-sharding:helloworld-1-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -269,7 +269,7 @@ backend be_http:test-sharding:helloworld-1-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -287,7 +287,7 @@ backend be_edge_http:test-sharding:helloworld-10-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -305,7 +305,7 @@ backend be_http:test-sharding:helloworld-10-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -323,7 +323,7 @@ backend be_edge_http:test-sharding:helloworld-100-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -341,7 +341,7 @@ backend be_http:test-sharding:helloworld-100-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -359,7 +359,7 @@ backend be_edge_http:test-sharding:helloworld-1000-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -377,7 +377,7 @@ backend be_http:test-sharding:helloworld-1000-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -395,7 +395,7 @@ backend be_edge_http:test-sharding:helloworld-1001-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -413,7 +413,7 @@ backend be_http:test-sharding:helloworld-1001-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -431,7 +431,7 @@ backend be_edge_http:test-sharding:helloworld-1002-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -449,7 +449,7 @@ backend be_http:test-sharding:helloworld-1002-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -467,7 +467,7 @@ backend be_edge_http:test-sharding:helloworld-1003-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -485,7 +485,7 @@ backend be_http:test-sharding:helloworld-1003-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -503,7 +503,7 @@ backend be_edge_http:test-sharding:helloworld-1004-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -521,7 +521,7 @@ backend be_http:test-sharding:helloworld-1004-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -539,7 +539,7 @@ backend be_edge_http:test-sharding:helloworld-1005-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -557,7 +557,7 @@ backend be_http:test-sharding:helloworld-1005-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -575,7 +575,7 @@ backend be_edge_http:test-sharding:helloworld-1006-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -593,7 +593,7 @@ backend be_http:test-sharding:helloworld-1006-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -611,7 +611,7 @@ backend be_edge_http:test-sharding:helloworld-1007-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -629,7 +629,7 @@ backend be_http:test-sharding:helloworld-1007-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -647,7 +647,7 @@ backend be_edge_http:test-sharding:helloworld-1008-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -665,7 +665,7 @@ backend be_http:test-sharding:helloworld-1008-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -683,7 +683,7 @@ backend be_edge_http:test-sharding:helloworld-1009-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -701,7 +701,7 @@ backend be_http:test-sharding:helloworld-1009-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -719,7 +719,7 @@ backend be_edge_http:test-sharding:helloworld-101-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -737,7 +737,7 @@ backend be_http:test-sharding:helloworld-101-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -755,7 +755,7 @@ backend be_edge_http:test-sharding:helloworld-1010-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -773,7 +773,7 @@ backend be_http:test-sharding:helloworld-1010-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -791,7 +791,7 @@ backend be_edge_http:test-sharding:helloworld-1011-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -809,7 +809,7 @@ backend be_http:test-sharding:helloworld-1011-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -827,7 +827,7 @@ backend be_edge_http:test-sharding:helloworld-1012-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -845,7 +845,7 @@ backend be_http:test-sharding:helloworld-1012-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -863,7 +863,7 @@ backend be_edge_http:test-sharding:helloworld-1013-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -881,7 +881,7 @@ backend be_http:test-sharding:helloworld-1013-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -899,7 +899,7 @@ backend be_edge_http:test-sharding:helloworld-1014-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -917,7 +917,7 @@ backend be_http:test-sharding:helloworld-1014-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -935,7 +935,7 @@ backend be_edge_http:test-sharding:helloworld-1015-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -953,7 +953,7 @@ backend be_http:test-sharding:helloworld-1015-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -971,7 +971,7 @@ backend be_edge_http:test-sharding:helloworld-1016-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -989,7 +989,7 @@ backend be_http:test-sharding:helloworld-1016-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1007,7 +1007,7 @@ backend be_edge_http:test-sharding:helloworld-1017-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1025,7 +1025,7 @@ backend be_http:test-sharding:helloworld-1017-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1043,7 +1043,7 @@ backend be_edge_http:test-sharding:helloworld-1018-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1061,7 +1061,7 @@ backend be_http:test-sharding:helloworld-1018-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1079,7 +1079,7 @@ backend be_edge_http:test-sharding:helloworld-1019-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1097,7 +1097,7 @@ backend be_http:test-sharding:helloworld-1019-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1115,7 +1115,7 @@ backend be_edge_http:test-sharding:helloworld-102-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1133,7 +1133,7 @@ backend be_http:test-sharding:helloworld-102-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1151,7 +1151,7 @@ backend be_edge_http:test-sharding:helloworld-1020-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1169,7 +1169,7 @@ backend be_http:test-sharding:helloworld-1020-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1187,7 +1187,7 @@ backend be_edge_http:test-sharding:helloworld-1021-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1205,7 +1205,7 @@ backend be_http:test-sharding:helloworld-1021-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1223,7 +1223,7 @@ backend be_edge_http:test-sharding:helloworld-1022-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1241,7 +1241,7 @@ backend be_http:test-sharding:helloworld-1022-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1259,7 +1259,7 @@ backend be_edge_http:test-sharding:helloworld-1023-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1277,7 +1277,7 @@ backend be_http:test-sharding:helloworld-1023-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1295,7 +1295,7 @@ backend be_edge_http:test-sharding:helloworld-1024-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1313,7 +1313,7 @@ backend be_http:test-sharding:helloworld-1024-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1331,7 +1331,7 @@ backend be_edge_http:test-sharding:helloworld-1025-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1349,7 +1349,7 @@ backend be_http:test-sharding:helloworld-1025-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1367,7 +1367,7 @@ backend be_edge_http:test-sharding:helloworld-1026-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1385,7 +1385,7 @@ backend be_http:test-sharding:helloworld-1026-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1403,7 +1403,7 @@ backend be_edge_http:test-sharding:helloworld-1027-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1421,7 +1421,7 @@ backend be_http:test-sharding:helloworld-1027-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1439,7 +1439,7 @@ backend be_edge_http:test-sharding:helloworld-1028-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1457,7 +1457,7 @@ backend be_http:test-sharding:helloworld-1028-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1475,7 +1475,7 @@ backend be_edge_http:test-sharding:helloworld-1029-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1493,7 +1493,7 @@ backend be_http:test-sharding:helloworld-1029-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1511,7 +1511,7 @@ backend be_edge_http:test-sharding:helloworld-103-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1529,7 +1529,7 @@ backend be_http:test-sharding:helloworld-103-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1547,7 +1547,7 @@ backend be_edge_http:test-sharding:helloworld-1030-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1565,7 +1565,7 @@ backend be_http:test-sharding:helloworld-1030-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1583,7 +1583,7 @@ backend be_edge_http:test-sharding:helloworld-1031-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1601,7 +1601,7 @@ backend be_http:test-sharding:helloworld-1031-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1619,7 +1619,7 @@ backend be_edge_http:test-sharding:helloworld-1032-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1637,7 +1637,7 @@ backend be_http:test-sharding:helloworld-1032-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1655,7 +1655,7 @@ backend be_edge_http:test-sharding:helloworld-1033-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1673,7 +1673,7 @@ backend be_http:test-sharding:helloworld-1033-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1691,7 +1691,7 @@ backend be_edge_http:test-sharding:helloworld-1034-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1709,7 +1709,7 @@ backend be_http:test-sharding:helloworld-1034-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1727,7 +1727,7 @@ backend be_edge_http:test-sharding:helloworld-1035-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1745,7 +1745,7 @@ backend be_http:test-sharding:helloworld-1035-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1763,7 +1763,7 @@ backend be_edge_http:test-sharding:helloworld-1036-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1781,7 +1781,7 @@ backend be_http:test-sharding:helloworld-1036-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1799,7 +1799,7 @@ backend be_edge_http:test-sharding:helloworld-1037-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1817,7 +1817,7 @@ backend be_http:test-sharding:helloworld-1037-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1835,7 +1835,7 @@ backend be_edge_http:test-sharding:helloworld-1038-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1853,7 +1853,7 @@ backend be_http:test-sharding:helloworld-1038-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1871,7 +1871,7 @@ backend be_edge_http:test-sharding:helloworld-1039-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1889,7 +1889,7 @@ backend be_http:test-sharding:helloworld-1039-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1907,7 +1907,7 @@ backend be_edge_http:test-sharding:helloworld-104-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1925,7 +1925,7 @@ backend be_http:test-sharding:helloworld-104-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1943,7 +1943,7 @@ backend be_edge_http:test-sharding:helloworld-1040-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1961,7 +1961,7 @@ backend be_http:test-sharding:helloworld-1040-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1979,7 +1979,7 @@ backend be_edge_http:test-sharding:helloworld-1041-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -1997,7 +1997,7 @@ backend be_http:test-sharding:helloworld-1041-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2015,7 +2015,7 @@ backend be_edge_http:test-sharding:helloworld-1042-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2033,7 +2033,7 @@ backend be_http:test-sharding:helloworld-1042-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2051,7 +2051,7 @@ backend be_edge_http:test-sharding:helloworld-1043-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2069,7 +2069,7 @@ backend be_http:test-sharding:helloworld-1043-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2087,7 +2087,7 @@ backend be_edge_http:test-sharding:helloworld-1044-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2105,7 +2105,7 @@ backend be_http:test-sharding:helloworld-1044-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2123,7 +2123,7 @@ backend be_edge_http:test-sharding:helloworld-1045-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2141,7 +2141,7 @@ backend be_http:test-sharding:helloworld-1045-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2159,7 +2159,7 @@ backend be_edge_http:test-sharding:helloworld-1046-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2177,7 +2177,7 @@ backend be_http:test-sharding:helloworld-1046-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2195,7 +2195,7 @@ backend be_edge_http:test-sharding:helloworld-1047-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2213,7 +2213,7 @@ backend be_http:test-sharding:helloworld-1047-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2231,7 +2231,7 @@ backend be_edge_http:test-sharding:helloworld-1048-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2249,7 +2249,7 @@ backend be_http:test-sharding:helloworld-1048-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2267,7 +2267,7 @@ backend be_edge_http:test-sharding:helloworld-1049-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2285,7 +2285,7 @@ backend be_http:test-sharding:helloworld-1049-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2303,7 +2303,7 @@ backend be_edge_http:test-sharding:helloworld-105-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2321,7 +2321,7 @@ backend be_http:test-sharding:helloworld-105-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2339,7 +2339,7 @@ backend be_edge_http:test-sharding:helloworld-1050-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2357,7 +2357,7 @@ backend be_http:test-sharding:helloworld-1050-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2375,7 +2375,7 @@ backend be_edge_http:test-sharding:helloworld-1051-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2393,7 +2393,7 @@ backend be_http:test-sharding:helloworld-1051-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2411,7 +2411,7 @@ backend be_edge_http:test-sharding:helloworld-1052-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2429,7 +2429,7 @@ backend be_http:test-sharding:helloworld-1052-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2447,7 +2447,7 @@ backend be_edge_http:test-sharding:helloworld-1053-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2465,7 +2465,7 @@ backend be_http:test-sharding:helloworld-1053-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2483,7 +2483,7 @@ backend be_edge_http:test-sharding:helloworld-1054-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2501,7 +2501,7 @@ backend be_http:test-sharding:helloworld-1054-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2519,7 +2519,7 @@ backend be_edge_http:test-sharding:helloworld-1055-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2537,7 +2537,7 @@ backend be_http:test-sharding:helloworld-1055-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2555,7 +2555,7 @@ backend be_edge_http:test-sharding:helloworld-1056-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2573,7 +2573,7 @@ backend be_http:test-sharding:helloworld-1056-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2591,7 +2591,7 @@ backend be_edge_http:test-sharding:helloworld-1057-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2609,7 +2609,7 @@ backend be_http:test-sharding:helloworld-1057-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2627,7 +2627,7 @@ backend be_edge_http:test-sharding:helloworld-1058-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2645,7 +2645,7 @@ backend be_http:test-sharding:helloworld-1058-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2663,7 +2663,7 @@ backend be_edge_http:test-sharding:helloworld-1059-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2681,7 +2681,7 @@ backend be_http:test-sharding:helloworld-1059-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2699,7 +2699,7 @@ backend be_edge_http:test-sharding:helloworld-106-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2717,7 +2717,7 @@ backend be_http:test-sharding:helloworld-106-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2735,7 +2735,7 @@ backend be_edge_http:test-sharding:helloworld-1060-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2753,7 +2753,7 @@ backend be_http:test-sharding:helloworld-1060-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2771,7 +2771,7 @@ backend be_edge_http:test-sharding:helloworld-1061-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2789,7 +2789,7 @@ backend be_http:test-sharding:helloworld-1061-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2807,7 +2807,7 @@ backend be_edge_http:test-sharding:helloworld-1062-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2825,7 +2825,7 @@ backend be_http:test-sharding:helloworld-1062-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2843,7 +2843,7 @@ backend be_edge_http:test-sharding:helloworld-1063-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2861,7 +2861,7 @@ backend be_http:test-sharding:helloworld-1063-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2879,7 +2879,7 @@ backend be_edge_http:test-sharding:helloworld-1064-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2897,7 +2897,7 @@ backend be_http:test-sharding:helloworld-1064-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2915,7 +2915,7 @@ backend be_edge_http:test-sharding:helloworld-1065-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2933,7 +2933,7 @@ backend be_http:test-sharding:helloworld-1065-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2951,7 +2951,7 @@ backend be_edge_http:test-sharding:helloworld-1066-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2969,7 +2969,7 @@ backend be_http:test-sharding:helloworld-1066-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -2987,7 +2987,7 @@ backend be_edge_http:test-sharding:helloworld-1067-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3005,7 +3005,7 @@ backend be_http:test-sharding:helloworld-1067-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3023,7 +3023,7 @@ backend be_edge_http:test-sharding:helloworld-1068-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3041,7 +3041,7 @@ backend be_http:test-sharding:helloworld-1068-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3059,7 +3059,7 @@ backend be_edge_http:test-sharding:helloworld-1069-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3077,7 +3077,7 @@ backend be_http:test-sharding:helloworld-1069-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3095,7 +3095,7 @@ backend be_edge_http:test-sharding:helloworld-107-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3113,7 +3113,7 @@ backend be_http:test-sharding:helloworld-107-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3131,7 +3131,7 @@ backend be_edge_http:test-sharding:helloworld-1070-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3149,7 +3149,7 @@ backend be_http:test-sharding:helloworld-1070-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3167,7 +3167,7 @@ backend be_edge_http:test-sharding:helloworld-1071-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3185,7 +3185,7 @@ backend be_http:test-sharding:helloworld-1071-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3203,7 +3203,7 @@ backend be_edge_http:test-sharding:helloworld-1072-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3221,7 +3221,7 @@ backend be_http:test-sharding:helloworld-1072-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3239,7 +3239,7 @@ backend be_edge_http:test-sharding:helloworld-1073-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3257,7 +3257,7 @@ backend be_http:test-sharding:helloworld-1073-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3275,7 +3275,7 @@ backend be_edge_http:test-sharding:helloworld-1074-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3293,7 +3293,7 @@ backend be_http:test-sharding:helloworld-1074-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3311,7 +3311,7 @@ backend be_edge_http:test-sharding:helloworld-1075-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3329,7 +3329,7 @@ backend be_http:test-sharding:helloworld-1075-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3347,7 +3347,7 @@ backend be_edge_http:test-sharding:helloworld-1076-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3365,7 +3365,7 @@ backend be_http:test-sharding:helloworld-1076-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3383,7 +3383,7 @@ backend be_edge_http:test-sharding:helloworld-1077-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3401,7 +3401,7 @@ backend be_http:test-sharding:helloworld-1077-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3419,7 +3419,7 @@ backend be_edge_http:test-sharding:helloworld-1078-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3437,7 +3437,7 @@ backend be_http:test-sharding:helloworld-1078-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3455,7 +3455,7 @@ backend be_edge_http:test-sharding:helloworld-1079-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3473,7 +3473,7 @@ backend be_http:test-sharding:helloworld-1079-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3491,7 +3491,7 @@ backend be_edge_http:test-sharding:helloworld-108-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3509,7 +3509,7 @@ backend be_http:test-sharding:helloworld-108-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3527,7 +3527,7 @@ backend be_edge_http:test-sharding:helloworld-1080-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3545,7 +3545,7 @@ backend be_http:test-sharding:helloworld-1080-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3563,7 +3563,7 @@ backend be_edge_http:test-sharding:helloworld-1081-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3581,7 +3581,7 @@ backend be_http:test-sharding:helloworld-1081-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3599,7 +3599,7 @@ backend be_edge_http:test-sharding:helloworld-1082-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3617,7 +3617,7 @@ backend be_http:test-sharding:helloworld-1082-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3635,7 +3635,7 @@ backend be_edge_http:test-sharding:helloworld-1083-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3653,7 +3653,7 @@ backend be_http:test-sharding:helloworld-1083-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3671,7 +3671,7 @@ backend be_edge_http:test-sharding:helloworld-1084-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3689,7 +3689,7 @@ backend be_http:test-sharding:helloworld-1084-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3707,7 +3707,7 @@ backend be_edge_http:test-sharding:helloworld-1085-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3725,7 +3725,7 @@ backend be_http:test-sharding:helloworld-1085-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3743,7 +3743,7 @@ backend be_edge_http:test-sharding:helloworld-1086-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3761,7 +3761,7 @@ backend be_http:test-sharding:helloworld-1086-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3779,7 +3779,7 @@ backend be_edge_http:test-sharding:helloworld-1087-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3797,7 +3797,7 @@ backend be_http:test-sharding:helloworld-1087-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3815,7 +3815,7 @@ backend be_edge_http:test-sharding:helloworld-1088-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3833,7 +3833,7 @@ backend be_http:test-sharding:helloworld-1088-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3851,7 +3851,7 @@ backend be_edge_http:test-sharding:helloworld-1089-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3869,7 +3869,7 @@ backend be_http:test-sharding:helloworld-1089-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3887,7 +3887,7 @@ backend be_edge_http:test-sharding:helloworld-109-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3905,7 +3905,7 @@ backend be_http:test-sharding:helloworld-109-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3923,7 +3923,7 @@ backend be_edge_http:test-sharding:helloworld-1090-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3941,7 +3941,7 @@ backend be_http:test-sharding:helloworld-1090-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3959,7 +3959,7 @@ backend be_edge_http:test-sharding:helloworld-1091-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3977,7 +3977,7 @@ backend be_http:test-sharding:helloworld-1091-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -3995,7 +3995,7 @@ backend be_edge_http:test-sharding:helloworld-1092-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4013,7 +4013,7 @@ backend be_http:test-sharding:helloworld-1092-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4031,7 +4031,7 @@ backend be_edge_http:test-sharding:helloworld-1093-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4049,7 +4049,7 @@ backend be_http:test-sharding:helloworld-1093-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4067,7 +4067,7 @@ backend be_edge_http:test-sharding:helloworld-1094-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4085,7 +4085,7 @@ backend be_http:test-sharding:helloworld-1094-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4103,7 +4103,7 @@ backend be_edge_http:test-sharding:helloworld-1095-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4121,7 +4121,7 @@ backend be_http:test-sharding:helloworld-1095-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4139,7 +4139,7 @@ backend be_edge_http:test-sharding:helloworld-1096-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4157,7 +4157,7 @@ backend be_http:test-sharding:helloworld-1096-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4175,7 +4175,7 @@ backend be_edge_http:test-sharding:helloworld-1097-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4193,7 +4193,7 @@ backend be_http:test-sharding:helloworld-1097-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4211,7 +4211,7 @@ backend be_edge_http:test-sharding:helloworld-1098-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4229,7 +4229,7 @@ backend be_http:test-sharding:helloworld-1098-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4247,7 +4247,7 @@ backend be_edge_http:test-sharding:helloworld-1099-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4265,7 +4265,7 @@ backend be_http:test-sharding:helloworld-1099-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4283,7 +4283,7 @@ backend be_edge_http:test-sharding:helloworld-11-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4301,7 +4301,7 @@ backend be_http:test-sharding:helloworld-11-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4319,7 +4319,7 @@ backend be_edge_http:test-sharding:helloworld-110-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4337,7 +4337,7 @@ backend be_http:test-sharding:helloworld-110-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4355,7 +4355,7 @@ backend be_edge_http:test-sharding:helloworld-1100-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4373,7 +4373,7 @@ backend be_http:test-sharding:helloworld-1100-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4391,7 +4391,7 @@ backend be_edge_http:test-sharding:helloworld-1101-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4409,7 +4409,7 @@ backend be_http:test-sharding:helloworld-1101-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4427,7 +4427,7 @@ backend be_edge_http:test-sharding:helloworld-1102-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4445,7 +4445,7 @@ backend be_http:test-sharding:helloworld-1102-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4463,7 +4463,7 @@ backend be_edge_http:test-sharding:helloworld-1103-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4481,7 +4481,7 @@ backend be_http:test-sharding:helloworld-1103-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4499,7 +4499,7 @@ backend be_edge_http:test-sharding:helloworld-1104-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4517,7 +4517,7 @@ backend be_http:test-sharding:helloworld-1104-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4535,7 +4535,7 @@ backend be_edge_http:test-sharding:helloworld-1105-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4553,7 +4553,7 @@ backend be_http:test-sharding:helloworld-1105-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4571,7 +4571,7 @@ backend be_edge_http:test-sharding:helloworld-1106-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4589,7 +4589,7 @@ backend be_http:test-sharding:helloworld-1106-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4607,7 +4607,7 @@ backend be_edge_http:test-sharding:helloworld-1107-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4625,7 +4625,7 @@ backend be_http:test-sharding:helloworld-1107-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4643,7 +4643,7 @@ backend be_edge_http:test-sharding:helloworld-1108-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4661,7 +4661,7 @@ backend be_http:test-sharding:helloworld-1108-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4679,7 +4679,7 @@ backend be_edge_http:test-sharding:helloworld-1109-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4697,7 +4697,7 @@ backend be_http:test-sharding:helloworld-1109-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4715,7 +4715,7 @@ backend be_edge_http:test-sharding:helloworld-111-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4733,7 +4733,7 @@ backend be_http:test-sharding:helloworld-111-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4751,7 +4751,7 @@ backend be_edge_http:test-sharding:helloworld-1110-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4769,7 +4769,7 @@ backend be_http:test-sharding:helloworld-1110-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4787,7 +4787,7 @@ backend be_edge_http:test-sharding:helloworld-1111-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4805,7 +4805,7 @@ backend be_http:test-sharding:helloworld-1111-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4823,7 +4823,7 @@ backend be_edge_http:test-sharding:helloworld-1112-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4841,7 +4841,7 @@ backend be_http:test-sharding:helloworld-1112-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4859,7 +4859,7 @@ backend be_edge_http:test-sharding:helloworld-1113-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4877,7 +4877,7 @@ backend be_http:test-sharding:helloworld-1113-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4895,7 +4895,7 @@ backend be_edge_http:test-sharding:helloworld-1114-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4913,7 +4913,7 @@ backend be_http:test-sharding:helloworld-1114-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4931,7 +4931,7 @@ backend be_edge_http:test-sharding:helloworld-1115-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4949,7 +4949,7 @@ backend be_http:test-sharding:helloworld-1115-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4967,7 +4967,7 @@ backend be_edge_http:test-sharding:helloworld-1116-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -4985,7 +4985,7 @@ backend be_http:test-sharding:helloworld-1116-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5003,7 +5003,7 @@ backend be_edge_http:test-sharding:helloworld-1117-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5021,7 +5021,7 @@ backend be_http:test-sharding:helloworld-1117-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5039,7 +5039,7 @@ backend be_edge_http:test-sharding:helloworld-1118-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5057,7 +5057,7 @@ backend be_http:test-sharding:helloworld-1118-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5075,7 +5075,7 @@ backend be_edge_http:test-sharding:helloworld-1119-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5093,7 +5093,7 @@ backend be_http:test-sharding:helloworld-1119-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5111,7 +5111,7 @@ backend be_edge_http:test-sharding:helloworld-112-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5129,7 +5129,7 @@ backend be_http:test-sharding:helloworld-112-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5147,7 +5147,7 @@ backend be_edge_http:test-sharding:helloworld-1120-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5165,7 +5165,7 @@ backend be_http:test-sharding:helloworld-1120-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5183,7 +5183,7 @@ backend be_edge_http:test-sharding:helloworld-1121-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5201,7 +5201,7 @@ backend be_http:test-sharding:helloworld-1121-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5219,7 +5219,7 @@ backend be_edge_http:test-sharding:helloworld-1122-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5237,7 +5237,7 @@ backend be_http:test-sharding:helloworld-1122-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5255,7 +5255,7 @@ backend be_edge_http:test-sharding:helloworld-1123-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5273,7 +5273,7 @@ backend be_http:test-sharding:helloworld-1123-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5291,7 +5291,7 @@ backend be_edge_http:test-sharding:helloworld-1124-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5309,7 +5309,7 @@ backend be_http:test-sharding:helloworld-1124-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5327,7 +5327,7 @@ backend be_edge_http:test-sharding:helloworld-1125-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5345,7 +5345,7 @@ backend be_http:test-sharding:helloworld-1125-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5363,7 +5363,7 @@ backend be_edge_http:test-sharding:helloworld-1126-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5381,7 +5381,7 @@ backend be_http:test-sharding:helloworld-1126-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5399,7 +5399,7 @@ backend be_edge_http:test-sharding:helloworld-1127-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5417,7 +5417,7 @@ backend be_http:test-sharding:helloworld-1127-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5435,7 +5435,7 @@ backend be_edge_http:test-sharding:helloworld-1128-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5453,7 +5453,7 @@ backend be_http:test-sharding:helloworld-1128-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5471,7 +5471,7 @@ backend be_edge_http:test-sharding:helloworld-1129-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5489,7 +5489,7 @@ backend be_http:test-sharding:helloworld-1129-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5507,7 +5507,7 @@ backend be_edge_http:test-sharding:helloworld-113-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5525,7 +5525,7 @@ backend be_http:test-sharding:helloworld-113-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5543,7 +5543,7 @@ backend be_edge_http:test-sharding:helloworld-1130-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5561,7 +5561,7 @@ backend be_http:test-sharding:helloworld-1130-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5579,7 +5579,7 @@ backend be_edge_http:test-sharding:helloworld-1131-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5597,7 +5597,7 @@ backend be_http:test-sharding:helloworld-1131-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5615,7 +5615,7 @@ backend be_edge_http:test-sharding:helloworld-1132-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5633,7 +5633,7 @@ backend be_http:test-sharding:helloworld-1132-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5651,7 +5651,7 @@ backend be_edge_http:test-sharding:helloworld-1133-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5669,7 +5669,7 @@ backend be_http:test-sharding:helloworld-1133-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5687,7 +5687,7 @@ backend be_edge_http:test-sharding:helloworld-1134-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5705,7 +5705,7 @@ backend be_http:test-sharding:helloworld-1134-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5723,7 +5723,7 @@ backend be_edge_http:test-sharding:helloworld-1135-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5741,7 +5741,7 @@ backend be_http:test-sharding:helloworld-1135-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5759,7 +5759,7 @@ backend be_edge_http:test-sharding:helloworld-1136-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5777,7 +5777,7 @@ backend be_http:test-sharding:helloworld-1136-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5795,7 +5795,7 @@ backend be_edge_http:test-sharding:helloworld-1137-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5813,7 +5813,7 @@ backend be_http:test-sharding:helloworld-1137-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5831,7 +5831,7 @@ backend be_edge_http:test-sharding:helloworld-1138-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5849,7 +5849,7 @@ backend be_http:test-sharding:helloworld-1138-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5867,7 +5867,7 @@ backend be_edge_http:test-sharding:helloworld-1139-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5885,7 +5885,7 @@ backend be_http:test-sharding:helloworld-1139-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5903,7 +5903,7 @@ backend be_edge_http:test-sharding:helloworld-114-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5921,7 +5921,7 @@ backend be_http:test-sharding:helloworld-114-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5939,7 +5939,7 @@ backend be_edge_http:test-sharding:helloworld-1140-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5957,7 +5957,7 @@ backend be_http:test-sharding:helloworld-1140-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5975,7 +5975,7 @@ backend be_edge_http:test-sharding:helloworld-1141-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -5993,7 +5993,7 @@ backend be_http:test-sharding:helloworld-1141-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6011,7 +6011,7 @@ backend be_edge_http:test-sharding:helloworld-1142-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6029,7 +6029,7 @@ backend be_http:test-sharding:helloworld-1142-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6047,7 +6047,7 @@ backend be_edge_http:test-sharding:helloworld-1143-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6065,7 +6065,7 @@ backend be_http:test-sharding:helloworld-1143-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6083,7 +6083,7 @@ backend be_edge_http:test-sharding:helloworld-1144-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6101,7 +6101,7 @@ backend be_http:test-sharding:helloworld-1144-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6119,7 +6119,7 @@ backend be_edge_http:test-sharding:helloworld-1145-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6137,7 +6137,7 @@ backend be_http:test-sharding:helloworld-1145-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6155,7 +6155,7 @@ backend be_edge_http:test-sharding:helloworld-1146-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6173,7 +6173,7 @@ backend be_http:test-sharding:helloworld-1146-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6191,7 +6191,7 @@ backend be_edge_http:test-sharding:helloworld-1147-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6209,7 +6209,7 @@ backend be_http:test-sharding:helloworld-1147-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6227,7 +6227,7 @@ backend be_edge_http:test-sharding:helloworld-1148-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6245,7 +6245,7 @@ backend be_http:test-sharding:helloworld-1148-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6263,7 +6263,7 @@ backend be_edge_http:test-sharding:helloworld-1149-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6281,7 +6281,7 @@ backend be_http:test-sharding:helloworld-1149-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6299,7 +6299,7 @@ backend be_edge_http:test-sharding:helloworld-115-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6317,7 +6317,7 @@ backend be_http:test-sharding:helloworld-115-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6335,7 +6335,7 @@ backend be_edge_http:test-sharding:helloworld-1150-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6353,7 +6353,7 @@ backend be_http:test-sharding:helloworld-1150-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6371,7 +6371,7 @@ backend be_edge_http:test-sharding:helloworld-1151-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6389,7 +6389,7 @@ backend be_http:test-sharding:helloworld-1151-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6407,7 +6407,7 @@ backend be_edge_http:test-sharding:helloworld-1152-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6425,7 +6425,7 @@ backend be_http:test-sharding:helloworld-1152-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6443,7 +6443,7 @@ backend be_edge_http:test-sharding:helloworld-1153-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6461,7 +6461,7 @@ backend be_http:test-sharding:helloworld-1153-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6479,7 +6479,7 @@ backend be_edge_http:test-sharding:helloworld-1154-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6497,7 +6497,7 @@ backend be_http:test-sharding:helloworld-1154-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6515,7 +6515,7 @@ backend be_edge_http:test-sharding:helloworld-1155-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6533,7 +6533,7 @@ backend be_http:test-sharding:helloworld-1155-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6551,7 +6551,7 @@ backend be_edge_http:test-sharding:helloworld-1156-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6569,7 +6569,7 @@ backend be_http:test-sharding:helloworld-1156-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6587,7 +6587,7 @@ backend be_edge_http:test-sharding:helloworld-1157-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6605,7 +6605,7 @@ backend be_http:test-sharding:helloworld-1157-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6623,7 +6623,7 @@ backend be_edge_http:test-sharding:helloworld-1158-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6641,7 +6641,7 @@ backend be_http:test-sharding:helloworld-1158-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6659,7 +6659,7 @@ backend be_edge_http:test-sharding:helloworld-1159-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6677,7 +6677,7 @@ backend be_http:test-sharding:helloworld-1159-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6695,7 +6695,7 @@ backend be_edge_http:test-sharding:helloworld-116-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6713,7 +6713,7 @@ backend be_http:test-sharding:helloworld-116-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6731,7 +6731,7 @@ backend be_edge_http:test-sharding:helloworld-1160-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6749,7 +6749,7 @@ backend be_http:test-sharding:helloworld-1160-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6767,7 +6767,7 @@ backend be_edge_http:test-sharding:helloworld-1161-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6785,7 +6785,7 @@ backend be_http:test-sharding:helloworld-1161-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6803,7 +6803,7 @@ backend be_edge_http:test-sharding:helloworld-1162-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6821,7 +6821,7 @@ backend be_http:test-sharding:helloworld-1162-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6839,7 +6839,7 @@ backend be_edge_http:test-sharding:helloworld-1163-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6857,7 +6857,7 @@ backend be_http:test-sharding:helloworld-1163-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6875,7 +6875,7 @@ backend be_edge_http:test-sharding:helloworld-1164-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6893,7 +6893,7 @@ backend be_http:test-sharding:helloworld-1164-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6911,7 +6911,7 @@ backend be_edge_http:test-sharding:helloworld-1165-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6929,7 +6929,7 @@ backend be_http:test-sharding:helloworld-1165-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6947,7 +6947,7 @@ backend be_edge_http:test-sharding:helloworld-1166-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6965,7 +6965,7 @@ backend be_http:test-sharding:helloworld-1166-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -6983,7 +6983,7 @@ backend be_edge_http:test-sharding:helloworld-1167-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7001,7 +7001,7 @@ backend be_http:test-sharding:helloworld-1167-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7019,7 +7019,7 @@ backend be_edge_http:test-sharding:helloworld-1168-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7037,7 +7037,7 @@ backend be_http:test-sharding:helloworld-1168-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7055,7 +7055,7 @@ backend be_edge_http:test-sharding:helloworld-1169-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7073,7 +7073,7 @@ backend be_http:test-sharding:helloworld-1169-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7091,7 +7091,7 @@ backend be_edge_http:test-sharding:helloworld-117-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7109,7 +7109,7 @@ backend be_http:test-sharding:helloworld-117-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7127,7 +7127,7 @@ backend be_edge_http:test-sharding:helloworld-1170-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7145,7 +7145,7 @@ backend be_http:test-sharding:helloworld-1170-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7163,7 +7163,7 @@ backend be_edge_http:test-sharding:helloworld-1171-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7181,7 +7181,7 @@ backend be_http:test-sharding:helloworld-1171-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7199,7 +7199,7 @@ backend be_edge_http:test-sharding:helloworld-1172-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7217,7 +7217,7 @@ backend be_http:test-sharding:helloworld-1172-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7235,7 +7235,7 @@ backend be_edge_http:test-sharding:helloworld-1173-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7253,7 +7253,7 @@ backend be_http:test-sharding:helloworld-1173-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7271,7 +7271,7 @@ backend be_edge_http:test-sharding:helloworld-1174-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7289,7 +7289,7 @@ backend be_http:test-sharding:helloworld-1174-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7307,7 +7307,7 @@ backend be_edge_http:test-sharding:helloworld-1175-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7325,7 +7325,7 @@ backend be_http:test-sharding:helloworld-1175-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7343,7 +7343,7 @@ backend be_edge_http:test-sharding:helloworld-1176-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7361,7 +7361,7 @@ backend be_http:test-sharding:helloworld-1176-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7379,7 +7379,7 @@ backend be_edge_http:test-sharding:helloworld-1177-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7397,7 +7397,7 @@ backend be_http:test-sharding:helloworld-1177-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7415,7 +7415,7 @@ backend be_edge_http:test-sharding:helloworld-1178-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7433,7 +7433,7 @@ backend be_http:test-sharding:helloworld-1178-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7451,7 +7451,7 @@ backend be_edge_http:test-sharding:helloworld-1179-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7469,7 +7469,7 @@ backend be_http:test-sharding:helloworld-1179-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7487,7 +7487,7 @@ backend be_edge_http:test-sharding:helloworld-118-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7505,7 +7505,7 @@ backend be_http:test-sharding:helloworld-118-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7523,7 +7523,7 @@ backend be_edge_http:test-sharding:helloworld-1180-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7541,7 +7541,7 @@ backend be_http:test-sharding:helloworld-1180-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7559,7 +7559,7 @@ backend be_edge_http:test-sharding:helloworld-1181-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7577,7 +7577,7 @@ backend be_http:test-sharding:helloworld-1181-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7595,7 +7595,7 @@ backend be_edge_http:test-sharding:helloworld-1182-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7613,7 +7613,7 @@ backend be_http:test-sharding:helloworld-1182-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7631,7 +7631,7 @@ backend be_edge_http:test-sharding:helloworld-1183-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7649,7 +7649,7 @@ backend be_http:test-sharding:helloworld-1183-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7667,7 +7667,7 @@ backend be_edge_http:test-sharding:helloworld-1184-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7685,7 +7685,7 @@ backend be_http:test-sharding:helloworld-1184-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7703,7 +7703,7 @@ backend be_edge_http:test-sharding:helloworld-1185-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7721,7 +7721,7 @@ backend be_http:test-sharding:helloworld-1185-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7739,7 +7739,7 @@ backend be_edge_http:test-sharding:helloworld-1186-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7757,7 +7757,7 @@ backend be_http:test-sharding:helloworld-1186-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7775,7 +7775,7 @@ backend be_edge_http:test-sharding:helloworld-1187-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7793,7 +7793,7 @@ backend be_http:test-sharding:helloworld-1187-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7811,7 +7811,7 @@ backend be_edge_http:test-sharding:helloworld-1188-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7829,7 +7829,7 @@ backend be_http:test-sharding:helloworld-1188-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7847,7 +7847,7 @@ backend be_edge_http:test-sharding:helloworld-1189-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7865,7 +7865,7 @@ backend be_http:test-sharding:helloworld-1189-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7883,7 +7883,7 @@ backend be_edge_http:test-sharding:helloworld-119-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7901,7 +7901,7 @@ backend be_http:test-sharding:helloworld-119-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7919,7 +7919,7 @@ backend be_edge_http:test-sharding:helloworld-1190-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7937,7 +7937,7 @@ backend be_http:test-sharding:helloworld-1190-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7955,7 +7955,7 @@ backend be_edge_http:test-sharding:helloworld-1191-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7973,7 +7973,7 @@ backend be_http:test-sharding:helloworld-1191-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -7991,7 +7991,7 @@ backend be_edge_http:test-sharding:helloworld-1192-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8009,7 +8009,7 @@ backend be_http:test-sharding:helloworld-1192-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8027,7 +8027,7 @@ backend be_edge_http:test-sharding:helloworld-1193-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8045,7 +8045,7 @@ backend be_http:test-sharding:helloworld-1193-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8063,7 +8063,7 @@ backend be_edge_http:test-sharding:helloworld-1194-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8081,7 +8081,7 @@ backend be_http:test-sharding:helloworld-1194-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8099,7 +8099,7 @@ backend be_edge_http:test-sharding:helloworld-1195-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8117,7 +8117,7 @@ backend be_http:test-sharding:helloworld-1195-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8135,7 +8135,7 @@ backend be_edge_http:test-sharding:helloworld-1196-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8153,7 +8153,7 @@ backend be_http:test-sharding:helloworld-1196-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8171,7 +8171,7 @@ backend be_edge_http:test-sharding:helloworld-1197-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8189,7 +8189,7 @@ backend be_http:test-sharding:helloworld-1197-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8207,7 +8207,7 @@ backend be_edge_http:test-sharding:helloworld-1198-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8225,7 +8225,7 @@ backend be_http:test-sharding:helloworld-1198-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8243,7 +8243,7 @@ backend be_edge_http:test-sharding:helloworld-1199-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8261,7 +8261,7 @@ backend be_http:test-sharding:helloworld-1199-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8279,7 +8279,7 @@ backend be_edge_http:test-sharding:helloworld-12-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8297,7 +8297,7 @@ backend be_http:test-sharding:helloworld-12-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8315,7 +8315,7 @@ backend be_edge_http:test-sharding:helloworld-120-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8333,7 +8333,7 @@ backend be_http:test-sharding:helloworld-120-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8351,7 +8351,7 @@ backend be_edge_http:test-sharding:helloworld-1200-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8369,7 +8369,7 @@ backend be_http:test-sharding:helloworld-1200-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8387,7 +8387,7 @@ backend be_edge_http:test-sharding:helloworld-1201-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8405,7 +8405,7 @@ backend be_http:test-sharding:helloworld-1201-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8423,7 +8423,7 @@ backend be_edge_http:test-sharding:helloworld-1202-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8441,7 +8441,7 @@ backend be_http:test-sharding:helloworld-1202-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8459,7 +8459,7 @@ backend be_edge_http:test-sharding:helloworld-1203-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8477,7 +8477,7 @@ backend be_http:test-sharding:helloworld-1203-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8495,7 +8495,7 @@ backend be_edge_http:test-sharding:helloworld-1204-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8513,7 +8513,7 @@ backend be_http:test-sharding:helloworld-1204-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8531,7 +8531,7 @@ backend be_edge_http:test-sharding:helloworld-1205-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8549,7 +8549,7 @@ backend be_http:test-sharding:helloworld-1205-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8567,7 +8567,7 @@ backend be_edge_http:test-sharding:helloworld-1206-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8585,7 +8585,7 @@ backend be_http:test-sharding:helloworld-1206-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8603,7 +8603,7 @@ backend be_edge_http:test-sharding:helloworld-1207-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8621,7 +8621,7 @@ backend be_http:test-sharding:helloworld-1207-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8639,7 +8639,7 @@ backend be_edge_http:test-sharding:helloworld-1208-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8657,7 +8657,7 @@ backend be_http:test-sharding:helloworld-1208-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8675,7 +8675,7 @@ backend be_edge_http:test-sharding:helloworld-1209-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8693,7 +8693,7 @@ backend be_http:test-sharding:helloworld-1209-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8711,7 +8711,7 @@ backend be_edge_http:test-sharding:helloworld-121-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8729,7 +8729,7 @@ backend be_http:test-sharding:helloworld-121-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8747,7 +8747,7 @@ backend be_edge_http:test-sharding:helloworld-1210-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8765,7 +8765,7 @@ backend be_http:test-sharding:helloworld-1210-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8783,7 +8783,7 @@ backend be_edge_http:test-sharding:helloworld-1211-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8801,7 +8801,7 @@ backend be_http:test-sharding:helloworld-1211-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8819,7 +8819,7 @@ backend be_edge_http:test-sharding:helloworld-1212-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8837,7 +8837,7 @@ backend be_http:test-sharding:helloworld-1212-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8855,7 +8855,7 @@ backend be_edge_http:test-sharding:helloworld-1213-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8873,7 +8873,7 @@ backend be_http:test-sharding:helloworld-1213-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8891,7 +8891,7 @@ backend be_edge_http:test-sharding:helloworld-1214-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8909,7 +8909,7 @@ backend be_http:test-sharding:helloworld-1214-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8927,7 +8927,7 @@ backend be_edge_http:test-sharding:helloworld-1215-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8945,7 +8945,7 @@ backend be_http:test-sharding:helloworld-1215-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8963,7 +8963,7 @@ backend be_edge_http:test-sharding:helloworld-1216-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8981,7 +8981,7 @@ backend be_http:test-sharding:helloworld-1216-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -8999,7 +8999,7 @@ backend be_edge_http:test-sharding:helloworld-1217-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9017,7 +9017,7 @@ backend be_http:test-sharding:helloworld-1217-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9035,7 +9035,7 @@ backend be_edge_http:test-sharding:helloworld-1218-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9053,7 +9053,7 @@ backend be_http:test-sharding:helloworld-1218-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9071,7 +9071,7 @@ backend be_edge_http:test-sharding:helloworld-1219-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9089,7 +9089,7 @@ backend be_http:test-sharding:helloworld-1219-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9107,7 +9107,7 @@ backend be_edge_http:test-sharding:helloworld-122-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9125,7 +9125,7 @@ backend be_http:test-sharding:helloworld-122-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9143,7 +9143,7 @@ backend be_edge_http:test-sharding:helloworld-1220-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9161,7 +9161,7 @@ backend be_http:test-sharding:helloworld-1220-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9179,7 +9179,7 @@ backend be_edge_http:test-sharding:helloworld-1221-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9197,7 +9197,7 @@ backend be_http:test-sharding:helloworld-1221-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9215,7 +9215,7 @@ backend be_edge_http:test-sharding:helloworld-1222-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9233,7 +9233,7 @@ backend be_http:test-sharding:helloworld-1222-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9251,7 +9251,7 @@ backend be_edge_http:test-sharding:helloworld-1223-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9269,7 +9269,7 @@ backend be_http:test-sharding:helloworld-1223-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9287,7 +9287,7 @@ backend be_edge_http:test-sharding:helloworld-1224-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9305,7 +9305,7 @@ backend be_http:test-sharding:helloworld-1224-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9323,7 +9323,7 @@ backend be_edge_http:test-sharding:helloworld-1225-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9341,7 +9341,7 @@ backend be_http:test-sharding:helloworld-1225-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9359,7 +9359,7 @@ backend be_edge_http:test-sharding:helloworld-1226-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9377,7 +9377,7 @@ backend be_http:test-sharding:helloworld-1226-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9395,7 +9395,7 @@ backend be_edge_http:test-sharding:helloworld-1227-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9413,7 +9413,7 @@ backend be_http:test-sharding:helloworld-1227-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9431,7 +9431,7 @@ backend be_edge_http:test-sharding:helloworld-1228-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9449,7 +9449,7 @@ backend be_http:test-sharding:helloworld-1228-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9467,7 +9467,7 @@ backend be_edge_http:test-sharding:helloworld-1229-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9485,7 +9485,7 @@ backend be_http:test-sharding:helloworld-1229-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9503,7 +9503,7 @@ backend be_edge_http:test-sharding:helloworld-123-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9521,7 +9521,7 @@ backend be_http:test-sharding:helloworld-123-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9539,7 +9539,7 @@ backend be_edge_http:test-sharding:helloworld-1230-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9557,7 +9557,7 @@ backend be_http:test-sharding:helloworld-1230-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9575,7 +9575,7 @@ backend be_edge_http:test-sharding:helloworld-1231-edge
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]
@@ -9593,7 +9593,7 @@ backend be_http:test-sharding:helloworld-1231-insecure
   mode http
   option redispatch
   option forwardfor
-  balance random
+  balance roundrobin
 
   timeout check 5000ms
   http-request add-header X-Forwarded-Host %[req.hdr(host)]

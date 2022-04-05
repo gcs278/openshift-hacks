@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: router-example-service-testing2
+  name: router-example-service-testing
   namespace: openshift-ingress
 spec:
   ports:

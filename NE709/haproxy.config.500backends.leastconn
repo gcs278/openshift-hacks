@@ -72,7 +72,7 @@ defaults
 # that terminates encryption in this router (edge)
 frontend public_ssl
     
-  bind :443
+  bind :23443
   tcp-request  inspect-delay 5s
   tcp-request content accept if { req_ssl_hello_type 1 }
 

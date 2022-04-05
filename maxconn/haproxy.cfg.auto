@@ -24,9 +24,7 @@ frontend public
 
 backend openshift_default
   mode http
-  balance random
   server web00 127.0.0.1:4040
-  server web01 127.0.0.1:4040
 
 listen stats
   bind :1937

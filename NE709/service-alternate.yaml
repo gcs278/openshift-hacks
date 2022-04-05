@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: List
+metadata: {}
+items:
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: router-service2-alternate
+  spec:
+    replicas: 1
+    selector:
+      app: router-service2-alternate
+      deploymentconfig: router-service2-alternate
+    strategy:
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: router-service2-alternate
+          deploymentconfig: router-service2-alternate
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
+          name: router-service2-alternate
+          command:
+            - /usr/bin/socat
+            - TCP4-LISTEN:8676,reuseaddr,fork
+            - EXEC:'/bin/bash -c \"printf \\\"HTTP/1.0 200 OK\\\nset-cookie:X=Y\\\nset-cookie2:A=B\\\nset-cookie:P=Q\\\nset-cookie2:M=N\r\n\r\n\\\"; sed -e \\\"/^\r/q\\\"\"'
+          ports:
+          - containerPort: 8676
+            protocol: TCP
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: router-service2
+  spec:
+    replicas: 1
+    selector:
+      app: router-service2
+      deploymentconfig: router-service2
+    strategy:
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: router-service2
+          deploymentconfig: router-service2
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
+          name: router-service2
+          command:
+            - /usr/bin/socat
+            - TCP4-LISTEN:8676,reuseaddr,fork
+            - EXEC:'/bin/bash -c \"printf \\\"HTTP/1.0 200 OK\\\nset-cookie:X=Y\\\nset-cookie2:A=B\\\nset-cookie:P=Q\\\nset-cookie2:M=N\r\n\r\n\\\"; sed -e \\\"/^\r/q\\\"\"'
+          ports:
+          - containerPort: 8676
+            protocol: TCP
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: router-service2-alternate
+    labels:
+      app: router-service2-alternate
+  spec:
+    selector:
+      app: router-service2
+    ports:
+      - port: 8676
+        name: router-service2
+        protocol: TCP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: router-service2
+    labels:
+      app: router-service2
+  spec:
+    selector:
+      app: router-service2
+    ports:
+      - port: 8676
+        name: router-service2
+        protocol: TCP
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: router-service2
+  spec:
+    to:
+      kind: Service
+      name: router-service2
+      weight: 10
+    alternateBackends:
+    - kind: Service
+      name: router-service2-alternate
+      weight: 15
