@@ -2,33 +2,50 @@
 set -euo pipefail
 
 function print_usage_exit() {
-    echo "usage: clusterctl <create|delete> <platform> <name>"
+    echo "usage: $(basename $0) create <VERSION_DIR> {aws|gcp|azure} [MOD_SCRIPT]"
+    echo "                      delete <CLUSTER_DIR>"
+    echo "       e.g. $(basename $0) create 4.10.5 aws"
     exit 1
 }
 
 export PATH=$PWD:$PATH
 
 WHAT="${1:-}"
-PLATFORM="${2:-}"
 if [[ "$WHAT" == "create" ]]; then
-  NAME="${3:-gspence-$(date +%Y-%m-%d-%H%M)}"
+  VERSION_DIR="${2:-}"
+  PLATFORM="${3:-}"
+  NAME="gspence-$(date +%Y-%m-%d-%H%M)"
+  CLUSTER_DIR="${VERSION_DIR}/${PLATFORM}-${NAME}"
+  MOD_SCRIPT="${4:-}"
+  if [[ ! -z "$MOD_SCRIPT" ]] && [[ ! -f "$MOD_SCRIPT" ]]; then
+    echo "ERROR: MOD_SCRIPT $MOD_SCRIPT is not a file"
+    exit 1
+  fi
 elif [[ "$WHAT" == "delete" ]]; then
-  NAME="${3:-}"
+  CLUSTER_DIR="${2:-}"
+  NAME=$(basename $CLUSTER_DIR)
+  VERSION_DIR=$(basename $(dirname $CLUSTER_DIR))
+  PLATFORM=$(echo $NAME | awk -F'-' '{print $1}')
+  if [[ ! -d "${CLUSTER_DIR}" ]]; then
+    echo "ERROR: ${CLUSTER_DIR} doesn't exist"
+    exit 1
+  fi
 else
   print_usage_exit
 fi
 
+INSTALLER="${VERSION_DIR}/openshift-install"
+if [[ ! -f "${INSTALLER}" ]]; then
+  echo "ERROR: ${INSTALLER} doesn't exist"
+  print_usage_exit
+fi
+
+
 if [ -z "$WHAT" ]; then print_usage_exit; fi
 if [ -z "$NAME" ]; then print_usage_exit; fi
+if [ -z "$CLUSTER_DIR" ]; then print_usage_exit; fi
 if [ -z "$PLATFORM" ]; then print_usage_exit; fi
 
-# If specified a path, then let's assume they wanted to reference a dir
-if [[ -d "${NAME}" ]]; then
-  CLUSTER_DIR="${NAME}"
-  NAME=$(basename $NAME)
-else
-  CLUSTER_DIR="$PWD/${PLATFORM}-${NAME}"
-fi
 
 echo $CLUSTER_DIR
 
@@ -166,40 +183,40 @@ function create() {
     if [ "$PLATFORM" == "aws" ]; then
         mkdir "$CLUSTER_DIR"
         create_aws_config
-        if [ "$WHAT" == "config" ]; then
-            echo "wrote install config to $CLUSTER_DIR"
-            exit 0
-        fi
-        set -x
-        ./openshift-install create cluster --dir="$CLUSTER_DIR"
     elif [ "$PLATFORM" == "azure" ]; then
         mkdir "$CLUSTER_DIR"
         create_azure_config
-        if [ "$WHAT" == "config" ]; then
-            echo "wrote install config to $CLUSTER_DIR"
-            exit 0
-        fi
-        ./openshift-install create cluster --dir="$CLUSTER_DIR"
     elif [ "$PLATFORM" == "gcp" ]; then
         mkdir "$CLUSTER_DIR"
         create_gcp_config
-        if [ "$WHAT" == "config" ]; then
-            echo "wrote install config to $CLUSTER_DIR"
-            exit 0
-        fi
-        GOOGLE_APPLICATION_CREDENTIALS=~/src/github.com/openshift/shared-secrets/gce/aos-serviceaccount.json \
-           ./openshift-install create cluster --dir="$CLUSTER_DIR"
+        export GOOGLE_APPLICATION_CREDENTIALS=~/src/github.com/openshift/shared-secrets/gce/aos-serviceaccount.json
     else
         echo "unrecognized platform '$PLATFORM'"
         exit 1
     fi
+    if [ "$WHAT" == "config" ]; then
+       echo "wrote install config to $CLUSTER_DIR"
+       exit 0
+    fi
 
+    if [[ "$MOD_SCRIPT" != "" ]]; then
+      bash $MOD_SCRIPT ${CLUSTER_DIR}/install-config.yaml
+      if [[ $? -ne 0 ]]; then
+        echo "ERROR: The mod_script $MOD_SCRIPT failed"
+	exit 1
+      fi
+    fi
     cat $CLUSTER_DIR/install-config.yaml
+    ${INSTALLER} create cluster --dir="$CLUSTER_DIR"
 }
 
 function delete() {
-  GOOGLE_APPLICATION_CREDENTIALS=~/src/github.com/openshift/shared-secrets/gce/aos-serviceaccount.json \
-    ./openshift-install destroy cluster --dir="$CLUSTER_DIR"
+  if [[ -f ${CLUSTER_DIR}/metadata.json ]]; then 
+    GOOGLE_APPLICATION_CREDENTIALS=~/src/github.com/openshift/shared-secrets/gce/aos-serviceaccount.json \
+      ${INSTALLER} destroy cluster --dir="$CLUSTER_DIR"
+  else
+    echo "Not a real cluster, just deleting dir"
+  fi
 
   rm -rf "$CLUSTER_DIR"
 }
