@@ -10,7 +10,7 @@ INSTALL_CONFIG="$1"
 
 # Update the number of worker replicas
 WORKER_REPLICAS=30
-YAML=$(python3 -c "import yaml;f=open(\"${INSTALL_CONFIG}\");y=yaml.safe_load(f);y['compute'][0]['replicas'] = $WORKER_REPLICAS; y['compute'][0]['platform']['aws'] = {}; y['compute'][0]['platform']['aws']['type'] = 'm6i.4xlarge'; print(yaml.dump(y, default_flow_style=False))")
+YAML=$(python3 -c "import yaml;f=open(\"${INSTALL_CONFIG}\");y=yaml.safe_load(f);y['compute'][0]['replicas'] = $WORKER_REPLICAS; y['compute'][0]['platform'] = {}; y['compute'][0]['platform']['aws'] = {}; y['compute'][0]['platform']['aws']['type'] = 'm6i.4xlarge'; print(yaml.dump(y, default_flow_style=False))") 
 
 # Write back to cluster config
 echo "$YAML" > $INSTALL_CONFIG

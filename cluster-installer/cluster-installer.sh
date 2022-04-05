@@ -13,6 +13,7 @@ export PATH=$PWD:$PATH
 WHAT="${1:-}"
 if [[ "$WHAT" == "create" ]]; then
   VERSION_DIR="${2:-}"
+  VERSION_DIR=$(basename $VERSION_DIR)
   PLATFORM="${3:-}"
   NAME="gspence-$(date +%Y-%m-%d-%H%M)"
   CLUSTER_DIR="${VERSION_DIR}/${PLATFORM}-${NAME}"
