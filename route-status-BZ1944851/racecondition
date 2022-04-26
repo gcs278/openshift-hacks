@@ -1,0 +1,195 @@
+ROUTER Logs:
+
+
+INGRESS LOGS: 
+2022-04-08T10:53:36.127-0700    INFO    operator.ingressclass_controller        controller/controller.go:114    reconciling     {"request": "openshift-ingress-operator/ic-delete-test"}
+2022-04-08T10:53:36.710-0700    INFO    operator.ingress_controller     ingress/controller.go:683       deleted deployment      {"namespace": "openshift-ingress", "name": "router-ic-delete-test"}
+2022-04-08T10:53:36.710-0700    DEBUG   operator.init.events    record/event.go:311     Normal  {"object": {"kind":"IngressController","namespace":"openshift-ingress-operator","name":"ic-delete-test","uid":"8e4ba748-ec6c-43c2-85f9-519cd3fe3a0e","apiVersion":"operator.openshift.io/v1","resourceVersion":"534866"}, "reason": "DeletedDeployment", "message": "Deleted deployment openshift-ingress/router-ic-delete-test"}
+2022-04-08T10:53:36.778-0700    INFO    operator.ingress_controller     handler/enqueue_mapped.go:80    queueing ingress        {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:36.802-0700    INFO    operator.ingress_controller     handler/enqueue_mapped.go:80    queueing ingress        {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:36.986-0700    INFO    operator.certificate_publisher_controller       handler/enqueue_mapped.go:80    queueing ingresscontroller      {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:36.986-0700    INFO    operator.certificate_publisher_controller       handler/enqueue_mapped.go:80    queueing ingresscontroller      {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:36.986-0700    INFO    operator.certificate_publisher_controller       handler/enqueue_mapped.go:80    queueing ingresscontroller      {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:36.986-0700    INFO    operator.certificate_publisher_controller       handler/enqueue_mapped.go:80    queueing ingresscontroller      {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:36.986-0700    INFO    operator.certificate_publisher_controller       controller/controller.go:114    Reconciling     {"request": "openshift-ingress-operator/ic-delete-test"}
+2022-04-08T10:53:36.998-0700    INFO    operator.ingress_controller     handler/enqueue_mapped.go:80    queueing ingress        {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:37.010-0700    INFO    operator.ingress_controller     handler/enqueue_mapped.go:80    queueing ingress        {"name": "ic-delete-test", "related": ""}
+2022-04-08T10:53:37.288-0700    INFO    operator.certificate_controller controller/controller.go:114    deployment not found; will retry default cert sync      {"ingresscontroller": "ic-delete-test"}
+2022-04-08T10:53:37.704-0700    DEBUG   operator.init.events    record/event.go:311     Normal  {"object": {"kind":"Secret","namespace":"openshift-config-managed","name":"router-certs","uid":"abb4c543-de06-456f-b937-bfd74ca1f2ce","apiVersion":"v1","resourceVersion":"534806"}, "reason": "UpdatedPublishedRouterCertificates", "message": "Updated the published router certificates"}
+I0408 17:53:37.720625       1 status.go:151] controller "msg"="updated route status"  "action"="admit" "name"="route-ic-delete-test" "namespace"="default"
+I0408 17:53:37.720684       1 writerlease.go:292] writerlease "msg"="completed work"  "expires"="2022-04-08T17:54:37.720649359Z" "key"="686114c4-33a2-4df9-828e-fc25929f7a7c" "state"=1 "tick"=0 "worker"="384627304"
+I0408 17:53:37.720702       1 writerlease.go:259] writerlease "msg"="lease owner or electing, running"  "key"="686114c4-33a2-4df9-828e-fc25929f7a7c" "worker"="384627304"
+I0408 17:53:37.720735       1 status.go:133] controller "msg"="no changes to route needed"  "action"="admit" "name"="route-ic-delete-test" "namespace"="default"
+I0408 17:53:37.720780       1 writerlease.go:292] writerlease "msg"="completed work"  "expires"="2022-04-08T17:54:37.720649359Z" "key"="686114c4-33a2-4df9-828e-fc25929f7a7c" "state"=1 "tick"=0 "worker"="384627304"
+2022-04-08T10:53:37.909-0700    INFO    operator.ingress_controller     ingress/controller.go:700       cleared route status for ingress        {"Ingress Controller": "ic-delete-test", "Routes Status Cleared": 1, "Time Elapsed": "308.642265ms"}
+I0408 17:53:37.939397       1 reflector.go:225] Stopping reflector *v1.Route (30m0s) from github.com/openshift/router/pkg/router/controller/factory/factory.go:125
+I0408 17:53:37.939541       1 reflector.go:225] Stopping reflector *v1.EndpointSlice (30m0s) from github.com/openshift/router/pkg/router/controller/factory/factory.go:125
+I0408 17:53:37.939611       1 template.go:704] router "msg"="Shutdown requested, waiting 45s for new connections to cease"  
+I0408 17:53:37.939723       1 writerlease.go:148] writerlease "msg"="worker stopped"  "worker"="384627304"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ROUND 2:
+
+2022-04-08T11:40:58.729-0700    INFO    operator.ingress_controller     ingress/router_status.go:82     CLEARED ROUTE
+2022-04-08T11:40:58.729-0700    INFO    operator.ingress_controller     ingress/controller.go:696       cleared route status for ingress        {"Ingress Controller": "ic-delete-test", "Routes Status Cleared": 1, "Time Elapsed": "179.483763ms"}
+I0408 18:40:58.654123       1 status.go:151] controller "msg"="updated route status"  "action"="admit" "name"="route-ic-delete-test" "namespace"="default"
+I0408 18:40:58.654197       1 writerlease.go:292] writerlease "msg"="completed work"  "expires"="2022-04-08T18:41:58.654149776Z" "key"="9328b748-70c9-4225-b94b-17468973ec05" "state"=1 "tick"=0 "worker"="1581549789"
+I0408 18:40:58.654239       1 writerlease.go:259] writerlease "msg"="lease owner or electing, running"  "key"="9328b748-70c9-4225-b94b-17468973ec05" "worker"="1581549789"
+I0408 18:40:58.654281       1 status.go:133] controller "msg"="no changes to route needed"  "action"="admit" "name"="route-ic-delete-test" "namespace"="default"
+I0408 18:40:58.655176       1 writerlease.go:292] writerlease "msg"="completed work"  "expires"="2022-04-08T18:41:58.654149776Z" "key"="9328b748-70c9-4225-b94b-17468973ec05" "state"=1 "tick"=0 "worker"="1581549789"
+I0408 18:40:59.770993       1 template.go:704] router "msg"="Shutdown requested, waiting 45s for new connections to cease"  
+I0408 18:40:59.771052       1 reflector.go:225] Stopping reflector *v1.Route (30m0s) from github.com/openshift/router/pkg/router/controller/factory/factory.go:125
+I0408 18:40:59.771078       1 writerlease.go:148] writerlease "msg"="worker stopped"  "worker"="1581549789"
+I0408 18:40:59.771109       1 reflector.go:225] Stopping reflector *v1.EndpointSlice (30m0s) from github.com/openshift/router/pkg/router/controller/factory/factory.go:125
+I0408 18:41:01.304992       1 limiter.go:93] limiter "msg"="changeWorker called"  
+I0408 18:41:01.305121       1 limiter.go:123] limiter "msg"="checking reload"  "lastStart"="2022-04-08T18:40:56.304742766Z" "limit"=5000000000 "now"="2022-04-08T18:41:01.305041635Z" "remaining"=-298870 "sinceLast"=5000298870
+I0408 18:41:01.305140       1 limiter.go:142] limiter "msg"="calling the handler function"  "invokeTime"="2022-04-08T18:40:56.305494763Z"
+I0408 18:41:01.305190       1 router.go:491] template "msg"="writing the router config"  
+I0408 18:41:01.305227       1 router.go:550] template "msg"="committing router certificate manager changes..."  
+I0408 18:41:01.305260       1 router.go:555] template "msg"="router certificate manager config committed"  
+I0408 18:41:01.308380       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="(?:append|replace|if-none|never)" "values"=["append","append"]
+I0408 18:41:01.308439       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="append"
+I0408 18:41:01.308500       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=[""]
+I0408 18:41:01.308514       1 template_helper.go:82] template "msg"="firstMatch returning empty string"  
+I0408 18:41:01.308565       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*" "values"=["4"]
+I0408 18:41:01.308594       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="4"
+I0408 18:41:01.308837       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","5s"]
+I0408 18:41:01.308877       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="5s"
+I0408 18:41:01.308910       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","30s"]
+I0408 18:41:01.308924       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="30s"
+I0408 18:41:01.308965       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","1s"]
+I0408 18:41:01.308980       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="1s"
+I0408 18:41:01.309012       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","30s"]
+I0408 18:41:01.309036       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="30s"
+I0408 18:41:01.309071       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","1s"]
+I0408 18:41:01.309084       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="1s"
+I0408 18:41:01.309120       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","10s"]
+I0408 18:41:01.309141       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="10s"
+I0408 18:41:01.309176       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","300s"]
+I0408 18:41:01.309199       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="300s"
+I0408 18:41:01.309235       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","1h"]
+I0408 18:41:01.309257       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="1h"
+I0408 18:41:01.309366       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","5s"]
+I0408 18:41:01.309377       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="5s"
+I0408 18:41:01.309457       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=["","5s"]
+I0408 18:41:01.309467       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="5s"
+I0408 18:41:01.309528       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"=".+" "values"=["/var/lib/haproxy/router/certs/default.pem","/var/lib/haproxy/conf/default_pub_keys.pem"]
+I0408 18:41:01.309550       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="/var/lib/haproxy/router/certs/default.pem"
+I0408 18:41:01.309642       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"=".+" "values"=["/var/lib/haproxy/router/certs/default.pem","/var/lib/haproxy/conf/default_pub_keys.pem"]
+I0408 18:41:01.309660       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="/var/lib/haproxy/router/certs/default.pem"
+I0408 18:41:01.309805       1 template_helper.go:109] template "msg"="matchValues called"  "allowedValues"=["","edge","reencrypt"] "s"=""
+I0408 18:41:01.309822       1 template_helper.go:112] template "msg"="matchValues finds matching string"  "s"=""
+I0408 18:41:01.309895       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="(?:append|replace|if-none|never)" "values"=["","append"]
+I0408 18:41:01.309923       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="append"
+I0408 18:41:01.309973       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="roundrobin|leastconn|source|random" "values"=[""]
+I0408 18:41:01.309991       1 template_helper.go:82] template "msg"="firstMatch returning empty string"  
+I0408 18:41:01.310030       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="roundrobin|leastconn|source|random" "values"=["leastconn","random"]
+I0408 18:41:01.310057       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="leastconn"
+I0408 18:41:01.310088       1 template_helper.go:365] template "msg"="parseIPList called"  "value"=""
+I0408 18:41:01.310124       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=[""]
+I0408 18:41:01.310136       1 template_helper.go:82] template "msg"="firstMatch returning empty string"  
+I0408 18:41:01.310166       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[1-9][0-9]*(us|ms|s|m|h|d)?" "values"=[""]
+I0408 18:41:01.310177       1 template_helper.go:82] template "msg"="firstMatch returning empty string"  
+I0408 18:41:01.310221       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="(?:append|replace|if-none|never)" "values"=["","append"]
+I0408 18:41:01.310237       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="append"
+I0408 18:41:01.310295       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="^/.*$" "values"=[""]
+I0408 18:41:01.310307       1 template_helper.go:82] template "msg"="firstMatch returning empty string"  
+I0408 18:41:01.310357       1 template_helper.go:74] template "msg"="firstMatch called"  "pattern"="[a-zA-Z0-9_-]+" "values"=["","","774e6a40f272ede40ce45bffa4e1b9a5"]
+I0408 18:41:01.310376       1 template_helper.go:78] template "msg"="firstMatch returning"  "value"="774e6a40f272ede40ce45bffa4e1b9a5"
+I0408 18:41:01.310416       1 template_helper.go:109] template "msg"="matchValues called"  "allowedValues"=["edge","reencrypt"] "s"=""
+I0408 18:41:01.310432       1 template_helper.go:116] template "msg"="matchValues cannot match string"  "s"=""
+I0408 18:41:01.310465       1 template_helper.go:109] template "msg"="matchValues called"  "allowedValues"=["edge","reencrypt"] "s"=""
+I0408 18:41:01.310476       1 template_helper.go:116] template "msg"="matchValues cannot match string"  "s"=""
+I0408 18:41:01.312506       1 router.go:495] template "msg"="writeConfig"  "duration"="7.275624ms"
+I0408 18:41:01.312541       1 router.go:502] template "msg"="calling reload function"  "fn"=0
+I0408 18:41:01.313844       1 router.go:506] template "msg"="reloading the router"  
+I0408 18:41:01.351492       1 router.go:618] template "msg"="router reloaded"  "output"=" - Checking http://localhost:80 ...\n - Health check ok : 0 retry attempt(s).\n"
+I0408 18:41:01.351538       1 limiter.go:170] limiter "msg"="re-calling the worker after a reload in case work came in"  
+I0408 18:41:01.351550       1 limiter.go:93] limiter "msg"="changeWorker called"  
+I0408 18:41:01.351563       1 limiter.go:115] limiter "msg"="no invoke requested time, so there's no queued work.  Nothing to do."  
+^[[1;5DI0408 18:41:44.771973       1 template.go:706] router "msg"="Instructing the template router to terminate"  
+I0408 18:41:44.785200       1 router.go:618] template "msg"="router reloaded"  "output"=" - Shutting down\n"
+I0408 18:41:44.785258       1 template.go:710] router "msg"="Shutdown complete, exiting"  
+.......................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+# IN THE CLOUD
+# It appears it happens JUST before the 
+I0408 19:13:02.224071       1 router_controller.go:270] controller "msg"="processing route"  "event"="MODIFIED" "route"={"metadata":{"name":"route-ic-delete-test","namespace":"default","uid":"797355d1-a732-4bb1-b7e7-7d05bdbbaac4","resourceVersion":"564306","creationTimestamp":"2022-04-08T19:12:56Z","labels":{"type":"ic-delete-test"},"annotations":{"openshift.io/host.generated":"true"},"managedFields":[{"manager":"___9TestDeleteIngressControllerShouldClearRouteStatus_in_github_com_openshift_cluster_ingress_operator_test_e2e.test","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:12:56Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:type":{}}},"f:spec":{"f:to":{"f:kind":{},"f:name":{},"f:weight":{}},"f:wildcardPolicy":{}}}},{"manager":"ingress-operator","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:13:02Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:ingress":{}}},"subresource":"status"}]},"spec":{"host":"route-ic-delete-test-default.apps.gspence-2022-04-07-0951.gcp.devcluster.openshift.com","to":{"kind":"Service","name":"foo","weight":100},"wildcardPolicy":"None"},"status":{"ingress":[{"host":"route-ic-delete-test-default.apps.gspence-2022-04-07-0951.gcp.devcluster.openshift.com","routerName":"default","conditions":[{"type":"Admitted","status":"True","lastTransitionTime":"2022-04-08T19:12:56Z"}],"wildcardPolicy":"None","routerCanonicalHostname":"router-default.apps.gspence-2022-04-07-0951.gcp.devcluster.openshift.com"}]}}
+I0408 19:13:02.224196       1 writerlease.go:259] writerlease "msg"="lease owner or electing, running"  "key"="797355d1-a732-4bb1-b7e7-7d05bdbbaac4" "worker"="265818368"
+I0408 19:13:02.224311       1 request.go:1181] Request Body: {"kind":"Route","apiVersion":"route.openshift.io/v1","metadata":{"name":"route-ic-delete-test","namespace":"default","uid":"797355d1-a732-4bb1-b7e7-7d05bdbbaac4","resourceVersion":"564306","creationTimestamp":"2022-04-08T19:12:56Z","labels":{"type":"ic-delete-test"},"annotations":{"openshift.io/host.generated":"true"},"managedFields":[{"manager":"___9TestDeleteIngressControllerShouldClearRouteStatus_in_github_com_openshift_cluster_ingress_operator_test_e2e.test","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:12:56Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:type":{}}},"f:spec":{"f:to":{"f:kind":{},"f:name":{},"f:weight":{}},"f:wildcardPolicy":{}}}},{"manager":"ingress-operator","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:13:02Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:ingress":{}}},"subresource":"status"}]},"spec":{"host":"route-ic-delete-test-default.apps.gspence-2022-04-07-0951.gcp.devcluster.opensh [truncated 814 chars]
+I0408 19:13:02.224382       1 round_trippers.go:463] PUT https://172.30.0.1:443/apis/route.openshift.io/v1/namespaces/default/routes/route-ic-delete-test/status
+I0408 19:13:02.224400       1 round_trippers.go:469] Request Headers:
+I0408 19:13:02.224413       1 round_trippers.go:473]     Accept: application/json, */*
+I0408 19:13:02.224423       1 round_trippers.go:473]     Content-Type: application/json
+I0408 19:13:02.224432       1 round_trippers.go:473]     User-Agent: openshift-router/v0.0.0 (linux/amd64) kubernetes/$Format
+I0408 19:13:02.224443       1 round_trippers.go:473]     Authorization: Bearer <masked>
+I0408 19:13:02.250438       1 round_trippers.go:574] Response Status: 200 OK in 25 milliseconds
+I0408 19:13:02.250468       1 round_trippers.go:577] Response Headers:
+I0408 19:13:02.250479       1 round_trippers.go:580]     Audit-Id: 2ed67431-d9a3-49ba-9149-201fac7774a1
+I0408 19:13:02.250488       1 round_trippers.go:580]     Audit-Id: 2ed67431-d9a3-49ba-9149-201fac7774a1
+I0408 19:13:02.250496       1 round_trippers.go:580]     Content-Type: application/json
+I0408 19:13:02.250503       1 round_trippers.go:580]     Date: Fri, 08 Apr 2022 19:13:02 GMT
+I0408 19:13:02.250513       1 round_trippers.go:580]     X-Kubernetes-Pf-Prioritylevel-Uid: 9715eb8a-4eff-4a33-8959-47e53cf8ea07
+I0408 19:13:02.250523       1 round_trippers.go:580]     Cache-Control: no-cache, private
+I0408 19:13:02.250531       1 round_trippers.go:580]     Cache-Control: no-store
+I0408 19:13:02.250539       1 round_trippers.go:580]     X-Kubernetes-Pf-Flowschema-Uid: 3dd22fd5-1e56-44b4-af1a-aa459a9e66d0
+I0408 19:13:02.250547       1 round_trippers.go:580]     Content-Length: 1838
+I0408 19:13:02.250669       1 request.go:1181] Response Body: {"kind":"Route","apiVersion":"route.openshift.io/v1","metadata":{"name":"route-ic-delete-test","namespace":"default","uid":"797355d1-a732-4bb1-b7e7-7d05bdbbaac4","resourceVersion":"564307","creationTimestamp":"2022-04-08T19:12:56Z","labels":{"type":"ic-delete-test"},"annotations":{"openshift.io/host.generated":"true"},"managedFields":[{"manager":"___9TestDeleteIngressControllerShouldClearRouteStatus_in_github_com_openshift_cluster_ingress_operator_test_e2e.test","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:12:56Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:type":{}}},"f:spec":{"f:to":{"f:kind":{},"f:name":{},"f:weight":{}},"f:wildcardPolicy":{}}}},{"manager":"openshift-router","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:13:02Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:ingress":{}}},"subresource":"status"}]},"spec":{"host":"route-ic-delete-test-default.apps.gspence-2022-04-07-0951.gcp.devcluster.opensh [truncated 814 chars]
+I0408 19:13:02.251013       1 status.go:151] controller "msg"="updated route status"  "action"="admit" "name"="route-ic-delete-test" "namespace"="default"
+I0408 19:13:02.251075       1 writerlease.go:292] writerlease "msg"="completed work"  "expires"="2022-04-08T19:14:02.251033552Z" "key"="797355d1-a732-4bb1-b7e7-7d05bdbbaac4" "state"=1 "tick"=0 "worker"="265818368"
+I0408 19:13:02.251150       1 router_controller.go:270] controller "msg"="processing route"  "event"="MODIFIED" "route"={"metadata":{"name":"route-ic-delete-test","namespace":"default","uid":"797355d1-a732-4bb1-b7e7-7d05bdbbaac4","resourceVersion":"564307","creationTimestamp":"2022-04-08T19:12:56Z","labels":{"type":"ic-delete-test"},"annotations":{"openshift.io/host.generated":"true"},"managedFields":[{"manager":"___9TestDeleteIngressControllerShouldClearRouteStatus_in_github_com_openshift_cluster_ingress_operator_test_e2e.test","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:12:56Z","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:labels":{".":{},"f:type":{}}},"f:spec":{"f:to":{"f:kind":{},"f:name":{},"f:weight":{}},"f:wildcardPolicy":{}}}},{"manager":"openshift-router","operation":"Update","apiVersion":"route.openshift.io/v1","time":"2022-04-08T19:13:02Z","fieldsType":"FieldsV1","fieldsV1":{"f:status":{"f:ingress":{}}},"subresource":"status"}]},"spec":{"host":"route-ic-delete-test-default.apps.gspence-2022-04-07-0951.gcp.devcluster.openshift.com","to":{"kind":"Service","name":"foo","weight":100},"wildcardPolicy":"None"},"status":{"ingress":[{"host":"route-ic-delete-test-default.apps.gspence-2022-04-07-0951.gcp.devcluster.openshift.com","routerName":"default","conditions":[{"type":"Admitted","status":"True","lastTransitionTime":"2022-04-08T19:12:56Z"}],"wildcardPolicy":"None","routerCanonicalHostname":"router-default.apps.gspence-2022-04-07-0951.gcp.devcluster.openshift.com"},{"host":"route-ic-delete-test-default.apps.gspence-2022-04-07-0951.gcp.devcluster.openshift.com","routerName":"ic-delete-test","conditions":[{"type":"Admitted","status":"True","lastTransitionTime":"2022-04-08T19:13:02Z"}],"wildcardPolicy":"None","routerCanonicalHostname":"router-ic-delete-test.ic-delete-test.gspence-2022-04-07-0951.gcp.devcluster.openshift.com"}]}}
+I0408 19:13:02.251290       1 writerlease.go:259] writerlease "msg"="lease owner or electing, running"  "key"="797355d1-a732-4bb1-b7e7-7d05bdbbaac4" "worker"="265818368"
+I0408 19:13:02.251333       1 status.go:133] controller "msg"="no changes to route needed"  "action"="admit" "name"="route-ic-delete-test" "namespace"="default"
+I0408 19:13:02.251385       1 writerlease.go:292] writerlease "msg"="completed work"  "expires"="2022-04-08T19:14:02.251033552Z" "key"="797355d1-a732-4bb1-b7e7-7d05bdbbaac4" "state"=1 "tick"=0 "worker"="265818368"
+I0408 19:13:02.387721       1 plugin.go:180] template "msg"="processing endpoints"  "endpointCount"=0 "eventType"="DELETED" "name"="router-internal-ic-delete-test" "namespace"="openshift-ingress"
+I0408 19:13:02.387750       1 plugin.go:197] template "msg"="deleting endpoints"  "key"="openshift-ingress/router-internal-ic-delete-test"
+I0408 19:13:03.666940       1 reflector.go:225] Stopping reflector *v1.EndpointSlice (30m0s) from github.com/openshift/router/pkg/router/controller/factory/factory.go:125
+I0408 19:13:03.667049       1 reflector.go:225] Stopping reflector *v1.Route (30m0s) from github.com/openshift/router/pkg/router/controller/factory/factory.go:125
+I0408 19:13:03.667102       1 template.go:704] router "msg"="Shutdown requested, waiting 45s for new connections to cease"
+I0408 19:13:03.667182       1 writerlease.go:148] writerlease "msg"="worker stopped"  "worker"="265818368"
+^[[D^[[5~I0408 19:13:48.667276       1 template.go:706] router "msg"="Instructing the template router to terminate"
+I0408 19:13:48.680834       1 router.go:618] template "msg"="router reloaded"  "output"=" - Shutting down\n"
+I0408 19:13:48.680876       1 template.go:710] router "msg"="Shutdown complete, exiting"
+
+# Ingress
+
+
+
+
+
+2022-04-08T19:13:02.223Z        INFO    operator.ingress_controller     ingress/router_status.go:82     CLEARED ROUTE
+I0408 19:13:02.224071       1 router_controller.go:270] controller "msg"="processing route"  "event"="MODIFIED"
+│I0408 19:13:02.251013       1 status.go:151] controller "msg"="updated route status"
+I0408 19:13:02.251075       1 writerlease.go:292] writerlease "msg"="completed work"
+I0408 19:13:03.667102       1 template.go:704] router "msg"="Shutdown requested, waiting 45s for new conn
+
+# KUBELET
+{"kind":"Event","apiVersion":"audit.k8s.io/v1","level":"Metadata","auditID":"72d22686-c720-499d-9a71-fa577693f2ec","stage":"ResponseComplete","requestURI":"/apis/apps/v1/namespaces/openshift-ingress/deployments/router-ic-delete-test","verb":"delete","user":{"username":"system:serviceaccount:openshift-ingress-operator:ingress-operator","uid":"23b402f9-7347-49c0-a547-507a8efc4e37","groups":["system:serviceaccounts","system:serviceaccounts:openshift-ingress-operator","system:authenticated"],"extra":{"authentication.kubernetes.io/pod-name":["ingress-operator-7b84c9b4c4-6zbcm"],"authentication.kubernetes.io/pod-uid":["b3868970-e871-4ad4-b570-e9618d2c2037"]}},"sourceIPs":["10.0.0.2"],"userAgent":"ingress-operator/v0.0.0 (linux/amd64) kubernetes/$Format","objectRef":{"resource":"deployments","namespace":"openshift-ingress","name":"router-ic-delete-test","apiGroup":"apps","apiVersion":"v1"},"responseStatus":{"metadata":{},"status":"Success","code":200},"requestReceivedTimestamp":"2022-04-08T19:13:02.186433Z","stageTimestamp":"2022-04-08T19:13:02.195655Z","annotations":{"authorization.k8s.io/decision":"allow","authorization.k8s.io/reason":"RBAC: allowed by ClusterRoleBinding \"openshift-ingress-operator\" of ClusterRole \"openshift-ingress-operator\" to ServiceAccount \"ingress-operator/openshift-ingress-operator\""}}
+

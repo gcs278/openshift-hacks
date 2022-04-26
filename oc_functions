@@ -153,6 +153,9 @@ function oc_ingress_edit_router_deployment() {
   oc edit -n openshift-ingress deployments/router-${IC}
 }
 
+function oc_ingress_edit_ingress_operator_deployment() {
+  oc edit deployment -n openshift-ingress-operator ingress-operator
+}
 
 function oc_ingress_delete_ingresscontroller() {
   if [[ "$1" == "" ]]; then
@@ -167,9 +170,48 @@ function oc_ingress_logs_any_router_default_access() {
   oc logs -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-default" | grep Running | head -1 | awk '{print $1}') -c logs --follow $@
 }
 
+function oc_ingress_logs_any_router() {
+  if [[ "$1" == "" ]]; then
+    router="default"
+  else
+    router="$1"
+  fi
+  shift 1
+  
+  oc logs -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running | head -1 | awk '{print $1}') --follow $@
+}
+
+
+function oc_ingress_logs_any_router_wait_appear() {
+  if [[ "$1" == "" ]]; then
+    router="default"
+  else
+    router="$1"
+  fi
+  shift 1
+  
+  while true; do
+    pod=$(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running | head -1 | awk '{print $1}')
+    if [[ "$pod" != "" ]]; then
+      oc logs -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running | head -1 | awk '{print $1}') --follow $@
+    else
+      echo -n "."
+    fi
+  done
+}
+
+
 function oc_ingress_force_delete_terminating_router_pods() {
   for i in $(oc get pods -n openshift-ingress --no-headers | grep Terminating | awk '{print $1}'); do
     oc delete -n openshift-ingress pod $i --force
   done
 }
 
+alias oc_update_pull_secrets="oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=/home/gspence/.secrets/pull-secret.txt"
+alias oc_get_pull_secrets="oc get secret/pull-secret -n openshift-config --template='{{index .data \".dockerconfigjson\" | base64decode}}'"
+alias oc_get_console_url="oc get routes -n openshift-console console -o go-template='{{.spec.host}}{{\"\n\"}}'"
+
+function oc_open_console() {
+  URL=$(oc_get_console_url)
+  xdg-open https://${URL}
+}

@@ -6,7 +6,8 @@ items:
     name: loadbalancer
     namespace: openshift-ingress-operator
   spec:
-    domain: loadbalaner.gspence-2022-02-14-1013.gcp.devcluster.openshift.com
+    domain: loadbalancer.gspence-2022-02-14-1013.gcp.devcluster.openshift.com
+    replicas: 1
     routeSelector:
       matchLabels:
         type: loadbalancer
