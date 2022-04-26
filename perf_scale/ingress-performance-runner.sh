@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ./env.sh
+alias python=python3
 
 trap "pkill -P $$" EXIT
 
