@@ -78,6 +78,6 @@ if [[ -f ${COMPARISON_OUTPUT} ]]; then
   exit 1
 fi
 
-#run "baseline" ./envrc-replicas1
-run "replicas1-weights-random" ./envrc-replicas1-weights-random "0f7354c4-1c7e-49a4-a7f3-fa196acfbc8b"
-run "replicas1-weights" ./envrc-replicas1-weights "0f7354c4-1c7e-49a4-a7f3-fa196acfbc8b"
+#run "baseline" ./tests/replicas1-baseline.env
+run "replicas1-weights-random" ./tests/replicas1-weights-random.env "0f7354c4-1c7e-49a4-a7f3-fa196acfbc8b"
+run "replicas1-weights" ./tests/replicas1-weights.env "0f7354c4-1c7e-49a4-a7f3-fa196acfbc8b"
