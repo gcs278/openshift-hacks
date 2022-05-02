@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: List
+metadata: {}
+items:
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: echo-sleeper-edge
+  spec:
+    replicas: 1
+    selector:
+      app: echo-sleeper-edge
+      deploymentconfig: echo-sleeper-edge
+    strategy:
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: echo-sleeper-edge
+          deploymentconfig: echo-sleeper-edge
+      spec:
+        containers:
+        - image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
+          name: echo-sleeper-edge
+          command:
+            - /usr/bin/socat
+            - TCP4-LISTEN:8676,reuseaddr,fork
+            - EXEC:'/bin/bash -c \"sleep 10; printf \\\"HTTP/1.0 200 OK\r\n\r\n\\\"; sed -e \\\"/^\r/q\\\"\"'
+          ports:
+          - containerPort: 8676
+            protocol: TCP
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: echo-sleeper-edge
+    labels:
+      app: echo-sleeper-edge
+  spec:
+    selector:
+      app: echo-sleeper-edge
+    ports:
+      - port: 8676
+        name: echo-sleeper-edge
+        protocol: TCP
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: echo-sleeper-edge
+  spec:
+    to:
+      kind: Service
+      name: echo-sleeper-edge
+    tls:
+      termination: edge
+      insecureEdgeTerminationPolicy: Redirect
+
