@@ -77,6 +77,9 @@ function run() {
       sleep 120
     else
       log "Test attempt #${ATTEMPT} success!"
+      mv ${ROUTER_PERF_DIR}/results.csv ${TEST_LOG_DIR}/${test_name}-results.csv
+      echo "Errors: $(grep -v ",$" ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" > ${TEST_LOG_DIR}/${tests_name}-errors
+      echo "Total Requests: $(cat ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" >> ${TEST_LOG_DIR}/${tests_name}-errors
       return
     fi
   done
@@ -121,4 +124,7 @@ declare -A env_files
 #done
 
 #run ./tests/replicas1-baseline.env
-run ./tests/maxconn/replicas1-maxconn-auto.env "e3275c0d-b64e-4550-8017-0db988880ae3"
+# Turn off probe tuning
+#cp -f ./ingress-performance.sh.prob ./ingress-performance.sh
+run ./tests/NE-709/replicas1-weights.env "456a8413-4d43-4ba3-9d42-fb4605ee0ee8"
+run ./tests/NE-709/replicas1-weights-random.env "456a8413-4d43-4ba3-9d42-fb4605ee0ee8"
