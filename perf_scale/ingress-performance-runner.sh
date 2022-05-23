@@ -78,8 +78,8 @@ function run() {
     else
       log "Test attempt #${ATTEMPT} success!"
       mv ${ROUTER_PERF_DIR}/results.csv ${TEST_LOG_DIR}/${test_name}-results.csv
-      echo "Errors: $(grep -v ",$" ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" > ${TEST_LOG_DIR}/${tests_name}-errors
-      echo "Total Requests: $(cat ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" >> ${TEST_LOG_DIR}/${tests_name}-errors
+      echo "Errors: $(grep -v ",$" ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" > ${TEST_LOG_DIR}/${test_name}-errors
+      echo "Total Requests: $(cat ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" >> ${TEST_LOG_DIR}/${test_name}-errors
       return
     fi
   done
