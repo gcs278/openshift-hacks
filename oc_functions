@@ -207,6 +207,11 @@ function oc_ingress_force_delete_terminating_router_pods() {
   done
 }
 
+function oc_ingress_maxconn_auto() {
+  oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"tuningOptions":{"maxConnections":-1}}}'
+  oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"unsupportedConfigOverrides":{"maxConnections":-1}}}'
+}
+
 alias oc_update_pull_secrets="oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=/home/gspence/.secrets/pull-secret.txt"
 alias oc_get_pull_secrets="oc get secret/pull-secret -n openshift-config --template='{{index .data \".dockerconfigjson\" | base64decode}}'"
 alias oc_get_console_url="oc get routes -n openshift-console console -o go-template='{{.spec.host}}{{\"\n\"}}'"

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function perfscale_copy_results() {
+  ssh perfscale dnf install -y rsync -q
+  rsync --progress -raz root@perfscale:/root/e2e-benchmarking/workloads/router-perf-v2/results ~/perf_scale/
+}
