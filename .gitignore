@@ -1,3 +1,6 @@
 etc-pki-entitlement
 rhsm-ca
 rhsm-conf
+
+istio/istio-download
+istio/certs
