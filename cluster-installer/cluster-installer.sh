@@ -25,7 +25,7 @@ if [[ "$WHAT" == "create" ]]; then
 elif [[ "$WHAT" == "delete" ]]; then
   CLUSTER_DIR="${2:-}"
   NAME=$(basename $CLUSTER_DIR)
-  VERSION_DIR=$(basename $(dirname $CLUSTER_DIR))
+  VERSION_DIR=$(dirname $CLUSTER_DIR)
   PLATFORM=$(echo $NAME | awk -F'-' '{print $1}')
   if [[ ! -d "${CLUSTER_DIR}" ]]; then
     echo "ERROR: ${CLUSTER_DIR} doesn't exist"

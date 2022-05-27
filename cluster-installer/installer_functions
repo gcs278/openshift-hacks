@@ -1,0 +1,54 @@
+#!/bin/bash
+
+if [[ "$(find ~/.secrets/pull-secret.txt -mmin +18720)" != "" ]]; then
+  echo "WARNING: ~/.secrets/pull-secret.txt hasn't been touched in 13 days. Re-login into the CI registry"
+  #echo "    1. Visit https://oauth-openshift.apps.ci.l2s4.p1.openshiftapps.com/oauth/token/request"
+  #echo "    2. Run the oc login command provided"
+  #echo "    3. oc registry login --to=/home/$USER/.secrets/pull-secret.txt"
+  echo "    1. Visit https://console.redhat.com/openshift/install/pull-secret and download pull-secret"
+  echo "    2. cp ~/Downloads/pull-secret to ~/.secrets/pull-secret.txt"
+  echo "    3. Visit https://console-openshift-console.apps.ci.l2s4.p1.openshiftapps.com/"
+  echo "    4. Log in -> Copy login command -> unset KUBECONFIG -> Use login command"
+  echo "    5. oc registry login --to=/home/$USER/.secrets/pull-secret.txt"
+fi
+
+function ci_delete_cluster() {
+  ~/clusters/cluster-installer.sh delete "$1"
+}
+
+function ci_cleanup_old_clusters() {
+  for cluster in $(find ~/clusters -iname "metadata.json"); do
+      kubeconfig=$(dirname ${cluster})/auth/kubeconfig;
+      cluster_dir=$(dirname $cluster)
+      if [[ -f "${kubeconfig}" ]]; then
+        KUBECONFIG=${kubeconfig}; oc version &> /dev/null
+	if [[ $? -ne 0 ]]; then
+          echo "$cluster_dir is dead. Cleaning up."
+	  ci_delete_cluster $cluster_dir
+	else
+	  echo "$cluster_dir is alive."
+	fi
+      else
+        echo "${kubeconfig} doesn't exit. Cleaning up."
+	ci_delete_cluster $cluster_dir
+      fi
+
+  done
+}
+
+function ci_findactiveclusters() {
+  for cluster in $(find ~/clusters -iname "metadata.json"); do
+    kubeconfig=$(dirname ${cluster})/auth/kubeconfig
+    if [[ -f "${kubeconfig}" ]]; then
+      echo "export KUBECONFIG=${kubeconfig}"
+    else
+      echo "ERROR: ${kubeconfig} doesn't exit"
+    fi
+  done
+}
+
+function ci_kubeconfiglastestcluster() {
+  latestCluster=$(dirname $(find ~/clusters -iname "metadata.json" | sort -h  | tail -n1))
+  echo "+ export KUBECONFIG=${latestCluster}/auth/kubeconfig"
+  export KUBECONFIG=${latestCluster}/auth/kubeconfig
+}

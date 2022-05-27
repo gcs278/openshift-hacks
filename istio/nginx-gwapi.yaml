@@ -177,8 +177,6 @@ spec:
     allowedRoutes:
       namespaces:
         from: All
-      kinds:
-      - kind: TLSRoute
   - name: passthrough
     hostname: "pass.${GWAPI_DOMAIN}"
     port: 443

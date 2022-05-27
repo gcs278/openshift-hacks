@@ -71,7 +71,7 @@ function run() {
       ATTEMPT=$((ATTEMPT+1))
       if [[ ${ATTEMPT} -gt ${LIMIT_ATTEMPTS} ]]; then
         log "ERROR: Giving up after ${LIMIT_ATTEMPTS} failed attempts"
-	exit 1
+	return
       fi
       log "Sleeping for 2 minutes to try to wait for things to settle down"
       sleep 120

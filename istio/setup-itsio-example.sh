@@ -28,9 +28,6 @@ $istioctl install -y --set profile=openshift --set meshConfig.accessLogFile=/dev
 # Expose openshift route for istio
 oc -n istio-system expose svc/istio-ingressgateway --port=http2
 
-# Allows istio sidecar to function correctly (need this for the example)
-oc adm policy add-scc-to-group anyuid system:serviceaccounts:default
-
 INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 INGRESS_PORT=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
 

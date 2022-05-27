@@ -1,0 +1,3 @@
+sum(haproxy_frontend_current_sessions)
+kube_pod_status_ready{namespace="openshift-ingress"} or sum(kube_pod_container_status_restarts_total{namespace="openshift-ingress"})
+
