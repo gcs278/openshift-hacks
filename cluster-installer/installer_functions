@@ -16,6 +16,14 @@ function ci_delete_cluster() {
   ~/clusters/cluster-installer.sh delete "$1"
 }
 
+function ci_launch_latest_aws() {
+  ~/clusters/cluster-installer.sh create "$(find ~/clusters/4.* -maxdepth 0 -type d | sort --version-sort | tail -1)" aws
+}
+
+function ci_launch_latest_gcp() {
+  ~/clusters/cluster-installer.sh create "$(find ~/clusters/4.* -maxdepth 0 -type d | sort --version-sort | tail -1)" gcp
+}
+
 function ci_cleanup_old_clusters() {
   for cluster in $(find ~/clusters -iname "metadata.json"); do
       kubeconfig=$(dirname ${cluster})/auth/kubeconfig;

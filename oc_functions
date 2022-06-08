@@ -212,6 +212,17 @@ function oc_ingress_maxconn_auto() {
   oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"unsupportedConfigOverrides":{"maxConnections":-1}}}'
 }
 
+function oc_ingress_rollout_router() {
+  if [[ "$1" == "" ]]; then
+    router="default"
+  else
+    router="$1"
+  fi
+  shift 1
+
+  oc rollout restart deployment -n openshift-ingress router-${router}
+}
+
 alias oc_update_pull_secrets="oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=/home/gspence/.secrets/pull-secret.txt"
 alias oc_get_pull_secrets="oc get secret/pull-secret -n openshift-config --template='{{index .data \".dockerconfigjson\" | base64decode}}'"
 alias oc_get_console_url="oc get routes -n openshift-console console -o go-template='{{.spec.host}}{{\"\n\"}}'"

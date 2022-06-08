@@ -1,0 +1,13 @@
+FROM quay.io/gspence/openshift-router:haproxy-2.4.17
+
+USER 0
+RUN sed -i 's/global/global\n  tune.maxaccept 64/g' /var/lib/haproxy/conf/haproxy-config.template
+
+RUN setcap 'cap_net_bind_service=ep' /usr/sbin/haproxy && \
+    chown -R :0 /var/lib/haproxy && \
+    chmod -R g+w /var/lib/haproxy && \
+    chmod +x /usr/sbin/haproxy
+
+WORKDIR /var/lib/haproxy/conf
+USER 1001
+EXPOSE 80 443

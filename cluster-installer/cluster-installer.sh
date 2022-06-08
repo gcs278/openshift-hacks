@@ -222,6 +222,8 @@ function delete() {
   rm -rf "$CLUSTER_DIR"
 }
 
+export AWS_PROFILE="openshift-dev"
+
 if [ "$WHAT" == "create" ]; then
     create
 elif [ "$WHAT" == "delete" ]; then

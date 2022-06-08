@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nginx-job
+  labels:
+    app: nginx
+spec:
+  replicas: 600
+  restartPolicy: Never
+  completions: 1000
+  parallelism: 300
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      restartPolicy: Never
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', "wget www.google.com"]
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        requests:
+          memory: "3000Mi"
+          cpu: "250m"

@@ -25,7 +25,7 @@ items:
           command:
             - /usr/bin/socat
             - TCP4-LISTEN:8676,reuseaddr,fork
-            - EXEC:'/bin/bash -c \"sleep 10; printf \\\"HTTP/1.0 200 OK\r\n\r\n\\\"; sed -e \\\"/^\r/q\\\"\"'
+            - EXEC:'/bin/bash -c \"sleep 25; printf \\\"HTTP/1.0 200 OK\r\n\r\n\\\"; sed -e \\\"/^\r/q\\\"\"'
           ports:
           - containerPort: 8676
             protocol: TCP
