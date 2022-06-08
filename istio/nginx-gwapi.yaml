@@ -166,7 +166,7 @@ spec:
       namespaces:
         from: All
   - name: reencrypt
-    hostname: "reencrypt.${GWAPI_DOMAIN}"
+    hostname: "re.${GWAPI_DOMAIN}"
     port: 443
     protocol: HTTPS
     tls:
@@ -239,7 +239,7 @@ spec:
   parentRefs:
   - name: gateway
     namespace: gwapi
-  hostnames: ["reencrypt.${GWAPI_DOMAIN}"]
+  hostnames: ["re.${GWAPI_DOMAIN}"]
   rules:
   - backendRefs:
     - name: nginx-reencrypt

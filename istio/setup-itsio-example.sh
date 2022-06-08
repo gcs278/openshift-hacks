@@ -28,7 +28,16 @@ $istioctl install -y --set profile=openshift --set meshConfig.accessLogFile=/dev
 # Expose openshift route for istio
 oc -n istio-system expose svc/istio-ingressgateway --port=http2
 
+DNS_RECORD_TYPE="CNAME"
 INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+if [[ "$INGRESS_HOST" == "" ]]; then
+  INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  DNS_RECORD_TYPE="A"
+fi
+if [[ "$INGRESS_HOST" == "" ]]; then
+  echo "ERROR: There was an issue getting the istio ingress service hostname or ip"
+  exit 1
+fi
 INGRESS_PORT=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
 
 DOMAIN="$(oc get ingresscontrollers.operator.openshift.io -n openshift-ingress-operator default -o go-template='{{.status.domain}}')"
@@ -47,7 +56,7 @@ metadata:
 spec:
   dnsName: "${ISTIO_DOMAIN}."
   recordTTL: 30
-  recordType: CNAME
+  recordType: ${DNS_RECORD_TYPE}
   targets:
   - ${INGRESS_HOST}
 EOF

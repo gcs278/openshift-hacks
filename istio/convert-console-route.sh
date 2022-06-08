@@ -1,6 +1,13 @@
 #!/bin/bash
 
 INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+if [[ "$INGRESS_HOST" == "" ]]; then
+  INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+fi
+if [[ "$INGRESS_HOST" == "" ]]; then
+  echo "ERROR: There was an issue getting the istio ingress service hostname or ip"
+  exit 1
+fi
 INGRESS_PORT=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
 
 CONSOLE_ROUTE="$(oc get routes -n openshift-console console -o go-template='{{.spec.host}}')"

@@ -5,7 +5,7 @@ export ISTIO_DOMAIN="istio.${DOMAIN:5}"
 export GWAPI_DOMAIN="gwapi.${DOMAIN:5}"
 
 DOMAINS="${ISTIO_DOMAIN} ${GWAPI_DOMAIN}"
-TERMINATIONS="http edge reencrypt pass"
+TERMINATIONS="http edge re pass"
 for j in ${DOMAINS}; do
   echo "##### $j #####"
   for i in ${TERMINATIONS}; do
