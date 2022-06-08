@@ -3,6 +3,7 @@
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:istio-system
 
 DOWNLOAD_DIR="/tmp/istio-download"
+HELPER="./helper-scripts"
 
 rm -rf ${DOWNLOAD_DIR}
 mkdir -p ${DOWNLOAD_DIR}
@@ -65,7 +66,7 @@ EOF
 rm -rf /tmp/istio-certs
 
 # Configure nginx examples
-./create-nginx-examples.sh
+${HELPER}/create-nginx-examples.sh
 
 # Convert the console route to istio ingress
-./convert-console-route.sh
+${HELPER}/convert-console-route.sh
