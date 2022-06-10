@@ -144,6 +144,8 @@ metadata:
   name: gateway
   namespace: gwapi
 spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
   gatewayClassName: istio
   listeners:
   - name: http
@@ -172,7 +174,7 @@ spec:
     tls:
       mode: Terminate
       certificateRefs:
-      - name: reencrypt-credential
+      - name: re-credential
         group: ""
     allowedRoutes:
       namespaces:

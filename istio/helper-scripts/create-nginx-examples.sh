@@ -1,9 +1,7 @@
 #!/bin/bash
 
-DOMAIN="$(oc get ingresscontrollers.operator.openshift.io -n openshift-ingress-operator default -o go-template='{{.status.domain}}')"
-export ISTIO_DOMAIN="istio.${DOMAIN:5}"
-export GWAPI_DOMAIN="gwapi.${DOMAIN:5}"
-
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]:-$0}"; )" &> /dev/null && pwd 2> /dev/null; )";
+YAML_DIR=${SCRIPT_DIR}/../yaml
 CERT_DIR=/tmp/istio-certs
 mkdir -p $CERT_DIR
 
@@ -25,6 +23,39 @@ function create_certs() {
   oc create -n $NAMESPACE secret tls ${TYPE}-credential --key=${CERT_DIR}/${TYPE}.${NAMESPACE}.key --cert=${CERT_DIR}/${TYPE}.${NAMESPACE}.crt
 }
 
+# Set up DNS for istioapi example
+DOMAIN="$(oc get ingresscontrollers.operator.openshift.io -n openshift-ingress-operator default -o go-template='{{.status.domain}}')"
+export ISTIO_DOMAIN="istio.${DOMAIN:5}"
+export GWAPI_DOMAIN="gwapi.${DOMAIN:5}"
+
+DNS_RECORD_TYPE="CNAME"
+INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+if [[ "$INGRESS_HOST" == "" ]]; then
+  INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  DNS_RECORD_TYPE="A"
+fi
+if [[ "$INGRESS_HOST" == "" ]]; then
+  echo "ERROR: There was an issue getting the istio ingress service hostname or ip"
+  exit 1
+fi
+
+# Add wildcard to send dns requests to istio via istio api
+oc apply -f - <<EOF
+apiVersion: ingress.operator.openshift.io/v1
+kind: DNSRecord
+metadata:
+  name: istio-wildcard
+  namespace: openshift-ingress-operator
+  labels:
+    ingresscontroller.operator.openshift.io/owning-ingresscontroller: default
+spec:
+  dnsName: "*.${ISTIO_DOMAIN}."
+  recordTTL: 30
+  recordType: ${DNS_RECORD_TYPE}
+  targets:
+  - ${INGRESS_HOST}
+EOF
+
 # Create namespaces
 oc create namespace istioapi --dry-run=client -o yaml | oc apply -f -
 oc create namespace gwapi  --dry-run=client -o yaml | oc apply --overwrite=true -f -
@@ -45,13 +76,18 @@ create_certs edge "edge.${GWAPI_DOMAIN}" gwapi
 create_certs re "re.${GWAPI_DOMAIN}" gwapi
 create_certs pass "pass.${GWAPI_DOMAIN}" gwapi
 
-# Install gateway api
-kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || { kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.0" | kubectl apply -f -; }
-
 # Configure istioapi examples via istio api
-cat ./nginx-istioapi.yaml | envsubst | oc apply -f -
-cat ./nginx-gwapi.yaml | envsubst | oc apply -f -
-cat ./echo-service-sleeper-istioapi.yaml | envsubst | oc apply -f -
+cat ${YAML_DIR}/nginx-istioapi.yaml | envsubst | oc apply -f -
+if [[ $? -ne 0 ]]; then
+  echo "ERROR: Something went wrong with configuring ${YAML_DIR}/nginx-istioapi.yaml"
+  exit 1
+fi
+cat ${YAML_DIR}/nginx-gwapi.yaml | envsubst | oc apply -f -
+if [[ $? -ne 0 ]]; then
+  echo "ERROR: Something went wrong with configuring ${YAML_DIR}/nginx-gwapi.yaml"
+  exit 1
+fi
+#cat ${YAML_DIR}/echo-service-sleeper-istioapi.yaml | envsubst | oc apply -f -
 
 TIMEOUT=60
 while [[ "$GWAPI_LOADBALANCER_DOMAIN" == "" ]] && [[ "$GWAPI_LOADBALANCER_IP" == "" ]]; do

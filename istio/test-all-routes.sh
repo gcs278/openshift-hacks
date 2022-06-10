@@ -13,8 +13,15 @@ for j in ${DOMAINS}; do
     if [[ "${i}" == "http" ]]; then
       PROTO="${i}"
     fi
-    cmd="curl -k --cacert /tmp/istio-certs/ca.crt -s -o /dev/null -I -w %{http_code}\\n ${PROTO}://${i}.${j}"
+    cmd="curl -k -sS -I ${PROTO}://${i}.${j}"
     echo $cmd
-    $cmd
+    echo -n " -> "
+    $cmd | head -1
   done
 done
+
+echo "##### Console Route #####"
+cmd="curl -k -sS -I https://console-openshift-console.${DOMAIN}"
+echo $cmd
+echo -n " -> "
+$cmd | head -1

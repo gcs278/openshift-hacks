@@ -102,6 +102,7 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
+      # TRICKY: Cert can only be in istio-system namespace!
       credentialName: edge-credential
     hosts:
     - "edge.${ISTIO_DOMAIN}"
@@ -207,7 +208,8 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: reencrypt-credential
+      # TRICKY: Cert can only be in istio-system namespace!
+      credentialName: re-credential
     hosts:
     - "re.${ISTIO_DOMAIN}"
 ---
