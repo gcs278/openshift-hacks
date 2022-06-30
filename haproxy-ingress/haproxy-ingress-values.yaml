@@ -1,0 +1,19 @@
+controller:
+  hostNetwork: true
+  logs:
+    enabled: true
+  extraArgs:
+    watch-gateway: "true"
+  haproxy:
+    enabled: true
+    image:
+      #repository: quay.io/gspence/openshift-router
+      #tag: haproxy-entrypoint
+      repository: haproxy
+      tag: 2.2.24
+ # logging:
+ #   level: debug
+ #   traffic:
+ #     address: stdout
+ #     format: raw
+ #     facility: daemon
