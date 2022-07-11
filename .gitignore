@@ -6,3 +6,4 @@ istio/istio-download
 istio/certs
 
 secrets.env
+perf_scale/e2e-benchmarking
