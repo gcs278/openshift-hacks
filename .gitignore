@@ -4,3 +4,5 @@ rhsm-conf
 
 istio/istio-download
 istio/certs
+
+secrets.env
