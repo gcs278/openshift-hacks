@@ -21,7 +21,8 @@ else
   cd -
 fi
 
-LOG_DIR=./results
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+LOG_DIR=${SCRIPT_DIR}/results
 RUNNER_LOG_DIR=${LOG_DIR}/runner-logs/
 RUNNER_LOG=${RUNNER_LOG_DIR}/runner-$(date +"%Y_%m_%d_%I_%M_%p")
 mkdir -p $LOG_DIR $RUNNER_LOG_DIR
