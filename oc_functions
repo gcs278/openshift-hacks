@@ -12,8 +12,8 @@ function oc_ingress_unmanaged_privileged_reset() {
 
 function oc_ingress_managed() {
   oc patch clusterversions/version --type=json --patch='[{"op":"add","path":"/spec/overrides","value":[{"kind":"Deployment","group":"apps/v1","name":"ingress-operator","namespace":"openshift-ingress-operator","unmanaged":false}]}]'
-  oc scale --replicas 1 -n openshift-cluster-version deployments/cluster-version-operator
-  oc scale --replicas 1 -n openshift-ingress-operator deployments ingress-operator
+  oc_scale_cvo 1
+  oc_ingress_scale_ingress_operator 1
   oc scale --replicas 2 -n openshift-ingress-operator ingresscontroller/default
 }
 
@@ -24,16 +24,24 @@ function oc_ingress_unprivileged() {
 }
 
 function oc_ingress_unmanaged() {
-  oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
-  oc scale --replicas 0 -n openshift-ingress-operator deployments ingress-operator
+  oc_scale_cvo 0
+  oc_ingress_scale_ingress_operator 0
 
   oc patch clusterversions/version --type=json --patch='[{"op":"add","path":"/spec/overrides","value":[{"kind":"Deployment","group":"apps/v1","name":"ingress-operator","namespace":"openshift-ingress-operator","unmanaged":true}]}]'
-  oc scale --replicas 0 -n openshift-ingress-operator deployments ingress-operator
+  oc_ingress_scale_ingress_operator 0
 }
 
 function oc_ingress_privileged() {
   oc patch clusterrole/openshift-ingress-router --type=strategic --patch='{"rules":[{"apiGroups":[""],"resources":["endpoints","namespaces","services"],"verbs":["list","watch"]},{"apiGroups":["authentication.k8s.io"],"resources":["tokenreviews"],"verbs":["create"]},{"apiGroups":["authorization.k8s.io"],"resources":["subjectaccessreviews"],"verbs":["create"]},{"apiGroups":["route.openshift.io"],"resources":["routes"],"verbs":["list","watch"]},{"apiGroups":["route.openshift.io"],"resources":["routes/status"],"verbs":["update"]},{"apiGroups":["security.openshift.io"],"resourceNames":["privileged"],"resources":["securitycontextconstraints"],"verbs":["use"]},{"apiGroups":["discovery.k8s.io"],"resources":["endpointslices"],"verbs":["list","watch"]}]}'
   oc patch -n openshift-ingress deployment/router-default --patch='{"spec":{"template":{"spec":{"securityContext":{"runAsUser":0}}}}}'
+}
+
+function oc_scale_cvo() {
+  if [[ $? == "" ]]; then
+    echo "ERROR: you need to provide replicas"
+    return 1
+  fi
+  oc scale --replicas $1 -n openshift-cluster-version deployments/cluster-version-operator
 }
 
 function oc_ingress_scale_router_default() {
@@ -200,6 +208,41 @@ function oc_ingress_logs_any_router_wait_appear() {
   done
 }
 
+function oc_ingress_run_logging_openshift_router() {
+  oc -n openshift-ingress rsh -c router deploy/router-default sh -c 'rm -rf /tmp/haproxy && mkdir -p /tmp/haproxy/{router/{certs,cacerts,whitelists},{conf/.tmp,run,bin,log}} && /bin/openshift-router --v=10 --template=/var/lib/haproxy/conf/haproxy-config.template --reload=/bin/true --update-status=false --stats-port=1937 --metrics-type=haproxy --working-dir=/tmp/haproxy'
+}
+
+function oc_ingress_get_router_image() {
+  oc_ingress_get_router_deployments router-default -o json | jq -r '.spec.template.spec.containers[0].image'
+}
+
+function oc_ingress_enable_verbose_openshift_router() {
+  echo "Log in to quay.io"
+  podman login quay.io || return 1
+  image=$(oc_ingress_get_router_image)
+  podman pull --authfile /home/gspence/.secrets/pull-secret.txt $image || return 1
+  sha=$(echo "$image" |  awk -F":" '{print $2}')
+  tag_new="quay.io/gspence/openshift-router:${sha}"
+  podman build -t $tag_new  -<<EOF
+FROM $image
+ENTRYPOINT ["/usr/bin/openshift-router","--v=10"]
+EOF
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Build failed"
+    return 1
+  fi
+  podman push $tag_new || return 1
+  oc_ingress_patch_router_image $tag_new || return 1
+}
+
+function oc_ingress_patch_router_image() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide an image"
+    return 1
+  fi
+  oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+  oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"ingress-operator","env":[{"name":"IMAGE","value":"'${1}'"}]}]}}}}'
+}
 
 function oc_ingress_force_delete_terminating_router_pods() {
   for i in $(oc get pods -n openshift-ingress --no-headers | grep Terminating | awk '{print $1}'); do
@@ -210,6 +253,14 @@ function oc_ingress_force_delete_terminating_router_pods() {
 function oc_ingress_maxconn_auto() {
   oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"tuningOptions":{"maxConnections":-1}}}'
   oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"unsupportedConfigOverrides":{"maxConnections":-1}}}'
+}
+
+function oc_ingress_patch_ingresscontroller_routeselector() {
+  if [[ "$1" == "" ]]; then
+    oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"routeSelector":{"matchLabels":{"type":null}}}}'
+  else
+    oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"routeSelector":{"matchLabels":{"type":"'$1'"}}}}'
+  fi
 }
 
 function oc_ingress_rollout_router() {
@@ -230,4 +281,37 @@ alias oc_get_console_url="oc get routes -n openshift-console console -o go-templ
 function oc_open_console() {
   URL=$(oc_get_console_url)
   xdg-open https://${URL}
+}
+
+function oc_curl() {
+  oc run curl-pod --image=radial/busyboxplus:curl -i --tty --rm
+}
+
+function oc_ingress_istioapi_logs() {
+  oc logs -f $(oc get -n istio-system pod --no-headers | grep istio-ingressgateway | awk '{print $1}') -n istio-system
+}
+
+function oc_ingress_gwapi_logs() {
+  oc logs -f $(oc get -n gwapi pod --no-headers | grep "gateway-" | awk '{print $1}') -n gwapi
+}
+
+function oc_ingress_domain() {
+  oc get ingresses.config/cluster -o jsonpath={.spec.domain}
+}
+
+function oc_logs() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide a pod name"
+    return 1
+  fi
+  if [[ "$1" == "-n" ]]; then
+    NS="-n $2"
+    shift 2
+  else
+    NS="-A"
+  fi
+  for pod in $(oc get pods $NS --no-headers | grep "${1}-" | awk '{print $2}'); do
+    echo "${pod}:"
+    oc logs $pod --timestamps
+  done
 }
