@@ -297,6 +297,7 @@ function oc_ingress_gwapi_logs() {
 
 function oc_ingress_domain() {
   oc get ingresses.config/cluster -o jsonpath={.spec.domain}
+  echo
 }
 
 function oc_logs() {
