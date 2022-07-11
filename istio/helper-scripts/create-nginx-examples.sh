@@ -23,24 +23,30 @@ function create_certs() {
   oc create -n $NAMESPACE secret tls ${TYPE}-credential --key=${CERT_DIR}/${TYPE}.${NAMESPACE}.key --cert=${CERT_DIR}/${TYPE}.${NAMESPACE}.crt
 }
 
-# Set up DNS for istioapi example
-DOMAIN="$(oc get ingresscontrollers.operator.openshift.io -n openshift-ingress-operator default -o go-template='{{.status.domain}}')"
-export ISTIO_DOMAIN="istio.${DOMAIN:5}"
-export GWAPI_DOMAIN="gwapi.${DOMAIN:5}"
+if [[ "$ISTIO_BM" == "true" ]]; then
+  DOMAIN="$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})"
+  export ISTIO_DOMAIN="istio.${DOMAIN:5}"
+  export GWAPI_DOMAIN="gwapi.${DOMAIN:5}"
+  # Don't create dnsrecords for BM since they won't do anything
+else
+  # Set up DNS for istioapi example
+  DOMAIN="$(oc get ingresscontrollers.operator.openshift.io -n openshift-ingress-operator default -o go-template='{{.status.domain}}')"
+  export ISTIO_DOMAIN="istio.${DOMAIN:5}"
+  export GWAPI_DOMAIN="gwapi.${DOMAIN:5}"
 
-DNS_RECORD_TYPE="CNAME"
-INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-if [[ "$INGRESS_HOST" == "" ]]; then
-  INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  DNS_RECORD_TYPE="A"
-fi
-if [[ "$INGRESS_HOST" == "" ]]; then
-  echo "ERROR: There was an issue getting the istio ingress service hostname or ip"
-  exit 1
-fi
+  DNS_RECORD_TYPE="CNAME"
+  INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+  if [[ "$INGRESS_HOST" == "" ]]; then
+    INGRESS_HOST=$(oc -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    DNS_RECORD_TYPE="A"
+  fi
+  if [[ "$INGRESS_HOST" == "" ]]; then
+    echo "ERROR: There was an issue getting the istio ingress service hostname or ip"
+    exit 1
+  fi
 
-# Add wildcard to send dns requests to istio via istio api
-oc apply -f - <<EOF
+  # Add wildcard to send dns requests to istio via istio api
+  oc apply -f - <<EOF
 apiVersion: ingress.operator.openshift.io/v1
 kind: DNSRecord
 metadata:
@@ -55,6 +61,7 @@ spec:
   targets:
   - ${INGRESS_HOST}
 EOF
+fi
 
 GWAPI_SERVICE="gateway"
 if [[ "$GW_MANUAL_DEPLOYMENT" == "true" ]]; then
@@ -121,30 +128,31 @@ if [[ $? -ne 0 ]]; then
 fi
 #cat ${YAML_DIR}/echo-service-sleeper-istioapi.yaml | envsubst | oc apply -f -
 
-TIMEOUT=60
-while [[ "$GWAPI_LOADBALANCER_DOMAIN" == "" ]] && [[ "$GWAPI_LOADBALANCER_IP" == "" ]]; do
-  # For AWS, it uses hostname, but for GCE, it uses IP
-  GWAPI_LOADBALANCER_DOMAIN=$(oc -n gwapi get service $GWAPI_SERVICE -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-  GWAPI_LOADBALANCER_IP=$(oc -n gwapi get service $GWAPI_SERVICE -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  echo "Waiting for gateway api loadbalancer to get domain name"
-  if [[ "$TIMEOUT" -lt 0 ]]; then
-    echo "ERROR: Gateway API loadbalancer never got domain name"
-    exit 1
+if [[ "$ISTIO_BM" != "true" ]]; then
+  TIMEOUT=60
+  while [[ "$GWAPI_LOADBALANCER_DOMAIN" == "" ]] && [[ "$GWAPI_LOADBALANCER_IP" == "" ]]; do
+    # For AWS, it uses hostname, but for GCE, it uses IP
+    GWAPI_LOADBALANCER_DOMAIN=$(oc -n gwapi get service $GWAPI_SERVICE -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+    GWAPI_LOADBALANCER_IP=$(oc -n gwapi get service $GWAPI_SERVICE -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    echo "Waiting for gateway api loadbalancer to get domain name"
+    if [[ "$TIMEOUT" -lt 0 ]]; then
+      echo "ERROR: Gateway API loadbalancer never got domain name"
+      exit 1
+    fi
+    TIMEOUT=$((TIMEOUT-1))
+    sleep 1
+  done
+
+  if [[ "$GWAPI_LOADBALANCER_DOMAIN" != "" ]]; then
+    GWAPI_LOADBALANCER="$GWAPI_LOADBALANCER_DOMAIN"
+    DNS_RECORD_TYPE="CNAME"
+  else
+    GWAPI_LOADBALANCER="$GWAPI_LOADBALANCER_IP"
+    DNS_RECORD_TYPE="A"
   fi
-  TIMEOUT=$((TIMEOUT-1))
-  sleep 1
-done
 
-if [[ "$GWAPI_LOADBALANCER_DOMAIN" != "" ]]; then
-  GWAPI_LOADBALANCER="$GWAPI_LOADBALANCER_DOMAIN"
-  DNS_RECORD_TYPE="CNAME"
-else
-  GWAPI_LOADBALANCER="$GWAPI_LOADBALANCER_IP"
-  DNS_RECORD_TYPE="A"
-fi
-
-# Add wildcard to send dns requests to istio via gwapi
-oc apply -f - <<EOF
+  # Add wildcard to send dns requests to istio via gwapi
+  oc apply -f - <<EOF
 apiVersion: ingress.operator.openshift.io/v1
 kind: DNSRecord
 metadata:
@@ -159,7 +167,7 @@ spec:
   targets:
   - ${GWAPI_LOADBALANCER}
 EOF
-
+fi
 
 echo "ISITIO API:"
 echo "curl -I http://http.${ISTIO_DOMAIN}"
@@ -172,3 +180,6 @@ echo "curl -I http://http.${GWAPI_DOMAIN}"
 echo "curl --cacert ${CERT_DIR}/ca.crt -I https://edge.${GWAPI_DOMAIN}"
 echo "curl --cacert ${CERT_DIR}/ca.crt -I https://re.${GWAPI_DOMAIN}"
 echo "curl --cacert ${CERT_DIR}/ca.crt -I https://pass.${GWAPI_DOMAIN}"
+if [[ "$ISTIO_BM" == "true" ]]; then
+  echo "WARNING: For baremetal you need to configure DNS yourself!"
+fi
