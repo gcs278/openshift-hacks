@@ -13,7 +13,7 @@ if [[ ! -d "$PS_DIR" ]]; then
   git clone $REPO
 else
   cd $PS_DIR
-  git pull REPO
+  git pull $REPO
   if [[ $? -ne 0 ]]; then
     echo "ERROR: Failed to update $PS_DIR"
     exit 1
@@ -72,11 +72,13 @@ function run() {
   ATTEMPT=1
   while [[ ! -f ${COMPARISON_OUTPUT_CFG} ]]; do
     TEST_LOG=${TEST_LOG_DIR}/log-${ATTEMPT}
+    cd ${ROUTER_PERF_DIR}
     start=$(date +%s)
     log "Starting test ${test_name} attempt #${ATTEMPT}"
     log "Log is ${TEST_LOG}"
-    ${ROUTER_PERF_DIR}/ingress-performance.sh &> $TEST_LOG
+    ./ingress-performance.sh &> $TEST_LOG
     end=$(date +%s)
+    cd -
     runtime=$((end-start))
     hours=$((runtime / 3600)); minutes=$(( (runtime % 3600) / 60 )); seconds=$(( (runtime % 3600) % 60 ));
     log "Test Exitted. Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
