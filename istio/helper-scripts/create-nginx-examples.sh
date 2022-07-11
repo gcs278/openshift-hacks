@@ -56,11 +56,43 @@ spec:
   - ${INGRESS_HOST}
 EOF
 
+GWAPI_SERVICE="gateway"
+if [[ "$GW_MANUAL_DEPLOYMENT" == "true" ]]; then
+  echo "GW_MANUAL_DEPLOYMENT is set. Using manual deployment for GWAPI"
+  if [[ "$GW_HOST_NETWORKING" == "true" ]]; then
+    echo "GW_HOST_NETWORKING is set. Using host networking for GWAPI"
+    export GW_HOST_NETWORKING_YAML=$(cat <<-END
+        ports:
+        - containerPort: 8080
+          hostPort: 80
+          protocol: TCP
+        - containerPort: 8443
+          hostPort: 443
+          protocol: TCP
+END
+)
+  fi
+  cat ${YAML_DIR}/gwapi-manual-deployment.yaml | envsubst | oc apply -f -
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Something went wrong with configuring ${YAML_DIR}/gwapi-manual-deployment.yaml"
+    exit 1
+  fi
+  GWAPI_SERVICE="gateway-manual"
+  export GW_ADDRESSES_YAML=$(cat <<-END
+addresses:
+  - value: gateway-manual.gwapi.svc.cluster.local
+    type: Hostname
+END
+)
+fi
+
 # Create namespaces
 oc create namespace istioapi --dry-run=client -o yaml | oc apply -f -
 oc create namespace gwapi  --dry-run=client -o yaml | oc apply --overwrite=true -f -
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:istioapi
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:gwapi
+oc create -n gwapi serviceaccount istio-ingressgateway-service-account
+oc adm policy add-scc-to-user privileged -n gwapi -z istio-ingressgateway-service-account
 
 # Set up certs
 # Create CA
@@ -92,8 +124,8 @@ fi
 TIMEOUT=60
 while [[ "$GWAPI_LOADBALANCER_DOMAIN" == "" ]] && [[ "$GWAPI_LOADBALANCER_IP" == "" ]]; do
   # For AWS, it uses hostname, but for GCE, it uses IP
-  GWAPI_LOADBALANCER_DOMAIN=$(oc -n gwapi get service gateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-  GWAPI_LOADBALANCER_IP=$(oc -n gwapi get service gateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  GWAPI_LOADBALANCER_DOMAIN=$(oc -n gwapi get service $GWAPI_SERVICE -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+  GWAPI_LOADBALANCER_IP=$(oc -n gwapi get service $GWAPI_SERVICE -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   echo "Waiting for gateway api loadbalancer to get domain name"
   if [[ "$TIMEOUT" -lt 0 ]]; then
     echo "ERROR: Gateway API loadbalancer never got domain name"

@@ -144,6 +144,7 @@ metadata:
   name: gateway
   namespace: gwapi
 spec:
+  ${GW_ADDRESSES_YAML}
   selector:
     istio: ingressgateway # use Istio default gateway implementation
   gatewayClassName: istio
