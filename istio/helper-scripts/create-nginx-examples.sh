@@ -78,10 +78,10 @@ if [[ "$GW_MANUAL_DEPLOYMENT" == "true" ]]; then
     echo "GW_HOST_NETWORKING is set. Using host networking for GWAPI"
     export GW_HOST_NETWORKING_YAML=$(cat <<-END
         ports:
-        - containerPort: 8080
+        - containerPort: 80
           hostPort: 80
           protocol: TCP
-        - containerPort: 8443
+        - containerPort: 443
           hostPort: 443
           protocol: TCP
 END
