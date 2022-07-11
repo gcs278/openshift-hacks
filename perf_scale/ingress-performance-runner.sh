@@ -7,12 +7,26 @@ trap "pkill -P $$" EXIT
 python3 -m venv pyenv
 source pyenv/bin/activate
 
+PS_DIR=e2e-benchmarking
+REPO=https://github.com/cloud-bulldozer/${PS_DIR}
+if [[ ! -d "$PS_DIR" ]]; then
+  git clone $REPO
+else
+  cd $PS_DIR
+  git pull REPO
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Failed to update $PS_DIR"
+    exit 1
+  fi
+  cd -
+fi
+
 LOG_DIR=./results
 RUNNER_LOG_DIR=${LOG_DIR}/runner-logs/
 RUNNER_LOG=${RUNNER_LOG_DIR}/runner-$(date +"%Y_%m_%d_%I_%M_%p")
 mkdir -p $LOG_DIR $RUNNER_LOG_DIR
 SECRETS=./secrets.env
-ROUTER_PERF_DIR=./
+ROUTER_PERF_DIR=${PS_DIR}/workloads/router-perf-v2/
 
 function log() {
   echo "$(date -u): ${@}"
