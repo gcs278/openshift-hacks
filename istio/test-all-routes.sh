@@ -1,27 +1,28 @@
 #!/bin/bash 
 
-DOMAIN="$(oc get ingresscontrollers.operator.openshift.io -n openshift-ingress-operator default -o go-template='{{.status.domain}}')"
-export ISTIO_DOMAIN="istio.${DOMAIN:5}"
-export GWAPI_DOMAIN="gwapi.${DOMAIN:5}"
+hosts_gwapi="$(oc get httproute -n gwapi --no-headers -o custom-columns="route:.spec.hostnames[0]") $(oc get tlsroute -n gwapi --no-headers -o custom-columns="route:.spec.hostnames[0]")"
+hosts_istio="$(oc get httproute -n istio-system --no-headers -o custom-columns="route:.spec.hostnames[0]") $(oc get tlsroute -n istio-system --no-headers -o custom-columns="route:.spec.hostnames[0]")"
 
-DOMAINS="${ISTIO_DOMAIN} ${GWAPI_DOMAIN}"
-TERMINATIONS="http edge re pass"
-for j in ${DOMAINS}; do
+for j in ${hosts_istio} ${hosts_gwapi}; do
   echo "##### $j #####"
-  for i in ${TERMINATIONS}; do
+  if [[ "${j}" == http* ]]; then
+    PROTO="http"
+  else
     PROTO="https"
-    if [[ "${i}" == "http" ]]; then
-      PROTO="${i}"
-    fi
-    cmd="curl -k -sS -I ${PROTO}://${i}.${j}"
-    echo $cmd
+  fi
+
+  cmd="curl -k ${silent} -I ${PROTO}://${j}"
+  echo $cmd
+  if [[ "$1" == "-h" ]]; then
+    $cmd
+  else
     echo -n " -> "
     $cmd | head -1
-  done
+  fi
 done
 
-echo "##### Console Route #####"
-cmd="curl -k -sS -I https://console-openshift-console.${DOMAIN}"
-echo $cmd
-echo -n " -> "
-$cmd | head -1
+#echo "##### Console Route #####"
+#cmd="curl -k -sS -I https://console-openshift-console.${DOMAIN}"
+#echo $cmd
+#echo -n " -> "
+#$cmd | head -1

@@ -127,6 +127,12 @@ if [[ $? -ne 0 ]]; then
   exit 1
 fi
 #cat ${YAML_DIR}/echo-service-sleeper-istioapi.yaml | envsubst | oc apply -f -
+cat ${YAML_DIR}/gwapi-features-examples.yaml | envsubst | oc apply -f -
+if [[ $? -ne 0 ]]; then
+  echo "ERROR: Something went wrong with configuring ${YAML_DIR}/nginx-gwapi.yaml"
+  exit 1
+fi
+
 
 if [[ "$ISTIO_BM" != "true" ]]; then
   TIMEOUT=60
