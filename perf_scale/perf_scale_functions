@@ -2,6 +2,6 @@
 
 function perfscale_copy_results() {
   ssh perfscale dnf install -y rsync -q
-  rsync --progress -raz --exclude "*results.csv" root@perfscale:/root/e2e-benchmarking/workloads/router-perf-v2/results ~/perf_scale/
-  rsync --progress -raz --exclude "*results.csv" root@perfscale:/root/e2e-benchmarking/workloads/router-perf-v2/tests ~/perf_scale/
+  rsync --progress -raz --exclude "*results.csv" root@perfscale:/root/openshift-hacks/perf_scale/results ~/perf_scale/
+  rsync --progress -raz --exclude "*results.csv" root@perfscale:/root/openshift-hacks/perf_scale/tests ~/perf_scale/
 }
