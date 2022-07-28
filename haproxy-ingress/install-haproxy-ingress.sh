@@ -3,12 +3,13 @@
 # Must do this for openshift to allow haproxy-ingress
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:ingress-controller
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:haproxy-ingress
-oc adm policy add-scc-to-user privileged -n ingress-controller -z haproxy-ingress
 
 helm upgrade --install haproxy-ingress haproxy-ingress/haproxy-ingress\
   --create-namespace --namespace ingress-controller \
   --version v0.14.0-alpha.2\
   -f haproxy-ingress-values.yaml
+
+oc adm policy add-scc-to-user privileged -n ingress-controller -z haproxy-ingress
 
 # Install GWAPI
 kubectl get crd gateways.gateway.networking.k8s.io &> /dev/null || { kubectl kustomize "github.com/kubernetes-sigs/gateway-api/config/crd?ref=v0.4.0" | kubectl apply -f -; }

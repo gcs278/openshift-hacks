@@ -52,6 +52,18 @@ function oc_ingress_scale_router_default() {
   oc scale --replicas=$1 -n openshift-ingress deployment/router-default
 }
 
+function oc_ingress_scale_router() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide a router name"
+    return 1
+  fi
+  if [[ $2 = "" ]]; then
+    echo "ERROR: You need to provide a scale #"
+    return 1
+  fi
+  oc scale --replicas=$2 -n openshift-ingress deployment/${1}
+}
+
 function oc_ingress_scale_ingress_operator() {
   if [[ $1 = "" ]]; then
     echo "ERROR: You need to provide a scale #"
@@ -88,7 +100,7 @@ function oc_ingress_rsh_any_router() {
 function oc_ingress_exec_any_router() {
   router="$1"
   shift 1
-  oc exec -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running | head -1 | awk '{print $1}') $@
+  oc exec -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running | head -1 | awk '{print $1}') "$@"
 }
 
 function oc_ingress_cp_into_only_router_default() {
@@ -242,6 +254,17 @@ function oc_ingress_patch_router_image() {
   fi
   oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
   oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"ingress-operator","env":[{"name":"IMAGE","value":"'${1}'"}]}]}}}}'
+  oc -n openshift-ingress patch deploy/router-default --type=strategic --patch='{"spec":{"containers":[{"name":"router-default","imagePullPolicy":"Always"}]}}'
+}
+
+function oc_ingress_patch_operator_image() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide an image"
+    return 1
+  fi
+  oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+  oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"ingress-operator","image":"'${1}'"}]}}}}'
+  oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"containers":[{"name":"ingress-operator","imagePullPolicy":"Always"}]}}'
 }
 
 function oc_ingress_force_delete_terminating_router_pods() {
@@ -274,6 +297,10 @@ function oc_ingress_rollout_router() {
   oc rollout restart deployment -n openshift-ingress router-${router}
 }
 
+function oc_ingress_rollout_ingressoperator() {
+  oc rollout restart deployment -n openshift-ingress-operator ingress-operator
+}
+
 alias oc_update_pull_secrets="oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=/home/gspence/.secrets/pull-secret.txt"
 alias oc_get_pull_secrets="oc get secret/pull-secret -n openshift-config --template='{{index .data \".dockerconfigjson\" | base64decode}}'"
 alias oc_get_console_url="oc get routes -n openshift-console console -o go-template='{{.spec.host}}{{\"\n\"}}'"
@@ -298,6 +325,13 @@ function oc_ingress_gwapi_logs() {
 function oc_ingress_domain() {
   oc get ingresses.config/cluster -o jsonpath={.spec.domain}
   echo
+}
+
+function oc_ingress_watch_router_conns() {
+  echo "Run:"
+  echo "oc_ingress_rsh_any_router"
+  echo "watch -n.1 'echo \"show info\" | socat /var/lib/haproxy/run/haproxy.sock stdio'"
+  #oc_ingress_exec_any_router default "watch -n .1 echo show info | socat /var/lib/haproxy/run/haproxy.sock stdio | grep CurrConns"
 }
 
 function oc_logs() {
