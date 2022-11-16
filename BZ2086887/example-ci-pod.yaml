@@ -1,0 +1,946 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    ci-operator.openshift.io/container-sub-tests: test
+    ci-operator.openshift.io/save-container-logs: "true"
+    ci.openshift.io/job-spec: '{"type":"periodic","job":"periodic-ci-openshift-release-master-ci-4.10-e2e-gcp-upgrade","buildid":"1562121686684274688","prowjobid":"4.10.0-0.ci-2022-08-23-165538-gcp-sdn-upgrade-4.10-micro","extra_refs":[{"org":"openshift","repo":"release","base_ref":"master"}],"decoration_config":{"timeout":"4h0m0s","grace_period":"1h0m0s","utility_images":{"clonerefs":"gcr.io/k8s-prow/clonerefs:v20220822-414bcae48c","initupload":"gcr.io/k8s-prow/initupload:v20220822-414bcae48c","entrypoint":"gcr.io/k8s-prow/entrypoint:v20220822-414bcae48c","sidecar":"gcr.io/k8s-prow/sidecar:v20220822-414bcae48c"},"resources":{"clonerefs":{"limits":{"memory":"3Gi"},"requests":{"cpu":"100m","memory":"500Mi"}},"initupload":{"limits":{"memory":"200Mi"},"requests":{"cpu":"100m","memory":"50Mi"}},"place_entrypoint":{"limits":{"memory":"100Mi"},"requests":{"cpu":"100m","memory":"25Mi"}},"sidecar":{"limits":{"memory":"2Gi"},"requests":{"cpu":"100m","memory":"250Mi"}}},"gcs_configuration":{"bucket":"origin-ci-test","path_strategy":"single","default_org":"openshift","default_repo":"origin","mediaTypes":{"log":"text/plain"}},"gcs_credentials_secret":"gce-sa-credentials-gcs-publisher","skip_cloning":true,"censor_secrets":true}}'
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "openshift-sdn",
+          "interface": "eth0",
+          "ips": [
+              "10.128.75.102"
+          ],
+          "default": true,
+          "dns": {}
+      }]
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "openshift-sdn",
+          "interface": "eth0",
+          "ips": [
+              "10.128.75.102"
+          ],
+          "default": true,
+          "dns": {}
+      }]
+    openshift.io/scc: restricted-v2
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+  creationTimestamp: "2022-08-23T17:26:43Z"
+  labels:
+    OPENSHIFT_CI: "true"
+    ci-workload: tests
+    ci-workload-namespace: ci-op-cifp9rlt
+    ci.openshift.io/metadata.branch: master
+    ci.openshift.io/metadata.org: openshift
+    ci.openshift.io/metadata.repo: release
+    ci.openshift.io/metadata.step: openshift-e2e-test
+    ci.openshift.io/metadata.target: e2e-gcp-upgrade
+    ci.openshift.io/metadata.variant: ci-4.10
+    ci.openshift.io/multi-stage-test: e2e-gcp-upgrade
+    created-by-ci: "true"
+  name: e2e-gcp-upgrade-openshift-e2e-test
+  namespace: ci-op-cifp9rlt
+  ownerReferences:
+  - apiVersion: image.openshift.io/v1
+    kind: ImageStream
+    name: pipeline
+    uid: da14e43d-d67b-4112-a152-fd71aaa3feaa
+  resourceVersion: "1600451643"
+  uid: dabeb590-a4d2-4b69-aa29-0b02b767bd82
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: NotIn
+            values:
+            - ip-10-0-200-52.ec2.internal
+  containers:
+  - args:
+    - /tools/entrypoint
+    command:
+    - /tmp/entrypoint-wrapper/entrypoint-wrapper
+    env:
+    - name: BUILD_ID
+      value: "1562121686684274688"
+    - name: CI
+      value: "true"
+    - name: JOB_NAME
+      value: periodic-ci-openshift-release-master-ci-4.10-e2e-gcp-upgrade
+    - name: JOB_SPEC
+      value: '{"type":"periodic","job":"periodic-ci-openshift-release-master-ci-4.10-e2e-gcp-upgrade","buildid":"1562121686684274688","prowjobid":"4.10.0-0.ci-2022-08-23-165538-gcp-sdn-upgrade-4.10-micro","extra_refs":[{"org":"openshift","repo":"release","base_ref":"master"}],"decoration_config":{"timeout":"4h0m0s","grace_period":"10m0s","utility_images":{"clonerefs":"gcr.io/k8s-prow/clonerefs:v20220822-414bcae48c","initupload":"gcr.io/k8s-prow/initupload:v20220822-414bcae48c","entrypoint":"gcr.io/k8s-prow/entrypoint:v20220822-414bcae48c","sidecar":"gcr.io/k8s-prow/sidecar:v20220822-414bcae48c"},"resources":{"clonerefs":{"limits":{"memory":"3Gi"},"requests":{"cpu":"100m","memory":"500Mi"}},"initupload":{"limits":{"memory":"200Mi"},"requests":{"cpu":"100m","memory":"50Mi"}},"place_entrypoint":{"limits":{"memory":"100Mi"},"requests":{"cpu":"100m","memory":"25Mi"}},"sidecar":{"limits":{"memory":"2Gi"},"requests":{"cpu":"100m","memory":"250Mi"}}},"gcs_configuration":{"bucket":"origin-ci-test","path_strategy":"single","default_org":"openshift","default_repo":"origin","mediaTypes":{"log":"text/plain"}},"gcs_credentials_secret":"gce-sa-credentials-gcs-publisher","skip_cloning":true,"censor_secrets":true}}'
+    - name: JOB_TYPE
+      value: periodic
+    - name: OPENSHIFT_CI
+      value: "true"
+    - name: PROW_JOB_ID
+      value: 4.10.0-0.ci-2022-08-23-165538-gcp-sdn-upgrade-4.10-micro
+    - name: ENTRYPOINT_OPTIONS
+      value: '{"timeout":14400000000000,"grace_period":600000000000,"artifact_dir":"/logs/artifacts","args":["/bin/bash","-c","#!/bin/bash\nset
+        -eu\n#!/bin/bash\n\nset -o nounset\nset -o errexit\nset -o pipefail\n\nexport
+        AWS_SHARED_CREDENTIALS_FILE=${CLUSTER_PROFILE_DIR}/.awscred\nexport AZURE_AUTH_LOCATION=${CLUSTER_PROFILE_DIR}/osServicePrincipal.json\nexport
+        GCP_SHARED_CREDENTIALS_FILE=${CLUSTER_PROFILE_DIR}/gce.json\nexport ALIBABA_CLOUD_CREDENTIALS_FILE=${SHARED_DIR}/alibabacreds.ini\nexport
+        HOME=/tmp/home\nexport PATH=/usr/libexec/origin:$PATH\n\n# HACK: HyperShift
+        clusters use their own profile type, but the cluster type\n# underneath is
+        actually AWS and the type identifier is derived from the profile\n# type.
+        For now, just treat the `hypershift` type the same as `aws` until\n# there''s
+        a clean way to decouple the notion of a cluster provider and the\n# platform
+        type.\n#\n# See also: https://issues.redhat.com/browse/DPTP-1988\nif [[ \"${CLUSTER_TYPE}\"
+        == \"hypershift\" ]]; then\n    export CLUSTER_TYPE=\"aws\"\n    echo \"Overriding
+        ''hypershift'' cluster type to be ''aws''\"\nfi\n\n# For disconnected or otherwise
+        unreachable environments, we want to\n# have steps use an HTTP(S) proxy to
+        reach the API server. This proxy\n# configuration file should export HTTP_PROXY,
+        HTTPS_PROXY, and NO_PROXY\n# environment variables, as well as their lowercase
+        equivalents (note\n# that libcurl doesn''t recognize the uppercase variables).\nif
+        test -f \"${SHARED_DIR}/proxy-conf.sh\"\nthen\n    # shellcheck disable=SC1090\n    source
+        \"${SHARED_DIR}/proxy-conf.sh\"\nfi\n\nif [[ -n \"${TEST_CSI_DRIVER_MANIFEST}\"
+        ]]; then\n    export TEST_CSI_DRIVER_FILES=${SHARED_DIR}/${TEST_CSI_DRIVER_MANIFEST}\nfi\n\ntrap
+        ''CHILDREN=$(jobs -p); if test -n \"${CHILDREN}\"; then kill ${CHILDREN} \u0026\u0026
+        wait; fi'' TERM\n\nmkdir -p \"${HOME}\"\n\n# Override the upstream docker.io
+        registry due to issues with rate limiting\n# https://bugzilla.redhat.com/show_bug.cgi?id=1895107\n#
+        sjenning: TODO: use of personal repo is temporary; should find long term location
+        for these mirrored images\nexport KUBE_TEST_REPO_LIST=${HOME}/repo_list.yaml\ncat
+        \u003c\u003cEOF \u003e ${KUBE_TEST_REPO_LIST}\ndockerLibraryRegistry: quay.io/sjenning\ndockerGluster:
+        quay.io/sjenning\nEOF\n\n# if the cluster profile included an insights secret,
+        install it to the cluster to\n# report support data from the support-operator\nif
+        [[ -f \"${CLUSTER_PROFILE_DIR}/insights-live.yaml\" ]]; then\n    oc create
+        -f \"${CLUSTER_PROFILE_DIR}/insights-live.yaml\" || true\nfi\n\n# if this
+        test requires an SSH bastion and one is not installed, configure it\nKUBE_SSH_BASTION=\"$(
+        oc --insecure-skip-tls-verify get node -l node-role.kubernetes.io/master -o
+        ''jsonpath={.items[0].status.addresses[?(@.type==\"ExternalIP\")].address}''
+        ):22\"\nKUBE_SSH_KEY_PATH=${CLUSTER_PROFILE_DIR}/ssh-privatekey\nexport KUBE_SSH_BASTION
+        KUBE_SSH_KEY_PATH\nif [[ -n \"${TEST_REQUIRES_SSH-}\" ]]; then\n    export
+        SSH_BASTION_NAMESPACE=test-ssh-bastion\n    echo \"Setting up ssh bastion\"\n\n    #
+        configure the local container environment to have the correct SSH configuration\n    mkdir
+        -p ~/.ssh\n    cp \"${KUBE_SSH_KEY_PATH}\" ~/.ssh/id_rsa\n    chmod 0600 ~/.ssh/id_rsa\n    if
+        ! whoami \u0026\u003e /dev/null; then\n        if [[ -w /etc/passwd ]]; then\n            echo
+        \"${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin\"
+        \u003e\u003e /etc/passwd\n        fi\n    fi\n\n    # if this is run from
+        a flow that does not have the ssh-bastion step, deploy the bastion\n    if
+        ! oc get -n \"${SSH_BASTION_NAMESPACE}\" ssh-bastion; then\n        curl https://raw.githubusercontent.com/eparis/ssh-bastion/master/deploy/deploy.sh
+        | bash -x\n    fi\n\n    # locate the bastion host for use within the tests\n    for
+        _ in $(seq 0 30); do\n        # AWS fills only .hostname of a service\n        BASTION_HOST=$(oc
+        get service -n \"${SSH_BASTION_NAMESPACE}\" ssh-bastion -o jsonpath=''{.status.loadBalancer.ingress[0].hostname}'')\n        if
+        [[ -n \"${BASTION_HOST}\" ]]; then break; fi\n        # Azure fills only .ip
+        of a service. Use it as bastion host.\n        BASTION_HOST=$(oc get service
+        -n \"${SSH_BASTION_NAMESPACE}\" ssh-bastion -o jsonpath=''{.status.loadBalancer.ingress[0].ip}'')\n        if
+        [[ -n \"${BASTION_HOST}\" ]]; then break; fi\n        echo \"Waiting for SSH
+        bastion load balancer service\"\n        sleep 10\n    done\n    if [[ -z
+        \"${BASTION_HOST}\" ]]; then\n        echo \u003e\u00262 \"Failed to find
+        bastion address, exiting\"\n        exit 1\n    fi\n    export KUBE_SSH_BASTION=\"${BASTION_HOST}:22\"\nfi\n\n\n#
+        set up cloud-provider-specific env vars\ncase \"${CLUSTER_TYPE}\" in\ngcp)\n    export
+        GOOGLE_APPLICATION_CREDENTIALS=\"${GCP_SHARED_CREDENTIALS_FILE}\"\n    # In
+        k8s 1.24 this is required to run GCP PD tests. See: https://github.com/kubernetes/kubernetes/pull/109541\n    export
+        ENABLE_STORAGE_GCE_PD_DRIVER=\"yes\"\n    export KUBE_SSH_USER=core\n    mkdir
+        -p ~/.ssh\n    cp \"${CLUSTER_PROFILE_DIR}/ssh-privatekey\" ~/.ssh/google_compute_engine
+        || true\n    # TODO: make openshift-tests auto-discover this from cluster
+        config\n    PROJECT=\"$(oc get -o jsonpath=''{.status.platformStatus.gcp.projectID}''
+        infrastructure cluster)\"\n    REGION=\"$(oc get -o jsonpath=''{.status.platformStatus.gcp.region}''
+        infrastructure cluster)\"\n    export TEST_PROVIDER=\"{\\\"type\\\":\\\"gce\\\",\\\"region\\\":\\\"${REGION}\\\",\\\"multizone\\\":
+        true,\\\"multimaster\\\":true,\\\"projectid\\\":\\\"${PROJECT}\\\"}\"\n    ;;\naws|aws-arm64)\n    mkdir
+        -p ~/.ssh\n    cp \"${CLUSTER_PROFILE_DIR}/ssh-privatekey\" ~/.ssh/kube_aws_rsa
+        || true\n    export PROVIDER_ARGS=\"-provider=aws -gce-zone=us-east-1\"\n    #
+        TODO: make openshift-tests auto-discover this from cluster config\n    REGION=\"$(oc
+        get -o jsonpath=''{.status.platformStatus.aws.region}'' infrastructure cluster)\"\n    ZONE=\"$(oc
+        get -o jsonpath=''{.items[0].metadata.labels.failure-domain\\.beta\\.kubernetes\\.io/zone}''
+        nodes)\"\n    export TEST_PROVIDER=\"{\\\"type\\\":\\\"aws\\\",\\\"region\\\":\\\"${REGION}\\\",\\\"zone\\\":\\\"${ZONE}\\\",\\\"multizone\\\":true,\\\"multimaster\\\":true}\"\n    export
+        KUBE_SSH_USER=core\n    ;;\nazure4) export TEST_PROVIDER=azure;;\nazurestack)\n    export
+        TEST_PROVIDER=\"none\"\n    export AZURE_AUTH_LOCATION=${SHARED_DIR}/osServicePrincipal.json\n    ;;\nvsphere)\n    #
+        shellcheck disable=SC1090\n    source \"${SHARED_DIR}/govc.sh\"\n    export
+        VSPHERE_CONF_FILE=\"${SHARED_DIR}/vsphere.conf\"\n    oc -n openshift-config
+        get cm/cloud-provider-config -o jsonpath=''{.data.config}'' \u003e \"$VSPHERE_CONF_FILE\"\n    #
+        The test suite requires a vSphere config file with explicit user and password
+        fields.\n    sed -i \"/secret-name \\=/c user = \\\"${GOVC_USERNAME}\\\"\"
+        \"$VSPHERE_CONF_FILE\"\n    sed -i \"/secret-namespace \\=/c password = \\\"${GOVC_PASSWORD}\\\"\"
+        \"$VSPHERE_CONF_FILE\"\n    export TEST_PROVIDER=vsphere;;\nalibabacloud)\n    mkdir
+        -p ~/.ssh\n    cp \"${CLUSTER_PROFILE_DIR}/ssh-privatekey\" ~/.ssh/kube_alibaba_rsa
+        || true\n    export PROVIDER_ARGS=\"-provider=alibabacloud -gce-zone=us-east-1\"\n    #
+        TODO: make openshift-tests auto-discover this from cluster config\n    REGION=\"$(oc
+        get -o jsonpath=''{.status.platformStatus.alibabacloud.region}'' infrastructure
+        cluster)\"\n    export TEST_PROVIDER=\"{\\\"type\\\":\\\"alibabacloud\\\",\\\"region\\\":\\\"${REGION}\\\",\\\"multizone\\\":true,\\\"multimaster\\\":true}\"\n    export
+        KUBE_SSH_USER=core\n;;\nopenstack*)\n    # shellcheck disable=SC1090\n    source
+        \"${SHARED_DIR}/cinder_credentials.sh\"\n    if test -n \"${HTTP_PROXY:-}\"
+        -o -n \"${HTTPS_PROXY:-}\"; then\n        export TEST_PROVIDER=''{\"type\":\"openstack\",\"disconnected\":true}''\n    else\n        export
+        TEST_PROVIDER=''{\"type\":\"openstack\"}''\n    fi\n    ;;\novirt) export
+        TEST_PROVIDER=''{\"type\":\"ovirt\"}'';;\nibmcloud)\n    export TEST_PROVIDER=''{\"type\":\"ibmcloud\"}''\n    IC_API_KEY=\"$(\u003c
+        \"${CLUSTER_PROFILE_DIR}/ibmcloud-api-key\")\"\n    export IC_API_KEY\n    ;;\nnutanix)
+        export TEST_PROVIDER=''{\"type\":\"nutanix\"}'' ;;\n*) echo \u003e\u00262
+        \"Unsupported cluster type ''${CLUSTER_TYPE}''\"; exit 1;;\nesac\n\nmkdir
+        -p /tmp/output\ncd /tmp/output\n\nif [[ \"${CLUSTER_TYPE}\" == gcp ]]; then\n    pushd
+        /tmp\n    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-256.0.0-linux-x86_64.tar.gz\n    tar
+        -xzf google-cloud-sdk-256.0.0-linux-x86_64.tar.gz\n    export PATH=$PATH:/tmp/google-cloud-sdk/bin\n    mkdir
+        gcloudconfig\n    export CLOUDSDK_CONFIG=/tmp/gcloudconfig\n    gcloud auth
+        activate-service-account --key-file=\"${GCP_SHARED_CREDENTIALS_FILE}\"\n    gcloud
+        config set project \"${PROJECT}\"\n    popd\nfi\n\n# Preserve the \u0026\u0026
+        chaining in this function, because it is called from and AND-OR list so it
+        doesn''t get errexit.\nfunction upgrade() {\n    set -x \u0026\u0026\n    TARGET_RELEASES=\"${OPENSHIFT_UPGRADE_RELEASE_IMAGE_OVERRIDE:-}\"
+        \u0026\u0026\n    if [[ -f \"${SHARED_DIR}/override-upgrade\" ]]; then\n        TARGET_RELEASES=\"$(\u003c
+        \"${SHARED_DIR}/override-upgrade\")\" \u0026\u0026\n        echo \"Overriding
+        upgrade target to ${TARGET_RELEASES}\"\n    fi \u0026\u0026\n    openshift-tests
+        run-upgrade \"${TEST_UPGRADE_SUITE}\" \\\n        --to-image \"${TARGET_RELEASES}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\" \u0026\u0026\n    set +x\n}\n\n#
+        upgrade_conformance runs the upgrade and the parallel tests, and exits with
+        an error if either fails.\nfunction upgrade_conformance() {\n    local exit_code=0
+        \u0026\u0026\n    upgrade || exit_code=$? \u0026\u0026\n    PROGRESSING=\"$(oc
+        get -o jsonpath=''{.status.conditions[?(@.type == \"Progressing\")].status}''
+        clusterversion version)\" \u0026\u0026\n    if test False = \"${PROGRESSING}\"\n    then\n        TEST_LIMIT_START_TIME=\"$(date
+        +%s)\" TEST_SUITE=openshift/conformance/parallel suite || exit_code=$?\n    else\n        echo
+        \"Skipping conformance suite because post-update ClusterVersion Progressing=${PROGRESSING}\"\n    fi
+        \u0026\u0026\n    return $exit_code\n}\n\nfunction upgrade_paused() {\n    set
+        -x\n    unset TEST_SUITE\n    TARGET_RELEASES=\"${OPENSHIFT_UPGRADE_RELEASE_IMAGE_OVERRIDE:-}\"\n    if
+        [[ -f \"${SHARED_DIR}/override-upgrade\" ]]; then\n        TARGET_RELEASES=\"$(\u003c
+        \"${SHARED_DIR}/override-upgrade\")\"\n        echo \"Overriding upgrade target
+        to ${TARGET_RELEASES}\"\n    fi\n    # Split TARGET_RELEASES by commas, producing
+        two releases\n    OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE=\"$(echo $TARGET_RELEASES
+        | cut -f1 -d,)\"\n    OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE=\"$(echo $TARGET_RELEASES
+        | cut -f2 -d,)\"\n\n    oc patch mcp/worker --type merge --patch ''{\"spec\":{\"paused\":true}}''\n\n    echo
+        \"Starting control-plane upgrade to ${OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE}\"\n    openshift-tests
+        run-upgrade \"${TEST_UPGRADE_SUITE}\" \\\n        --to-image \"${OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\"\n    echo \"Upgraded control-plane
+        to ${OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE}\"\n\n    echo \"Starting control-plane
+        upgrade to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n    openshift-tests
+        run-upgrade \"${TEST_UPGRADE_SUITE}\" \\\n        --to-image \"${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\"\n    echo \"Upgraded control-plane
+        to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n\n    echo \"Starting worker
+        upgrade to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n    oc patch mcp/worker
+        --type merge --patch ''{\"spec\":{\"paused\":false}}''\n    openshift-tests
+        run-upgrade all \\\n        --to-image \"${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\"\n    echo \"Upgraded workers
+        to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n    set +x\n}\n\n\n# Preserve
+        the \u0026\u0026 chaining in this function, because it is called from and
+        AND-OR list so it doesn''t get errexit.\nfunction suite() {\n    if [[ -n
+        \"${TEST_SKIPS}\" ]]; then\n        TESTS=\"$(openshift-tests run --dry-run
+        --provider \"${TEST_PROVIDER}\" \"${TEST_SUITE}\")\" \u0026\u0026\n        echo
+        \"${TESTS}\" | grep -v \"${TEST_SKIPS}\" \u003e/tmp/tests \u0026\u0026\n        echo
+        \"Skipping tests:\" \u0026\u0026\n        echo \"${TESTS}\" | grep \"${TEST_SKIPS}\"
+        || { exit_code=$?; echo ''Error: no tests were found matching the TEST_SKIPS
+        regex:''; echo \"$TEST_SKIPS\"; return $exit_code; } \u0026\u0026\n        TEST_ARGS=\"${TEST_ARGS:-}
+        --file /tmp/tests\"\n    fi \u0026\u0026\n\n    set -x \u0026\u0026\n    openshift-tests
+        run \"${TEST_SUITE}\" ${TEST_ARGS:-} \\\n        --provider \"${TEST_PROVIDER}\"
+        \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir \"${ARTIFACT_DIR}/junit\"
+        \u0026\n    wait \"$!\" \u0026\u0026\n    set +x\n}\n\necho \"$(date +%s)\"
+        \u003e \"${SHARED_DIR}/TEST_TIME_TEST_START\"\ntrap ''echo \"$(date +%s)\"
+        \u003e \"${SHARED_DIR}/TEST_TIME_TEST_END\"'' EXIT\n\noc -n openshift-config
+        patch cm admin-acks --patch ''{\"data\":{\"ack-4.8-kube-1.22-api-removals-in-4.9\":\"true\"}}''
+        --type=merge || echo ''failed to ack the 4.9 Kube v1beta1 removals; possibly
+        API-server issue, or a pre-4.8 release image''\n\n# wait for ClusterVersion
+        to level, until https://bugzilla.redhat.com/show_bug.cgi?id=2009845 makes
+        it back to all 4.9 releases being installed in CI\noc wait --for=condition=Progressing=False
+        --timeout=2m clusterversion/version\n\n# wait up to 10m for the number of
+        nodes to match the number of machines\ni=0\nwhile true\ndo\n    MACHINECOUNT=\"$(kubectl
+        get machines -A --no-headers | wc -l)\"\n    NODECOUNT=\"$(kubectl get nodes
+        --no-headers | wc -l)\"\n    if [ \"${MACHINECOUNT}\" -le \"${NODECOUNT}\"
+        ]\n    then\n      cat \u003e\"${ARTIFACT_DIR}/junit_nodes.xml\" \u003c\u003cEOF\n      \u003ctestsuite
+        name=\"cluster nodes\" tests=\"1\" failures=\"0\"\u003e\n        \u003ctestcase
+        name=\"node count should match or exceed machine count\"/\u003e\n      \u003c/testsuite\u003e\nEOF\n        echo
+        \"$(date) - node count ($NODECOUNT) now matches or exceeds machine count ($MACHINECOUNT)\"\n        break\n    fi\n    echo
+        \"$(date) - $MACHINECOUNT Machines - $NODECOUNT Nodes\"\n    sleep 30\n    i=$((i+1))\n    if
+        [ $i -gt 20 ]; then\n      MACHINELIST=\"$(kubectl get machines -A)\"\n      NODELIST=\"$(kubectl
+        get nodes)\"\n      cat \u003e\"${ARTIFACT_DIR}/junit_nodes.xml\" \u003c\u003cEOF\n      \u003ctestsuite
+        name=\"cluster nodes\" tests=\"1\" failures=\"1\"\u003e\n        \u003ctestcase
+        name=\"node count should match or exceed machine count\"\u003e\n          \u003cfailure
+        message=\"\"\u003e\n            Timed out waiting for node count ($NODECOUNT)
+        to equal or exceed machine count ($MACHINECOUNT).\n            $MACHINELIST\n            $NODELIST\n          \u003c/failure\u003e\n        \u003c/testcase\u003e\n      \u003c/testsuite\u003e\nEOF\n\n        echo
+        \"Timed out waiting for node count ($NODECOUNT) to equal or exceed machine
+        count ($MACHINECOUNT).\"\n        # If we enabled the ssh bastion pod, attempt
+        to gather journal logs from each machine, regardless\n        # if it made
+        it to a node or not.\n        if [[ -n \"${TEST_REQUIRES_SSH-}\" ]]; then\n            echo
+        \"Attempting to gather system journal logs from each machine via ssh bastion
+        pod\"\n            mkdir -p \"${ARTIFACT_DIR}/ssh-bastion-gather/\"\n\n            #
+        This returns each IP all on one line, separated by spaces:\n            machine_ips=\"$(oc
+        --insecure-skip-tls-verify get machines -n openshift-machine-api -o ''jsonpath={.items[*].status.addresses[?(@.type==\"InternalIP\")].address}'')\"\n            echo
+        \"Found machine IPs: $machine_ips\"\n            ingress_host=\"$(oc get service
+        --all-namespaces -l run=ssh-bastion -o go-template=''{{ with (index (index
+        .items 0).status.loadBalancer.ingress 0) }}{{ or .hostname .ip }}{{end}}'')\"\n            echo
+        \"Ingress host: $ingress_host\"\n\n            # Disable errors so we keep
+        trying hosts if any of these commands fail.\n            set +e\n            for
+        ip in $machine_ips\n            do\n                echo \"Gathering journalctl
+        logs from ${ip}\"\n                ssh -i \"${KUBE_SSH_KEY_PATH}\" -o StrictHostKeyChecking=no
+        -o ProxyCommand=\"ssh -i ${KUBE_SSH_KEY_PATH} -A -o StrictHostKeyChecking=no
+        -o ServerAliveInterval=30 -W %h:%p core@${ingress_host}\" core@$ip \"sudo
+        journalctl --no-pager\" \u003e \"${ARTIFACT_DIR}/ssh-bastion-gather/${ip}-journal.log\"\n                ssh
+        -i \"${KUBE_SSH_KEY_PATH}\" -o StrictHostKeyChecking=no -o ProxyCommand=\"ssh
+        -i ${KUBE_SSH_KEY_PATH} -A -o StrictHostKeyChecking=no -o ServerAliveInterval=30
+        -W %h:%p core@${ingress_host}\" core@$ip \"sudo /sbin/ip addr show\" \u003e
+        \"${ARTIFACT_DIR}/ssh-bastion-gather/${ip}-ip-addr-show.log\"\n                ssh
+        -i \"${KUBE_SSH_KEY_PATH}\" -o StrictHostKeyChecking=no -o ProxyCommand=\"ssh
+        -i ${KUBE_SSH_KEY_PATH} -A -o StrictHostKeyChecking=no -o ServerAliveInterval=30
+        -W %h:%p core@${ingress_host}\" core@$ip \"sudo /sbin/ip route show\" \u003e
+        \"${ARTIFACT_DIR}/ssh-bastion-gather/${ip}-ip-route-show.log\"\n            done\n            set
+        -e\n        fi\n\n        exit 1\n    fi\ndone\n\n# wait for all nodes to
+        reach Ready=true to ensure that all machines and nodes came up, before we
+        run\n# any e2e tests that might require specific workload capacity.\necho
+        \"$(date) - waiting for nodes to be ready...\"\nret=0\noc wait nodes --all
+        --for=condition=Ready=true --timeout=10m || ret=$?\nif [[ \"$ret\" == 0 ]];
+        then\n      cat \u003e\"${ARTIFACT_DIR}/junit_node_ready.xml\" \u003c\u003cEOF\n      \u003ctestsuite
+        name=\"cluster nodes ready\" tests=\"1\" failures=\"0\"\u003e\n        \u003ctestcase
+        name=\"all nodes should be ready\"/\u003e\n      \u003c/testsuite\u003e\nEOF\n    echo
+        \"$(date) - all nodes are ready\"\nelse\n    set +e\n    getNodeResult=$(oc
+        get nodes)\n    set -e\n    cat \u003e\"${ARTIFACT_DIR}/junit_node_ready.xml\"
+        \u003c\u003cEOF\n    \u003ctestsuite name=\"cluster nodes ready\" tests=\"1\"
+        failures=\"1\"\u003e\n      \u003ctestcase name=\"all nodes should be ready\"\u003e\n        \u003cfailure
+        message=\"\"\u003e\n          Timed out waiting for nodes to be ready. Return
+        code: $ret.\n          oc get nodes\n          $getNodeResult\n        \u003c/failure\u003e\n      \u003c/testcase\u003e\n    \u003c/testsuite\u003e\nEOF\n    echo
+        \"Timed out waiting for nodes to be ready. Return code: $ret.\"\n    exit
+        1\nfi\n\n# wait for all clusteroperators to reach progressing=false to ensure
+        that we achieved the configuration specified at installation\n# time before
+        we run our e2e tests.\necho \"$(date) - waiting for clusteroperators to finish
+        progressing...\"\noc wait clusteroperators --all --for=condition=Progressing=false
+        --timeout=10m\necho \"$(date) - all clusteroperators are done progressing.\"\n\n#
+        this works around a problem where tests fail because imagestreams aren''t
+        imported.  We see this happen for exec session.\necho \"$(date) - waiting
+        for non-samples imagesteams to import...\"\ncount=0\nwhile :\ndo\n  non_imported_imagestreams=$(oc
+        -n openshift get imagestreams -o go-template=''{{range .items}}{{$namespace
+        := .metadata.namespace}}{{$name := .metadata.name}}{{range .status.tags}}{{if
+        not .items}}{{$namespace}}/{{$name}}:{{.tag}}{{\"\\n\"}}{{end}}{{end}}{{end}}'')\n  if
+        [ -z \"${non_imported_imagestreams}\" ]\n  then\n    break\n  fi\n  echo \"The
+        following image streams are yet to be imported (attempt #${count}):\"\n  echo
+        \"${non_imported_imagestreams}\"\n\n  count=$((count+1))\n  if (( count \u003e
+        20 )); then\n    echo \"Failed while waiting on imagestream import\"\n    exit
+        1\n  fi\n\n  sleep 60\ndone\necho \"$(date) - all imagestreams are imported.\"\n\ncase
+        \"${TEST_TYPE}\" in\nupgrade-conformance)\n    upgrade_conformance\n    ;;\nupgrade)\n    upgrade\n    ;;\nupgrade-paused)\n    upgrade_paused\n    ;;\nsuite-conformance)\n    suite\n    TEST_LIMIT_START_TIME=\"$(date
+        +%s)\" TEST_SUITE=openshift/conformance/parallel suite\n    ;;\nsuite)\n    suite\n    ;;\n*)\n    echo
+        \u003e\u00262 \"Unsupported test type ''${TEST_TYPE}''\"\n    exit 1\n    ;;\nesac\n"],"container_name":"test","process_log":"/logs/process-log.txt","marker_file":"/logs/marker-file.txt","metadata_file":"/logs/artifacts/metadata.json"}'
+    - name: ARTIFACT_DIR
+      value: /logs/artifacts
+    - name: NAMESPACE
+      value: ci-op-cifp9rlt
+    - name: JOB_NAME_SAFE
+      value: e2e-gcp-upgrade
+    - name: JOB_NAME_HASH
+      value: a9175
+    - name: LEASED_RESOURCE
+      value: us-central1
+    - name: RELEASE_IMAGE_LATEST
+      value: registry.ci.openshift.org/ocp/release:4.10.0-0.ci-2022-08-23-165538
+    - name: IMAGE_FORMAT
+    - name: TEST_ARGS
+    - name: TEST_TYPE
+      value: upgrade-conformance
+    - name: TEST_SUITE
+    - name: TEST_UPGRADE_SUITE
+      value: all
+    - name: TEST_SKIPS
+    - name: TEST_UPGRADE_OPTIONS
+    - name: TEST_REQUIRES_SSH
+    - name: TEST_INSTALL_CSI_DRIVERS
+    - name: TEST_CSI_DRIVER_MANIFEST
+    - name: TEST_IMAGE_MIRROR_REGISTRY
+    - name: OPENSHIFT_UPGRADE_RELEASE_IMAGE_OVERRIDE
+      value: registry.build03.ci.openshift.org/ci-op-cifp9rlt/release@sha256:8ae4be4bb336f54f3f66cd045f3ad0fcca702f7139dab50e18cbd8fd0b589422
+    - name: KUBECONFIG
+      value: /var/run/secrets/ci.openshift.io/multi-stage/kubeconfig
+    - name: KUBEADMIN_PASSWORD_FILE
+      value: /var/run/secrets/ci.openshift.io/multi-stage/kubeadmin-password
+    - name: CLUSTER_TYPE
+      value: gcp
+    - name: CLUSTER_PROFILE_DIR
+      value: /var/run/secrets/ci.openshift.io/cluster-profile
+    - name: SHARED_DIR
+      value: /var/run/secrets/ci.openshift.io/multi-stage
+    image: image-registry.openshift-image-registry.svc:5000/ci-op-cifp9rlt/stable@sha256:254445d28a183f752bdb8354eabf947cef3d36f6eaabbc380530958140a30c1d
+    imagePullPolicy: IfNotPresent
+    name: test
+    resources:
+      limits:
+        memory: 6Gi
+      requests:
+        cpu: "3"
+        memory: "2323493975"
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1011730000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /logs
+      name: logs
+    - mountPath: /tools
+      name: tools
+    - mountPath: /alabama
+      name: home
+    - mountPath: /tmp/entrypoint-wrapper
+      name: entrypoint-wrapper
+    - mountPath: /var/run/secrets/ci.openshift.io/cluster-profile
+      name: cluster-profile
+    - mountPath: /var/run/secrets/ci.openshift.io/multi-stage
+      name: e2e-gcp-upgrade
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h96qz
+      readOnly: true
+  - env:
+    - name: JOB_SPEC
+      value: '{"type":"periodic","job":"periodic-ci-openshift-release-master-ci-4.10-e2e-gcp-upgrade","buildid":"1562121686684274688","prowjobid":"4.10.0-0.ci-2022-08-23-165538-gcp-sdn-upgrade-4.10-micro","extra_refs":[{"org":"openshift","repo":"release","base_ref":"master"}],"decoration_config":{"timeout":"4h0m0s","grace_period":"1h0m0s","utility_images":{"clonerefs":"gcr.io/k8s-prow/clonerefs:v20220822-414bcae48c","initupload":"gcr.io/k8s-prow/initupload:v20220822-414bcae48c","entrypoint":"gcr.io/k8s-prow/entrypoint:v20220822-414bcae48c","sidecar":"gcr.io/k8s-prow/sidecar:v20220822-414bcae48c"},"resources":{"clonerefs":{"limits":{"memory":"3Gi"},"requests":{"cpu":"100m","memory":"500Mi"}},"initupload":{"limits":{"memory":"200Mi"},"requests":{"cpu":"100m","memory":"50Mi"}},"place_entrypoint":{"limits":{"memory":"100Mi"},"requests":{"cpu":"100m","memory":"25Mi"}},"sidecar":{"limits":{"memory":"2Gi"},"requests":{"cpu":"100m","memory":"250Mi"}}},"gcs_configuration":{"bucket":"origin-ci-test","path_strategy":"single","default_org":"openshift","default_repo":"origin","mediaTypes":{"log":"text/plain"}},"gcs_credentials_secret":"gce-sa-credentials-gcs-publisher","skip_cloning":true,"censor_secrets":true}}'
+    - name: SIDECAR_OPTIONS
+      value: '{"gcs_options":{"items":["/logs/artifacts"],"sub_dir":"artifacts/e2e-gcp-upgrade/openshift-e2e-test","bucket":"origin-ci-test","path_strategy":"single","default_org":"openshift","default_repo":"origin","mediaTypes":{"log":"text/plain"},"gcs_credentials_file":"/secrets/gcs/service-account.json","dry_run":false},"entries":[{"args":["/bin/bash","-c","#!/bin/bash\nset
+        -eu\n#!/bin/bash\n\nset -o nounset\nset -o errexit\nset -o pipefail\n\nexport
+        AWS_SHARED_CREDENTIALS_FILE=${CLUSTER_PROFILE_DIR}/.awscred\nexport AZURE_AUTH_LOCATION=${CLUSTER_PROFILE_DIR}/osServicePrincipal.json\nexport
+        GCP_SHARED_CREDENTIALS_FILE=${CLUSTER_PROFILE_DIR}/gce.json\nexport ALIBABA_CLOUD_CREDENTIALS_FILE=${SHARED_DIR}/alibabacreds.ini\nexport
+        HOME=/tmp/home\nexport PATH=/usr/libexec/origin:$PATH\n\n# HACK: HyperShift
+        clusters use their own profile type, but the cluster type\n# underneath is
+        actually AWS and the type identifier is derived from the profile\n# type.
+        For now, just treat the `hypershift` type the same as `aws` until\n# there''s
+        a clean way to decouple the notion of a cluster provider and the\n# platform
+        type.\n#\n# See also: https://issues.redhat.com/browse/DPTP-1988\nif [[ \"${CLUSTER_TYPE}\"
+        == \"hypershift\" ]]; then\n    export CLUSTER_TYPE=\"aws\"\n    echo \"Overriding
+        ''hypershift'' cluster type to be ''aws''\"\nfi\n\n# For disconnected or otherwise
+        unreachable environments, we want to\n# have steps use an HTTP(S) proxy to
+        reach the API server. This proxy\n# configuration file should export HTTP_PROXY,
+        HTTPS_PROXY, and NO_PROXY\n# environment variables, as well as their lowercase
+        equivalents (note\n# that libcurl doesn''t recognize the uppercase variables).\nif
+        test -f \"${SHARED_DIR}/proxy-conf.sh\"\nthen\n    # shellcheck disable=SC1090\n    source
+        \"${SHARED_DIR}/proxy-conf.sh\"\nfi\n\nif [[ -n \"${TEST_CSI_DRIVER_MANIFEST}\"
+        ]]; then\n    export TEST_CSI_DRIVER_FILES=${SHARED_DIR}/${TEST_CSI_DRIVER_MANIFEST}\nfi\n\ntrap
+        ''CHILDREN=$(jobs -p); if test -n \"${CHILDREN}\"; then kill ${CHILDREN} \u0026\u0026
+        wait; fi'' TERM\n\nmkdir -p \"${HOME}\"\n\n# Override the upstream docker.io
+        registry due to issues with rate limiting\n# https://bugzilla.redhat.com/show_bug.cgi?id=1895107\n#
+        sjenning: TODO: use of personal repo is temporary; should find long term location
+        for these mirrored images\nexport KUBE_TEST_REPO_LIST=${HOME}/repo_list.yaml\ncat
+        \u003c\u003cEOF \u003e ${KUBE_TEST_REPO_LIST}\ndockerLibraryRegistry: quay.io/sjenning\ndockerGluster:
+        quay.io/sjenning\nEOF\n\n# if the cluster profile included an insights secret,
+        install it to the cluster to\n# report support data from the support-operator\nif
+        [[ -f \"${CLUSTER_PROFILE_DIR}/insights-live.yaml\" ]]; then\n    oc create
+        -f \"${CLUSTER_PROFILE_DIR}/insights-live.yaml\" || true\nfi\n\n# if this
+        test requires an SSH bastion and one is not installed, configure it\nKUBE_SSH_BASTION=\"$(
+        oc --insecure-skip-tls-verify get node -l node-role.kubernetes.io/master -o
+        ''jsonpath={.items[0].status.addresses[?(@.type==\"ExternalIP\")].address}''
+        ):22\"\nKUBE_SSH_KEY_PATH=${CLUSTER_PROFILE_DIR}/ssh-privatekey\nexport KUBE_SSH_BASTION
+        KUBE_SSH_KEY_PATH\nif [[ -n \"${TEST_REQUIRES_SSH-}\" ]]; then\n    export
+        SSH_BASTION_NAMESPACE=test-ssh-bastion\n    echo \"Setting up ssh bastion\"\n\n    #
+        configure the local container environment to have the correct SSH configuration\n    mkdir
+        -p ~/.ssh\n    cp \"${KUBE_SSH_KEY_PATH}\" ~/.ssh/id_rsa\n    chmod 0600 ~/.ssh/id_rsa\n    if
+        ! whoami \u0026\u003e /dev/null; then\n        if [[ -w /etc/passwd ]]; then\n            echo
+        \"${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin\"
+        \u003e\u003e /etc/passwd\n        fi\n    fi\n\n    # if this is run from
+        a flow that does not have the ssh-bastion step, deploy the bastion\n    if
+        ! oc get -n \"${SSH_BASTION_NAMESPACE}\" ssh-bastion; then\n        curl https://raw.githubusercontent.com/eparis/ssh-bastion/master/deploy/deploy.sh
+        | bash -x\n    fi\n\n    # locate the bastion host for use within the tests\n    for
+        _ in $(seq 0 30); do\n        # AWS fills only .hostname of a service\n        BASTION_HOST=$(oc
+        get service -n \"${SSH_BASTION_NAMESPACE}\" ssh-bastion -o jsonpath=''{.status.loadBalancer.ingress[0].hostname}'')\n        if
+        [[ -n \"${BASTION_HOST}\" ]]; then break; fi\n        # Azure fills only .ip
+        of a service. Use it as bastion host.\n        BASTION_HOST=$(oc get service
+        -n \"${SSH_BASTION_NAMESPACE}\" ssh-bastion -o jsonpath=''{.status.loadBalancer.ingress[0].ip}'')\n        if
+        [[ -n \"${BASTION_HOST}\" ]]; then break; fi\n        echo \"Waiting for SSH
+        bastion load balancer service\"\n        sleep 10\n    done\n    if [[ -z
+        \"${BASTION_HOST}\" ]]; then\n        echo \u003e\u00262 \"Failed to find
+        bastion address, exiting\"\n        exit 1\n    fi\n    export KUBE_SSH_BASTION=\"${BASTION_HOST}:22\"\nfi\n\n\n#
+        set up cloud-provider-specific env vars\ncase \"${CLUSTER_TYPE}\" in\ngcp)\n    export
+        GOOGLE_APPLICATION_CREDENTIALS=\"${GCP_SHARED_CREDENTIALS_FILE}\"\n    # In
+        k8s 1.24 this is required to run GCP PD tests. See: https://github.com/kubernetes/kubernetes/pull/109541\n    export
+        ENABLE_STORAGE_GCE_PD_DRIVER=\"yes\"\n    export KUBE_SSH_USER=core\n    mkdir
+        -p ~/.ssh\n    cp \"${CLUSTER_PROFILE_DIR}/ssh-privatekey\" ~/.ssh/google_compute_engine
+        || true\n    # TODO: make openshift-tests auto-discover this from cluster
+        config\n    PROJECT=\"$(oc get -o jsonpath=''{.status.platformStatus.gcp.projectID}''
+        infrastructure cluster)\"\n    REGION=\"$(oc get -o jsonpath=''{.status.platformStatus.gcp.region}''
+        infrastructure cluster)\"\n    export TEST_PROVIDER=\"{\\\"type\\\":\\\"gce\\\",\\\"region\\\":\\\"${REGION}\\\",\\\"multizone\\\":
+        true,\\\"multimaster\\\":true,\\\"projectid\\\":\\\"${PROJECT}\\\"}\"\n    ;;\naws|aws-arm64)\n    mkdir
+        -p ~/.ssh\n    cp \"${CLUSTER_PROFILE_DIR}/ssh-privatekey\" ~/.ssh/kube_aws_rsa
+        || true\n    export PROVIDER_ARGS=\"-provider=aws -gce-zone=us-east-1\"\n    #
+        TODO: make openshift-tests auto-discover this from cluster config\n    REGION=\"$(oc
+        get -o jsonpath=''{.status.platformStatus.aws.region}'' infrastructure cluster)\"\n    ZONE=\"$(oc
+        get -o jsonpath=''{.items[0].metadata.labels.failure-domain\\.beta\\.kubernetes\\.io/zone}''
+        nodes)\"\n    export TEST_PROVIDER=\"{\\\"type\\\":\\\"aws\\\",\\\"region\\\":\\\"${REGION}\\\",\\\"zone\\\":\\\"${ZONE}\\\",\\\"multizone\\\":true,\\\"multimaster\\\":true}\"\n    export
+        KUBE_SSH_USER=core\n    ;;\nazure4) export TEST_PROVIDER=azure;;\nazurestack)\n    export
+        TEST_PROVIDER=\"none\"\n    export AZURE_AUTH_LOCATION=${SHARED_DIR}/osServicePrincipal.json\n    ;;\nvsphere)\n    #
+        shellcheck disable=SC1090\n    source \"${SHARED_DIR}/govc.sh\"\n    export
+        VSPHERE_CONF_FILE=\"${SHARED_DIR}/vsphere.conf\"\n    oc -n openshift-config
+        get cm/cloud-provider-config -o jsonpath=''{.data.config}'' \u003e \"$VSPHERE_CONF_FILE\"\n    #
+        The test suite requires a vSphere config file with explicit user and password
+        fields.\n    sed -i \"/secret-name \\=/c user = \\\"${GOVC_USERNAME}\\\"\"
+        \"$VSPHERE_CONF_FILE\"\n    sed -i \"/secret-namespace \\=/c password = \\\"${GOVC_PASSWORD}\\\"\"
+        \"$VSPHERE_CONF_FILE\"\n    export TEST_PROVIDER=vsphere;;\nalibabacloud)\n    mkdir
+        -p ~/.ssh\n    cp \"${CLUSTER_PROFILE_DIR}/ssh-privatekey\" ~/.ssh/kube_alibaba_rsa
+        || true\n    export PROVIDER_ARGS=\"-provider=alibabacloud -gce-zone=us-east-1\"\n    #
+        TODO: make openshift-tests auto-discover this from cluster config\n    REGION=\"$(oc
+        get -o jsonpath=''{.status.platformStatus.alibabacloud.region}'' infrastructure
+        cluster)\"\n    export TEST_PROVIDER=\"{\\\"type\\\":\\\"alibabacloud\\\",\\\"region\\\":\\\"${REGION}\\\",\\\"multizone\\\":true,\\\"multimaster\\\":true}\"\n    export
+        KUBE_SSH_USER=core\n;;\nopenstack*)\n    # shellcheck disable=SC1090\n    source
+        \"${SHARED_DIR}/cinder_credentials.sh\"\n    if test -n \"${HTTP_PROXY:-}\"
+        -o -n \"${HTTPS_PROXY:-}\"; then\n        export TEST_PROVIDER=''{\"type\":\"openstack\",\"disconnected\":true}''\n    else\n        export
+        TEST_PROVIDER=''{\"type\":\"openstack\"}''\n    fi\n    ;;\novirt) export
+        TEST_PROVIDER=''{\"type\":\"ovirt\"}'';;\nibmcloud)\n    export TEST_PROVIDER=''{\"type\":\"ibmcloud\"}''\n    IC_API_KEY=\"$(\u003c
+        \"${CLUSTER_PROFILE_DIR}/ibmcloud-api-key\")\"\n    export IC_API_KEY\n    ;;\nnutanix)
+        export TEST_PROVIDER=''{\"type\":\"nutanix\"}'' ;;\n*) echo \u003e\u00262
+        \"Unsupported cluster type ''${CLUSTER_TYPE}''\"; exit 1;;\nesac\n\nmkdir
+        -p /tmp/output\ncd /tmp/output\n\nif [[ \"${CLUSTER_TYPE}\" == gcp ]]; then\n    pushd
+        /tmp\n    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-256.0.0-linux-x86_64.tar.gz\n    tar
+        -xzf google-cloud-sdk-256.0.0-linux-x86_64.tar.gz\n    export PATH=$PATH:/tmp/google-cloud-sdk/bin\n    mkdir
+        gcloudconfig\n    export CLOUDSDK_CONFIG=/tmp/gcloudconfig\n    gcloud auth
+        activate-service-account --key-file=\"${GCP_SHARED_CREDENTIALS_FILE}\"\n    gcloud
+        config set project \"${PROJECT}\"\n    popd\nfi\n\n# Preserve the \u0026\u0026
+        chaining in this function, because it is called from and AND-OR list so it
+        doesn''t get errexit.\nfunction upgrade() {\n    set -x \u0026\u0026\n    TARGET_RELEASES=\"${OPENSHIFT_UPGRADE_RELEASE_IMAGE_OVERRIDE:-}\"
+        \u0026\u0026\n    if [[ -f \"${SHARED_DIR}/override-upgrade\" ]]; then\n        TARGET_RELEASES=\"$(\u003c
+        \"${SHARED_DIR}/override-upgrade\")\" \u0026\u0026\n        echo \"Overriding
+        upgrade target to ${TARGET_RELEASES}\"\n    fi \u0026\u0026\n    openshift-tests
+        run-upgrade \"${TEST_UPGRADE_SUITE}\" \\\n        --to-image \"${TARGET_RELEASES}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\" \u0026\u0026\n    set +x\n}\n\n#
+        upgrade_conformance runs the upgrade and the parallel tests, and exits with
+        an error if either fails.\nfunction upgrade_conformance() {\n    local exit_code=0
+        \u0026\u0026\n    upgrade || exit_code=$? \u0026\u0026\n    PROGRESSING=\"$(oc
+        get -o jsonpath=''{.status.conditions[?(@.type == \"Progressing\")].status}''
+        clusterversion version)\" \u0026\u0026\n    if test False = \"${PROGRESSING}\"\n    then\n        TEST_LIMIT_START_TIME=\"$(date
+        +%s)\" TEST_SUITE=openshift/conformance/parallel suite || exit_code=$?\n    else\n        echo
+        \"Skipping conformance suite because post-update ClusterVersion Progressing=${PROGRESSING}\"\n    fi
+        \u0026\u0026\n    return $exit_code\n}\n\nfunction upgrade_paused() {\n    set
+        -x\n    unset TEST_SUITE\n    TARGET_RELEASES=\"${OPENSHIFT_UPGRADE_RELEASE_IMAGE_OVERRIDE:-}\"\n    if
+        [[ -f \"${SHARED_DIR}/override-upgrade\" ]]; then\n        TARGET_RELEASES=\"$(\u003c
+        \"${SHARED_DIR}/override-upgrade\")\"\n        echo \"Overriding upgrade target
+        to ${TARGET_RELEASES}\"\n    fi\n    # Split TARGET_RELEASES by commas, producing
+        two releases\n    OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE=\"$(echo $TARGET_RELEASES
+        | cut -f1 -d,)\"\n    OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE=\"$(echo $TARGET_RELEASES
+        | cut -f2 -d,)\"\n\n    oc patch mcp/worker --type merge --patch ''{\"spec\":{\"paused\":true}}''\n\n    echo
+        \"Starting control-plane upgrade to ${OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE}\"\n    openshift-tests
+        run-upgrade \"${TEST_UPGRADE_SUITE}\" \\\n        --to-image \"${OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\"\n    echo \"Upgraded control-plane
+        to ${OPENSHIFT_UPGRADE0_RELEASE_IMAGE_OVERRIDE}\"\n\n    echo \"Starting control-plane
+        upgrade to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n    openshift-tests
+        run-upgrade \"${TEST_UPGRADE_SUITE}\" \\\n        --to-image \"${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\"\n    echo \"Upgraded control-plane
+        to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n\n    echo \"Starting worker
+        upgrade to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n    oc patch mcp/worker
+        --type merge --patch ''{\"spec\":{\"paused\":false}}''\n    openshift-tests
+        run-upgrade all \\\n        --to-image \"${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"
+        \\\n        --options \"${TEST_UPGRADE_OPTIONS-}\" \\\n        --provider
+        \"${TEST_PROVIDER}\" \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir
+        \"${ARTIFACT_DIR}/junit\" \u0026\n    wait \"$!\"\n    echo \"Upgraded workers
+        to ${OPENSHIFT_UPGRADE1_RELEASE_IMAGE_OVERRIDE}\"\n    set +x\n}\n\n\n# Preserve
+        the \u0026\u0026 chaining in this function, because it is called from and
+        AND-OR list so it doesn''t get errexit.\nfunction suite() {\n    if [[ -n
+        \"${TEST_SKIPS}\" ]]; then\n        TESTS=\"$(openshift-tests run --dry-run
+        --provider \"${TEST_PROVIDER}\" \"${TEST_SUITE}\")\" \u0026\u0026\n        echo
+        \"${TESTS}\" | grep -v \"${TEST_SKIPS}\" \u003e/tmp/tests \u0026\u0026\n        echo
+        \"Skipping tests:\" \u0026\u0026\n        echo \"${TESTS}\" | grep \"${TEST_SKIPS}\"
+        || { exit_code=$?; echo ''Error: no tests were found matching the TEST_SKIPS
+        regex:''; echo \"$TEST_SKIPS\"; return $exit_code; } \u0026\u0026\n        TEST_ARGS=\"${TEST_ARGS:-}
+        --file /tmp/tests\"\n    fi \u0026\u0026\n\n    set -x \u0026\u0026\n    openshift-tests
+        run \"${TEST_SUITE}\" ${TEST_ARGS:-} \\\n        --provider \"${TEST_PROVIDER}\"
+        \\\n        -o \"${ARTIFACT_DIR}/e2e.log\" \\\n        --junit-dir \"${ARTIFACT_DIR}/junit\"
+        \u0026\n    wait \"$!\" \u0026\u0026\n    set +x\n}\n\necho \"$(date +%s)\"
+        \u003e \"${SHARED_DIR}/TEST_TIME_TEST_START\"\ntrap ''echo \"$(date +%s)\"
+        \u003e \"${SHARED_DIR}/TEST_TIME_TEST_END\"'' EXIT\n\noc -n openshift-config
+        patch cm admin-acks --patch ''{\"data\":{\"ack-4.8-kube-1.22-api-removals-in-4.9\":\"true\"}}''
+        --type=merge || echo ''failed to ack the 4.9 Kube v1beta1 removals; possibly
+        API-server issue, or a pre-4.8 release image''\n\n# wait for ClusterVersion
+        to level, until https://bugzilla.redhat.com/show_bug.cgi?id=2009845 makes
+        it back to all 4.9 releases being installed in CI\noc wait --for=condition=Progressing=False
+        --timeout=2m clusterversion/version\n\n# wait up to 10m for the number of
+        nodes to match the number of machines\ni=0\nwhile true\ndo\n    MACHINECOUNT=\"$(kubectl
+        get machines -A --no-headers | wc -l)\"\n    NODECOUNT=\"$(kubectl get nodes
+        --no-headers | wc -l)\"\n    if [ \"${MACHINECOUNT}\" -le \"${NODECOUNT}\"
+        ]\n    then\n      cat \u003e\"${ARTIFACT_DIR}/junit_nodes.xml\" \u003c\u003cEOF\n      \u003ctestsuite
+        name=\"cluster nodes\" tests=\"1\" failures=\"0\"\u003e\n        \u003ctestcase
+        name=\"node count should match or exceed machine count\"/\u003e\n      \u003c/testsuite\u003e\nEOF\n        echo
+        \"$(date) - node count ($NODECOUNT) now matches or exceeds machine count ($MACHINECOUNT)\"\n        break\n    fi\n    echo
+        \"$(date) - $MACHINECOUNT Machines - $NODECOUNT Nodes\"\n    sleep 30\n    i=$((i+1))\n    if
+        [ $i -gt 20 ]; then\n      MACHINELIST=\"$(kubectl get machines -A)\"\n      NODELIST=\"$(kubectl
+        get nodes)\"\n      cat \u003e\"${ARTIFACT_DIR}/junit_nodes.xml\" \u003c\u003cEOF\n      \u003ctestsuite
+        name=\"cluster nodes\" tests=\"1\" failures=\"1\"\u003e\n        \u003ctestcase
+        name=\"node count should match or exceed machine count\"\u003e\n          \u003cfailure
+        message=\"\"\u003e\n            Timed out waiting for node count ($NODECOUNT)
+        to equal or exceed machine count ($MACHINECOUNT).\n            $MACHINELIST\n            $NODELIST\n          \u003c/failure\u003e\n        \u003c/testcase\u003e\n      \u003c/testsuite\u003e\nEOF\n\n        echo
+        \"Timed out waiting for node count ($NODECOUNT) to equal or exceed machine
+        count ($MACHINECOUNT).\"\n        # If we enabled the ssh bastion pod, attempt
+        to gather journal logs from each machine, regardless\n        # if it made
+        it to a node or not.\n        if [[ -n \"${TEST_REQUIRES_SSH-}\" ]]; then\n            echo
+        \"Attempting to gather system journal logs from each machine via ssh bastion
+        pod\"\n            mkdir -p \"${ARTIFACT_DIR}/ssh-bastion-gather/\"\n\n            #
+        This returns each IP all on one line, separated by spaces:\n            machine_ips=\"$(oc
+        --insecure-skip-tls-verify get machines -n openshift-machine-api -o ''jsonpath={.items[*].status.addresses[?(@.type==\"InternalIP\")].address}'')\"\n            echo
+        \"Found machine IPs: $machine_ips\"\n            ingress_host=\"$(oc get service
+        --all-namespaces -l run=ssh-bastion -o go-template=''{{ with (index (index
+        .items 0).status.loadBalancer.ingress 0) }}{{ or .hostname .ip }}{{end}}'')\"\n            echo
+        \"Ingress host: $ingress_host\"\n\n            # Disable errors so we keep
+        trying hosts if any of these commands fail.\n            set +e\n            for
+        ip in $machine_ips\n            do\n                echo \"Gathering journalctl
+        logs from ${ip}\"\n                ssh -i \"${KUBE_SSH_KEY_PATH}\" -o StrictHostKeyChecking=no
+        -o ProxyCommand=\"ssh -i ${KUBE_SSH_KEY_PATH} -A -o StrictHostKeyChecking=no
+        -o ServerAliveInterval=30 -W %h:%p core@${ingress_host}\" core@$ip \"sudo
+        journalctl --no-pager\" \u003e \"${ARTIFACT_DIR}/ssh-bastion-gather/${ip}-journal.log\"\n                ssh
+        -i \"${KUBE_SSH_KEY_PATH}\" -o StrictHostKeyChecking=no -o ProxyCommand=\"ssh
+        -i ${KUBE_SSH_KEY_PATH} -A -o StrictHostKeyChecking=no -o ServerAliveInterval=30
+        -W %h:%p core@${ingress_host}\" core@$ip \"sudo /sbin/ip addr show\" \u003e
+        \"${ARTIFACT_DIR}/ssh-bastion-gather/${ip}-ip-addr-show.log\"\n                ssh
+        -i \"${KUBE_SSH_KEY_PATH}\" -o StrictHostKeyChecking=no -o ProxyCommand=\"ssh
+        -i ${KUBE_SSH_KEY_PATH} -A -o StrictHostKeyChecking=no -o ServerAliveInterval=30
+        -W %h:%p core@${ingress_host}\" core@$ip \"sudo /sbin/ip route show\" \u003e
+        \"${ARTIFACT_DIR}/ssh-bastion-gather/${ip}-ip-route-show.log\"\n            done\n            set
+        -e\n        fi\n\n        exit 1\n    fi\ndone\n\n# wait for all nodes to
+        reach Ready=true to ensure that all machines and nodes came up, before we
+        run\n# any e2e tests that might require specific workload capacity.\necho
+        \"$(date) - waiting for nodes to be ready...\"\nret=0\noc wait nodes --all
+        --for=condition=Ready=true --timeout=10m || ret=$?\nif [[ \"$ret\" == 0 ]];
+        then\n      cat \u003e\"${ARTIFACT_DIR}/junit_node_ready.xml\" \u003c\u003cEOF\n      \u003ctestsuite
+        name=\"cluster nodes ready\" tests=\"1\" failures=\"0\"\u003e\n        \u003ctestcase
+        name=\"all nodes should be ready\"/\u003e\n      \u003c/testsuite\u003e\nEOF\n    echo
+        \"$(date) - all nodes are ready\"\nelse\n    set +e\n    getNodeResult=$(oc
+        get nodes)\n    set -e\n    cat \u003e\"${ARTIFACT_DIR}/junit_node_ready.xml\"
+        \u003c\u003cEOF\n    \u003ctestsuite name=\"cluster nodes ready\" tests=\"1\"
+        failures=\"1\"\u003e\n      \u003ctestcase name=\"all nodes should be ready\"\u003e\n        \u003cfailure
+        message=\"\"\u003e\n          Timed out waiting for nodes to be ready. Return
+        code: $ret.\n          oc get nodes\n          $getNodeResult\n        \u003c/failure\u003e\n      \u003c/testcase\u003e\n    \u003c/testsuite\u003e\nEOF\n    echo
+        \"Timed out waiting for nodes to be ready. Return code: $ret.\"\n    exit
+        1\nfi\n\n# wait for all clusteroperators to reach progressing=false to ensure
+        that we achieved the configuration specified at installation\n# time before
+        we run our e2e tests.\necho \"$(date) - waiting for clusteroperators to finish
+        progressing...\"\noc wait clusteroperators --all --for=condition=Progressing=false
+        --timeout=10m\necho \"$(date) - all clusteroperators are done progressing.\"\n\n#
+        this works around a problem where tests fail because imagestreams aren''t
+        imported.  We see this happen for exec session.\necho \"$(date) - waiting
+        for non-samples imagesteams to import...\"\ncount=0\nwhile :\ndo\n  non_imported_imagestreams=$(oc
+        -n openshift get imagestreams -o go-template=''{{range .items}}{{$namespace
+        := .metadata.namespace}}{{$name := .metadata.name}}{{range .status.tags}}{{if
+        not .items}}{{$namespace}}/{{$name}}:{{.tag}}{{\"\\n\"}}{{end}}{{end}}{{end}}'')\n  if
+        [ -z \"${non_imported_imagestreams}\" ]\n  then\n    break\n  fi\n  echo \"The
+        following image streams are yet to be imported (attempt #${count}):\"\n  echo
+        \"${non_imported_imagestreams}\"\n\n  count=$((count+1))\n  if (( count \u003e
+        20 )); then\n    echo \"Failed while waiting on imagestream import\"\n    exit
+        1\n  fi\n\n  sleep 60\ndone\necho \"$(date) - all imagestreams are imported.\"\n\ncase
+        \"${TEST_TYPE}\" in\nupgrade-conformance)\n    upgrade_conformance\n    ;;\nupgrade)\n    upgrade\n    ;;\nupgrade-paused)\n    upgrade_paused\n    ;;\nsuite-conformance)\n    suite\n    TEST_LIMIT_START_TIME=\"$(date
+        +%s)\" TEST_SUITE=openshift/conformance/parallel suite\n    ;;\nsuite)\n    suite\n    ;;\n*)\n    echo
+        \u003e\u00262 \"Unsupported test type ''${TEST_TYPE}''\"\n    exit 1\n    ;;\nesac\n"],"container_name":"test","process_log":"/logs/process-log.txt","marker_file":"/logs/marker-file.txt","metadata_file":"/logs/artifacts/metadata.json"}],"ignore_interrupts":true,"censoring_options":{"secret_directories":["/secrets/ci-pull-credentials","/secrets/e2e-gcp-upgrade-cluster-profile","/secrets/gce-sa-credentials-gcs-publisher","/secrets/registry-pull-credentials","/secrets/test-credentials-loki-grafanacloud-secret","/secrets/test-credentials-loki-stage-collector-test-secret"]}}'
+    image: gcr.io/k8s-prow/sidecar:v20220822-414bcae48c
+    imagePullPolicy: IfNotPresent
+    name: sidecar
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        cpu: 100m
+        memory: 250Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1011730000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /logs
+      name: logs
+    - mountPath: /secrets/gcs
+      name: gcs-credentials
+    - mountPath: /secrets/ci-pull-credentials
+      name: censor-4
+    - mountPath: /secrets/e2e-gcp-upgrade-cluster-profile
+      name: censor-10
+    - mountPath: /secrets/gce-sa-credentials-gcs-publisher
+      name: censor-13
+    - mountPath: /secrets/registry-pull-credentials
+      name: censor-14
+    - mountPath: /secrets/test-credentials-loki-grafanacloud-secret
+      name: censor-15
+    - mountPath: /secrets/test-credentials-loki-stage-collector-test-secret
+      name: censor-16
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h96qz
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: e2e-gcp-upgrade-dockercfg-tjgfp
+  initContainers:
+  - command:
+    - /bin/sh
+    - -c
+    - declare -i T; until [[ "$ret" == "0" ]] || [[ "$T" -gt "120" ]]; do curl http://static.redhat.com/test/rhel-networkmanager.txt
+      > /dev/null; ret=$?; sleep 1; let "T+=1"; done
+    image: registry.access.redhat.com/ubi8
+    imagePullPolicy: Always
+    name: ci-scheduling-dns-wait
+    resources:
+      requests:
+        cpu: 100m
+        memory: 200Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1011730000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h96qz
+      readOnly: true
+  - args:
+    - --copy-mode-only
+    image: gcr.io/k8s-prow/entrypoint:v20220822-414bcae48c
+    imagePullPolicy: IfNotPresent
+    name: place-entrypoint
+    resources:
+      limits:
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 25Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1011730000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /tools
+      name: tools
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h96qz
+      readOnly: true
+  - args:
+    - /bin/entrypoint-wrapper
+    - /tmp/entrypoint-wrapper/entrypoint-wrapper
+    command:
+    - cp
+    image: registry.ci.openshift.org/ci/entrypoint-wrapper:latest
+    imagePullPolicy: Always
+    name: cp-entrypoint-wrapper
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1011730000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: FallbackToLogsOnError
+    volumeMounts:
+    - mountPath: /tmp/entrypoint-wrapper
+      name: entrypoint-wrapper
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-h96qz
+      readOnly: true
+  nodeName: ip-10-0-157-108.ec2.internal
+  nodeSelector:
+    ci-workload: tests
+  overhead:
+    cpu: 300m
+    memory: 600Mi
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  runtimeClassName: ci-scheduler-runtime-tests
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1011730000
+    seLinuxOptions:
+      level: s0:c108,c87
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: e2e-gcp-upgrade
+  serviceAccountName: e2e-gcp-upgrade
+  terminationGracePeriodSeconds: 750
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/ci-tests-worker
+    operator: Exists
+  volumes:
+  - emptyDir: {}
+    name: logs
+  - emptyDir: {}
+    name: tools
+  - name: gcs-credentials
+    secret:
+      defaultMode: 420
+      secretName: gce-sa-credentials-gcs-publisher
+  - emptyDir: {}
+    name: home
+  - name: censor-4
+    secret:
+      defaultMode: 420
+      secretName: ci-pull-credentials
+  - name: censor-10
+    secret:
+      defaultMode: 420
+      secretName: e2e-gcp-upgrade-cluster-profile
+  - name: censor-13
+    secret:
+      defaultMode: 420
+      secretName: gce-sa-credentials-gcs-publisher
+  - name: censor-14
+    secret:
+      defaultMode: 420
+      secretName: registry-pull-credentials
+  - name: censor-15
+    secret:
+      defaultMode: 420
+      secretName: test-credentials-loki-grafanacloud-secret
+  - name: censor-16
+    secret:
+      defaultMode: 420
+      secretName: test-credentials-loki-stage-collector-test-secret
+  - emptyDir: {}
+    name: entrypoint-wrapper
+  - name: cluster-profile
+    secret:
+      defaultMode: 420
+      secretName: e2e-gcp-upgrade-cluster-profile
+  - name: e2e-gcp-upgrade
+    secret:
+      defaultMode: 420
+      secretName: e2e-gcp-upgrade
+  - name: kube-api-access-h96qz
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+      - configMap:
+          items:
+          - key: service-ca.crt
+            path: service-ca.crt
+          name: openshift-service-ca.crt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-08-23T17:26:55Z"
+    reason: PodCompleted
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-08-23T18:54:33Z"
+    reason: PodCompleted
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-08-23T18:54:33Z"
+    reason: PodCompleted
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-08-23T17:26:43Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: cri-o://b8679ce845ccb3a777696da29b548caa7b197e3f8a90cfb795666c1868542cef
+    image: gcr.io/k8s-prow/sidecar:v20220822-414bcae48c
+    imageID: gcr.io/k8s-prow/sidecar@sha256:7531626907eb0b3bb3c2c17cac61b41162994619497c6788ca9780dd4afa506b
+    lastState: {}
+    name: sidecar
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: cri-o://b8679ce845ccb3a777696da29b548caa7b197e3f8a90cfb795666c1868542cef
+        exitCode: 0
+        finishedAt: "2022-08-23T18:55:10Z"
+        reason: Completed
+        startedAt: "2022-08-23T17:27:02Z"
+  - containerID: cri-o://6160933b2d16810fc05c42913fa75a56c81f3683f5f04ee00cc54fd2b68f0429
+    image: image-registry.openshift-image-registry.svc:5000/ci-op-cifp9rlt/stable@sha256:254445d28a183f752bdb8354eabf947cef3d36f6eaabbc380530958140a30c1d
+    imageID: image-registry.openshift-image-registry.svc:5000/ci-op-cifp9rlt/stable@sha256:254445d28a183f752bdb8354eabf947cef3d36f6eaabbc380530958140a30c1d
+    lastState: {}
+    name: test
+    ready: false
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: cri-o://6160933b2d16810fc05c42913fa75a56c81f3683f5f04ee00cc54fd2b68f0429
+        exitCode: 0
+        finishedAt: "2022-08-23T18:54:32Z"
+        reason: Completed
+        startedAt: "2022-08-23T17:27:02Z"
+  hostIP: 10.0.157.108
+  initContainerStatuses:
+  - containerID: cri-o://4b0cdd3817aa8d11913e86824d058f1ee7ed034f9223fb78324725a0cee83f57
+    image: registry.access.redhat.com/ubi8:latest
+    imageID: registry.access.redhat.com/ubi8@sha256:08e221b041a95e6840b208c618ae56c27e3429c3dad637ece01c9b471cc8fac6
+    lastState: {}
+    name: ci-scheduling-dns-wait
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: cri-o://4b0cdd3817aa8d11913e86824d058f1ee7ed034f9223fb78324725a0cee83f57
+        exitCode: 0
+        finishedAt: "2022-08-23T17:26:52Z"
+        reason: Completed
+        startedAt: "2022-08-23T17:26:46Z"
+  - containerID: cri-o://1165045e80ae0787fb8a59f4967cfde8328faf76598d64772d500d4780a08b27
+    image: gcr.io/k8s-prow/entrypoint:v20220822-414bcae48c
+    imageID: gcr.io/k8s-prow/entrypoint@sha256:22c3f068de79e697f3f02a9f8f07d10a729a63f6be6ee6582fc05693378479f7
+    lastState: {}
+    name: place-entrypoint
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: cri-o://1165045e80ae0787fb8a59f4967cfde8328faf76598d64772d500d4780a08b27
+        exitCode: 0
+        finishedAt: "2022-08-23T17:26:53Z"
+        reason: Completed
+        startedAt: "2022-08-23T17:26:53Z"
+  - containerID: cri-o://eb7256fae504d081495c042d280eae63eba5fcb096fd684bd4208d3edea92f43
+    image: registry.ci.openshift.org/ci/entrypoint-wrapper:latest
+    imageID: registry.ci.openshift.org/ci/entrypoint-wrapper@sha256:f0ce3dee5fb98c3955d3ac79eb5b0e8ed226df3eabdb6e7bfd02add1134ccb42
+    lastState: {}
+    name: cp-entrypoint-wrapper
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: cri-o://eb7256fae504d081495c042d280eae63eba5fcb096fd684bd4208d3edea92f43
+        exitCode: 0
+        finishedAt: "2022-08-23T17:26:54Z"
+        reason: Completed
+        startedAt: "2022-08-23T17:26:54Z"
+  phase: Succeeded
+  podIP: 10.128.75.102
+  podIPs:
+  - ip: 10.128.75.102
+  qosClass: Burstable
+  startTime: "2022-08-23T17:26:43Z"

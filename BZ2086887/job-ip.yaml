@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wget-job
+  labels:
+    app: wget
+spec:
+  restartPolicy: Never
+  completions: 1000
+  parallelism: 1000
+  activeDeadlineSeconds: 100000
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      restartPolicy: Never
+      initContainers:
+      - name: init
+        image: quay.io/gspence/busybox
+        command: ['sh', '-c', "wget 172.217.14.238 -O /wget-dir/index.html || exit 0"]
+        volumeMounts:
+        - name: wgetdir
+          mountPath: "/wget-dir"
+      containers:
+      - name: myservice
+        image: quay.io/gspence/busybox
+        command: ['sh', '-c', "test -s /wget-dir/index.html || sleep 100000"]
+        volumeMounts:
+        - name: wgetdir
+          mountPath: "/wget-dir"
+      volumes:
+      - name: wgetdir
+        emptyDir: {}

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: dig-test
+  name: dig-test
+spec:
+  selector:
+    matchLabels:
+      app: dig-test
+  template:
+    metadata:
+      labels:
+        app: dig-test
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          echo "Starting"
+          sleep 60 # Avoid fix for https://github.com/openshift/sdn/pull/439
+          requests=0
+          fails=0
+          while : ; do
+            requests=$((requests+1))
+            OUT=$(dig +retry=0 +timeout=60 +tries=1 "https://docs.ci.openshift.org")
+            if [[ $? -ne 0 ]]; then
+              echo "FAIL: $OUT"
+              fails=$((fails+1))
+           # else
+             # echo -n "."
+            #  echo -n "SUCCESS: "
+            #  echo "${OUT}" | grep -i "query time"
+              
+              echo "Stats: Requests=${requests} Fails=${fails}"
+            fi
+            if [[ $((requests % 10000)) == 0 ]]; then
+              echo "Stats: Requests=${requests} Fails=${fails}"
+            fi
+            sleep 0.5
+            done
+        # oc adm release info --image-for=cli
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        name: curl
+      hostNetwork: false
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+      - key: node-role.kubernetes.io/ci-builds-worker
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/ci-tests-worker
+        operator: Exists

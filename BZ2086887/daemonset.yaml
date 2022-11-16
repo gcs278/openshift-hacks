@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: wget
+  labels:
+    app: wget
+spec:
+  selector:
+    matchLabels:
+      app: wget
+  template:
+    metadata:
+      labels:
+        app: wget
+    spec:
+      containers:
+      - name: wget
+        image: quay.io/gspence/busybox
+        command: ['sh', '-c', "wget www.google.com; sleep 99999"]

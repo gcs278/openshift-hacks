@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: router-loadbalancer-test
+  labels:
+    type: loadbalancer
+spec:
+  to:
+    kind: Service
+    name: router-loadbalancer-test

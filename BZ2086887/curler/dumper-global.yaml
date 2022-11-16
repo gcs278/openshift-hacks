@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: dumper
+  name: dumper
+  namespace: openshift-dns
+spec:
+  selector:
+    matchLabels:
+      app: dumper
+  template:
+    metadata:
+      labels:
+        app: dumper
+    spec:
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -euo pipefail
+          /sbin/tcpdump -i any "udp port 53 or tcp port 53 or udp port 5353 or tcp port 5353" -W 10 -C 20 -w "/tmp/tcpdump.pcap"
+        # oc adm release info --image-for=tools
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3e630fcf3b3a8c3b78e6766eb1e71db69a9ccdae9014e32464390806e74eaca9
+        name: tcpdump
+        securityContext:
+          privileged: true
+      terminationGracePeriodSeconds: 30
+      hostNetwork: true
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      privileged: true
+      tolerations:
+      - operator: Exists
+      #- key: "node-role.kubernetes.io/master"
+      #  operator: Exists
+      #- key: node-role.kubernetes.io/ci-builds-worker
+      #  operator: Exists
+      #  effect: NoSchedule
+      #- key: node-role.kubernetes.io/ci-tests-worker
+      #  operator: Exists
+      #  effect: NoSchedule

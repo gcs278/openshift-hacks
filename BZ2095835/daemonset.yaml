@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: api-test
+  labels:
+    app: api-test
+spec:
+  selector:
+    matchLabels:
+      app: api-test
+  template:
+    metadata:
+      labels:
+        app: api-test
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: api-test
+        image: docker.io/curlimages/curl
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          set -x
+          curl -o /tmp/success -k https://172.30.0.1:443 
+          sleep 100000
+        readinessProbe:
+          exec:
+            command:
+            - test
+            - "-s"
+            - /tmp/success
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+

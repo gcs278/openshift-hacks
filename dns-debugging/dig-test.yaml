@@ -26,7 +26,7 @@ spec:
           fails=0
           while : ; do
             requests=$((requests+1))
-            OUT=$(dig +retry=0 +timeout=60 +tries=1 "https://docs.ci.openshift.org")
+            OUT=$(dig +retry=0 +timeout=60 +tries=1 "docs.ci.openshift.org")
             if [[ $? -ne 0 ]]; then
               echo "FAIL: $OUT"
               fails=$((fails+1))
@@ -45,6 +45,12 @@ spec:
         # oc adm release info --image-for=cli
         image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
         name: curl
+        securityContext:
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop: "ALL"
       hostNetwork: false
       nodeSelector:
         "kubernetes.io/os": "linux"

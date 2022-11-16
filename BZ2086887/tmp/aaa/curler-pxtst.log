@@ -1,0 +1,4 @@
+curl: (6) Could not resolve host: canary-openshift-ingress-canary.apps.build01dnslookup: 0.000000 | connect: 0.000000 | appconnect: 0.000000 | pretransfer: 0.000000 | starttransfer: 0.000000 | total: 19.890734 | size: 0
+.ci.devcluster.openshift.com
+curl: (6) Could not resolve host: canary-openshift-ingress-canary.apps.build01.ci.devcluster.openshift.com
+dnslookup: 0.000000 | connect: 0.000000 | appconnect: 0.000000 | pretransfer: 0.000000 | starttransfer: 0.000000 | total: 19.890866 | size: 0

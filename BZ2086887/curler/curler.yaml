@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: curler
+  name: curler
+spec:
+  selector:
+    matchLabels:
+      app: curler
+  template:
+    metadata:
+      labels:
+        app: curler
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+
+          while : ; do
+            start=`date +%s`
+            output=$(curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "http://ingress-canary.openshift-ingress-canary.svc.cluster.local:8080" 2>&1)
+            rc=$?
+            end=`date +%s`
+            runtime=$((end-start))
+            if [[ $rc -ne 0 ]]; then
+              echo "FAILURE:"
+              echo "$output"
+            fi
+            if [[ $runtime -gt 1 ]]; then
+              echo "Took longer than 1 second:"
+              echo "$output"
+            fi
+          done
+        # oc adm release info --image-for=cli
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        name: curl
+      hostNetwork: false
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+      - key: node-role.kubernetes.io/ci-builds-worker
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/ci-tests-worker
+        operator: Exists
+        effect: NoSchedule

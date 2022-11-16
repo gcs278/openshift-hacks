@@ -1,0 +1,5 @@
+2022-06-14T13:58:10.879179287Z I0614 13:58:10.879058       1 main.go:181] Valid token audiences: 
+2022-06-14T13:58:10.879279602Z I0614 13:58:10.879194       1 main.go:305] Reading certificate files
+2022-06-14T13:58:10.879375550Z I0614 13:58:10.879350       1 main.go:339] Starting TCP socket on :9154
+2022-06-14T13:58:10.879636539Z I0614 13:58:10.879610       1 main.go:346] Listening securely on :9154
+2022-06-21T14:42:02.631479367Z E0621 14:42:02.631410       1 proxy.go:73] Unable to authenticate the request due to an error: context canceled

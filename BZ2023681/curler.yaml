@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: curler
+  name: curler
+spec:
+  selector:
+    matchLabels:
+      app: curler
+  template:
+    metadata:
+      labels:
+        app: curler
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          while : ; do
+            curl -f -sS -I route-nlb-default-test.apps.gspence-2022-11-04-0625.devcluster.openshift.com
+            if [[ $? -ne 0 ]]; then
+              echo "ERROR: CURL FAILED"
+            fi
+            sleep 0.5
+          done
+        # oc adm release info --image-for=cli
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        name: curl
+      hostNetwork: false
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+
+

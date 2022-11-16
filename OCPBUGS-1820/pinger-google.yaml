@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: pinger-google
+  name: pinger-google
+spec:
+  selector:
+    matchLabels:
+      app: pinger-google
+  template:
+    metadata:
+      labels:
+        app: pinger-google
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          ping 8.8.8.8
+        # oc adm release info --image-for=cli
+        image: docker.io/tutum/dnsutils
+        name: curl
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_RAW
+      hostNetwork: false
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+      - key: node-role.kubernetes.io/ci-builds-worker
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/ci-tests-worker
+        operator: Exists
+        effect: NoSchedule

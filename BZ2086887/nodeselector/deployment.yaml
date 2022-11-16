@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wget
+  labels:
+    app: wget
+spec:
+  replicas: 1000
+  selector:
+    matchLabels:
+      app: wget
+  template:
+    metadata:
+      labels:
+        app: wget
+    spec:
+      nodeSelector:
+        wget: "true"
+      initContainers:
+      - name: init
+        image: quay.io/gspence/busybox
+        #image: registry.ci.openshift.org/ocp/4.11-2022-06-12-130306@sha256:9bf5821c8733242f14482bc128e55fb51037eecf198c27a70557c55c8139fd5a
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          set -x
+          wget www.google.com -O /wget-dir/index.html || exit 0
+          #curl -o /wget-dir/index.html -skw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://google.com" || exit 0
+          #curl -o /wget-dir/index.html -skw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/" || exit 0
+        volumeMounts:
+        - name: wgetdir
+          mountPath: "/wget-dir"
+        env:
+        - name: "CLUSTER_INGRESS_DOMAIN"
+          # oc get ingresses.config/cluster -o 'jsonpath={.spec.domain}'
+          value: "apps.gspence-2022-06-13-1020.gcp.devcluster.openshift.com"
+      containers:
+      - name: myservice
+        image: quay.io/gspence/busybox
+        command: ['sh', '-c', "test -s /wget-dir/index.html; sleep 100000"]
+        volumeMounts:
+        - name: wgetdir
+          mountPath: "/wget-dir"
+        readinessProbe:
+          exec:
+            command:
+            - test
+            - "-s"
+            - /wget-dir/index.html
+      volumes:
+      - name: wgetdir
+        emptyDir: {}

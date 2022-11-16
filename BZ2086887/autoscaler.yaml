@@ -14,16 +14,16 @@ spec:
       max: 256 
   scaleDown: 
     enabled: true 
-    delayAfterAdd: 10m 
-    delayAfterDelete: 5m 
+    delayAfterAdd: 1m 
+    delayAfterDelete: 30s 
     delayAfterFailure: 30s 
-    unneededTime: 5m 
+    unneededTime: 2m 
     utilizationThreshold: "0.4"
 ---
 apiVersion: "autoscaling.openshift.io/v1beta1"
 kind: "MachineAutoscaler"
 metadata:
-  name: "gspence-2022-06-06-10-zfdv7-worker-b"
+  name: "autoscaler"
   namespace: "openshift-machine-api"
 spec:
   minReplicas: 1
@@ -31,4 +31,4 @@ spec:
   scaleTargetRef:
     apiVersion: machine.openshift.io/v1beta1
     kind: MachineSet
-    name: gspence-2022-06-06-10-zfdv7-worker-b
+    name: gspence-2022-06-15-08-qxqbv-worker-c

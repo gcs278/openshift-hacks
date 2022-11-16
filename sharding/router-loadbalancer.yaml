@@ -1,0 +1,17 @@
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  name: loadbalancer
+  namespace: openshift-ingress-operator
+spec:
+  domain: loadbalancer.gspence-2022-02-14-1013.gcp.devcluster.openshift.com
+  replicas: 1
+  namespaceSelector:
+    matchLabels:
+      type: loadbalancer
+  endpointPublishingStrategy:
+    type: LoadBalancerService
+  nodePlacement:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/worker: ""

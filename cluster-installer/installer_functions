@@ -10,6 +10,8 @@ if [[ "$(find ~/.secrets/pull-secret.txt -mmin +18720)" != "" ]]; then
   echo "    3. Visit https://console-openshift-console.apps.ci.l2s4.p1.openshiftapps.com/"
   echo "    4. Log in -> Copy login command -> unset KUBECONFIG -> Use login command"
   echo "    5. oc registry login --to=/home/$USER/.secrets/pull-secret.txt"
+  echo "    6. Test via:"
+  echo "       podman pull --authfile ~/.secrets/pull-secret.txt registry.ci.openshift.org/ocp/4.12:base"
 fi
 
 function ci_delete_cluster() {
@@ -29,7 +31,7 @@ function ci_cleanup_old_clusters() {
       kubeconfig=$(dirname ${cluster})/auth/kubeconfig;
       cluster_dir=$(dirname $cluster)
       if [[ -f "${kubeconfig}" ]]; then
-        KUBECONFIG=${kubeconfig}; oc version &> /dev/null
+        KUBECONFIG=${kubeconfig} oc version &> /dev/null
 	if [[ $? -ne 0 ]]; then
           echo "$cluster_dir is dead. Cleaning up."
 	  ci_delete_cluster $cluster_dir

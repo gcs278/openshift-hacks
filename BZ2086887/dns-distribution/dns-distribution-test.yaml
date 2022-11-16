@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: dns-distribution
+  name: dns-distribution
+spec:
+  selector:
+    matchLabels:
+      app: dns-distribution
+  template:
+    metadata:
+      labels:
+        app: dns-distribution
+    spec:
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -euo pipefail
+          while : ; do
+            echo "Collecting tcpdump for 30 seconds...please wait"
+            tcpdump -i any "udp port 53 or tcp port 53 or udp port 5353 or tcp port 5353" -W 1 -G 30 -w "/tmp/tcpdump.pcap" &> /dev/null
+            tshark -r /tmp/tcpdump.pcap -n -Y 'mdns and dns.flags.response == 0 and not dns.retransmission' -t ud | awk '{print $6}' | uniq -c 2> /dev/null
+          done
+        # oc adm release info --image-for=tools
+        image: quay.io/gspence/tshark
+        name: tcpdump
+        securityContext:
+          privileged: true
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          echo "Starting"
+          while : ; do
+            dig +retry=0 +timeout=60 +tries=1 "https://docs.ci.openshift.org"
+            sleep 0.5
+          done
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3e630fcf3b3a8c3b78e6766eb1e71db69a9ccdae9014e32464390806e74eaca9
+        name: dig
+        securityContext:
+          privileged: true
+      terminationGracePeriodSeconds: 30
+      hostNetwork: true
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      privileged: true
+      tolerations:
+      - operator: Exists
+      #- key: "node-role.kubernetes.io/master"
+      #  operator: Exists
+      #- key: node-role.kubernetes.io/ci-builds-worker
+      #  operator: Exists
+      #  effect: NoSchedule
+      #- key: node-role.kubernetes.io/ci-tests-worker
+      #  operator: Exists
+      #  effect: NoSchedule

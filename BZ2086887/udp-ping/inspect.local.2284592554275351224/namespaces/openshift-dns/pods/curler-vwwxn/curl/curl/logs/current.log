@@ -1,0 +1,422 @@
+2022-06-21T20:37:59.511609283Z dnslookup: 0.000000 | connect: 0.000000 | appconnect: 0.000000 | pretransfer: 0.000000 | starttransfer: 0.000000 | total: 19.891553 | size: 0
+2022-06-21T20:38:20.606901609Z dnslookup: 0.000000 | connect: 0.000000 | appconnect: 0.000000 | pretransfer: 0.000000 | starttransfer: 0.000000 | total: 19.889701 | size: 0
+2022-06-21T20:38:21.631788968Z Healthcheck requested
+2022-06-21T20:38:21.631788968Z dnslookup: 0.004089 | connect: 0.006017 | appconnect: 0.015880 | pretransfer: 0.015902 | starttransfer: 0.019052 | total: 0.019062 | size: 22
+2022-06-21T20:38:22.649090162Z Healthcheck requested
+2022-06-21T20:38:22.649090162Z dnslookup: 0.001148 | connect: 0.002887 | appconnect: 0.009817 | pretransfer: 0.009839 | starttransfer: 0.011634 | total: 0.011645 | size: 22
+2022-06-21T20:38:23.667596753Z Healthcheck requested
+2022-06-21T20:38:23.667596753Z dnslookup: 0.002566 | connect: 0.004182 | appconnect: 0.010919 | pretransfer: 0.010956 | starttransfer: 0.012638 | total: 0.012648 | size: 22
+2022-06-21T20:38:24.685793639Z Healthcheck requested
+2022-06-21T20:38:24.685793639Z dnslookup: 0.001146 | connect: 0.003095 | appconnect: 0.010126 | pretransfer: 0.010149 | starttransfer: 0.012109 | total: 0.012120 | size: 22
+2022-06-21T20:38:25.705619574Z Healthcheck requested
+2022-06-21T20:38:25.705619574Z dnslookup: 0.001641 | connect: 0.003470 | appconnect: 0.010574 | pretransfer: 0.010600 | starttransfer: 0.013658 | total: 0.013669 | size: 22
+2022-06-21T20:38:26.725073412Z Healthcheck requested
+2022-06-21T20:38:26.725073412Z dnslookup: 0.002854 | connect: 0.004557 | appconnect: 0.011531 | pretransfer: 0.011554 | starttransfer: 0.013590 | total: 0.013600 | size: 22
+2022-06-21T20:38:27.746479296Z Healthcheck requested
+2022-06-21T20:38:27.746479296Z dnslookup: 0.002562 | connect: 0.004784 | appconnect: 0.012598 | pretransfer: 0.012621 | starttransfer: 0.014660 | total: 0.014681 | size: 22
+2022-06-21T20:38:28.838870452Z Healthcheck requested
+2022-06-21T20:38:28.838870452Z dnslookup: 0.019876 | connect: 0.021782 | appconnect: 0.052476 | pretransfer: 0.052513 | starttransfer: 0.054447 | total: 0.054468 | size: 22
+2022-06-21T20:38:29.947434903Z Healthcheck requested
+2022-06-21T20:38:29.947434903Z dnslookup: 0.028847 | connect: 0.030583 | appconnect: 0.041120 | pretransfer: 0.041151 | starttransfer: 0.044159 | total: 0.044192 | size: 22
+2022-06-21T20:38:30.997609781Z Healthcheck requested
+2022-06-21T20:38:30.997609781Z dnslookup: 0.013935 | connect: 0.015581 | appconnect: 0.030808 | pretransfer: 0.030845 | starttransfer: 0.032419 | total: 0.032436 | size: 22
+2022-06-21T20:38:32.034866134Z Healthcheck requested
+2022-06-21T20:38:32.034866134Z dnslookup: 0.001934 | connect: 0.004875 | appconnect: 0.016107 | pretransfer: 0.016140 | starttransfer: 0.017786 | total: 0.017806 | size: 22
+2022-06-21T20:38:33.077022921Z Healthcheck requested
+2022-06-21T20:38:33.077022921Z dnslookup: 0.002579 | connect: 0.004598 | appconnect: 0.015769 | pretransfer: 0.015804 | starttransfer: 0.017678 | total: 0.017692 | size: 22
+2022-06-21T20:38:34.099642724Z Healthcheck requested
+2022-06-21T20:38:34.099642724Z dnslookup: 0.000917 | connect: 0.002395 | appconnect: 0.011591 | pretransfer: 0.011619 | starttransfer: 0.013421 | total: 0.013436 | size: 22
+2022-06-21T20:38:35.118816231Z Healthcheck requested
+2022-06-21T20:38:35.118816231Z dnslookup: 0.001244 | connect: 0.002942 | appconnect: 0.009707 | pretransfer: 0.009730 | starttransfer: 0.011904 | total: 0.011914 | size: 22
+2022-06-21T20:38:36.140816854Z Healthcheck requested
+2022-06-21T20:38:36.140816854Z dnslookup: 0.001210 | connect: 0.003327 | appconnect: 0.012564 | pretransfer: 0.012592 | starttransfer: 0.015581 | total: 0.015596 | size: 22
+2022-06-21T20:38:37.159613774Z Healthcheck requested
+2022-06-21T20:38:37.159613774Z dnslookup: 0.001169 | connect: 0.003249 | appconnect: 0.010461 | pretransfer: 0.010483 | starttransfer: 0.011924 | total: 0.011935 | size: 22
+2022-06-21T20:38:38.179418851Z Healthcheck requested
+2022-06-21T20:38:38.179418851Z dnslookup: 0.001281 | connect: 0.003344 | appconnect: 0.010270 | pretransfer: 0.010292 | starttransfer: 0.013149 | total: 0.013160 | size: 22
+2022-06-21T20:38:39.200599164Z Healthcheck requested
+2022-06-21T20:38:39.200599164Z dnslookup: 0.000808 | connect: 0.002799 | appconnect: 0.012620 | pretransfer: 0.012648 | starttransfer: 0.014614 | total: 0.014627 | size: 22
+2022-06-21T20:38:40.219908458Z Healthcheck requested
+2022-06-21T20:38:40.219908458Z dnslookup: 0.001263 | connect: 0.003000 | appconnect: 0.010148 | pretransfer: 0.010173 | starttransfer: 0.012078 | total: 0.012103 | size: 22
+2022-06-21T20:38:41.238745075Z Healthcheck requested
+2022-06-21T20:38:41.238745075Z dnslookup: 0.001258 | connect: 0.003411 | appconnect: 0.010701 | pretransfer: 0.010724 | starttransfer: 0.012204 | total: 0.012216 | size: 22
+2022-06-21T20:38:42.258066089Z Healthcheck requested
+2022-06-21T20:38:42.258066089Z dnslookup: 0.001610 | connect: 0.003302 | appconnect: 0.011816 | pretransfer: 0.011838 | starttransfer: 0.013085 | total: 0.013097 | size: 22
+2022-06-21T20:38:43.275777478Z Healthcheck requested
+2022-06-21T20:38:43.275777478Z dnslookup: 0.001263 | connect: 0.003012 | appconnect: 0.009996 | pretransfer: 0.010020 | starttransfer: 0.011461 | total: 0.011474 | size: 22
+2022-06-21T20:38:44.292932106Z Healthcheck requested
+2022-06-21T20:38:44.292932106Z dnslookup: 0.001168 | connect: 0.002812 | appconnect: 0.009561 | pretransfer: 0.009582 | starttransfer: 0.011357 | total: 0.011369 | size: 22
+2022-06-21T20:38:45.310856148Z Healthcheck requested
+2022-06-21T20:38:45.310856148Z dnslookup: 0.001777 | connect: 0.003470 | appconnect: 0.010294 | pretransfer: 0.010319 | starttransfer: 0.012210 | total: 0.012221 | size: 22
+2022-06-21T20:38:46.327944165Z Healthcheck requested
+2022-06-21T20:38:46.327944165Z dnslookup: 0.001188 | connect: 0.002657 | appconnect: 0.009445 | pretransfer: 0.009468 | starttransfer: 0.011381 | total: 0.011392 | size: 22
+2022-06-21T20:38:47.346177902Z Healthcheck requested
+2022-06-21T20:38:47.346177902Z dnslookup: 0.001244 | connect: 0.003343 | appconnect: 0.010046 | pretransfer: 0.010068 | starttransfer: 0.011853 | total: 0.011862 | size: 22
+2022-06-21T20:38:48.365774861Z Healthcheck requested
+2022-06-21T20:38:48.365774861Z dnslookup: 0.001180 | connect: 0.003385 | appconnect: 0.010585 | pretransfer: 0.010608 | starttransfer: 0.013668 | total: 0.013678 | size: 22
+2022-06-21T20:38:49.384362173Z Healthcheck requested
+2022-06-21T20:38:49.384362173Z dnslookup: 0.000771 | connect: 0.002818 | appconnect: 0.009672 | pretransfer: 0.009694 | starttransfer: 0.012715 | total: 0.012725 | size: 22
+2022-06-21T20:38:50.404432930Z Healthcheck requested
+2022-06-21T20:38:50.404432930Z dnslookup: 0.000810 | connect: 0.005133 | appconnect: 0.012121 | pretransfer: 0.012143 | starttransfer: 0.014023 | total: 0.014034 | size: 22
+2022-06-21T20:38:51.421491637Z Healthcheck requested
+2022-06-21T20:38:51.421491637Z dnslookup: 0.001122 | connect: 0.002898 | appconnect: 0.009730 | pretransfer: 0.009753 | starttransfer: 0.011240 | total: 0.011251 | size: 22
+2022-06-21T20:38:52.438425953Z Healthcheck requested
+2022-06-21T20:38:52.438425953Z dnslookup: 0.001123 | connect: 0.002532 | appconnect: 0.009251 | pretransfer: 0.009272 | starttransfer: 0.010917 | total: 0.010928 | size: 22
+2022-06-21T20:38:53.460063655Z Healthcheck requested
+2022-06-21T20:38:53.460063655Z dnslookup: 0.001256 | connect: 0.006220 | appconnect: 0.012830 | pretransfer: 0.012852 | starttransfer: 0.015848 | total: 0.015858 | size: 22
+2022-06-21T20:38:54.485673722Z Healthcheck requested
+2022-06-21T20:38:54.485673722Z dnslookup: 0.001213 | connect: 0.004155 | appconnect: 0.014260 | pretransfer: 0.014282 | starttransfer: 0.020338 | total: 0.020349 | size: 22
+2022-06-21T20:38:55.503287574Z Healthcheck requested
+2022-06-21T20:38:55.503287574Z dnslookup: 0.001142 | connect: 0.003286 | appconnect: 0.010051 | pretransfer: 0.010074 | starttransfer: 0.012049 | total: 0.012059 | size: 22
+2022-06-21T20:38:56.521608100Z Healthcheck requested
+2022-06-21T20:38:56.521608100Z dnslookup: 0.001182 | connect: 0.003237 | appconnect: 0.009908 | pretransfer: 0.009930 | starttransfer: 0.012884 | total: 0.012894 | size: 22
+2022-06-21T20:38:57.539795154Z Healthcheck requested
+2022-06-21T20:38:57.539795154Z dnslookup: 0.001356 | connect: 0.002936 | appconnect: 0.009868 | pretransfer: 0.009895 | starttransfer: 0.012325 | total: 0.012340 | size: 22
+2022-06-21T20:38:58.558291853Z Healthcheck requested
+2022-06-21T20:38:58.558291853Z dnslookup: 0.000825 | connect: 0.002337 | appconnect: 0.009789 | pretransfer: 0.009811 | starttransfer: 0.011577 | total: 0.011589 | size: 22
+2022-06-21T20:38:59.576876672Z Healthcheck requested
+2022-06-21T20:38:59.576876672Z dnslookup: 0.001173 | connect: 0.002756 | appconnect: 0.010371 | pretransfer: 0.010395 | starttransfer: 0.012104 | total: 0.012120 | size: 22
+2022-06-21T20:39:00.596472748Z Healthcheck requested
+2022-06-21T20:39:00.596472748Z dnslookup: 0.001422 | connect: 0.003229 | appconnect: 0.010262 | pretransfer: 0.010287 | starttransfer: 0.013068 | total: 0.013080 | size: 22
+2022-06-21T20:39:01.618681315Z Healthcheck requested
+2022-06-21T20:39:01.618681315Z dnslookup: 0.001259 | connect: 0.002889 | appconnect: 0.012373 | pretransfer: 0.012400 | starttransfer: 0.014220 | total: 0.014234 | size: 22
+2022-06-21T20:39:02.639356357Z Healthcheck requested
+2022-06-21T20:39:02.639356357Z dnslookup: 0.001054 | connect: 0.003360 | appconnect: 0.010644 | pretransfer: 0.010666 | starttransfer: 0.013569 | total: 0.013581 | size: 22
+2022-06-21T20:39:03.659083155Z Healthcheck requested
+2022-06-21T20:39:03.659083155Z dnslookup: 0.000666 | connect: 0.002806 | appconnect: 0.010732 | pretransfer: 0.010759 | starttransfer: 0.012904 | total: 0.012915 | size: 22
+2022-06-21T20:39:04.679181599Z Healthcheck requested
+2022-06-21T20:39:04.679181599Z dnslookup: 0.001272 | connect: 0.003033 | appconnect: 0.010042 | pretransfer: 0.010070 | starttransfer: 0.013036 | total: 0.013051 | size: 22
+2022-06-21T20:39:05.698833635Z Healthcheck requested
+2022-06-21T20:39:05.698833635Z dnslookup: 0.001673 | connect: 0.003527 | appconnect: 0.010806 | pretransfer: 0.010829 | starttransfer: 0.012524 | total: 0.012537 | size: 22
+2022-06-21T20:39:06.715928312Z Healthcheck requested
+2022-06-21T20:39:06.715928312Z dnslookup: 0.001179 | connect: 0.002589 | appconnect: 0.009343 | pretransfer: 0.009364 | starttransfer: 0.011061 | total: 0.011071 | size: 22
+2022-06-21T20:39:07.734382419Z Healthcheck requested
+2022-06-21T20:39:07.734382419Z dnslookup: 0.001872 | connect: 0.003657 | appconnect: 0.010920 | pretransfer: 0.010949 | starttransfer: 0.012368 | total: 0.012382 | size: 22
+2022-06-21T20:39:08.754118282Z Healthcheck requested
+2022-06-21T20:39:08.754118282Z dnslookup: 0.001313 | connect: 0.003277 | appconnect: 0.010689 | pretransfer: 0.010711 | starttransfer: 0.012748 | total: 0.012760 | size: 22
+2022-06-21T20:39:09.774148658Z Healthcheck requested
+2022-06-21T20:39:09.774148658Z dnslookup: 0.001279 | connect: 0.003164 | appconnect: 0.009980 | pretransfer: 0.010003 | starttransfer: 0.013010 | total: 0.013022 | size: 22
+2022-06-21T20:39:10.794554331Z Healthcheck requested
+2022-06-21T20:39:10.794554331Z dnslookup: 0.001189 | connect: 0.003280 | appconnect: 0.011595 | pretransfer: 0.011724 | starttransfer: 0.012871 | total: 0.012883 | size: 22
+2022-06-21T20:39:11.813780576Z Healthcheck requested
+2022-06-21T20:39:11.813780576Z dnslookup: 0.001271 | connect: 0.003277 | appconnect: 0.010756 | pretransfer: 0.010791 | starttransfer: 0.012194 | total: 0.012205 | size: 22
+2022-06-21T20:39:12.833085847Z Healthcheck requested
+2022-06-21T20:39:12.833085847Z dnslookup: 0.001149 | connect: 0.002892 | appconnect: 0.009827 | pretransfer: 0.009863 | starttransfer: 0.013047 | total: 0.013058 | size: 22
+2022-06-21T20:39:13.851582694Z Healthcheck requested
+2022-06-21T20:39:13.851582694Z dnslookup: 0.000965 | connect: 0.002598 | appconnect: 0.010981 | pretransfer: 0.011003 | starttransfer: 0.012510 | total: 0.012522 | size: 22
+2022-06-21T20:39:14.872894705Z Healthcheck requested
+2022-06-21T20:39:14.872894705Z dnslookup: 0.001213 | connect: 0.002930 | appconnect: 0.012225 | pretransfer: 0.012255 | starttransfer: 0.014168 | total: 0.014180 | size: 22
+2022-06-21T20:39:15.892021662Z Healthcheck requested
+2022-06-21T20:39:15.892021662Z dnslookup: 0.001192 | connect: 0.003104 | appconnect: 0.009971 | pretransfer: 0.009993 | starttransfer: 0.012992 | total: 0.013002 | size: 22
+2022-06-21T20:39:16.909058189Z Healthcheck requested
+2022-06-21T20:39:16.909058189Z dnslookup: 0.001371 | connect: 0.003090 | appconnect: 0.009853 | pretransfer: 0.009876 | starttransfer: 0.011218 | total: 0.011229 | size: 22
+2022-06-21T20:39:17.928198417Z Healthcheck requested
+2022-06-21T20:39:17.928198417Z dnslookup: 0.000791 | connect: 0.002641 | appconnect: 0.010649 | pretransfer: 0.010671 | starttransfer: 0.012482 | total: 0.012496 | size: 22
+2022-06-21T20:39:18.947113201Z Healthcheck requested
+2022-06-21T20:39:18.947113201Z dnslookup: 0.000996 | connect: 0.003106 | appconnect: 0.010254 | pretransfer: 0.010276 | starttransfer: 0.012164 | total: 0.012177 | size: 22
+2022-06-21T20:39:19.969683231Z Healthcheck requested
+2022-06-21T20:39:19.969683231Z dnslookup: 0.001153 | connect: 0.003590 | appconnect: 0.012180 | pretransfer: 0.012213 | starttransfer: 0.015321 | total: 0.015335 | size: 22
+2022-06-21T20:39:20.989936330Z Healthcheck requested
+2022-06-21T20:39:20.989936330Z dnslookup: 0.001415 | connect: 0.002829 | appconnect: 0.010436 | pretransfer: 0.010459 | starttransfer: 0.013129 | total: 0.013141 | size: 22
+2022-06-21T20:39:22.018381674Z Healthcheck requested
+2022-06-21T20:39:22.018381674Z dnslookup: 0.008287 | connect: 0.011435 | appconnect: 0.018746 | pretransfer: 0.018770 | starttransfer: 0.022084 | total: 0.022095 | size: 22
+2022-06-21T20:39:23.037204611Z Healthcheck requested
+2022-06-21T20:39:23.037204611Z dnslookup: 0.000784 | connect: 0.002522 | appconnect: 0.010813 | pretransfer: 0.010837 | starttransfer: 0.012252 | total: 0.012263 | size: 22
+2022-06-21T20:39:24.058439647Z Healthcheck requested
+2022-06-21T20:39:24.058439647Z dnslookup: 0.001776 | connect: 0.003745 | appconnect: 0.011176 | pretransfer: 0.011206 | starttransfer: 0.014171 | total: 0.014184 | size: 22
+2022-06-21T20:39:25.076016493Z Healthcheck requested
+2022-06-21T20:39:25.076016493Z dnslookup: 0.000771 | connect: 0.002842 | appconnect: 0.009510 | pretransfer: 0.009534 | starttransfer: 0.011135 | total: 0.011145 | size: 22
+2022-06-21T20:39:26.093705862Z Healthcheck requested
+2022-06-21T20:39:26.093705862Z dnslookup: 0.001298 | connect: 0.003034 | appconnect: 0.010288 | pretransfer: 0.010311 | starttransfer: 0.011718 | total: 0.011729 | size: 22
+2022-06-21T20:39:27.112215785Z Healthcheck requested
+2022-06-21T20:39:27.112215785Z dnslookup: 0.001355 | connect: 0.003030 | appconnect: 0.010198 | pretransfer: 0.010221 | starttransfer: 0.011971 | total: 0.011983 | size: 22
+2022-06-21T20:39:28.129849440Z Healthcheck requested
+2022-06-21T20:39:28.129849440Z dnslookup: 0.000769 | connect: 0.002584 | appconnect: 0.009442 | pretransfer: 0.009464 | starttransfer: 0.011264 | total: 0.011274 | size: 22
+2022-06-21T20:39:29.147722900Z Healthcheck requested
+2022-06-21T20:39:29.147722900Z dnslookup: 0.001254 | connect: 0.002939 | appconnect: 0.009736 | pretransfer: 0.009758 | starttransfer: 0.011631 | total: 0.011641 | size: 22
+2022-06-21T20:39:30.165317205Z Healthcheck requested
+2022-06-21T20:39:30.165317205Z dnslookup: 0.001272 | connect: 0.002826 | appconnect: 0.009645 | pretransfer: 0.009666 | starttransfer: 0.011448 | total: 0.011458 | size: 22
+2022-06-21T20:39:31.182528774Z Healthcheck requested
+2022-06-21T20:39:31.182528774Z dnslookup: 0.000819 | connect: 0.002687 | appconnect: 0.009639 | pretransfer: 0.009662 | starttransfer: 0.011445 | total: 0.011457 | size: 22
+2022-06-21T20:39:32.201666335Z Healthcheck requested
+2022-06-21T20:39:32.201666335Z dnslookup: 0.001750 | connect: 0.003400 | appconnect: 0.010011 | pretransfer: 0.010034 | starttransfer: 0.012722 | total: 0.012733 | size: 22
+2022-06-21T20:39:33.221668789Z Healthcheck requested
+2022-06-21T20:39:33.221668789Z dnslookup: 0.001837 | connect: 0.003610 | appconnect: 0.010840 | pretransfer: 0.010864 | starttransfer: 0.014048 | total: 0.014059 | size: 22
+2022-06-21T20:39:34.239541779Z Healthcheck requested
+2022-06-21T20:39:34.239541779Z dnslookup: 0.001216 | connect: 0.002941 | appconnect: 0.010332 | pretransfer: 0.010354 | starttransfer: 0.011587 | total: 0.011598 | size: 22
+2022-06-21T20:39:35.258148201Z Healthcheck requested
+2022-06-21T20:39:35.258148201Z dnslookup: 0.001188 | connect: 0.003207 | appconnect: 0.010403 | pretransfer: 0.010428 | starttransfer: 0.012138 | total: 0.012151 | size: 22
+2022-06-21T20:39:36.277210290Z Healthcheck requested
+2022-06-21T20:39:36.277210290Z dnslookup: 0.001722 | connect: 0.003952 | appconnect: 0.011052 | pretransfer: 0.011074 | starttransfer: 0.013223 | total: 0.013234 | size: 22
+2022-06-21T20:39:37.295359724Z Healthcheck requested
+2022-06-21T20:39:37.295359724Z dnslookup: 0.001183 | connect: 0.002722 | appconnect: 0.010278 | pretransfer: 0.010309 | starttransfer: 0.012044 | total: 0.012055 | size: 22
+2022-06-21T20:39:38.313808224Z Healthcheck requested
+2022-06-21T20:39:38.313808224Z dnslookup: 0.001167 | connect: 0.003422 | appconnect: 0.010593 | pretransfer: 0.010615 | starttransfer: 0.012164 | total: 0.012175 | size: 22
+2022-06-21T20:39:39.331663553Z Healthcheck requested
+2022-06-21T20:39:39.331663553Z dnslookup: 0.001202 | connect: 0.003353 | appconnect: 0.010218 | pretransfer: 0.010241 | starttransfer: 0.011931 | total: 0.011943 | size: 22
+2022-06-21T20:39:40.351849971Z Healthcheck requested
+2022-06-21T20:39:40.351849971Z dnslookup: 0.001193 | connect: 0.002950 | appconnect: 0.010509 | pretransfer: 0.010533 | starttransfer: 0.013909 | total: 0.013921 | size: 22
+2022-06-21T20:39:41.370713107Z Healthcheck requested
+2022-06-21T20:39:41.370713107Z dnslookup: 0.001179 | connect: 0.002765 | appconnect: 0.009902 | pretransfer: 0.009925 | starttransfer: 0.012850 | total: 0.012862 | size: 22
+2022-06-21T20:39:42.390596990Z Healthcheck requested
+2022-06-21T20:39:42.390596990Z dnslookup: 0.001650 | connect: 0.003909 | appconnect: 0.011477 | pretransfer: 0.011499 | starttransfer: 0.013435 | total: 0.013446 | size: 22
+2022-06-21T20:39:43.407834537Z Healthcheck requested
+2022-06-21T20:39:43.407834537Z dnslookup: 0.001152 | connect: 0.002688 | appconnect: 0.009267 | pretransfer: 0.009289 | starttransfer: 0.010892 | total: 0.010904 | size: 22
+2022-06-21T20:39:44.426001485Z Healthcheck requested
+2022-06-21T20:39:44.426001485Z dnslookup: 0.001195 | connect: 0.002989 | appconnect: 0.010362 | pretransfer: 0.010399 | starttransfer: 0.012185 | total: 0.012199 | size: 22
+2022-06-21T20:39:45.444000480Z Healthcheck requested
+2022-06-21T20:39:45.444000480Z dnslookup: 0.000817 | connect: 0.002869 | appconnect: 0.009860 | pretransfer: 0.009882 | starttransfer: 0.011799 | total: 0.011809 | size: 22
+2022-06-21T20:39:46.461520438Z Healthcheck requested
+2022-06-21T20:39:46.461520438Z dnslookup: 0.001312 | connect: 0.003086 | appconnect: 0.010014 | pretransfer: 0.010036 | starttransfer: 0.011523 | total: 0.011533 | size: 22
+2022-06-21T20:39:47.479504202Z Healthcheck requested
+2022-06-21T20:39:47.479504202Z dnslookup: 0.001388 | connect: 0.003182 | appconnect: 0.010253 | pretransfer: 0.010276 | starttransfer: 0.011945 | total: 0.011956 | size: 22
+2022-06-21T20:39:48.497506338Z Healthcheck requested
+2022-06-21T20:39:48.497506338Z dnslookup: 0.001074 | connect: 0.002478 | appconnect: 0.010402 | pretransfer: 0.010429 | starttransfer: 0.011687 | total: 0.011698 | size: 22
+2022-06-21T20:39:49.515100857Z Healthcheck requested
+2022-06-21T20:39:49.515100857Z dnslookup: 0.001151 | connect: 0.002934 | appconnect: 0.009879 | pretransfer: 0.009926 | starttransfer: 0.011690 | total: 0.011699 | size: 22
+2022-06-21T20:39:50.533195313Z Healthcheck requested
+2022-06-21T20:39:50.533195313Z dnslookup: 0.001220 | connect: 0.003150 | appconnect: 0.010257 | pretransfer: 0.010289 | starttransfer: 0.012037 | total: 0.012048 | size: 22
+2022-06-21T20:39:51.553715770Z Healthcheck requested
+2022-06-21T20:39:51.553715770Z dnslookup: 0.004083 | connect: 0.005831 | appconnect: 0.012794 | pretransfer: 0.012816 | starttransfer: 0.014345 | total: 0.014357 | size: 22
+2022-06-21T20:39:52.572627480Z Healthcheck requested
+2022-06-21T20:39:52.572627480Z dnslookup: 0.002923 | connect: 0.004525 | appconnect: 0.011148 | pretransfer: 0.011188 | starttransfer: 0.012899 | total: 0.012910 | size: 22
+2022-06-21T20:39:53.590322450Z Healthcheck requested
+2022-06-21T20:39:53.590322450Z dnslookup: 0.001166 | connect: 0.003086 | appconnect: 0.010079 | pretransfer: 0.010102 | starttransfer: 0.011595 | total: 0.011605 | size: 22
+2022-06-21T20:39:54.606833931Z Healthcheck requested
+2022-06-21T20:39:54.606833931Z dnslookup: 0.000799 | connect: 0.002554 | appconnect: 0.009032 | pretransfer: 0.009053 | starttransfer: 0.010588 | total: 0.010597 | size: 22
+2022-06-21T20:39:55.623954591Z Healthcheck requested
+2022-06-21T20:39:55.623954591Z dnslookup: 0.001119 | connect: 0.003057 | appconnect: 0.010054 | pretransfer: 0.010086 | starttransfer: 0.011457 | total: 0.011470 | size: 22
+2022-06-21T20:39:56.643124616Z Healthcheck requested
+2022-06-21T20:39:56.643124616Z dnslookup: 0.001621 | connect: 0.003492 | appconnect: 0.010404 | pretransfer: 0.010426 | starttransfer: 0.013336 | total: 0.013347 | size: 22
+2022-06-21T20:39:57.661859653Z Healthcheck requested
+2022-06-21T20:39:57.661859653Z dnslookup: 0.001288 | connect: 0.003100 | appconnect: 0.010161 | pretransfer: 0.010185 | starttransfer: 0.013039 | total: 0.013049 | size: 22
+2022-06-21T20:39:58.679151307Z Healthcheck requested
+2022-06-21T20:39:58.679151307Z dnslookup: 0.001108 | connect: 0.002620 | appconnect: 0.009718 | pretransfer: 0.009741 | starttransfer: 0.011626 | total: 0.011638 | size: 22
+2022-06-21T20:39:59.695966643Z Healthcheck requested
+2022-06-21T20:39:59.695966643Z dnslookup: 0.001181 | connect: 0.002853 | appconnect: 0.009577 | pretransfer: 0.009600 | starttransfer: 0.011212 | total: 0.011223 | size: 22
+2022-06-21T20:40:00.717511752Z Healthcheck requested
+2022-06-21T20:40:00.717511752Z dnslookup: 0.001304 | connect: 0.003293 | appconnect: 0.012737 | pretransfer: 0.012760 | starttransfer: 0.015810 | total: 0.015821 | size: 22
+2022-06-21T20:40:01.736710944Z Healthcheck requested
+2022-06-21T20:40:01.736710944Z dnslookup: 0.001675 | connect: 0.003510 | appconnect: 0.010550 | pretransfer: 0.010572 | starttransfer: 0.013492 | total: 0.013504 | size: 22
+2022-06-21T20:40:02.753799360Z Healthcheck requested
+2022-06-21T20:40:02.753799360Z dnslookup: 0.001130 | connect: 0.002844 | appconnect: 0.009436 | pretransfer: 0.009459 | starttransfer: 0.011227 | total: 0.011241 | size: 22
+2022-06-21T20:40:03.773430018Z Healthcheck requested
+2022-06-21T20:40:03.773430018Z dnslookup: 0.001169 | connect: 0.003168 | appconnect: 0.009962 | pretransfer: 0.009984 | starttransfer: 0.012853 | total: 0.012865 | size: 22
+2022-06-21T20:40:04.790847920Z Healthcheck requested
+2022-06-21T20:40:04.790847920Z dnslookup: 0.000791 | connect: 0.002451 | appconnect: 0.009231 | pretransfer: 0.009254 | starttransfer: 0.011154 | total: 0.011166 | size: 22
+2022-06-21T20:40:05.808430855Z Healthcheck requested
+2022-06-21T20:40:05.808430855Z dnslookup: 0.001272 | connect: 0.003100 | appconnect: 0.009888 | pretransfer: 0.009910 | starttransfer: 0.011658 | total: 0.011669 | size: 22
+2022-06-21T20:40:06.826638879Z Healthcheck requested
+2022-06-21T20:40:06.826638879Z dnslookup: 0.001141 | connect: 0.002917 | appconnect: 0.010758 | pretransfer: 0.010781 | starttransfer: 0.012300 | total: 0.012311 | size: 22
+2022-06-21T20:40:07.844720252Z Healthcheck requested
+2022-06-21T20:40:07.844720252Z dnslookup: 0.001084 | connect: 0.003005 | appconnect: 0.010087 | pretransfer: 0.010110 | starttransfer: 0.011724 | total: 0.011736 | size: 22
+2022-06-21T20:40:08.875002866Z Healthcheck requested
+2022-06-21T20:40:08.875002866Z dnslookup: 0.001335 | connect: 0.003053 | appconnect: 0.012759 | pretransfer: 0.012784 | starttransfer: 0.023286 | total: 0.023304 | size: 22
+2022-06-21T20:40:09.927371044Z Healthcheck requested
+2022-06-21T20:40:09.927371044Z dnslookup: 0.001307 | connect: 0.008278 | appconnect: 0.015479 | pretransfer: 0.015504 | starttransfer: 0.017554 | total: 0.017570 | size: 22
+2022-06-21T20:40:10.947160975Z Healthcheck requested
+2022-06-21T20:40:10.947160975Z dnslookup: 0.000874 | connect: 0.002688 | appconnect: 0.010073 | pretransfer: 0.010117 | starttransfer: 0.011913 | total: 0.011926 | size: 22
+2022-06-21T20:40:11.968420239Z Healthcheck requested
+2022-06-21T20:40:11.968420239Z dnslookup: 0.001177 | connect: 0.002859 | appconnect: 0.012268 | pretransfer: 0.012294 | starttransfer: 0.014195 | total: 0.014209 | size: 22
+2022-06-21T20:40:12.998869576Z Healthcheck requested
+2022-06-21T20:40:12.998869576Z dnslookup: 0.004095 | connect: 0.005976 | appconnect: 0.015156 | pretransfer: 0.015186 | starttransfer: 0.017979 | total: 0.017994 | size: 22
+2022-06-21T20:40:14.022877316Z Healthcheck requested
+2022-06-21T20:40:14.022877316Z dnslookup: 0.001937 | connect: 0.004096 | appconnect: 0.011729 | pretransfer: 0.011761 | starttransfer: 0.013623 | total: 0.013638 | size: 22
+2022-06-21T20:40:15.040722525Z Healthcheck requested
+2022-06-21T20:40:15.040722525Z dnslookup: 0.001134 | connect: 0.002999 | appconnect: 0.010032 | pretransfer: 0.010056 | starttransfer: 0.011422 | total: 0.011434 | size: 22
+2022-06-21T20:40:16.061996673Z Healthcheck requested
+2022-06-21T20:40:16.061996673Z dnslookup: 0.001266 | connect: 0.002762 | appconnect: 0.011828 | pretransfer: 0.011861 | starttransfer: 0.013982 | total: 0.014001 | size: 22
+2022-06-21T20:40:17.081375790Z Healthcheck requested
+2022-06-21T20:40:17.081375790Z dnslookup: 0.000821 | connect: 0.002969 | appconnect: 0.010159 | pretransfer: 0.010183 | starttransfer: 0.012239 | total: 0.012251 | size: 22
+2022-06-21T20:40:18.101579929Z Healthcheck requested
+2022-06-21T20:40:18.101579929Z dnslookup: 0.001371 | connect: 0.003625 | appconnect: 0.011446 | pretransfer: 0.011469 | starttransfer: 0.013413 | total: 0.013426 | size: 22
+2022-06-21T20:40:19.121189229Z Healthcheck requested
+2022-06-21T20:40:19.121189229Z dnslookup: 0.000914 | connect: 0.003692 | appconnect: 0.010916 | pretransfer: 0.010938 | starttransfer: 0.012594 | total: 0.012605 | size: 22
+2022-06-21T20:40:20.138934752Z Healthcheck requested
+2022-06-21T20:40:20.138934752Z dnslookup: 0.001285 | connect: 0.002829 | appconnect: 0.009589 | pretransfer: 0.009611 | starttransfer: 0.011243 | total: 0.011253 | size: 22
+2022-06-21T20:40:21.157164253Z Healthcheck requested
+2022-06-21T20:40:21.157164253Z dnslookup: 0.000824 | connect: 0.002556 | appconnect: 0.009969 | pretransfer: 0.009992 | starttransfer: 0.011930 | total: 0.011941 | size: 22
+2022-06-21T20:40:22.174673083Z Healthcheck requested
+2022-06-21T20:40:22.174673083Z dnslookup: 0.001040 | connect: 0.002595 | appconnect: 0.009293 | pretransfer: 0.009315 | starttransfer: 0.011306 | total: 0.011316 | size: 22
+2022-06-21T20:40:23.192324115Z Healthcheck requested
+2022-06-21T20:40:23.192324115Z dnslookup: 0.000734 | connect: 0.002729 | appconnect: 0.010146 | pretransfer: 0.010169 | starttransfer: 0.011784 | total: 0.011795 | size: 22
+2022-06-21T20:40:24.213489157Z Healthcheck requested
+2022-06-21T20:40:24.213489157Z dnslookup: 0.001188 | connect: 0.002982 | appconnect: 0.009733 | pretransfer: 0.009755 | starttransfer: 0.012872 | total: 0.012883 | size: 22
+2022-06-21T20:40:25.232192234Z Healthcheck requested
+2022-06-21T20:40:25.232192234Z dnslookup: 0.001215 | connect: 0.002961 | appconnect: 0.010244 | pretransfer: 0.010268 | starttransfer: 0.012529 | total: 0.012542 | size: 22
+2022-06-21T20:40:26.251202435Z Healthcheck requested
+2022-06-21T20:40:26.251202435Z dnslookup: 0.001672 | connect: 0.003617 | appconnect: 0.010495 | pretransfer: 0.010518 | starttransfer: 0.013110 | total: 0.013121 | size: 22
+2022-06-21T20:40:27.270962501Z Healthcheck requested
+2022-06-21T20:40:27.270962501Z dnslookup: 0.001206 | connect: 0.004393 | appconnect: 0.011489 | pretransfer: 0.011512 | starttransfer: 0.013345 | total: 0.013356 | size: 22
+2022-06-21T20:40:28.289902566Z Healthcheck requested
+2022-06-21T20:40:28.289902566Z dnslookup: 0.001094 | connect: 0.002881 | appconnect: 0.009997 | pretransfer: 0.010021 | starttransfer: 0.012838 | total: 0.012854 | size: 22
+2022-06-21T20:40:29.307953857Z Healthcheck requested
+2022-06-21T20:40:29.307953857Z dnslookup: 0.001146 | connect: 0.003009 | appconnect: 0.010043 | pretransfer: 0.010065 | starttransfer: 0.011935 | total: 0.011946 | size: 22
+2022-06-21T20:40:30.326977423Z Healthcheck requested
+2022-06-21T20:40:30.326977423Z dnslookup: 0.001086 | connect: 0.002665 | appconnect: 0.010642 | pretransfer: 0.010665 | starttransfer: 0.012482 | total: 0.012502 | size: 22
+2022-06-21T20:40:31.347379932Z Healthcheck requested
+2022-06-21T20:40:31.347379932Z dnslookup: 0.001263 | connect: 0.004643 | appconnect: 0.011838 | pretransfer: 0.011860 | starttransfer: 0.014114 | total: 0.014126 | size: 22
+2022-06-21T20:40:32.366267965Z Healthcheck requested
+2022-06-21T20:40:32.366267965Z dnslookup: 0.001803 | connect: 0.003681 | appconnect: 0.010917 | pretransfer: 0.010939 | starttransfer: 0.012841 | total: 0.012852 | size: 22
+2022-06-21T20:40:33.385287945Z Healthcheck requested
+2022-06-21T20:40:33.385287945Z dnslookup: 0.001261 | connect: 0.002955 | appconnect: 0.009787 | pretransfer: 0.009809 | starttransfer: 0.012656 | total: 0.012667 | size: 22
+2022-06-21T20:40:34.405894591Z Healthcheck requested
+2022-06-21T20:40:34.405894591Z dnslookup: 0.001386 | connect: 0.004512 | appconnect: 0.011421 | pretransfer: 0.011448 | starttransfer: 0.014327 | total: 0.014352 | size: 22
+2022-06-21T20:40:35.424853440Z Healthcheck requested
+2022-06-21T20:40:35.424853440Z dnslookup: 0.001215 | connect: 0.002783 | appconnect: 0.009956 | pretransfer: 0.009980 | starttransfer: 0.011985 | total: 0.011996 | size: 22
+2022-06-21T20:40:36.444947417Z Healthcheck requested
+2022-06-21T20:40:36.444947417Z dnslookup: 0.001228 | connect: 0.003849 | appconnect: 0.010877 | pretransfer: 0.010900 | starttransfer: 0.013785 | total: 0.013797 | size: 22
+2022-06-21T20:40:37.463749024Z Healthcheck requested
+2022-06-21T20:40:37.463749024Z dnslookup: 0.001147 | connect: 0.003968 | appconnect: 0.011085 | pretransfer: 0.011107 | starttransfer: 0.012539 | total: 0.012550 | size: 22
+2022-06-21T20:40:38.482094672Z Healthcheck requested
+2022-06-21T20:40:38.482094672Z dnslookup: 0.001167 | connect: 0.002690 | appconnect: 0.010118 | pretransfer: 0.010141 | starttransfer: 0.012057 | total: 0.012069 | size: 22
+2022-06-21T20:40:39.500195277Z Healthcheck requested
+2022-06-21T20:40:39.500195277Z dnslookup: 0.001206 | connect: 0.002621 | appconnect: 0.009312 | pretransfer: 0.009334 | starttransfer: 0.011856 | total: 0.011868 | size: 22
+2022-06-21T20:40:40.519924259Z Healthcheck requested
+2022-06-21T20:40:40.519924259Z dnslookup: 0.001703 | connect: 0.003409 | appconnect: 0.010358 | pretransfer: 0.010380 | starttransfer: 0.013501 | total: 0.013511 | size: 22
+2022-06-21T20:40:41.539078511Z Healthcheck requested
+2022-06-21T20:40:41.539078511Z dnslookup: 0.001172 | connect: 0.003962 | appconnect: 0.010982 | pretransfer: 0.011005 | starttransfer: 0.012939 | total: 0.012953 | size: 22
+2022-06-21T20:40:42.563250534Z Healthcheck requested
+2022-06-21T20:40:42.563250534Z dnslookup: 0.001189 | connect: 0.008923 | appconnect: 0.015832 | pretransfer: 0.015855 | starttransfer: 0.017412 | total: 0.017424 | size: 22
+2022-06-21T20:40:43.589502782Z Healthcheck requested
+2022-06-21T20:40:43.589502782Z dnslookup: 0.001232 | connect: 0.009200 | appconnect: 0.016524 | pretransfer: 0.016548 | starttransfer: 0.019854 | total: 0.019867 | size: 22
+2022-06-21T20:40:44.608897928Z Healthcheck requested
+2022-06-21T20:40:44.608897928Z dnslookup: 0.001174 | connect: 0.004633 | appconnect: 0.011386 | pretransfer: 0.011408 | starttransfer: 0.013157 | total: 0.013167 | size: 22
+2022-06-21T20:40:45.628007450Z Healthcheck requested
+2022-06-21T20:40:45.628007450Z dnslookup: 0.000811 | connect: 0.005017 | appconnect: 0.011781 | pretransfer: 0.011803 | starttransfer: 0.013280 | total: 0.013291 | size: 22
+2022-06-21T20:40:46.655778182Z Healthcheck requested
+2022-06-21T20:40:46.655778182Z dnslookup: 0.001222 | connect: 0.013923 | appconnect: 0.020748 | pretransfer: 0.020771 | starttransfer: 0.022028 | total: 0.022039 | size: 22
+2022-06-21T20:40:47.675348421Z Healthcheck requested
+2022-06-21T20:40:47.675348421Z dnslookup: 0.001158 | connect: 0.005224 | appconnect: 0.011918 | pretransfer: 0.011940 | starttransfer: 0.013759 | total: 0.013769 | size: 22
+2022-06-21T20:40:48.692735806Z Healthcheck requested
+2022-06-21T20:40:48.692735806Z dnslookup: 0.000754 | connect: 0.002304 | appconnect: 0.008930 | pretransfer: 0.008954 | starttransfer: 0.011586 | total: 0.011597 | size: 22
+2022-06-21T20:40:49.710422103Z Healthcheck requested
+2022-06-21T20:40:49.710422103Z dnslookup: 0.001362 | connect: 0.003669 | appconnect: 0.010534 | pretransfer: 0.010556 | starttransfer: 0.012102 | total: 0.012112 | size: 22
+2022-06-21T20:40:50.731937484Z Healthcheck requested
+2022-06-21T20:40:50.731937484Z dnslookup: 0.000882 | connect: 0.005439 | appconnect: 0.013323 | pretransfer: 0.013354 | starttransfer: 0.015278 | total: 0.015290 | size: 22
+2022-06-21T20:40:51.752000580Z Healthcheck requested
+2022-06-21T20:40:51.752000580Z dnslookup: 0.001412 | connect: 0.003218 | appconnect: 0.011511 | pretransfer: 0.011538 | starttransfer: 0.012871 | total: 0.012886 | size: 22
+2022-06-21T20:40:52.788878902Z Healthcheck requested
+2022-06-21T20:40:52.788878902Z dnslookup: 0.005303 | connect: 0.010922 | appconnect: 0.024252 | pretransfer: 0.024283 | starttransfer: 0.026268 | total: 0.026288 | size: 22
+2022-06-21T20:40:53.829702179Z Healthcheck requested
+2022-06-21T20:40:53.829702179Z dnslookup: 0.001006 | connect: 0.002384 | appconnect: 0.012892 | pretransfer: 0.012921 | starttransfer: 0.014772 | total: 0.014788 | size: 22
+2022-06-21T20:40:54.872099872Z Healthcheck requested
+2022-06-21T20:40:54.872099872Z dnslookup: 0.001194 | connect: 0.003035 | appconnect: 0.011999 | pretransfer: 0.012032 | starttransfer: 0.014604 | total: 0.014621 | size: 22
+2022-06-21T20:40:55.953762928Z Healthcheck requested
+2022-06-21T20:40:55.953762928Z dnslookup: 0.020950 | connect: 0.027209 | appconnect: 0.043704 | pretransfer: 0.044032 | starttransfer: 0.067425 | total: 0.067447 | size: 22
+2022-06-21T20:40:57.017870957Z Healthcheck requested
+2022-06-21T20:40:57.017870957Z dnslookup: 0.002696 | connect: 0.005560 | appconnect: 0.027304 | pretransfer: 0.027330 | starttransfer: 0.029244 | total: 0.029269 | size: 22
+2022-06-21T20:40:58.086414998Z Healthcheck requested
+2022-06-21T20:40:58.086414998Z dnslookup: 0.001811 | connect: 0.003562 | appconnect: 0.018285 | pretransfer: 0.018316 | starttransfer: 0.037685 | total: 0.037714 | size: 22
+2022-06-21T20:40:59.127106833Z Healthcheck requested
+2022-06-21T20:40:59.127106833Z dnslookup: 0.006318 | connect: 0.008571 | appconnect: 0.018455 | pretransfer: 0.018484 | starttransfer: 0.020296 | total: 0.020315 | size: 22
+2022-06-21T20:41:00.162565862Z Healthcheck requested
+2022-06-21T20:41:00.162565862Z dnslookup: 0.010366 | connect: 0.013988 | appconnect: 0.024073 | pretransfer: 0.024098 | starttransfer: 0.026031 | total: 0.026050 | size: 22
+2022-06-21T20:41:01.192187585Z Healthcheck requested
+2022-06-21T20:41:01.192187585Z dnslookup: 0.001271 | connect: 0.003296 | appconnect: 0.015757 | pretransfer: 0.015791 | starttransfer: 0.017768 | total: 0.017785 | size: 22
+2022-06-21T20:41:02.212423145Z Healthcheck requested
+2022-06-21T20:41:02.212423145Z dnslookup: 0.001260 | connect: 0.002756 | appconnect: 0.009980 | pretransfer: 0.010003 | starttransfer: 0.012865 | total: 0.012878 | size: 22
+2022-06-21T20:41:03.232963199Z Healthcheck requested
+2022-06-21T20:41:03.232963199Z dnslookup: 0.000911 | connect: 0.002399 | appconnect: 0.010220 | pretransfer: 0.010253 | starttransfer: 0.012857 | total: 0.012871 | size: 22
+2022-06-21T20:41:04.253257116Z Healthcheck requested
+2022-06-21T20:41:04.253257116Z dnslookup: 0.001700 | connect: 0.003541 | appconnect: 0.011389 | pretransfer: 0.011417 | starttransfer: 0.013209 | total: 0.013224 | size: 22
+2022-06-21T20:41:05.273314173Z Healthcheck requested
+2022-06-21T20:41:05.273314173Z dnslookup: 0.001929 | connect: 0.003848 | appconnect: 0.011316 | pretransfer: 0.011350 | starttransfer: 0.013153 | total: 0.013167 | size: 22
+2022-06-21T20:41:06.291718333Z Healthcheck requested
+2022-06-21T20:41:06.291718333Z dnslookup: 0.001217 | connect: 0.003199 | appconnect: 0.010128 | pretransfer: 0.010151 | starttransfer: 0.011843 | total: 0.011854 | size: 22
+2022-06-21T20:41:07.309605244Z Healthcheck requested
+2022-06-21T20:41:07.309605244Z dnslookup: 0.001858 | connect: 0.003592 | appconnect: 0.010365 | pretransfer: 0.010390 | starttransfer: 0.011940 | total: 0.011952 | size: 22
+2022-06-21T20:41:08.327305333Z Healthcheck requested
+2022-06-21T20:41:08.327305333Z dnslookup: 0.001315 | connect: 0.003107 | appconnect: 0.009903 | pretransfer: 0.009927 | starttransfer: 0.011279 | total: 0.011291 | size: 22
+2022-06-21T20:41:09.344566085Z Healthcheck requested
+2022-06-21T20:41:09.344566085Z dnslookup: 0.001366 | connect: 0.002890 | appconnect: 0.009540 | pretransfer: 0.009563 | starttransfer: 0.011130 | total: 0.011141 | size: 22
+2022-06-21T20:41:10.362477377Z Healthcheck requested
+2022-06-21T20:41:10.362477377Z dnslookup: 0.001252 | connect: 0.003152 | appconnect: 0.010086 | pretransfer: 0.010108 | starttransfer: 0.011730 | total: 0.011742 | size: 22
+2022-06-21T20:41:11.380707735Z Healthcheck requested
+2022-06-21T20:41:11.380707735Z dnslookup: 0.001321 | connect: 0.002946 | appconnect: 0.009898 | pretransfer: 0.009921 | starttransfer: 0.011764 | total: 0.011775 | size: 22
+2022-06-21T20:41:12.399904347Z Healthcheck requested
+2022-06-21T20:41:12.399904347Z dnslookup: 0.001273 | connect: 0.002768 | appconnect: 0.009844 | pretransfer: 0.009867 | starttransfer: 0.012580 | total: 0.012591 | size: 22
+2022-06-21T20:41:13.418915627Z Healthcheck requested
+2022-06-21T20:41:13.418915627Z dnslookup: 0.000840 | connect: 0.003347 | appconnect: 0.010488 | pretransfer: 0.010512 | starttransfer: 0.012621 | total: 0.012631 | size: 22
+2022-06-21T20:41:14.436230969Z Healthcheck requested
+2022-06-21T20:41:14.436230969Z dnslookup: 0.001233 | connect: 0.002745 | appconnect: 0.009571 | pretransfer: 0.009594 | starttransfer: 0.011380 | total: 0.011391 | size: 22
+2022-06-21T20:41:15.454467847Z Healthcheck requested
+2022-06-21T20:41:15.454467847Z dnslookup: 0.001309 | connect: 0.004134 | appconnect: 0.011265 | pretransfer: 0.011287 | starttransfer: 0.012591 | total: 0.012601 | size: 22
+2022-06-21T20:41:16.473578779Z Healthcheck requested
+2022-06-21T20:41:16.473578779Z dnslookup: 0.001302 | connect: 0.004249 | appconnect: 0.011152 | pretransfer: 0.011175 | starttransfer: 0.013003 | total: 0.013013 | size: 22
+2022-06-21T20:41:17.491761656Z Healthcheck requested
+2022-06-21T20:41:17.491761656Z dnslookup: 0.001541 | connect: 0.003185 | appconnect: 0.010186 | pretransfer: 0.010208 | starttransfer: 0.012004 | total: 0.012016 | size: 22
+2022-06-21T20:41:18.509989673Z Healthcheck requested
+2022-06-21T20:41:18.509989673Z dnslookup: 0.001670 | connect: 0.003378 | appconnect: 0.010189 | pretransfer: 0.010211 | starttransfer: 0.011837 | total: 0.011848 | size: 22
+2022-06-21T20:41:19.528036137Z Healthcheck requested
+2022-06-21T20:41:19.528036137Z dnslookup: 0.001712 | connect: 0.003252 | appconnect: 0.010108 | pretransfer: 0.010136 | starttransfer: 0.011541 | total: 0.011555 | size: 22
+2022-06-21T20:41:20.547860343Z Healthcheck requested
+2022-06-21T20:41:20.547860343Z dnslookup: 0.001166 | connect: 0.003388 | appconnect: 0.010432 | pretransfer: 0.010455 | starttransfer: 0.012258 | total: 0.012270 | size: 22
+2022-06-21T20:41:21.566535930Z Healthcheck requested
+2022-06-21T20:41:21.566535930Z dnslookup: 0.001149 | connect: 0.002959 | appconnect: 0.010233 | pretransfer: 0.010256 | starttransfer: 0.012459 | total: 0.012470 | size: 22
+2022-06-21T20:41:22.593810016Z Healthcheck requested
+2022-06-21T20:41:22.593810016Z dnslookup: 0.001386 | connect: 0.003336 | appconnect: 0.014164 | pretransfer: 0.014196 | starttransfer: 0.016228 | total: 0.016286 | size: 22
+2022-06-21T20:41:23.614539336Z Healthcheck requested
+2022-06-21T20:41:23.614539336Z dnslookup: 0.001230 | connect: 0.002628 | appconnect: 0.009409 | pretransfer: 0.009432 | starttransfer: 0.010808 | total: 0.010819 | size: 22
+2022-06-21T20:41:24.634561455Z Healthcheck requested
+2022-06-21T20:41:24.634561455Z dnslookup: 0.001250 | connect: 0.003570 | appconnect: 0.011455 | pretransfer: 0.011478 | starttransfer: 0.013750 | total: 0.013763 | size: 22
+2022-06-21T20:41:25.651851069Z Healthcheck requested
+2022-06-21T20:41:25.651851069Z dnslookup: 0.001111 | connect: 0.002588 | appconnect: 0.009486 | pretransfer: 0.009515 | starttransfer: 0.010793 | total: 0.010804 | size: 22
+2022-06-21T20:41:26.671466942Z Healthcheck requested
+2022-06-21T20:41:26.671466942Z dnslookup: 0.001118 | connect: 0.004870 | appconnect: 0.011764 | pretransfer: 0.011787 | starttransfer: 0.013674 | total: 0.013685 | size: 22
+2022-06-21T20:41:27.690142669Z Healthcheck requested
+2022-06-21T20:41:27.690142669Z dnslookup: 0.001189 | connect: 0.003056 | appconnect: 0.010643 | pretransfer: 0.010665 | starttransfer: 0.012491 | total: 0.012502 | size: 22
+2022-06-21T20:41:28.709904403Z Healthcheck requested
+2022-06-21T20:41:28.709904403Z dnslookup: 0.001132 | connect: 0.002651 | appconnect: 0.009651 | pretransfer: 0.009673 | starttransfer: 0.013404 | total: 0.013416 | size: 22
+2022-06-21T20:41:29.729488065Z Healthcheck requested
+2022-06-21T20:41:29.729488065Z dnslookup: 0.001689 | connect: 0.003754 | appconnect: 0.011303 | pretransfer: 0.011326 | starttransfer: 0.013445 | total: 0.013459 | size: 22
+2022-06-21T20:41:30.748735831Z Healthcheck requested
+2022-06-21T20:41:30.748735831Z dnslookup: 0.001087 | connect: 0.002760 | appconnect: 0.010206 | pretransfer: 0.010233 | starttransfer: 0.012020 | total: 0.012031 | size: 22
+2022-06-21T20:41:31.765980424Z Healthcheck requested
+2022-06-21T20:41:31.765980424Z dnslookup: 0.001042 | connect: 0.002672 | appconnect: 0.009326 | pretransfer: 0.009349 | starttransfer: 0.010899 | total: 0.010910 | size: 22
+2022-06-21T20:41:32.782917973Z Healthcheck requested
+2022-06-21T20:41:32.782917973Z dnslookup: 0.001245 | connect: 0.002780 | appconnect: 0.009561 | pretransfer: 0.009583 | starttransfer: 0.011215 | total: 0.011226 | size: 22
+2022-06-21T20:41:33.799972484Z Healthcheck requested
+2022-06-21T20:41:33.799972484Z dnslookup: 0.001227 | connect: 0.002911 | appconnect: 0.009788 | pretransfer: 0.009810 | starttransfer: 0.011122 | total: 0.011132 | size: 22
+2022-06-21T20:41:34.818029010Z Healthcheck requested
+2022-06-21T20:41:34.818029010Z dnslookup: 0.001082 | connect: 0.002767 | appconnect: 0.009479 | pretransfer: 0.009501 | starttransfer: 0.012315 | total: 0.012326 | size: 22
+2022-06-21T20:41:35.837060262Z Healthcheck requested
+2022-06-21T20:41:35.837060262Z dnslookup: 0.001288 | connect: 0.003101 | appconnect: 0.010334 | pretransfer: 0.010356 | starttransfer: 0.013210 | total: 0.013220 | size: 22
+2022-06-21T20:41:36.858316332Z Healthcheck requested
+2022-06-21T20:41:36.858316332Z dnslookup: 0.001155 | connect: 0.005399 | appconnect: 0.012184 | pretransfer: 0.012206 | starttransfer: 0.014977 | total: 0.014989 | size: 22
+2022-06-21T20:41:37.875866943Z Healthcheck requested
+2022-06-21T20:41:37.875866943Z dnslookup: 0.001096 | connect: 0.002605 | appconnect: 0.009732 | pretransfer: 0.009755 | starttransfer: 0.011425 | total: 0.011437 | size: 22
+2022-06-21T20:41:38.895050331Z Healthcheck requested
+2022-06-21T20:41:38.895050331Z dnslookup: 0.001130 | connect: 0.003100 | appconnect: 0.010035 | pretransfer: 0.010058 | starttransfer: 0.013049 | total: 0.013059 | size: 22
+2022-06-21T20:41:39.913843942Z Healthcheck requested
+2022-06-21T20:41:39.913843942Z dnslookup: 0.001712 | connect: 0.003615 | appconnect: 0.011009 | pretransfer: 0.011032 | starttransfer: 0.012619 | total: 0.012630 | size: 22
+2022-06-21T20:41:40.931032087Z Healthcheck requested
+2022-06-21T20:41:40.931032087Z dnslookup: 0.001290 | connect: 0.002672 | appconnect: 0.009363 | pretransfer: 0.009385 | starttransfer: 0.011060 | total: 0.011071 | size: 22
+2022-06-21T20:41:41.951739450Z Healthcheck requested
+2022-06-21T20:41:41.951739450Z dnslookup: 0.000806 | connect: 0.002928 | appconnect: 0.010727 | pretransfer: 0.010750 | starttransfer: 0.014126 | total: 0.014140 | size: 22
+2022-06-21T20:41:42.970387909Z Healthcheck requested
+2022-06-21T20:41:42.970387909Z dnslookup: 0.001318 | connect: 0.003450 | appconnect: 0.010735 | pretransfer: 0.010780 | starttransfer: 0.012260 | total: 0.012276 | size: 22
+2022-06-21T20:41:43.989580457Z Healthcheck requested
+2022-06-21T20:41:43.989580457Z dnslookup: 0.001093 | connect: 0.003793 | appconnect: 0.010908 | pretransfer: 0.010931 | starttransfer: 0.013046 | total: 0.013057 | size: 22
+2022-06-21T20:41:45.016398680Z Healthcheck requested
+2022-06-21T20:41:45.016398680Z dnslookup: 0.008276 | connect: 0.011683 | appconnect: 0.018655 | pretransfer: 0.018678 | starttransfer: 0.020502 | total: 0.020513 | size: 22
+2022-06-21T20:41:46.035469996Z Healthcheck requested
+2022-06-21T20:41:46.035469996Z dnslookup: 0.001228 | connect: 0.003001 | appconnect: 0.010002 | pretransfer: 0.010025 | starttransfer: 0.013142 | total: 0.013154 | size: 22
+2022-06-21T20:41:47.053949042Z Healthcheck requested
+2022-06-21T20:41:47.053949042Z dnslookup: 0.001335 | connect: 0.003419 | appconnect: 0.010532 | pretransfer: 0.010560 | starttransfer: 0.012437 | total: 0.012448 | size: 22
+2022-06-21T20:41:48.079751718Z Healthcheck requested
+2022-06-21T20:41:48.079751718Z dnslookup: 0.001271 | connect: 0.009326 | appconnect: 0.016394 | pretransfer: 0.016417 | starttransfer: 0.019545 | total: 0.019556 | size: 22
+2022-06-21T20:41:49.098435118Z Healthcheck requested
+2022-06-21T20:41:49.098435118Z dnslookup: 0.001252 | connect: 0.003040 | appconnect: 0.010379 | pretransfer: 0.010401 | starttransfer: 0.012395 | total: 0.012406 | size: 22
+2022-06-21T20:41:50.124435078Z Healthcheck requested
+2022-06-21T20:41:50.124435078Z dnslookup: 0.001149 | connect: 0.010588 | appconnect: 0.017742 | pretransfer: 0.017763 | starttransfer: 0.019331 | total: 0.019341 | size: 22
+2022-06-21T20:41:51.142478097Z Healthcheck requested
+2022-06-21T20:41:51.142478097Z dnslookup: 0.001255 | connect: 0.003153 | appconnect: 0.010250 | pretransfer: 0.010273 | starttransfer: 0.012082 | total: 0.012093 | size: 22
+2022-06-21T20:41:52.161595384Z Healthcheck requested
+2022-06-21T20:41:52.161595384Z dnslookup: 0.001095 | connect: 0.004351 | appconnect: 0.011416 | pretransfer: 0.011449 | starttransfer: 0.012863 | total: 0.012873 | size: 22
+2022-06-21T20:41:53.180235935Z Healthcheck requested
+2022-06-21T20:41:53.180235935Z dnslookup: 0.001267 | connect: 0.003263 | appconnect: 0.010283 | pretransfer: 0.010307 | starttransfer: 0.012599 | total: 0.012609 | size: 22
+2022-06-21T20:41:54.197751597Z Healthcheck requested
+2022-06-21T20:41:54.197751597Z dnslookup: 0.001255 | connect: 0.002834 | appconnect: 0.009733 | pretransfer: 0.009755 | starttransfer: 0.011465 | total: 0.011477 | size: 22
+2022-06-21T20:41:55.215691943Z Healthcheck requested
+2022-06-21T20:41:55.215691943Z dnslookup: 0.001667 | connect: 0.002999 | appconnect: 0.009960 | pretransfer: 0.009984 | starttransfer: 0.011741 | total: 0.011752 | size: 22

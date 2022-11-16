@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: godns-test
+  name: godns-test
+spec:
+  selector:
+    matchLabels:
+      app: godns-test
+  template:
+    metadata:
+      labels:
+        app: godns-test
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          echo "Starting"
+          requests=0
+          fails=0
+          while : ; do
+            requests=$((requests+1))
+            dnslookup
+          done
+        # oc adm release info --image-for=cli
+        image: quay.io/gspence/dnslookup
+        name: curl
+      hostNetwork: false
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+      - key: node-role.kubernetes.io/ci-builds-worker
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/ci-tests-worker
+        operator: Exists

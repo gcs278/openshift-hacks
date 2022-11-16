@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl-deploy
+  labels:
+    app: curl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curl
+  template:
+    metadata:
+      labels:
+        app: curl
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: curl
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          set -x
+          # Add a sleep and the nslookup doesn't time out
+          #sleep 1
+          #curl -w "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "http://172.30.248.157:8080"
+          #curl -w "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "http://172.30.248.157:8080"
+          #time nslookup -timeout=30 -retry=0 ingress-canary.openshift-ingress-canary.svc.cluster.local
+          # Can use curl optionally, same problem, but less control over DNS options
+          #curl -w "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "http://ingress-canary.openshift-ingress-canary.svc.cluster.local:8080"
+          sleep 100000
+      # Uncommenting this should make DNS use TCP
+      #dnsConfig:
+      #  options:
+      #  - name: use-vc

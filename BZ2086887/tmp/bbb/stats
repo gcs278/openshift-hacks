@@ -1,0 +1,5 @@
+Total Curl Requests: 455496
+Total Successful Curl Requests: 455492
+DNS retry once, then success: 19
+CURL OpenSSL SSL_ERROR_SYSCALL: 4
+Average DNS request time: 0.00185828

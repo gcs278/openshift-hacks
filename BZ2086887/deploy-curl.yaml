@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl-deploy
+  labels:
+    app: curl
+spec:
+  replicas: 100
+  selector:
+    matchLabels:
+      app: curl
+  template:
+    metadata:
+      labels:
+        app: curl
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: curl
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          set -x
+          #nslookup -timeout=5 canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN} && echo "PASS" > /wget-dir/index.html || echo "FAIL"
+          #wget 172.30.50.73 -O /wget-dir/index.html || exit 0
+          #curl -o /wget-dir/index.html -kw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://google.com" || exit 0
+          #curl -o /wget-dir/index.html -k -H "host: canary-openshift-ingress-canary.apps.gspence-2022-06-15-0843.gcp.devcluster.openshift.com" https://35.196.231.96
+          curl -o /wget-dir/index.html -kw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 100000
+        volumeMounts:
+        - name: wgetdir
+          mountPath: "/wget-dir"
+        env:
+        - name: "CLUSTER_INGRESS_DOMAIN"
+          # oc get ingresses.config/cluster -o 'jsonpath={.spec.domain}'
+          value: "apps.gspence-2022-06-16-0848.gcp.devcluster.openshift.com"
+        dnsConfig:
+          options:
+          - name: use-vc
+        readinessProbe:
+          exec:
+            command:
+            - test
+            - "-s"
+            - /wget-dir/index.html
+      dnsConfig:
+        options:
+        - name: use-vc
+      volumes:
+      - name: wgetdir
+        emptyDir: {}

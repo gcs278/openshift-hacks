@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: burst-test
+  name: burst-test
+spec:
+  selector:
+    matchLabels:
+      app: burst-test
+  template:
+    metadata:
+      labels:
+        app: burst-test
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          echo "Starting"
+          sleep 10 # Avoid fix for https://github.com/openshift/sdn/pull/439
+          function f_dig() {
+            OUT=$(dig +retry=0 +timeout=30 +tries=1 "https://github.com")
+            if [[ $? -ne 0 ]]; then
+              echo "FAIL: $OUT"
+              return 1
+            else
+              return 0
+            fi
+          }
+          requests=0
+          burst_num=500
+          num_of_rounds=10
+          sleep $((60 - $(date +%s) % 60))
+          while : ; do
+            success=0
+            fails=0
+            pids=""
+            echo "Starting $burst_num more requests..."
+            echo "Active pids: $(ps uxH | wc -l)"
+            for i in $(seq 1 $burst_num); do
+              requests=$((requests+1))
+              f_dig &
+              pids+=" $!"
+            done
+            echo "Waiting for pids: $pids"
+            for p in $pids; do
+              wait $p
+              rc=$?
+              if [[ "$rc" == 0 ]]; then
+                success=$((success+1))
+              else
+                echo "PID: $p rc: $rc"
+                fails=$((fails+1))
+              fi
+            done
+            echo "Stats: Requests=${requests} Success=${success} Fails=${fails}"
+            num_of_rounds=$((num_of_rounds-1))
+            if [[ $num_of_rounds == 0 ]]; then
+              echo "DONE....sleeping forever"
+              sleep infinity
+            fi
+            sleep $((60 - $(date +%s) % 60))
+          done
+        # oc adm release info --image-for=cli
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        name: curl
+      hostNetwork: false
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+      - key: node-role.kubernetes.io/ci-builds-worker
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/ci-tests-worker
+        operator: Exists

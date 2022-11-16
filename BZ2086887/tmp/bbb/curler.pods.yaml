@@ -1,0 +1,3174 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.102.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.102.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T07:49:33Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-745c5
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3296469413"
+    uid: e503ef26-5383-4198-941b-3f0d3dc9f331
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-132-76.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-t9llv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-132-76.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-t9llv
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:49:33Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:49:36Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:49:36Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:49:33Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://82c615d8c5e0d5b55dffc2fa435e17fba6cdbdba3b6969720577e50e404e39d5
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T07:49:36Z"
+    hostIP: 10.0.132.76
+    phase: Running
+    podIP: 10.130.102.3
+    podIPs:
+    - ip: 10.130.102.3
+    qosClass: BestEffort
+    startTime: "2022-06-23T07:49:33Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.130.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.130.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T09:43:53Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-944g6
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3296822944"
+    uid: 82beed7f-fcfa-45cb-81a4-860fd7898861
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-133-102.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-pd89k
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-133-102.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-pd89k
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T09:43:53Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T09:43:56Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T09:43:56Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T09:43:53Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://a944646a59db3e5e3017a1fdde99285246313f188d6b9bd423f88de7515d2e17
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T09:43:55Z"
+    hostIP: 10.0.133.102
+    phase: Running
+    podIP: 10.129.130.2
+    podIPs:
+    - ip: 10.129.130.2
+    qosClass: BestEffort
+    startTime: "2022-06-23T09:43:53Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.5.164"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.5.164"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-22T19:19:22Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-9jpfn
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3294511700"
+    uid: 53fc44ad-e559-422c-ae30-f6bec05d065b
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-133-231.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-j4x7b
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-133-231.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-j4x7b
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:19:22Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:19:25Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:19:25Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:19:22Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://952b60e4312379546c729ada47bdb52de1a5b9777861d9d0a4bac135fee7ca32
+      image: image-registry.openshift-image-registry.svc:5000/ci-op-9s3j4lqp/stable-latest-managed-gitops-unit-tests@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: image-registry.openshift-image-registry.svc:5000/ci-op-0d22fy3k/stable-latest-cvp-common-claim@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-22T19:19:24Z"
+    hostIP: 10.0.133.231
+    phase: Running
+    podIP: 10.129.5.164
+    podIPs:
+    - ip: 10.129.5.164
+    qosClass: BestEffort
+    startTime: "2022-06-22T19:19:22Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.160.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.160.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T11:40:49Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-b96sh
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297233901"
+    uid: 416917c8-941e-4113-b26a-7687973cca2a
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-159-150.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-8j2zn
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-159-150.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-8j2zn
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:40:49Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:40:53Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:40:53Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:40:49Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://d2168ee3f548b11438e5a6f6aace053d5cfe2670176362e2c0b53e05f1260db0
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T11:40:52Z"
+    hostIP: 10.0.159.150
+    phase: Running
+    podIP: 10.128.160.2
+    podIPs:
+    - ip: 10.128.160.2
+    qosClass: BestEffort
+    startTime: "2022-06-23T11:40:49Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.180.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.180.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T15:23:57Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-dg52q
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297954962"
+    uid: 9e32c85e-eec4-4a3c-ad14-142513c90110
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-130-34.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-fbtcj
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-130-34.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-fbtcj
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:23:57Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:24:01Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:24:01Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:23:57Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://c60990766cee70f310ad86ee64ecf98e9cb16300d02eb253e4b01339044ba48b
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T15:24:00Z"
+    hostIP: 10.0.130.34
+    phase: Running
+    podIP: 10.130.180.2
+    podIPs:
+    - ip: 10.130.180.2
+    qosClass: BestEffort
+    startTime: "2022-06-23T15:23:57Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.131.171.137"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.131.171.137"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-22T19:20:32Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-dgwbz
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3294514136"
+    uid: dc99602e-c17f-463a-8042-038244a22820
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-169-113.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-n8gfd
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-169-113.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-n8gfd
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:20:32Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:20:35Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:20:35Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:20:32Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://05c3bb9ad52eb608c8c847254deb5ccc1813b38a1ad951f0e891899ac29686aa
+      image: image-registry.openshift-image-registry.svc:5000/ci-ln-6wz80kk/stable@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: image-registry.openshift-image-registry.svc:5000/ci-ln-6wz80kk/stable@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-22T19:20:35Z"
+    hostIP: 10.0.169.113
+    phase: Running
+    podIP: 10.131.171.137
+    podIPs:
+    - ip: 10.131.171.137
+    qosClass: BestEffort
+    startTime: "2022-06-22T19:20:32Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.92.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.92.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T05:21:31Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-fhgj6
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3296157788"
+    uid: 7192843e-ed72-4cc1-b11e-08223e59be8f
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-130-233.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-kxrw9
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-130-233.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-kxrw9
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T05:21:31Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T05:21:35Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T05:21:35Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T05:21:31Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://628bb6e5eafb57ff716d9d4584475aceb1687597915234295de6bd5a602e73f3
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T05:21:34Z"
+    hostIP: 10.0.130.233
+    phase: Running
+    podIP: 10.129.92.3
+    podIPs:
+    - ip: 10.129.92.3
+    qosClass: BestEffort
+    startTime: "2022-06-23T05:21:31Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.12.169"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.12.169"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-22T19:21:07Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-g85vs
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3294516509"
+    uid: ebe238a1-5b04-4bcc-999d-8af810ec86de
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-145-124.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-22687
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-145-124.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-22687
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:21:07Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:21:10Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:21:10Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:21:07Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://ebd5f174d9a2b1faf636d36357893021e100ef56a8a606e15fb95059ec361b42
+      image: image-registry.openshift-image-registry.svc:5000/ci-op-v5qgh862/stable-latest-cvp-common-claim@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: image-registry.openshift-image-registry.svc:5000/ci-ln-01ixcnt/stable@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-22T19:21:09Z"
+    hostIP: 10.0.145.124
+    phase: Running
+    podIP: 10.128.12.169
+    podIPs:
+    - ip: 10.128.12.169
+    qosClass: BestEffort
+    startTime: "2022-06-22T19:21:07Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.180.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.180.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T15:22:02Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-hgdn8
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297949154"
+    uid: 601e17d8-4d6d-402b-9094-d5e0021bf593
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-134-255.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5t4hf
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-134-255.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-5t4hf
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:22:02Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:22:06Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:22:06Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:22:02Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://de3ac2d8e55af04479dfb6361bc0d7423ffb50c1eece051a79fe894cd092b026
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T15:22:05Z"
+    hostIP: 10.0.134.255
+    phase: Running
+    podIP: 10.129.180.2
+    podIPs:
+    - ip: 10.129.180.2
+    qosClass: BestEffort
+    startTime: "2022-06-23T15:22:02Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.136.4"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.136.4"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T10:14:52Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-hx7kt
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3296946946"
+    uid: 856175b8-26de-4253-ae1c-df4373bd2b87
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-141-47.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-knp75
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-141-47.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-knp75
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:14:52Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:14:56Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:14:56Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:14:52Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://1950bbde51540cb38b7c366ff0e614c01f252f6ec7106d15e741a7ecbb564789
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T10:14:56Z"
+    hostIP: 10.0.141.47
+    phase: Running
+    podIP: 10.129.136.4
+    podIPs:
+    - ip: 10.129.136.4
+    qosClass: BestEffort
+    startTime: "2022-06-23T10:14:52Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.104.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.104.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T07:52:05Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-knw6f
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3296476878"
+    uid: f49867b2-a903-48f8-9283-68cf0fb434f2
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-144-164.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-x4g98
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-144-164.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-x4g98
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:52:05Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:52:07Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:52:07Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T07:52:05Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://d82805fa67bec474a5d6b932ac7331dc6e64075568d37045cbc83de1f5194e2a
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T07:52:07Z"
+    hostIP: 10.0.144.164
+    phase: Running
+    podIP: 10.128.104.3
+    podIPs:
+    - ip: 10.128.104.3
+    qosClass: BestEffort
+    startTime: "2022-06-23T07:52:05Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.131.178.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.131.178.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T15:16:06Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-lzx6g
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297928680"
+    uid: c39fc0ba-3201-4b39-931f-469d08a0564a
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-136-109.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-gm2qh
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-136-109.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-gm2qh
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:16:06Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:16:10Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:16:10Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:16:06Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://21d7f295736ee33449013564d65ae56a360f047bfb683eaaabb843069396897f
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T15:16:10Z"
+    hostIP: 10.0.136.109
+    phase: Running
+    podIP: 10.131.178.2
+    podIPs:
+    - ip: 10.131.178.2
+    qosClass: BestEffort
+    startTime: "2022-06-23T15:16:06Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.148.4"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.148.4"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T11:27:20Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-mxzgn
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297175425"
+    uid: 616cad84-5980-4155-8c3e-ef1290ab64b5
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-156-152.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-dmtz6
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-156-152.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-dmtz6
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:27:20Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:27:29Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:27:29Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T11:27:20Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://579d263c07ae408184295ee427cc34b9527bf05a5befdd009b05721be7959bf0
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T11:27:29Z"
+    hostIP: 10.0.156.152
+    phase: Running
+    podIP: 10.130.148.4
+    podIPs:
+    - ip: 10.130.148.4
+    qosClass: BestEffort
+    startTime: "2022-06-23T11:27:20Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.178.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.178.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T14:53:35Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-pdqpp
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297859984"
+    uid: 45217956-2802-4374-9731-6a56f5cbf859
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-134-240.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-wmsgz
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-134-240.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-wmsgz
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T14:53:35Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T14:53:40Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T14:53:40Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T14:53:35Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://58df707cace1ebf4ef5d198c5f0caeaeb1f85dced7a9559425a299202aaa3bee
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T14:53:39Z"
+    hostIP: 10.0.134.240
+    phase: Running
+    podIP: 10.130.178.3
+    podIPs:
+    - ip: 10.130.178.3
+    qosClass: BestEffort
+    startTime: "2022-06-23T14:53:35Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.131.180.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.131.180.2"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T15:23:57Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-v72lr
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297954992"
+    uid: 7cdd8748-9663-4a41-89fd-c5112e45e035
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-138-87.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-zmmk2
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-138-87.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-zmmk2
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:23:57Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:24:01Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:24:01Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:23:57Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://617b2d74be301e26c59e2fc076aad12a19a41fd5bd3859e345f7ffb95fc9c7cd
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T15:24:01Z"
+    hostIP: 10.0.138.87
+    phase: Running
+    podIP: 10.131.180.2
+    podIPs:
+    - ip: 10.131.180.2
+    qosClass: BestEffort
+    startTime: "2022-06-23T15:23:57Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.52.205"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.129.52.205"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-22T19:16:35Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-xnjvz
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3294505961"
+    uid: 91f982c0-0438-4051-9c4e-c3aa5e832026
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-145-15.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-l6p9l
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-145-15.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-l6p9l
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:16:35Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:16:39Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:16:39Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-22T19:16:35Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://fed0c77e18f6f4230ff436463c23ea233dc742b8e1dd2b72526a9fe57665fd29
+      image: image-registry.openshift-image-registry.svc:5000/ci-op-wcb0vkgc/stable-latest-cvp-common-claim@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: image-registry.openshift-image-registry.svc:5000/ci-ln-lzryhl2/stable@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-22T19:16:38Z"
+    hostIP: 10.0.145.15
+    phase: Running
+    podIP: 10.129.52.205
+    podIPs:
+    - ip: 10.129.52.205
+    qosClass: BestEffort
+    startTime: "2022-06-22T19:16:35Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.142.4"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.130.142.4"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T10:56:27Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-zfnvr
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297068628"
+    uid: 8f964afc-0075-4cf5-967f-f26a37ce2bf5
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-134-137.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-npmzj
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-134-137.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-npmzj
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:56:27Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:56:31Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:56:31Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T10:56:27Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://23395f7fb5fb06dc5db216d7ab19a2bcf896ef97a689ce190024d903cab2a75a
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T10:56:30Z"
+    hostIP: 10.0.134.137
+    phase: Running
+    podIP: 10.130.142.4
+    podIPs:
+    - ip: 10.130.142.4
+    qosClass: BestEffort
+    startTime: "2022-06-23T10:56:27Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.180.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "openshift-sdn",
+            "interface": "eth0",
+            "ips": [
+                "10.128.180.3"
+            ],
+            "default": true,
+            "dns": {}
+        }]
+    creationTimestamp: "2022-06-23T15:20:05Z"
+    generateName: curler-
+    labels:
+      app: curler
+      controller-revision-hash: 794cffd55
+      pod-template-generation: "2"
+    name: curler-zp94t
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: curler
+      uid: 0db4e703-96b4-47a2-80c0-e7a6b40bced8
+    resourceVersion: "3297942376"
+    uid: 55aef24b-89ab-4a11-92ff-e86e01700784
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - ip-10-0-129-223.ec2.internal
+    containers:
+    - command:
+      - /bin/bash
+      - -c
+      - |
+        set -uo pipefail
+        while :
+          do curl -sSkw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+          sleep 1
+          done
+      env:
+      - name: CLUSTER_INGRESS_DOMAIN
+        value: apps.build01.ci.devcluster.openshift.com
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imagePullPolicy: IfNotPresent
+      name: curl
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-hfrsq
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-kc7dq
+    nodeName: ip-10-0-129-223.ec2.internal
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-builds-worker
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/ci-tests-worker
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    volumes:
+    - name: kube-api-access-hfrsq
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:20:05Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:20:09Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:20:09Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-06-23T15:20:05Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://5b4c9828899a8dd9d92319b78b1adc8d08b9c0e8658fe5d91ff09f9eb0537e9b
+      image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+      lastState: {}
+      name: curl
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-06-23T15:20:08Z"
+    hostIP: 10.0.129.223
+    phase: Running
+    podIP: 10.128.180.3
+    podIPs:
+    - ip: 10.128.180.3
+    qosClass: BestEffort
+    startTime: "2022-06-23T15:20:05Z"
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

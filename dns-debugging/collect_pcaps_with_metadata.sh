@@ -44,6 +44,7 @@ for i in $dumpers; do
       rm -f $j
     done
     mergecap ${WORKER_DIR}/*.fixed.pcap -w ${WORKER_DIR}/$i.pcap
+    echo "Wrote: ${WORKER_DIR}/$i.pcap"
     rm -f ${WORKER_DIR}/*.fixed.pcap
     echo "### Pods on $node (Again): ###" >> $metadata
     oc get pods -A --as system:admin -o wide | grep -i $node >> $metadata

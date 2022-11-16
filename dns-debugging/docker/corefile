@@ -1,0 +1,10 @@
+.:5383 {
+  bufsize 512
+  forward . 127.0.0.1:8053
+  cache
+}
+
+.:8053 {
+  log
+  forward . 8.8.8.8
+}

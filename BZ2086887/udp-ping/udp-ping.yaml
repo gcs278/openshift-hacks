@@ -1,0 +1,202 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: udp-ping-server
+  name: udp-ping-server
+spec:
+  selector:
+    matchLabels:
+      app: udp-ping-server
+  template:
+    metadata:
+      labels:
+        app: udp-ping-server
+    spec:
+      containers:
+      - command:
+        - "/bin/python3"
+        - "/udp-server.py"
+        # oc adm release info --image-for=cli
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        name: curl
+        ports:
+        - containerPort: 25050
+        volumeMounts:
+        - name: udp-server
+          mountPath: /udp-server.py
+          subPath: udp-server.py
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "0"
+      hostNetwork: false
+      volumes:
+      - name: udp-server
+        configMap:
+          name: udp-server
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: udp-ping-client
+  name: udp-ping-client
+spec:
+  selector:
+    matchLabels:
+      app: udp-ping-client
+  template:
+    metadata:
+      labels:
+        app: udp-ping-client
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/python3"
+        - "/udp-client.py"
+        # oc adm release info --image-for=cli
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        name: client
+        volumeMounts:
+        - name: udp-client
+          mountPath: /udp-client.py
+          subPath: udp-client.py
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "0"
+      hostNetwork: false
+      volumes:
+      - name: udp-client
+        configMap:
+          name: udp-client
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+---
+apiVersion: v1
+data:
+  udp-client.py: |
+    #!/usr/bin/env python
+
+    import datetime
+    import time
+    import sys
+    import socket
+
+    host = "udp-ping-server.hongkliu-test.svc.cluster.local" #set to server ip or hostname
+    port = 25050
+
+    number_of_pings = 40
+    timeout = 2
+    sleep_time = 1
+    message_bytes = 256
+
+    min_ping = 999999
+    max_ping = 0
+    ping_count = 0
+    ping_received = 0
+    avg_ping = 0
+    warning_time=10
+
+    print(f"Connecting to host {host} on port {port}...")
+
+    clientSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    clientSocket.settimeout(timeout)
+
+    message = bytearray([1] * message_bytes)
+
+    def show_summary():
+        total_time = (time.time() - time_start) * 1000
+
+        print('--- %s udp ping statistics ---' % (host))
+        print('%d packets transmitted, %d received, %0.0f%% packet loss, time %0.0fms' % (ping_count, ping_received, (ping_count - ping_received) / ping_count * 100, total_time))
+        print('rtt min/avg/max/mdev = %0.3f/%0.3f/%0.3f/%0.3f ms' % (min_ping, avg_ping / ping_count, max_ping, max_ping - min_ping))
+        sys.exit()
+
+    time_start = time.time()
+
+    print(f"Started ping to host {host} on port {port}...")
+
+    seq=0
+    while True:
+        try:
+            clientSocket.sendto(message, (host, port))
+            start = time.time()
+            data, server = clientSocket.recvfrom(2048)
+            end = time.time()
+            elapsed = (end - start) * 1000
+            if elapsed < min_ping: min_ping = elapsed
+            if elapsed > max_ping: max_ping = elapsed
+            ping_count += 1
+            ping_received += 1
+            avg_ping += elapsed
+            jitter = elapsed - min_ping
+            if elapsed > warning_time:
+              print('%s: Time exceeded %d ms: received %s bytes from %s udp_seq=%d time=%0.1f ms jitter=%0.2f ms' % (datetime.datetime.now(), warning_time, len(data), host, seq, elapsed, jitter))
+            time.sleep(sleep_time)
+        except socket.timeout as e:
+            print('%s: udp_seq=%d REQUEST TIMED OUT' % (datetime.datetime.now(), seq))
+        except KeyboardInterrupt:
+            show_summary()
+        seq=seq+1
+
+    show_summary()
+kind: ConfigMap
+metadata:
+  name: udp-client
+---
+apiVersion: v1
+data:
+  udp-server.py: |
+    #!/usr/bin/env python
+
+    from __future__ import print_function
+    from socket import *
+    import time
+
+    bind = '' #listen on any
+    port = 25050
+    
+    print("Starting udp server...")
+
+    serverSocket = socket(AF_INET, SOCK_DGRAM)
+    serverSocket.bind((bind, port))
+    
+    print("Started udp server on port", port)
+
+    while True:
+        message, address = serverSocket.recvfrom(2048)
+        #time.sleep(1)
+        #print(".", end='', flush=True)
+        serverSocket.sendto(message, address)
+kind: ConfigMap
+metadata:
+  name: udp-server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: udp-ping-server
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: ping
+    port: 25050
+    protocol: UDP
+    targetPort: 25050
+  selector:
+    app: udp-ping-server
+  sessionAffinity: None
+  type: ClusterIP

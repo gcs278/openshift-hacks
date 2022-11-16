@@ -1,29 +1,56 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: nginx-job
+  name: wget-job
   labels:
-    app: nginx
+    app: wget
 spec:
-  replicas: 600
   restartPolicy: Never
-  completions: 1000
-  parallelism: 300
+  completions: 1250
+  parallelism: 1250
+  activeDeadlineSeconds: 100000
+  backoffLimit: 0
   template:
     metadata:
       labels:
-        app: nginx
+        app: busybox
     spec:
+      terminationGracePeriodSeconds: 0
       restartPolicy: Never
       initContainers:
-      - name: init-myservice
-        image: busybox:1.28
-        command: ['sh', '-c', "wget www.google.com"]
+      - name: init
+        image: quay.io/gspence/busybox
+        #image: registry.ci.openshift.org/ocp/4.11-2022-06-12-130306@sha256:9bf5821c8733242f14482bc128e55fb51037eecf198c27a70557c55c8139fd5a
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          set -x
+          #nslookup google.com 172.30.0.10 && echo "GOOD" > /wget-dir/index.html || echo "failure"
+          #wget 172.30.50.73 -O /wget-dir/index.html || exit 0
+          wget www.google.com -O /wget-dir/index.html || exit 0
+          #curl -o /wget-dir/index.html -skw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://google.com" || exit 0
+          #curl -o /wget-dir/index.html -skw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/" || exit 0
+        volumeMounts:
+        - name: wgetdir
+          mountPath: "/wget-dir"
+        env:
+        - name: "CLUSTER_INGRESS_DOMAIN"
+          # oc get ingresses.config/cluster -o 'jsonpath={.spec.domain}'
+          value: "apps.gspence-2022-06-15-0843.gcp.devcluster.openshift.com"
       containers:
-      - name: nginx
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 80
-        requests:
-          memory: "3000Mi"
-          cpu: "250m"
+      - name: myservice
+        image: quay.io/gspence/busybox
+        command: ['sh', '-c', "test -s /wget-dir/index.html; sleep 100000"]
+        volumeMounts:
+        - name: wgetdir
+          mountPath: "/wget-dir"
+        readinessProbe:
+          exec:
+            command:
+            - test
+            - "-s"
+            - /wget-dir/index.html
+      volumes:
+      - name: wgetdir
+        emptyDir: {}

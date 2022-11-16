@@ -334,6 +334,33 @@ function oc_ingress_watch_router_conns() {
   #oc_ingress_exec_any_router default "watch -n .1 echo show info | socat /var/lib/haproxy/run/haproxy.sock stdio | grep CurrConns"
 }
 
+function oc_ingress_get_svc() {
+  oc get svc -n openshift-ingress $@
+}
+
+function oc_ingress_patch_ingress_operator_local_binary() {
+  #image=$(oc 
+  podman pull --authfile /home/gspence/.secrets/pull-secret.txt 
+}
+
+function oc_get_image() {
+  if [[ "$1" == "" ]] || [[ "$2" == "" ]]; then
+    echo "Usage: oc_get_image <VERSION> <container>"
+    return 1
+  fi
+
+  sha=$(oc adm release info quay.io/openshift-release-dev/ocp-release:${1}-x86_64 | grep -i ${2} | awk '{print $2}')
+  if [[ $? -ne 0 ]]; then
+    echo "Error running oc adm release info quay.io/openshift-release-dev/ocp-release:${1}-x86_64"
+    return 1
+  fi
+  if [[ "$sha" == "" ]]; then
+    echo "Unable to find sha for ${2}"
+    return 1
+  fi
+  echo "quay.io/openshift-release-dev/ocp-v4.0-art-dev@$sha"
+}
+
 function oc_logs() {
   if [[ "$1" == "" ]]; then
     echo "ERROR: You need to provide a pod name"
@@ -348,5 +375,49 @@ function oc_logs() {
   for pod in $(oc get pods $NS --no-headers | grep "${1}-" | awk '{print $2}'); do
     echo "${pod}:"
     oc logs $pod --timestamps
+  done
+}
+
+function oc_dns_unmanaged() {
+  oc_scale_cvo 0
+  
+  oc -n openshift-dns-operator scale deployment.apps/dns-operator --replicas=0
+  oc patch clusterversions/version --type=json --patch='[{"op":"add","path":"/spec/overrides","value":[{"kind":"Deployment","group":"apps/v1","name":"dns-operator","namespace":"openshift-dns-operator","unmanaged":true}]}]'
+
+  oc -n openshift-dns-operator scale deployment.apps/dns-operator --replicas=0
+}
+
+function oc_dns_managed() {
+  oc_scale_cvo 1
+  
+  oc patch clusterversions/version --type=json --patch='[{"op":"add","path":"/spec/overrides","value":[{"kind":"Deployment","group":"apps/v1","name":"dns-operator","namespace":"openshift-dns-operator","unmanaged":false}]}]'
+
+  oc -n openshift-dns-operator scale deployment.apps/dns-operator --replicas=1
+}
+
+function oc_dns_get_coredns_pods() {
+  oc get -n openshift-dns pods $@
+}
+
+function oc_dns_get_dnsoperator_pods() {
+  oc get -n openshift-dns-operator pods $@
+}
+
+function oc_dns_edit_configmap() {
+  oc -n openshift-dns edit configmaps/dns-default $@
+}
+
+function oc_dns_edit_dnsoperator() {
+  oc edit -n openshift-dns dns.operator/default $@
+}
+
+function oc_dns_edit_dnsdaemonset() {
+  oc edit daemonsets.apps -n openshift-dns dns-default
+}
+
+function oc_dns_delete_all_coredns_pods() {
+  for i in $(oc get pods -n openshift-dns --no-headers | awk '{print $1}' | grep -i dns-default); do
+    echo "Deleting $i"
+    oc delete --force -n openshift-dns pod $i
   done
 }

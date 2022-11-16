@@ -1,0 +1,322 @@
+# Failing pods
+wget-job-4k28n   0/1     Running   0          18m   10.130.60.4     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-52zg6   0/1     Running   0          18m   10.130.60.10    gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-556l6   0/1     Running   0          18m   10.130.60.12    gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-8mp42   0/1     Running   0          18m   10.130.60.9     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-b2gnl   0/1     Running   0          18m   10.130.60.8     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-cp28f   0/1     Running   0          18m   10.130.60.5     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-ddmtn   0/1     Running   0          18m   10.130.60.6     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-fjcrp   0/1     Running   0          18m   10.130.60.11    gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-hpjnw   0/1     Running   0          18m   10.130.60.2     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-lkl74   0/1     Running   0          18m   10.130.60.7     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+wget-job-x7jjz   0/1     Running   0          18m   10.130.60.3     gspence-2022-06-13-10-dhhxm-worker-c-f8xm6   <none>           <none>
+
+# Pod wget-job-4k28n describe status
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 14 Jun 2022 13:51:18 -0700
+      Finished:     Tue, 14 Jun 2022 13:51:48 -0700
+
+# Pod wget-job-4k28n logs
+2022-06-14T20:51:18.004653027Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:48.037558178Z wget: bad address 'www.google.com'
+2022-06-14T20:51:48.037717502Z + exit 0
+
+# All Failing requests:
+2022-06-14T20:51:18.004653027Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:48.037558178Z wget: bad address 'www.google.com'
+2022-06-14T20:51:48.037717502Z + exit 0
+2022-06-14T20:51:24.854822404Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:54.887654181Z wget: bad address 'www.google.com'
+2022-06-14T20:51:54.887865786Z + exit 0
+2022-06-14T20:51:28.733204201Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:58.773664157Z wget: bad address 'www.google.com'
+2022-06-14T20:51:58.773882349Z + exit 0
+2022-06-14T20:51:24.576540956Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:54.616876299Z wget: bad address 'www.google.com'
+2022-06-14T20:51:54.617123777Z + exit 0
+2022-06-14T20:51:23.043916628Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:53.085576040Z wget: bad address 'www.google.com'
+2022-06-14T20:51:53.085717783Z + exit 0
+2022-06-14T20:51:19.233322671Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:49.273684851Z wget: bad address 'www.google.com'
+2022-06-14T20:51:49.273896222Z + exit 0
+2022-06-14T20:51:20.775214303Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:50.806595082Z wget: bad address 'www.google.com'
+2022-06-14T20:51:50.806745379Z + exit 0
+2022-06-14T20:51:25.730195531Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:55.769739320Z wget: bad address 'www.google.com'
+2022-06-14T20:51:55.769959456Z + exit 0
+2022-06-14T20:51:17.518618165Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:47.533998727Z wget: bad address 'www.google.com'
+2022-06-14T20:51:47.534102316Z + exit 0
+2022-06-14T20:51:21.018210290Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:51.051556200Z wget: bad address 'www.google.com'
+2022-06-14T20:51:51.051806019Z + exit 0
+2022-06-14T20:51:17.946217204Z + wget www.google.com -O /wget-dir/index.html
+2022-06-14T20:51:47.976674336Z wget: bad address 'www.google.com'
+2022-06-14T20:51:47.976934361Z + exit 0
+
+# Node status:
+status:
+  addresses:
+  - address: 10.0.128.8
+    type: InternalIP
+  - address: gspence-2022-06-13-10-dhhxm-worker-c-f8xm6.c.openshift-gce-devel.internal
+    type: InternalDNS
+  - address: gspence-2022-06-13-10-dhhxm-worker-c-f8xm6.c.openshift-gce-devel.internal
+    type: Hostname
+  allocatable:
+    attachable-volumes-gce-pd: "127"
+    cpu: 3500m
+    ephemeral-storage: "123201474766"
+    hugepages-1Gi: "0"
+    hugepages-2Mi: "0"
+    memory: 14217440Ki
+    pods: "250"
+  capacity:
+    attachable-volumes-gce-pd: "127"
+    cpu: "4"
+    ephemeral-storage: 133682156Ki
+    hugepages-1Gi: "0"
+    hugepages-2Mi: "0"
+    memory: 15368416Ki
+    pods: "250"
+  conditions:
+  - lastHeartbeatTime: null
+    lastTransitionTime: "2022-06-14T20:50:38Z"
+    message: openshift-sdn cleared kubelet-set NoRouteCreated
+    reason: RouteCreated
+    status: "False"
+    type: NetworkUnavailable
+  - lastHeartbeatTime: "2022-06-14T21:02:53Z"
+    lastTransitionTime: "2022-06-14T20:50:38Z"
+    message: kubelet has sufficient memory available
+    reason: KubeletHasSufficientMemory
+    status: "False"
+    type: MemoryPressure
+  - lastHeartbeatTime: "2022-06-14T21:02:53Z"
+    lastTransitionTime: "2022-06-14T20:50:38Z"
+    message: kubelet has no disk pressure
+    reason: KubeletHasNoDiskPressure
+    status: "False"
+    type: DiskPressure
+  - lastHeartbeatTime: "2022-06-14T21:02:53Z"
+    lastTransitionTime: "2022-06-14T20:50:38Z"
+    message: kubelet has sufficient PID available
+    reason: KubeletHasSufficientPID
+    status: "False"
+    type: PIDPressure
+  - lastHeartbeatTime: "2022-06-14T21:02:53Z"
+    lastTransitionTime: "2022-06-14T20:51:08Z"
+    message: kubelet is posting ready status
+    reason: KubeletReady
+    status: "True"
+    type: Ready
+
+# The earliest reqeust for google.com in PCAP
+# However, I'm not sure I captured everything because the dumper pod didn't deploy to the problematic nodes
+5	2022-06-14 13:51:47.900075	10.128.62.50	172.30.0.10	DNS	76	Standard query 0x0002 AAAA www.google.com
+
+# DNS Pod on the node that failed:
+Name:                 dns-default-sjkw7
+Namespace:            openshift-dns
+Priority:             2000001000
+Priority Class Name:  system-node-critical
+Node:                 gspence-2022-06-13-10-dhhxm-worker-c-f8xm6/10.0.128.8
+Start Time:           Tue, 14 Jun 2022 13:51:09 -0700
+Labels:               controller-revision-hash=5b9ddbb944
+                      dns.operator.openshift.io/daemonset-dns=default
+                      pod-template-generation=1
+Annotations:          cluster-autoscaler.kubernetes.io/enable-ds-eviction: true
+                      k8s.v1.cni.cncf.io/network-status:
+                        [{
+                            "name": "openshift-sdn",
+                            "interface": "eth0",
+                            "ips": [
+                                "10.130.60.109"
+                            ],
+                            "default": true,
+                            "dns": {}
+                        }]
+                      k8s.v1.cni.cncf.io/networks-status:
+                        [{
+                            "name": "openshift-sdn",
+                            "interface": "eth0",
+                            "ips": [
+                                "10.130.60.109"
+                            ],
+                            "default": true,
+                            "dns": {}
+                        }]
+Status:               Running
+IP:                   10.130.60.109
+IPs:
+  IP:           10.130.60.109
+Controlled By:  DaemonSet/dns-default
+Containers:
+  dns:
+    Container ID:  cri-o://e337af937492b0c64f38ff5bcecaa03c5e9d4dc49b438c284a8c6930ab102fab
+    Image:         quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:df20060da75fe9571ad05f964e98599304dc90a5b008c75eb5aeaddf04b022a6
+    Image ID:      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:df20060da75fe9571ad05f964e98599304dc90a5b008c75eb5aeaddf04b022a6
+    Ports:         5353/UDP, 5353/TCP
+    Host Ports:    0/UDP, 0/TCP
+    Command:
+      coredns
+    Args:
+      -conf
+      /etc/coredns/Corefile
+    State:          Running
+      Started:      Tue, 14 Jun 2022 13:52:32 -0700
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:        50m
+      memory:     70Mi
+    Liveness:     http-get http://:8080/health delay=60s timeout=5s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:8181/ready delay=10s timeout=3s period=3s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /etc/coredns from config-volume (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-kpjw8 (ro)
+  kube-rbac-proxy:
+    Container ID:  cri-o://803021bf10373b58041a547623d32f7a130dc0ce365618d857d2a0bf7dc949fc
+    Image:         quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:aa8d1daf3432d8dedc5c56d94aeb1f25301bce6ccd7d5406fb03a00be97374ad
+    Image ID:      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:aa8d1daf3432d8dedc5c56d94aeb1f25301bce6ccd7d5406fb03a00be97374ad
+    Port:          9154/TCP
+    Host Port:     0/TCP
+    Args:
+      --logtostderr
+      --secure-listen-address=:9154
+      --tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+      --upstream=http://127.0.0.1:9153/
+      --tls-cert-file=/etc/tls/private/tls.crt
+      --tls-private-key-file=/etc/tls/private/tls.key
+    State:          Running
+      Started:      Tue, 14 Jun 2022 13:52:44 -0700
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:        10m
+      memory:     40Mi
+    Environment:  <none>
+    Mounts:
+      /etc/tls/private from metrics-tls (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-kpjw8 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  config-volume:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      dns-default
+    Optional:  false
+  metrics-tls:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  dns-default-metrics-tls
+    Optional:    false
+  kube-api-access-kpjw8:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+    ConfigMapName:           openshift-service-ca.crt
+    ConfigMapOptional:       <nil>
+QoS Class:                   Burstable
+Node-Selectors:              kubernetes.io/os=linux
+Tolerations:                 node-role.kubernetes.io/master op=Exists
+                             node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type     Reason          Age                From               Message
+  ----     ------          ----               ----               -------
+  Normal   Scheduled       40m                default-scheduler  Successfully assigned openshift-dns/dns-default-sjkw7 to gspence-2022-06-13-10-dhhxm-worker-c-f8xm6 by gspence-2022-06-13-10-dhhxm-master-2
+  Warning  FailedMount     40m                kubelet            MountVolume.SetUp failed for volume "config-volume" : failed to sync configmap cache: timed out waiting for the condition
+  Warning  FailedMount     40m                kubelet            MountVolume.SetUp failed for volume "metrics-tls" : failed to sync secret cache: timed out waiting for the condition
+  Normal   AddedInterface  39m                multus             Add eth0 [10.130.60.109/23] from openshift-sdn
+  Normal   Pulling         39m                kubelet            Pulling image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:df20060da75fe9571ad05f964e98599304dc90a5b008c75eb5aeaddf04b022a6"
+  Normal   Pulled          39m                kubelet            Successfully pulled image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:df20060da75fe9571ad05f964e98599304dc90a5b008c75eb5aeaddf04b022a6" in 6.74398049s
+  Normal   Created         38m                kubelet            Created container dns
+  Normal   Started         38m                kubelet            Started container dns
+  Normal   Pulled          38m                kubelet            Container image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:aa8d1daf3432d8dedc5c56d94aeb1f25301bce6ccd7d5406fb03a00be97374ad" already present on machine
+  Normal   Created         38m                kubelet            Created container kube-rbac-proxy
+  Normal   Started         38m                kubelet            Started container kube-rbac-proxy
+  Warning  ProbeError      38m (x2 over 38m)  kubelet            Readiness probe error: HTTP probe failed with statuscode: 503
+body: kubernetes
+  Warning  Unhealthy  38m (x2 over 38m)  kubelet  Readiness probe failed: HTTP probe failed with statuscode: 503
+
+# Scenario 2:
+# I made dns run only one 1 node and I dumped the network traffic from that node. I never see the request for DNS for the failed
+#
+
+# Scenario 3:
+# A single pod is majorly delayed in nslookup/curl (DNS) when just coming up anywhere.
+# 4.8 nightly (June 15) - No prob
+# 4.9.0-0.nightly-2022-06-14-225707 - No prob
+# 4.10.0-fc.3 - Problem
+# 4.10.0 - Problem
+# 4.10.1 - Problem
+# 4.10.3 - Problem
+# 4.10.5 - Problem
+# 4.11.0 - Problem
+#
+Update:
+
+So I chased the autoscaling DNS issue for a while and was able to reproduce with "wget", however, I just found inconsistencies with the command I used. wget would fail *sometimes*, but curl and nslookup always worked for my autoscaling reproducer.
+
+However, I was able to create a MUCH simpler and more targeted reproducer without any autoscaling that seems to point to OpenshiftSDN as the culprit. Just by spinning up a pod and having the pod immediately curl or nslookup a DNS name. Here's a reproducer in which you can either run nslookup or curl in any cluster and you will notice the nslookup takes 5 seconds and the curl can take upwards of 15 or 20 seconds sometimes (or just times out). It should NOT take 5 seconds for DNS query. Here's are my findings:
+
+ - If you switch to OVNKubernetes, then the nslookup or curl command works immediately every time (hence why I'm looking to OpenshiftSDN)
+ - If you uncomment the sleep, then it works immediately (< 0.01 second). Race condition?
+ - I spun up MANY clusters and found that the bug was introduced in 4.10.0-rc0
+ - If I switch DNS to a different port, still fails.
+ - If I switch DNS to TCP (-vc argument), then it succeeds after 1 second (that's pretty slow), but the tcpdump show TCP retransmissions after 1 second of no ACK
+   - I'll attach this PCAP since the UDP failing PCAP is just one packet and doesn't tell you much.
+ - If you just curl an IP address as the first command (so no DNS lookup) you will see it takes 1 second and there are TCP retransmissions as well. So this is not a DNS-specific problem.
+
+Reproducer Steps:
+1. Create a cluster > 4.10.0-rc0 with OpenshiftSDN
+2. Apply the YAML below
+3. oc logs curl-deploy-<ID>
+4. If it times out, then that's the issue.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl-deploy
+  labels:
+    app: curl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curl
+  template:
+    metadata:
+      labels:
+        app: curl
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: curl
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        command:
+        - "/bin/sh"
+        - "-c"
+        - |
+          set -x
+          # Add a sleep and the nslookup succeeds!
+          # sleep 1
+          # Add "-vc" to the nslookup to switch to TCP, and you'll notice it succeeds, but packets are dropped and TCP retransmissions happen.
+          time nslookup -timeout=30 -retry=0 ingress-canary.openshift-ingress-canary.svc.cluster.local
+          sleep 100000
+

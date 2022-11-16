@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: example
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/kubernetes
+spec:
+  ports:
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 6443
+  sessionAffinity: None
+  type: ClusterIP
+

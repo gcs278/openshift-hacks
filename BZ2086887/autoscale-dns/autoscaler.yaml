@@ -1,0 +1,35 @@
+apiVersion: "autoscaling.openshift.io/v1"
+kind: "ClusterAutoscaler"
+metadata:
+  name: "default"
+spec:
+  logVerbosity: 4
+  podPriorityThreshold: -10 
+  resourceLimits:
+    maxNodesTotal: 24 
+    cores:
+      min: 8 
+      max: 128 
+    memory:
+      min: 4 
+      max: 256 
+  scaleDown: 
+    enabled: true 
+    delayAfterAdd: 1m 
+    delayAfterDelete: 30s 
+    delayAfterFailure: 30s 
+    unneededTime: 2m 
+    utilizationThreshold: "0.4"
+---
+apiVersion: "autoscaling.openshift.io/v1beta1"
+kind: "MachineAutoscaler"
+metadata:
+  name: "autoscaler"
+  namespace: "openshift-machine-api"
+spec:
+  minReplicas: 1
+  maxReplicas: 12
+  scaleTargetRef:
+    apiVersion: machine.openshift.io/v1beta1
+    kind: MachineSet
+    name: gspence-2022-08-22-08-9s8m5-worker-d

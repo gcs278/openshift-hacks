@@ -6,9 +6,12 @@ items:
     name: loadbalancer
     namespace: openshift-ingress-operator
   spec:
-    domain: test2-apps.gspence-2022-02-14-1013.gcp.devcluster.openshift.com
+    domain: scope.gspence-2022-10-13-1354.devcluster.openshift.com
     endpointPublishingStrategy:
       type: LoadBalancerService
+      loadBalancer:
+        DNSManagementPolicy: Managed
+        scope: External
     nodePlacement:
       nodeSelector:
         matchLabels:

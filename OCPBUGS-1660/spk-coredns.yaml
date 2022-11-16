@@ -1,0 +1,232 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    k8s.ovn.org/external-gw-pod-ips: 198.19.16.2,198.19.16.3
+    openshift.io/sa.scc.mcs: s0:c32,c4
+    openshift.io/sa.scc.supplemental-groups: 1001000000/10000
+    openshift.io/sa.scc.uid-range: 1001000000/10000
+  name: spk-coredns
+  selfLink: /api/v1/namespaces/spk-coredns
+spec:
+  finalizers:
+  - kubernetes
+---
+apiVersion: v1
+imagePullSecrets:
+- name: spk-coredns-sa-dockercfg-jrxhx
+kind: ServiceAccount
+metadata:
+  name: spk-coredns-sa
+  namespace: spk-coredns
+  selfLink: /api/v1/namespaces/spk-coredns/serviceaccounts/spk-coredns-sa
+secrets:
+- name: spk-coredns-sa-token-7tpmf
+- name: spk-coredns-sa-dockercfg-jrxhx
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: list-namespaces-registry-creds
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["endpoints"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: [""]
+  resources: ["serviceaccounts"]
+  verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: list-namespaces-global
+subjects:
+- kind: ServiceAccount
+  name: spk-coredns-sa
+  namespace: spk-coredns
+roleRef:
+  kind: ClusterRole
+  name: list-namespaces-registry-creds
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    labels:
+      app: spk-coredns
+      manager: kube-controller-manager
+      operation: Update
+    name: spk-coredns-deployment
+    namespace: spk-coredns
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: spk-coredns
+    strategy:
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: spk-coredns
+        namespace: spk-coredns
+      spec:
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - spk-coredns
+              topologyKey: kubernetes.io/hostname
+        containers:
+        - args:
+          - -conf
+          - /etc/coredns/Corefile
+          command:
+          - coredns
+          image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:790915e54be36106bd8e7700780cee399be71569f83d6aee6747c6a0131eb749
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: dns
+          ports:
+          - containerPort: 5353
+            name: dns5353
+            protocol: UDP
+          - containerPort: 5354
+            name: dns-tcp
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 70Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+          - mountPath: /etc/coredns
+            name: config-volume
+            readOnly: true
+        dnsPolicy: Default
+        enableServiceLinks: true
+        nodeSelector:
+          node-role.kubernetes.io/master: ""
+        preemptionPolicy: PreemptLowerPriority
+        priority: 2000001000
+        priorityClassName: system-node-critical
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: spk-coredns-sa
+        serviceAccountName: spk-coredns-sa
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - operator: Exists
+        volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: Corefile
+              path: Corefile
+            name: spk-coredns-cm
+          name: config-volume
+kind: DeploymentList
+metadata:
+  resourceVersion: "1226059810"
+  selfLink: /apis/apps/v1/namespaces/spk-coredns/deployments
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    Corefile: "# f5nat64dns\n5gc.cdsappslab.com:5353 5gc.vzimstest.com:5353 5gc.3gppnetwork.org:5353 com:5353 net:5353 org:5353 {\n    log\n    cache 900 {\n      denial 9984 30\n    }\n    prometheus 127.0.0.1:9153 \n    forward .  172.20.50.7        \n}\n\nregistry.mtce.vzwops.com:5353 registry-rchltx.mtce.vzwops.com:5353 wsregistry.mtce.vzwops.com:5353 .:5353 {\n    bufsize 512\n    errors\n    health {\n        lameduck 20s\n    }\n    ready\n    kubernetes cluster.local in-addr.arpa ip6.arpa {\n        pods insecure\n        upstream\n        fallthrough in-addr.arpa ip6.arpa\n    }\n    prometheus 127.0.0.1:9153\n    forward . /etc/resolv.conf {\n        policy sequential\n    }\n    cache 900 {\n        denial 9984 30\n    }\n    reload\n}\n\n5gc.cdsappslab.com:5354 5gc.vzimstest.com:5354 5gc.3gppnetwork.org:5354 com:5354 net:5354 org:5354 {\n    log\n    cache 900 {\n      denial 9984 30\n    }\n    forward .  172.20.50.7\n}\n\nregistry.mtce.vzwops.com:5354 registry-rchltx.mtce.vzwops.com:5354 wsregistry.mtce.vzwops.com:5354 .:5354 {\n    bufsize 512\n    errors\n    health {\n        lameduck 20s\n    }\n    ready\n    kubernetes cluster.local in-addr.arpa ip6.arpa {\n        pods insecure\n        upstream\n        fallthrough in-addr.arpa ip6.arpa\n    }\n    prometheus 127.0.0.1:9153\n    forward . /etc/resolv.conf {\n        policy sequential\n    }\n    cache 900 {\n        denial 9984 30\n    }\n    reload\n}\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      manager: Swagger-Codegen
+      operation: Update
+    name: spk-coredns-cm
+    namespace: spk-coredns
+    selfLink: /api/v1/namespaces/spk-coredns/configmaps/spk-coredns-cm
+kind: ConfigMapList
+metadata:
+  selfLink: /api/v1/namespaces/spk-coredns/configmaps
+---
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+    name: spk-coredns-svc
+    namespace: spk-coredns
+    selfLink: /api/v1/namespaces/spk-coredns/services/spk-coredns-svc
+  spec:
+    clusterIP: 172.30.0.99
+    clusterIPs:
+    - 172.30.0.99
+    ports:
+    - name: dns
+      port: 53
+      protocol: UDP
+      targetPort: dns5353
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+      targetPort: dns-tcp
+    - name: metrics
+      port: 9154
+      protocol: TCP
+      targetPort: metrics
+    selector:
+      app: spk-coredns
+    sessionAffinity: None
+    type: ClusterIP
+kind: ServiceList
+metadata:
+  resourceVersion: "1226059810"
+  selfLink: /api/v1/namespaces/spk-coredns/services

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/node-selector: ""
+    openshift.io/sa.scc.mcs: s0:c21,c10
+    openshift.io/sa.scc.supplemental-groups: 1000440000/10000
+    openshift.io/sa.scc.uid-range: 1000440000/10000
+  creationTimestamp: "2020-01-30T13:46:07Z"
+  labels:
+    kubernetes.io/metadata.name: openshift-dns
+    olm.operatorgroup.uid/f69998c4-6fed-4821-af6d-af172c7f4d2f: ""
+    openshift.io/cluster-monitoring: "true"
+    openshift.io/run-level: "0"
+  name: openshift-dns
+  resourceVersion: "749766382"
+  uid: 46f54449-da3b-4889-a3d8-3eba76a5de09
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

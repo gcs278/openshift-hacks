@@ -1,0 +1,266 @@
+curl: (6) Could not resolve host: canary-openshift-ingress-canary.apps.build01.ci.devcluster.openshifdnslookup: 0.000000 | connect: 0.000000 | appconnect: 0.000000 | pretransfer: 0.000000 | starttransfer: 0.000000 | total: 19.890913 | size: 0
+t.com
+curl: (6) Could not resolve host: canary-openshift-ingress-canary.apps.build01.ci.ddnslookup: 0.000000 | connect: 0.000000 | appconnect: 0.000000 | pretransfer: 0.000000 | starttransfer: 0.000000 | total: 19.890221 | size: 0
+evcluster.openshift.com
+Healthcheck requested
+dnslookup: 5.071882 | connect: 5.073664 | appconnect: 5.082864 | pretransfer: 5.082887 | starttransfer: 5.085821 | total: 5.085834 | size: 22
+Healthcheck requested
+dnslookup: 0.000678 | connect: 0.002121 | appconnect: 0.008997 | pretransfer: 0.009031 | starttransfer: 0.011570 | total: 0.011579 | size: 22
+Healthcheck requested
+dnslookup: 0.002978 | connect: 0.004128 | appconnect: 0.010659 | pretransfer: 0.010681 | starttransfer: 0.012416 | total: 0.012428 | size: 22
+Healthcheck requested
+dnslookup: 0.000781 | connect: 0.002352 | appconnect: 0.008854 | pretransfer: 0.008878 | starttransfer: 0.010915 | total: 0.010926 | size: 22
+Healthcheck requested
+dnslookup: 0.000760 | connect: 0.002147 | appconnect: 0.008795 | pretransfer: 0.008818 | starttransfer: 0.010395 | total: 0.010406 | size: 22
+Healthcheck requested
+dnslookup: 0.001953 | connect: 0.003373 | appconnect: 0.010686 | pretransfer: 0.010709 | starttransfer: 0.012660 | total: 0.012671 | size: 22
+Healthcheck requested
+dnslookup: 0.000772 | connect: 0.002734 | appconnect: 0.009784 | pretransfer: 0.009806 | starttransfer: 0.012623 | total: 0.012634 | size: 22
+Healthcheck requested
+dnslookup: 0.002861 | connect: 0.004076 | appconnect: 0.010618 | pretransfer: 0.010641 | starttransfer: 0.012289 | total: 0.012300 | size: 22
+Healthcheck requested
+dnslookup: 0.000957 | connect: 0.002588 | appconnect: 0.009531 | pretransfer: 0.009554 | starttransfer: 0.011964 | total: 0.011978 | size: 22
+Healthcheck requested
+dnslookup: 0.000971 | connect: 0.002627 | appconnect: 0.009185 | pretransfer: 0.009206 | starttransfer: 0.010685 | total: 0.010696 | size: 22
+Healthcheck requested
+dnslookup: 0.002859 | connect: 0.004496 | appconnect: 0.011460 | pretransfer: 0.011486 | starttransfer: 0.013202 | total: 0.013221 | size: 22
+Healthcheck requested
+dnslookup: 0.001310 | connect: 0.002961 | appconnect: 0.009971 | pretransfer: 0.009993 | starttransfer: 0.011704 | total: 0.011716 | size: 22
+Healthcheck requested
+dnslookup: 0.000851 | connect: 0.002229 | appconnect: 0.008767 | pretransfer: 0.008790 | starttransfer: 0.009954 | total: 0.009967 | size: 22
+Healthcheck requested
+dnslookup: 0.004086 | connect: 0.005586 | appconnect: 0.012464 | pretransfer: 0.012490 | starttransfer: 0.013887 | total: 0.013899 | size: 22
+Healthcheck requested
+dnslookup: 0.001432 | connect: 0.003086 | appconnect: 0.009642 | pretransfer: 0.009665 | starttransfer: 0.012251 | total: 0.012263 | size: 22
+Healthcheck requested
+dnslookup: 0.001345 | connect: 0.003128 | appconnect: 0.009921 | pretransfer: 0.009943 | starttransfer: 0.011998 | total: 0.012018 | size: 22
+Healthcheck requested
+dnslookup: 0.000714 | connect: 0.002624 | appconnect: 0.009352 | pretransfer: 0.009373 | starttransfer: 0.010984 | total: 0.010995 | size: 22
+Healthcheck requested
+dnslookup: 0.000784 | connect: 0.002296 | appconnect: 0.008889 | pretransfer: 0.008911 | starttransfer: 0.010743 | total: 0.010755 | size: 22
+Healthcheck requested
+dnslookup: 0.001062 | connect: 0.002665 | appconnect: 0.009758 | pretransfer: 0.009781 | starttransfer: 0.011399 | total: 0.011409 | size: 22
+Healthcheck requested
+dnslookup: 0.001371 | connect: 0.003238 | appconnect: 0.010750 | pretransfer: 0.010773 | starttransfer: 0.012599 | total: 0.012618 | size: 22
+Healthcheck requested
+dnslookup: 0.001485 | connect: 0.002939 | appconnect: 0.009763 | pretransfer: 0.009787 | starttransfer: 0.011394 | total: 0.011405 | size: 22
+Healthcheck requested
+dnslookup: 0.002106 | connect: 0.003640 | appconnect: 0.013815 | pretransfer: 0.013838 | starttransfer: 0.015592 | total: 0.015604 | size: 22
+Healthcheck requested
+dnslookup: 0.001744 | connect: 0.003282 | appconnect: 0.010109 | pretransfer: 0.010131 | starttransfer: 0.011943 | total: 0.011953 | size: 22
+Healthcheck requested
+dnslookup: 0.001825 | connect: 0.003604 | appconnect: 0.010181 | pretransfer: 0.010204 | starttransfer: 0.011791 | total: 0.011801 | size: 22
+Healthcheck requested
+dnslookup: 0.001656 | connect: 0.003476 | appconnect: 0.011250 | pretransfer: 0.011273 | starttransfer: 0.012611 | total: 0.012623 | size: 22
+Healthcheck requested
+dnslookup: 0.000904 | connect: 0.002471 | appconnect: 0.009334 | pretransfer: 0.009357 | starttransfer: 0.010950 | total: 0.010965 | size: 22
+Healthcheck requested
+dnslookup: 0.001632 | connect: 0.003428 | appconnect: 0.010341 | pretransfer: 0.010364 | starttransfer: 0.011669 | total: 0.011681 | size: 22
+Healthcheck requested
+dnslookup: 0.001060 | connect: 0.002828 | appconnect: 0.009672 | pretransfer: 0.009695 | starttransfer: 0.011022 | total: 0.011032 | size: 22
+Healthcheck requested
+dnslookup: 0.000856 | connect: 0.002770 | appconnect: 0.011894 | pretransfer: 0.011922 | starttransfer: 0.013285 | total: 0.013300 | size: 22
+Healthcheck requested
+dnslookup: 0.000846 | connect: 0.002324 | appconnect: 0.013070 | pretransfer: 0.013094 | starttransfer: 0.014848 | total: 0.014865 | size: 22
+Healthcheck requested
+dnslookup: 0.001533 | connect: 0.003214 | appconnect: 0.009929 | pretransfer: 0.009953 | starttransfer: 0.011691 | total: 0.011701 | size: 22
+Healthcheck requested
+dnslookup: 0.001445 | connect: 0.003063 | appconnect: 0.009556 | pretransfer: 0.009580 | starttransfer: 0.011069 | total: 0.011079 | size: 22
+Healthcheck requested
+dnslookup: 0.000756 | connect: 0.002633 | appconnect: 0.009914 | pretransfer: 0.009939 | starttransfer: 0.011935 | total: 0.011947 | size: 22
+Healthcheck requested
+dnslookup: 0.001928 | connect: 0.003577 | appconnect: 0.010359 | pretransfer: 0.010382 | starttransfer: 0.013341 | total: 0.013350 | size: 22
+Healthcheck requested
+dnslookup: 0.000711 | connect: 0.002413 | appconnect: 0.009224 | pretransfer: 0.009247 | starttransfer: 0.011266 | total: 0.011278 | size: 22
+Healthcheck requested
+dnslookup: 0.001589 | connect: 0.003505 | appconnect: 0.012419 | pretransfer: 0.012451 | starttransfer: 0.013925 | total: 0.013941 | size: 22
+Healthcheck requested
+dnslookup: 0.001677 | connect: 0.003177 | appconnect: 0.010142 | pretransfer: 0.010164 | starttransfer: 0.011755 | total: 0.011768 | size: 22
+Healthcheck requested
+dnslookup: 0.000796 | connect: 0.002349 | appconnect: 0.009987 | pretransfer: 0.010009 | starttransfer: 0.012826 | total: 0.012837 | size: 22
+Healthcheck requested
+dnslookup: 0.000806 | connect: 0.002636 | appconnect: 0.009635 | pretransfer: 0.009668 | starttransfer: 0.011253 | total: 0.011265 | size: 22
+Healthcheck requested
+dnslookup: 0.001560 | connect: 0.003032 | appconnect: 0.010969 | pretransfer: 0.010992 | starttransfer: 0.012900 | total: 0.012911 | size: 22
+Healthcheck requested
+dnslookup: 0.001751 | connect: 0.003244 | appconnect: 0.010615 | pretransfer: 0.010639 | starttransfer: 0.011833 | total: 0.011844 | size: 22
+Healthcheck requested
+dnslookup: 0.001167 | connect: 0.002629 | appconnect: 0.010149 | pretransfer: 0.010173 | starttransfer: 0.011954 | total: 0.011971 | size: 22
+Healthcheck requested
+dnslookup: 0.001685 | connect: 0.006424 | appconnect: 0.013468 | pretransfer: 0.013491 | starttransfer: 0.014780 | total: 0.014793 | size: 22
+Healthcheck requested
+dnslookup: 0.001127 | connect: 0.002553 | appconnect: 0.014271 | pretransfer: 0.014295 | starttransfer: 0.016966 | total: 0.016976 | size: 22
+Healthcheck requested
+dnslookup: 0.001336 | connect: 0.003828 | appconnect: 0.010833 | pretransfer: 0.010855 | starttransfer: 0.012685 | total: 0.012695 | size: 22
+Healthcheck requested
+dnslookup: 0.003022 | connect: 0.004700 | appconnect: 0.011435 | pretransfer: 0.011457 | starttransfer: 0.013974 | total: 0.013985 | size: 22
+Healthcheck requested
+dnslookup: 0.000957 | connect: 0.002537 | appconnect: 0.011127 | pretransfer: 0.011149 | starttransfer: 0.012481 | total: 0.012491 | size: 22
+Healthcheck requested
+dnslookup: 0.001485 | connect: 0.002943 | appconnect: 0.009842 | pretransfer: 0.009865 | starttransfer: 0.012931 | total: 0.012942 | size: 22
+Healthcheck requested
+dnslookup: 0.001574 | connect: 0.003201 | appconnect: 0.009997 | pretransfer: 0.010020 | starttransfer: 0.013070 | total: 0.013080 | size: 22
+Healthcheck requested
+dnslookup: 0.001199 | connect: 0.002362 | appconnect: 0.009929 | pretransfer: 0.009951 | starttransfer: 0.012312 | total: 0.012326 | size: 22
+Healthcheck requested
+dnslookup: 0.001432 | connect: 0.002901 | appconnect: 0.009318 | pretransfer: 0.009341 | starttransfer: 0.011053 | total: 0.011063 | size: 22
+Healthcheck requested
+dnslookup: 0.001425 | connect: 0.002955 | appconnect: 0.009510 | pretransfer: 0.009532 | starttransfer: 0.013065 | total: 0.013075 | size: 22
+Healthcheck requested
+dnslookup: 0.001415 | connect: 0.002769 | appconnect: 0.009881 | pretransfer: 0.009903 | starttransfer: 0.011698 | total: 0.011709 | size: 22
+Healthcheck requested
+dnslookup: 0.001501 | connect: 0.003533 | appconnect: 0.010339 | pretransfer: 0.010361 | starttransfer: 0.012526 | total: 0.012537 | size: 22
+Healthcheck requested
+dnslookup: 0.001049 | connect: 0.002670 | appconnect: 0.009587 | pretransfer: 0.009609 | starttransfer: 0.011067 | total: 0.011093 | size: 22
+Healthcheck requested
+dnslookup: 0.001696 | connect: 0.003024 | appconnect: 0.009664 | pretransfer: 0.009686 | starttransfer: 0.012360 | total: 0.012371 | size: 22
+Healthcheck requested
+dnslookup: 0.002886 | connect: 0.004297 | appconnect: 0.010822 | pretransfer: 0.010844 | starttransfer: 0.011971 | total: 0.011981 | size: 22
+Healthcheck requested
+dnslookup: 0.000731 | connect: 0.002263 | appconnect: 0.008968 | pretransfer: 0.008990 | starttransfer: 0.012063 | total: 0.012073 | size: 22
+Healthcheck requested
+dnslookup: 0.000975 | connect: 0.002381 | appconnect: 0.011023 | pretransfer: 0.011059 | starttransfer: 0.012732 | total: 0.012749 | size: 22
+Healthcheck requested
+dnslookup: 0.000978 | connect: 0.002863 | appconnect: 0.009657 | pretransfer: 0.009681 | starttransfer: 0.010949 | total: 0.010959 | size: 22
+Healthcheck requested
+dnslookup: 0.002107 | connect: 0.003703 | appconnect: 0.011513 | pretransfer: 0.011544 | starttransfer: 0.012742 | total: 0.012753 | size: 22
+Healthcheck requested
+dnslookup: 0.001440 | connect: 0.007163 | appconnect: 0.014116 | pretransfer: 0.014140 | starttransfer: 0.016155 | total: 0.016165 | size: 22
+Healthcheck requested
+dnslookup: 0.001754 | connect: 0.003132 | appconnect: 0.010215 | pretransfer: 0.010238 | starttransfer: 0.016821 | total: 0.016834 | size: 22
+Healthcheck requested
+dnslookup: 0.000966 | connect: 0.002287 | appconnect: 0.008841 | pretransfer: 0.008863 | starttransfer: 0.010394 | total: 0.010405 | size: 22
+Healthcheck requested
+dnslookup: 0.000672 | connect: 0.002082 | appconnect: 0.008642 | pretransfer: 0.008664 | starttransfer: 0.010213 | total: 0.010222 | size: 22
+Healthcheck requested
+dnslookup: 0.001030 | connect: 0.002488 | appconnect: 0.009283 | pretransfer: 0.009305 | starttransfer: 0.012412 | total: 0.012423 | size: 22
+Healthcheck requested
+dnslookup: 0.001628 | connect: 0.002855 | appconnect: 0.009691 | pretransfer: 0.009713 | starttransfer: 0.010934 | total: 0.010946 | size: 22
+Healthcheck requested
+dnslookup: 0.001577 | connect: 0.003059 | appconnect: 0.009546 | pretransfer: 0.009568 | starttransfer: 0.014588 | total: 0.014598 | size: 22
+Healthcheck requested
+dnslookup: 0.001745 | connect: 0.003017 | appconnect: 0.009951 | pretransfer: 0.009977 | starttransfer: 0.012937 | total: 0.012949 | size: 22
+Healthcheck requested
+dnslookup: 0.001649 | connect: 0.003099 | appconnect: 0.014360 | pretransfer: 0.014382 | starttransfer: 0.016556 | total: 0.016566 | size: 22
+Healthcheck requested
+dnslookup: 0.000974 | connect: 0.002517 | appconnect: 0.009825 | pretransfer: 0.009853 | starttransfer: 0.011227 | total: 0.011240 | size: 22
+Healthcheck requested
+dnslookup: 0.002120 | connect: 0.003526 | appconnect: 0.010666 | pretransfer: 0.010689 | starttransfer: 0.012150 | total: 0.012163 | size: 22
+Healthcheck requested
+dnslookup: 0.001604 | connect: 0.003397 | appconnect: 0.011181 | pretransfer: 0.011211 | starttransfer: 0.012530 | total: 0.012548 | size: 22
+Healthcheck requested
+dnslookup: 0.001080 | connect: 0.002614 | appconnect: 0.010938 | pretransfer: 0.010962 | starttransfer: 0.012409 | total: 0.012423 | size: 22
+Healthcheck requested
+dnslookup: 0.001552 | connect: 0.003149 | appconnect: 0.010459 | pretransfer: 0.010488 | starttransfer: 0.012284 | total: 0.012296 | size: 22
+Healthcheck requested
+dnslookup: 0.001928 | connect: 0.003437 | appconnect: 0.010850 | pretransfer: 0.010875 | starttransfer: 0.012582 | total: 0.012596 | size: 22
+Healthcheck requested
+dnslookup: 0.001201 | connect: 0.002851 | appconnect: 0.011620 | pretransfer: 0.011648 | starttransfer: 0.013524 | total: 0.013552 | size: 22
+Healthcheck requested
+dnslookup: 0.003111 | connect: 0.004909 | appconnect: 0.014324 | pretransfer: 0.014372 | starttransfer: 0.016224 | total: 0.016242 | size: 22
+Healthcheck requested
+dnslookup: 0.001476 | connect: 0.003146 | appconnect: 0.011761 | pretransfer: 0.011796 | starttransfer: 0.013279 | total: 0.013294 | size: 22
+Healthcheck requested
+dnslookup: 0.001131 | connect: 0.002537 | appconnect: 0.010125 | pretransfer: 0.010149 | starttransfer: 0.011758 | total: 0.011772 | size: 22
+Healthcheck requested
+dnslookup: 0.000992 | connect: 0.002617 | appconnect: 0.012001 | pretransfer: 0.012023 | starttransfer: 0.013572 | total: 0.013582 | size: 22
+Healthcheck requested
+dnslookup: 0.006274 | connect: 0.008591 | appconnect: 0.018472 | pretransfer: 0.018529 | starttransfer: 0.020178 | total: 0.020197 | size: 22
+Healthcheck requested
+dnslookup: 0.001625 | connect: 0.004149 | appconnect: 0.014683 | pretransfer: 0.014720 | starttransfer: 0.017537 | total: 0.017557 | size: 22
+Healthcheck requested
+dnslookup: 0.005810 | connect: 0.007530 | appconnect: 0.019301 | pretransfer: 0.019333 | starttransfer: 0.022157 | total: 0.022179 | size: 22
+Healthcheck requested
+dnslookup: 0.005154 | connect: 0.012072 | appconnect: 0.039341 | pretransfer: 0.039382 | starttransfer: 0.040746 | total: 0.040767 | size: 22
+Healthcheck requested
+dnslookup: 0.001862 | connect: 0.003594 | appconnect: 0.014380 | pretransfer: 0.014418 | starttransfer: 0.016127 | total: 0.016157 | size: 22
+Healthcheck requested
+dnslookup: 0.006935 | connect: 0.009285 | appconnect: 0.071170 | pretransfer: 0.071199 | starttransfer: 0.072484 | total: 0.072503 | size: 22
+Healthcheck requested
+dnslookup: 0.046845 | connect: 0.048822 | appconnect: 0.147204 | pretransfer: 0.147247 | starttransfer: 0.149619 | total: 0.149640 | size: 22
+Healthcheck requested
+dnslookup: 0.001736 | connect: 0.003404 | appconnect: 0.013811 | pretransfer: 0.013847 | starttransfer: 0.016412 | total: 0.016434 | size: 22
+Healthcheck requested
+dnslookup: 0.001501 | connect: 0.003176 | appconnect: 0.019915 | pretransfer: 0.019943 | starttransfer: 0.021974 | total: 0.021991 | size: 22
+Healthcheck requested
+dnslookup: 0.001663 | connect: 0.003190 | appconnect: 0.022084 | pretransfer: 0.022123 | starttransfer: 0.023790 | total: 0.023812 | size: 22
+Healthcheck requested
+dnslookup: 0.001704 | connect: 0.003187 | appconnect: 0.013567 | pretransfer: 0.013604 | starttransfer: 0.015351 | total: 0.015370 | size: 22
+Healthcheck requested
+dnslookup: 0.001623 | connect: 0.003254 | appconnect: 0.014517 | pretransfer: 0.014557 | starttransfer: 0.016425 | total: 0.016444 | size: 22
+Healthcheck requested
+dnslookup: 0.016580 | connect: 0.031575 | appconnect: 0.069996 | pretransfer: 0.070038 | starttransfer: 0.072777 | total: 0.072797 | size: 22
+Healthcheck requested
+dnslookup: 0.007321 | connect: 0.008902 | appconnect: 0.019404 | pretransfer: 0.019440 | starttransfer: 0.022158 | total: 0.022179 | size: 22
+Healthcheck requested
+dnslookup: 0.062504 | connect: 0.064264 | appconnect: 0.078151 | pretransfer: 0.078195 | starttransfer: 0.190651 | total: 0.190681 | size: 22
+Healthcheck requested
+dnslookup: 0.001539 | connect: 0.003271 | appconnect: 0.013596 | pretransfer: 0.013631 | starttransfer: 0.039937 | total: 0.039965 | size: 22
+Healthcheck requested
+dnslookup: 0.001592 | connect: 0.003375 | appconnect: 0.010341 | pretransfer: 0.010373 | starttransfer: 0.012484 | total: 0.012500 | size: 22
+Healthcheck requested
+dnslookup: 0.001473 | connect: 0.003405 | appconnect: 0.011421 | pretransfer: 0.011447 | starttransfer: 0.012606 | total: 0.012625 | size: 22
+Healthcheck requested
+dnslookup: 0.015694 | connect: 0.017685 | appconnect: 0.070821 | pretransfer: 0.070859 | starttransfer: 0.072807 | total: 0.072826 | size: 22
+Healthcheck requested
+dnslookup: 0.006199 | connect: 0.008118 | appconnect: 0.019368 | pretransfer: 0.019410 | starttransfer: 0.030383 | total: 0.030409 | size: 22
+Healthcheck requested
+dnslookup: 0.001599 | connect: 0.003282 | appconnect: 0.014079 | pretransfer: 0.014120 | starttransfer: 0.015641 | total: 0.015661 | size: 22
+Healthcheck requested
+dnslookup: 0.001638 | connect: 0.003366 | appconnect: 0.013652 | pretransfer: 0.013687 | starttransfer: 0.016524 | total: 0.016544 | size: 22
+Healthcheck requested
+dnslookup: 0.001462 | connect: 0.003360 | appconnect: 0.015622 | pretransfer: 0.015660 | starttransfer: 0.018568 | total: 0.018590 | size: 22
+Healthcheck requested
+dnslookup: 0.002707 | connect: 0.004721 | appconnect: 0.015427 | pretransfer: 0.015462 | starttransfer: 0.016608 | total: 0.016626 | size: 22
+Healthcheck requested
+dnslookup: 0.004109 | connect: 0.006006 | appconnect: 0.038833 | pretransfer: 0.038866 | starttransfer: 0.041584 | total: 0.041615 | size: 22
+Healthcheck requested
+dnslookup: 0.016154 | connect: 0.017972 | appconnect: 0.027585 | pretransfer: 0.027614 | starttransfer: 0.029501 | total: 0.029531 | size: 22
+Healthcheck requested
+dnslookup: 0.006293 | connect: 0.008669 | appconnect: 0.017118 | pretransfer: 0.017149 | starttransfer: 0.019864 | total: 0.019888 | size: 22
+Healthcheck requested
+dnslookup: 0.002787 | connect: 0.004281 | appconnect: 0.011136 | pretransfer: 0.011161 | starttransfer: 0.012935 | total: 0.012949 | size: 22
+Healthcheck requested
+dnslookup: 0.000850 | connect: 0.002315 | appconnect: 0.012201 | pretransfer: 0.012235 | starttransfer: 0.013769 | total: 0.013790 | size: 22
+Healthcheck requested
+dnslookup: 0.000854 | connect: 0.002275 | appconnect: 0.012254 | pretransfer: 0.012288 | starttransfer: 0.020882 | total: 0.020910 | size: 22
+Healthcheck requested
+dnslookup: 0.005184 | connect: 0.006847 | appconnect: 0.026713 | pretransfer: 0.026749 | starttransfer: 0.035204 | total: 0.035226 | size: 22
+Healthcheck requested
+dnslookup: 0.004097 | connect: 0.005741 | appconnect: 0.017855 | pretransfer: 0.017889 | starttransfer: 0.019158 | total: 0.019181 | size: 22
+Healthcheck requested
+dnslookup: 0.001635 | connect: 0.003114 | appconnect: 0.010061 | pretransfer: 0.010084 | starttransfer: 0.012060 | total: 0.012071 | size: 22
+Healthcheck requested
+dnslookup: 0.001695 | connect: 0.003361 | appconnect: 0.010198 | pretransfer: 0.010220 | starttransfer: 0.011476 | total: 0.011501 | size: 22
+Healthcheck requested
+dnslookup: 0.001089 | connect: 0.002571 | appconnect: 0.009395 | pretransfer: 0.009419 | starttransfer: 0.011177 | total: 0.011188 | size: 22
+Healthcheck requested
+dnslookup: 0.001958 | connect: 0.004501 | appconnect: 0.011447 | pretransfer: 0.011469 | starttransfer: 0.012738 | total: 0.012749 | size: 22
+Healthcheck requested
+dnslookup: 0.002100 | connect: 0.003531 | appconnect: 0.010271 | pretransfer: 0.010293 | starttransfer: 0.012994 | total: 0.013005 | size: 22
+Healthcheck requested
+dnslookup: 0.000961 | connect: 0.002420 | appconnect: 0.009027 | pretransfer: 0.009049 | starttransfer: 0.010213 | total: 0.010223 | size: 22
+Healthcheck requested
+dnslookup: 0.001671 | connect: 0.003441 | appconnect: 0.012919 | pretransfer: 0.012943 | starttransfer: 0.015991 | total: 0.016002 | size: 22
+Healthcheck requested
+dnslookup: 0.001276 | connect: 0.002855 | appconnect: 0.009809 | pretransfer: 0.009833 | starttransfer: 0.011735 | total: 0.011746 | size: 22
+Healthcheck requested
+dnslookup: 0.000969 | connect: 0.002458 | appconnect: 0.009582 | pretransfer: 0.009604 | starttransfer: 0.012229 | total: 0.012240 | size: 22
+Healthcheck requested
+dnslookup: 0.001038 | connect: 0.002554 | appconnect: 0.009116 | pretransfer: 0.009139 | starttransfer: 0.011692 | total: 0.011704 | size: 22
+Healthcheck requested
+dnslookup: 0.001444 | connect: 0.003115 | appconnect: 0.009784 | pretransfer: 0.009807 | starttransfer: 0.012498 | total: 0.012510 | size: 22
+Healthcheck requested
+dnslookup: 0.001586 | connect: 0.002952 | appconnect: 0.009520 | pretransfer: 0.009545 | starttransfer: 0.011189 | total: 0.011199 | size: 22
+Healthcheck requested
+dnslookup: 0.001246 | connect: 0.002654 | appconnect: 0.012745 | pretransfer: 0.012769 | starttransfer: 0.014659 | total: 0.014670 | size: 22
+Healthcheck requested
+dnslookup: 0.001344 | connect: 0.002830 | appconnect: 0.009536 | pretransfer: 0.009560 | starttransfer: 0.011285 | total: 0.011296 | size: 22
+Healthcheck requested
+dnslookup: 0.001183 | connect: 0.002614 | appconnect: 0.011693 | pretransfer: 0.011725 | starttransfer: 0.014311 | total: 0.014330 | size: 22
+Healthcheck requested
+dnslookup: 0.000846 | connect: 0.002223 | appconnect: 0.010556 | pretransfer: 0.010580 | starttransfer: 0.012187 | total: 0.012198 | size: 22
+Healthcheck requested
+dnslookup: 0.001518 | connect: 0.003179 | appconnect: 0.009872 | pretransfer: 0.009896 | starttransfer: 0.011267 | total: 0.011277 | size: 22
+Healthcheck requested
+dnslookup: 0.001549 | connect: 0.002817 | appconnect: 0.009496 | pretransfer: 0.009518 | starttransfer: 0.011274 | total: 0.011284 | size: 22

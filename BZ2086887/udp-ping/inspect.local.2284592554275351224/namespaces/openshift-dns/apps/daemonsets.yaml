@@ -1,0 +1,445 @@
+---
+apiVersion: apps/v1
+items:
+- apiVersion: apps/v1
+  kind: DaemonSet
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"app":"curler"},"name":"curler","namespace":"openshift-dns"},"spec":{"selector":{"matchLabels":{"app":"curler"}},"template":{"metadata":{"labels":{"app":"curler"}},"spec":{"containers":[{"command":["/bin/bash","-c","set -uo pipefail\nwhile :\n  do curl -skw \"dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\\n\" \"https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/\"\n  sleep 1\n  done\n"],"env":[{"name":"CLUSTER_INGRESS_DOMAIN","value":"apps.build01.ci.devcluster.openshift.com"}],"image":"quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c","name":"curl"}],"hostNetwork":false,"nodeSelector":{"kubernetes.io/os":"linux"},"tolerations":[{"key":"node-role.kubernetes.io/master","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/ci-builds-worker","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/ci-tests-worker","operator":"Exists"}]}}}}
+    creationTimestamp: "2022-06-14T04:04:13Z"
+    generation: 1
+    labels:
+      app: curler
+    name: curler
+    namespace: openshift-dns
+    resourceVersion: "3290958435"
+    uid: e99a1b64-2717-4c7b-ad22-a59fac93efc3
+  spec:
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: curler
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: curler
+      spec:
+        containers:
+        - command:
+          - /bin/bash
+          - -c
+          - |
+            set -uo pipefail
+            while :
+              do curl -skw "dnslookup: %{time_namelookup} | connect: %{time_connect} | appconnect: %{time_appconnect} | pretransfer: %{time_pretransfer} | starttransfer: %{time_starttransfer} | total: %{time_total} | size: %{size_download}\n" "https://canary-openshift-ingress-canary.${CLUSTER_INGRESS_DOMAIN}/"
+              sleep 1
+              done
+          env:
+          - name: CLUSTER_INGRESS_DOMAIN
+            value: apps.build01.ci.devcluster.openshift.com
+          image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+          imagePullPolicy: IfNotPresent
+          name: curl
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/ci-builds-worker
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/ci-tests-worker
+          operator: Exists
+    updateStrategy:
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+      type: RollingUpdate
+  status:
+    currentNumberScheduled: 22
+    desiredNumberScheduled: 22
+    numberAvailable: 22
+    numberMisscheduled: 1
+    numberReady: 22
+    observedGeneration: 1
+    updatedNumberScheduled: 22
+- apiVersion: apps/v1
+  kind: DaemonSet
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "74"
+    creationTimestamp: "2020-01-30T13:46:08Z"
+    generation: 74
+    labels:
+      dns.operator.openshift.io/owning-dns: default
+    name: dns-default
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      controller: true
+      kind: DNS
+      name: default
+      uid: d8bbcd7a-f7a5-4612-ae86-d6e8d620756b
+    resourceVersion: "3289818472"
+    uid: 0b15ce96-eb69-42f3-9dc5-d2a5e440e3bc
+  spec:
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        dns.operator.openshift.io/daemonset-dns: default
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          dns.operator.openshift.io/daemonset-dns: default
+      spec:
+        containers:
+        - args:
+          - -conf
+          - /etc/coredns/Corefile
+          command:
+          - coredns
+          image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2b423e88cdd37f307aff51cbb0f53fc45deff9618f5b4f12bfb78bea7aff51a2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: dns
+          ports:
+          - containerPort: 5353
+            name: dns
+            protocol: UDP
+          - containerPort: 5353
+            name: dns-tcp
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /ready
+              port: 8181
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 3
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 70Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+          - mountPath: /etc/coredns
+            name: config-volume
+            readOnly: true
+        - args:
+          - --logtostderr
+          - --secure-listen-address=:9154
+          - --tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+          - --upstream=http://127.0.0.1:9153/
+          - --tls-cert-file=/etc/tls/private/tls.crt
+          - --tls-private-key-file=/etc/tls/private/tls.key
+          image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3df935837634adb5df8080ac7263c7fb4c4f9d8fd45b36e32ca4fb802bdeaecc
+          imagePullPolicy: IfNotPresent
+          name: kube-rbac-proxy
+          ports:
+          - containerPort: 9154
+            name: metrics
+            protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 40Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/tls/private
+            name: metrics-tls
+            readOnly: true
+        dnsPolicy: Default
+        nodeSelector:
+          kubernetes.io/os: linux
+        priorityClassName: system-node-critical
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: dns
+        serviceAccountName: dns
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+        volumes:
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: Corefile
+              path: Corefile
+            name: dns-default
+          name: config-volume
+        - name: metrics-tls
+          secret:
+            defaultMode: 420
+            secretName: dns-default-metrics-tls
+    updateStrategy:
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 10%
+      type: RollingUpdate
+  status:
+    currentNumberScheduled: 5
+    desiredNumberScheduled: 5
+    numberAvailable: 5
+    numberMisscheduled: 0
+    numberReady: 5
+    observedGeneration: 74
+    updatedNumberScheduled: 5
+- apiVersion: apps/v1
+  kind: DaemonSet
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"app":"dumper"},"name":"dumper","namespace":"openshift-dns"},"spec":{"selector":{"matchLabels":{"app":"dumper"}},"template":{"metadata":{"labels":{"app":"dumper"}},"spec":{"containers":[{"command":["/bin/bash","-c","set -euo pipefail\ncurler_container_id=$(chroot /host crictl ps --label=io.kubernetes.container.name=curl --label=io.kubernetes.pod.namespace=openshift-dns | awk 'NR==2{print $1}')\ncurler_pod_ip_addr=$(chroot /host crictl inspect -o go-template --template='{{index .info.runtimeSpec.annotations \"io.kubernetes.cri-o.IP.0\"}}' \"$curler_container_id\")\n/sbin/tcpdump -i any \"host $curler_pod_ip_addr and (udp port 53 or tcp port 53 or udp port 5353 or tcp port 5353)\"\n"],"image":"quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3e630fcf3b3a8c3b78e6766eb1e71db69a9ccdae9014e32464390806e74eaca9","name":"tcpdump","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/host","name":"host-slash","readOnly":true}]}],"hostNetwork":true,"nodeSelector":{"kubernetes.io/os":"linux"},"privileged":true,"tolerations":[{"key":"node-role.kubernetes.io/master","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/ci-builds-worker","operator":"Exists"},{"effect":"NoSchedule","key":"node-role.kubernetes.io/ci-tests-worker","operator":"Exists"}],"volumes":[{"hostPath":{"path":"/"},"name":"host-slash"}]}}}}
+    creationTimestamp: "2022-06-14T04:30:52Z"
+    generation: 1
+    labels:
+      app: dumper
+    name: dumper
+    namespace: openshift-dns
+    resourceVersion: "3290958463"
+    uid: f4500066-c797-4bfc-bdac-63d203b5b5df
+  spec:
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: dumper
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: dumper
+      spec:
+        containers:
+        - command:
+          - /bin/bash
+          - -c
+          - |
+            set -euo pipefail
+            curler_container_id=$(chroot /host crictl ps --label=io.kubernetes.container.name=curl --label=io.kubernetes.pod.namespace=openshift-dns | awk 'NR==2{print $1}')
+            curler_pod_ip_addr=$(chroot /host crictl inspect -o go-template --template='{{index .info.runtimeSpec.annotations "io.kubernetes.cri-o.IP.0"}}' "$curler_container_id")
+            /sbin/tcpdump -i any "host $curler_pod_ip_addr and (udp port 53 or tcp port 53 or udp port 5353 or tcp port 5353)"
+          image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3e630fcf3b3a8c3b78e6766eb1e71db69a9ccdae9014e32464390806e74eaca9
+          imagePullPolicy: IfNotPresent
+          name: tcpdump
+          resources: {}
+          securityContext:
+            privileged: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /host
+            name: host-slash
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        hostNetwork: true
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/ci-builds-worker
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/ci-tests-worker
+          operator: Exists
+        volumes:
+        - hostPath:
+            path: /
+            type: ""
+          name: host-slash
+    updateStrategy:
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
+      type: RollingUpdate
+  status:
+    currentNumberScheduled: 22
+    desiredNumberScheduled: 22
+    numberAvailable: 22
+    numberMisscheduled: 1
+    numberReady: 22
+    observedGeneration: 1
+    updatedNumberScheduled: 22
+- apiVersion: apps/v1
+  kind: DaemonSet
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "35"
+    creationTimestamp: "2021-05-25T13:41:53Z"
+    generation: 35
+    name: node-resolver
+    namespace: openshift-dns
+    ownerReferences:
+    - apiVersion: operator.openshift.io/v1
+      controller: true
+      kind: DNS
+      name: default
+      uid: d8bbcd7a-f7a5-4612-ae86-d6e8d620756b
+    resourceVersion: "3290958467"
+    uid: 64186ea4-cdbe-47db-a13e-fe4f1b7ec315
+  spec:
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        dns.operator.openshift.io/daemonset-node-resolver: ""
+    template:
+      metadata:
+        annotations:
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        creationTimestamp: null
+        labels:
+          dns.operator.openshift.io/daemonset-node-resolver: ""
+      spec:
+        containers:
+        - command:
+          - /bin/bash
+          - -c
+          - |
+            #!/bin/bash
+            set -uo pipefail
+
+            trap 'jobs -p | xargs kill || true; wait; exit 0' TERM
+
+            OPENSHIFT_MARKER="openshift-generated-node-resolver"
+            HOSTS_FILE="/etc/hosts"
+            TEMP_FILE="/etc/hosts.tmp"
+
+            IFS=', ' read -r -a services <<< "${SERVICES}"
+
+            # Make a temporary file with the old hosts file's attributes.
+            cp -f --attributes-only "${HOSTS_FILE}" "${TEMP_FILE}"
+
+            while true; do
+              declare -A svc_ips
+              for svc in "${services[@]}"; do
+                # Fetch service IP from cluster dns if present. We make several tries
+                # to do it: IPv4, IPv6, IPv4 over TCP and IPv6 over TCP. The two last ones
+                # are for deployments with Kuryr on older OpenStack (OSP13) - those do not
+                # support UDP loadbalancers and require reaching DNS through TCP.
+                cmds=('dig -t A @"${NAMESERVER}" +short "${svc}.${CLUSTER_DOMAIN}"|grep -v "^;"'
+                      'dig -t AAAA @"${NAMESERVER}" +short "${svc}.${CLUSTER_DOMAIN}"|grep -v "^;"'
+                      'dig -t A +tcp +retry=0 @"${NAMESERVER}" +short "${svc}.${CLUSTER_DOMAIN}"|grep -v "^;"'
+                      'dig -t AAAA +tcp +retry=0 @"${NAMESERVER}" +short "${svc}.${CLUSTER_DOMAIN}"|grep -v "^;"')
+                for i in ${!cmds[*]}
+                do
+                  ips=($(eval "${cmds[i]}"))
+                  if [[ "$?" -eq 0 && "${#ips[@]}" -ne 0 ]]; then
+                    svc_ips["${svc}"]="${ips[@]}"
+                    break
+                  fi
+                done
+              done
+
+              # Update /etc/hosts only if we get valid service IPs
+              # We will not update /etc/hosts when there is coredns service outage or api unavailability
+              # Stale entries could exist in /etc/hosts if the service is deleted
+              if [[ -n "${svc_ips[*]-}" ]]; then
+                # Build a new hosts file from /etc/hosts with our custom entries filtered out
+                grep -v "# ${OPENSHIFT_MARKER}" "${HOSTS_FILE}" > "${TEMP_FILE}"
+
+                # Append resolver entries for services
+                for svc in "${!svc_ips[@]}"; do
+                  for ip in ${svc_ips[${svc}]}; do
+                    echo "${ip} ${svc} ${svc}.${CLUSTER_DOMAIN} # ${OPENSHIFT_MARKER}" >> "${TEMP_FILE}"
+                  done
+                done
+
+                # TODO: Update /etc/hosts atomically to avoid any inconsistent behavior
+                # Replace /etc/hosts with our modified version if needed
+                cmp "${TEMP_FILE}" "${HOSTS_FILE}" || cp -f "${TEMP_FILE}" "${HOSTS_FILE}"
+                # TEMP_FILE is not removed to avoid file create/delete and attributes copy churn
+              fi
+              sleep 60 & wait
+              unset svc_ips
+            done
+          env:
+          - name: SERVICES
+            value: image-registry.openshift-image-registry.svc
+          - name: NAMESERVER
+            value: 172.30.0.10
+          - name: CLUSTER_DOMAIN
+            value: cluster.local
+          image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+          imagePullPolicy: IfNotPresent
+          name: dns-node-resolver
+          resources:
+            requests:
+              cpu: 5m
+              memory: 21Mi
+          securityContext:
+            privileged: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+          - mountPath: /etc/hosts
+            name: hosts-file
+        dnsPolicy: ClusterFirst
+        hostNetwork: true
+        nodeSelector:
+          kubernetes.io/os: linux
+        priorityClassName: system-node-critical
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: node-resolver
+        serviceAccountName: node-resolver
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - operator: Exists
+        volumes:
+        - hostPath:
+            path: /etc/hosts
+            type: File
+          name: hosts-file
+    updateStrategy:
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 33%
+      type: RollingUpdate
+  status:
+    currentNumberScheduled: 41
+    desiredNumberScheduled: 41
+    numberAvailable: 40
+    numberMisscheduled: 0
+    numberReady: 40
+    numberUnavailable: 1
+    observedGeneration: 35
+    updatedNumberScheduled: 41
+kind: DaemonSetList
+metadata:
+  resourceVersion: "3290959246"

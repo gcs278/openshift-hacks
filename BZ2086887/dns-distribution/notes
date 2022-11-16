@@ -1,0 +1,12 @@
+Fails: ClusterBOT-GCP 4.11.0-0.nightly-2022-08-23-050348  OpenshiftSDN
+Fails: build03    4.11.0 OpenshiftSDN
+Success: gcp      4.12.0-ec.1 OpenshiftSDN
+Fails: ClusterBOT-GCP 4.9.0-0.nightly-2022-08-18-221044 OpenshiftSDN
+Fails: ClusterBOT-GCP 4.10.28 OpenshiftSDN
+Fails: ClusterBOT-GCP 4.10.1 OpenshiftSDN
+Fails: ClusterBOT-GCP 4.10.14 OpenshiftSDN
+Fails: ClusterBOT-AWS 4.10.7 OpenshiftSDN
+Success: ClusterBOT-AWS 4.10.4 OpenshiftSDN
+Success: ClusterBOT-AWS 4.10.6 OpenshiftSDN
+Fails: ClusterBOT-AWS 4.11.2 OpenshiftSDN
+

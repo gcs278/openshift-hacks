@@ -1,0 +1,1 @@
+Modifying a namespace or route label to opt-out of a router shard doesn't update the route admitted status
