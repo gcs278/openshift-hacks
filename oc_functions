@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function oc_ingress_unmanaged_privileged() {
   oc_ingress_unmanaged
   oc_ingress_privileged
@@ -149,6 +147,10 @@ function oc_ingress_logs_ingress_operator() {
   oc logs -n openshift-ingress-operator $(oc get -n openshift-ingress-operator pods --no-headers | head -1 | awk '{print $1}') -c ingress-operator $@
 }
 
+function oc_dns_logs_dns_operator() {
+  oc logs -n openshift-dns-operator $(oc get -n openshift-dns-operator pods --no-headers | head -1 | awk '{print $1}') -c dns-operator $@
+}
+
 function oc_ingress_enable_http2_router_default() {
   oc -n openshift-ingress-operator annotate ingresscontrollers/default ingress.operator.openshift.io/default-enable-http2=true
 }
@@ -186,8 +188,23 @@ function oc_ingress_delete_ingresscontroller() {
   oc delete -n openshift-ingress-operator ingresscontroller $@
 }
 
-function oc_ingress_logs_any_router_default_access() {
-  oc logs -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-default" | grep Running | head -1 | awk '{print $1}') -c logs --follow $@
+function oc_ingress_logs_any_router_access() {
+  if [[ "$1" == "" ]]; then
+    router="default"
+  else
+    router="$1"
+  fi
+  shift 1
+
+  oc logs -n openshift-ingress $(oc get pods -n openshift-ingress --no-headers | grep "^router-${router}" | grep Running | head -1 | awk '{print $1}') -c logs --follow $@
+}
+
+function oc_ingress_enable_access_logs() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide ingress controller name"
+    return 1
+  fi
+  oc -n openshift-ingress-operator patch ingresscontroller/$1 --type=merge --patch='{"spec":{"logging":{"access":{"destination":{"type":"Container"}}}}}'
 }
 
 function oc_ingress_logs_any_router() {
@@ -228,6 +245,10 @@ function oc_ingress_get_router_image() {
   oc_ingress_get_router_deployments router-default -o json | jq -r '.spec.template.spec.containers[0].image'
 }
 
+function oc_ingress_get_operator_image() {
+  oc get deployment -n openshift-ingress-operator ingress-operator -o json | jq -r '.spec.template.spec.containers[0].image'
+}
+
 function oc_ingress_enable_verbose_openshift_router() {
   echo "Log in to quay.io"
   podman login quay.io || return 1
@@ -253,8 +274,9 @@ function oc_ingress_patch_router_image() {
     return 1
   fi
   oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+  oc -n openshift-ingress patch deploy/router-default --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"router","image":"'${1}'","imagePullPolicy":"Always"}]}}}}'
   oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"ingress-operator","env":[{"name":"IMAGE","value":"'${1}'"}]}]}}}}'
-  oc -n openshift-ingress patch deploy/router-default --type=strategic --patch='{"spec":{"containers":[{"name":"router-default","imagePullPolicy":"Always"}]}}'
+  #oc -n openshift-ingress patch deploy/router-default --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"router-default","imagePullPolicy":"Always"}]}}}}'
 }
 
 function oc_ingress_patch_operator_image() {
@@ -264,7 +286,7 @@ function oc_ingress_patch_operator_image() {
   fi
   oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
   oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"ingress-operator","image":"'${1}'"}]}}}}'
-  oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"containers":[{"name":"ingress-operator","imagePullPolicy":"Always"}]}}'
+  oc -n openshift-ingress-operator patch deploy/ingress-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"ingress-operator","imagePullPolicy":"Always"}]}}}}'
 }
 
 function oc_ingress_force_delete_terminating_router_pods() {
@@ -277,6 +299,16 @@ function oc_ingress_maxconn_auto() {
   oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"tuningOptions":{"maxConnections":-1}}}'
   oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"unsupportedConfigOverrides":{"maxConnections":-1}}}'
 }
+
+function oc_ingress_patch_maxconn() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You must provide a maxconn value"
+    return 1
+  fi
+  oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"tuningOptions":{"maxConnections":'$1'}}}'
+  oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"unsupportedConfigOverrides":{"maxConnections":'$1'}}}'
+}
+
 
 function oc_ingress_patch_ingresscontroller_routeselector() {
   if [[ "$1" == "" ]]; then
@@ -310,6 +342,12 @@ function oc_open_console() {
   xdg-open https://${URL}
 }
 
+function oc_open_kibana() {
+  URL=$(oc get route -n openshift-logging kibana -o go-template='{{.spec.host}}{{"\n"}}')
+  echo $URL
+  xdg-open https://${URL}
+}
+
 function oc_curl() {
   oc run curl-pod --image=radial/busyboxplus:curl -i --tty --rm
 }
@@ -324,6 +362,11 @@ function oc_ingress_gwapi_logs() {
 
 function oc_ingress_domain() {
   oc get ingresses.config/cluster -o jsonpath={.spec.domain}
+  echo
+}
+
+function oc_ingress_domain_base() {
+  oc get dnses cluster -o jsonpath={.spec.baseDomain}
   echo
 }
 
@@ -344,21 +387,24 @@ function oc_ingress_patch_ingress_operator_local_binary() {
 }
 
 function oc_get_image() {
-  if [[ "$1" == "" ]] || [[ "$2" == "" ]]; then
+  if [[ "$1" == "" ]]; then
     echo "Usage: oc_get_image <VERSION> <container>"
     return 1
   fi
 
-  sha=$(oc adm release info quay.io/openshift-release-dev/ocp-release:${1}-x86_64 | grep -i ${2} | awk '{print $2}')
+  REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release info --pullspecs quay.io/openshift-release-dev/ocp-release:${1}-x86_64
   if [[ $? -ne 0 ]]; then
-    echo "Error running oc adm release info quay.io/openshift-release-dev/ocp-release:${1}-x86_64"
-    return 1
+    oc adm release info --pullspecs registry.ci.openshift.org/ocp/release:$1
+    if [[ $? -ne 0 ]]; then
+      # for shas
+      oc adm release info --pullspecs registry.ci.openshift.org/ocp/release@$1
+      if [[ $? -ne 0 ]]; then
+        echo "Error running oc adm release info quay.io/openshift-release-dev/ocp-release:${1}-x86_64"
+        echo "Error running oc adm release info registry.ci.openshift.org/ocp/release@$1"
+        return 1
+      fi
+    fi
   fi
-  if [[ "$sha" == "" ]]; then
-    echo "Unable to find sha for ${2}"
-    return 1
-  fi
-  echo "quay.io/openshift-release-dev/ocp-v4.0-art-dev@$sha"
 }
 
 function oc_logs() {
@@ -366,15 +412,11 @@ function oc_logs() {
     echo "ERROR: You need to provide a pod name"
     return 1
   fi
-  if [[ "$1" == "-n" ]]; then
-    NS="-n $2"
-    shift 2
-  else
-    NS="-A"
-  fi
-  for pod in $(oc get pods $NS --no-headers | grep "${1}-" | awk '{print $2}'); do
+  pod_name="$1"
+  shift 1
+  for pod in $(oc get pods $@ --no-headers -o jsonpath='{range .items[*]}{@.metadata.name}{"\n"}' | grep "${pod_name}-"); do
     echo "${pod}:"
-    oc logs $pod --timestamps
+    oc logs $pod --timestamps $@
   done
 }
 
@@ -419,5 +461,101 @@ function oc_dns_delete_all_coredns_pods() {
   for i in $(oc get pods -n openshift-dns --no-headers | awk '{print $1}' | grep -i dns-default); do
     echo "Deleting $i"
     oc delete --force -n openshift-dns pod $i
+  done
+}
+
+# Takes version of cluster-ingress-operator, puts in the a new container, then runs it
+# Alternative to debuging C-I-O locally
+function oc_ingress_clusterbuild_operator(){
+  if [[ "$1" == "" ]]; then 
+    echo "ERROR: Provide a tag name for your image"
+    return 1
+  fi
+  make
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Make failed"
+    return 1
+  fi
+  podman login quay.io
+  img=$(REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release info --pullspecs | grep cluster-ingress-operator | awk '{print $2}')
+  if [[ "$img" == "" ]]; then
+    echo "ERROR: Couldn't get current cluster ingress operator image"
+    return 1
+  fi
+
+  podman pull --authfile /home/${USER}/.secrets/pull-secret.txt $img
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Failed to pull $img"
+    return 1
+  fi
+
+  container=$(podman create $img)
+  podman cp ~/src/github.com/openshift/cluster-ingress-operator/ingress-operator ${container}:/usr/bin/
+  new_img="quay.io/${USER}/cluster-ingress-operator:${1}"
+  podman commit $container $new_img
+  podman push $new_img
+
+  oc_ingress_patch_operator_image $new_img
+  echo "Patched cluster-ingress-operator to $new_img"
+}
+
+function oc_dns_patch_operator_image() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide an image"
+    return 1
+  fi
+  oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+  oc -n openshift-dns-operator patch deploy/dns-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"dns-operator","image":"'${1}'"}]}}}}'
+  oc -n openshift-dns-operator patch deploy/dns-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"dns-operator","imagePullPolicy":"Always"}]}}}}'
+}
+
+
+# Takes version of cluster-dns-operator, puts in the a new container, then runs it
+# Alternative to debuging C-D-O locally
+function oc_dns_clusterbuild_operator(){
+  if [[ "$1" == "" ]]; then 
+    echo "ERROR: Provide a tag name for your image"
+    return 1
+  fi
+  make
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Make failed"
+    return 1
+  fi
+  podman login quay.io
+  img=$(REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release info --pullspecs | grep cluster-dns-operator | awk '{print $2}')
+  if [[ "$img" == "" ]]; then
+    echo "ERROR: Couldn't get current cluster dns operator image"
+    return 1
+  fi
+
+  podman pull --authfile /home/${USER}/.secrets/pull-secret.txt $img
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Failed to pull $img"
+    return 1
+  fi
+
+  container=$(podman create $img)
+  podman cp ~/src/github.com/openshift/cluster-dns-operator/dns-operator ${container}:/usr/bin/
+  new_img="quay.io/${USER}/cluster-dns-operator:${1}"
+  podman commit $container $new_img
+  podman push $new_img
+
+  oc_dns_patch_operator_image $new_img
+  echo "Patched cluster-dns-operator to $new_img"
+}
+
+function oc_dns_get_operator_config {
+  oc get dnses.operator.openshift.io $@
+}
+
+function oc_dns_edit_operator_config {
+  oc edit dnses.operator.openshift.io default $@
+}
+
+function oc_ingress_exec_router_all {
+  for i in $(oc get pods -n openshift-ingress -o json | jq -r '.items[].metadata.name'); do
+    echo $i;
+    oc exec -n openshift-ingress $i $@
   done
 }

@@ -1,0 +1,6 @@
+FROM docker.io/library/debian:latest
+#COPY --from=builder /go/src/github.com/openshift/router/openshift-router /usr/bin/
+COPY ./openshift-router /usr/bin/
+LABEL io.k8s.display-name="OpenShift Router" \
+      io.k8s.description="This is the base image from which all template based routers inherit." \
+      io.openshift.tags="openshift,router"

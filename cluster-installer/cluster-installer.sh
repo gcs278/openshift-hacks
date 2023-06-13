@@ -47,10 +47,19 @@ if [ -z "$NAME" ]; then print_usage_exit; fi
 if [ -z "$CLUSTER_DIR" ]; then print_usage_exit; fi
 if [ -z "$PLATFORM" ]; then print_usage_exit; fi
 
+# Always remove the building file on exit
+BUILDING_FILE=${CLUSTER_DIR}/building
+function cleanup {
+  rm -f ${BUILDING_FILE}
+}
+trap cleanup EXIT
 
 echo $CLUSTER_DIR
 
 AUTHS_JSON="$(jq ".auths" $HOME/.secrets/pull-secret.txt | jq -c .)"
+
+#SDN_TYPE=OpenshiftSDN
+SDN_TYPE=OVNKubernetes
 
 function create_gcp_config {
     SSH_KEY=$(<$HOME/.ssh/id_rsa.pub)
@@ -71,7 +80,7 @@ networking:
   - cidr: 10.128.0.0/14
     hostPrefix: 23
   machineCIDR: 10.0.0.0/16
-  networkType: OpenShiftSDN
+  networkType: ${SDN_TYPE}
   serviceNetwork:
   - 172.30.0.0/16
 platform:
@@ -109,7 +118,7 @@ networking:
     hostPrefix: 23
   machineNetwork:
   - cidr: 10.0.0.0/16
-  networkType: OpenShiftSDN
+  networkType: ${SDN_TYPE}
   serviceNetwork:
   - 172.30.0.0/16
 platform:
@@ -157,7 +166,7 @@ networking:
   - cidr: 10.128.0.0/14
     hostPrefix: 23
   machineCIDR: 10.0.0.0/16
-  networkType: OpenShiftSDN
+  networkType: ${SDN_TYPE}
   serviceNetwork:
   - 172.30.0.0/16
 platform:
@@ -177,6 +186,19 @@ function create() {
     if [ -d "$CLUSTER_DIR" ]; then
         echo "Error: ${CLUSTER_DIR} already exists"
         exit 1
+    fi
+
+    if ! podman login --authfile ~/.secrets/pull-secret.txt registry.ci.openshift.org <&-; then
+      echo "ERROR: You are not logged into registry.ci.openshift.org. You must:"
+      echo ""
+      echo "    1. Visit https://console.redhat.com/openshift/install/pull-secret and download pull-secret"
+      echo "    2. cp ~/Downloads/pull-secret to ~/.secrets/pull-secret.txt"
+      echo "    3. Visit https://console-openshift-console.apps.ci.l2s4.p1.openshiftapps.com/"
+      echo "    4. Log in -> Copy login command -> unset KUBECONFIG -> Use login command"
+      echo "    5. oc registry login --to=/home/$USER/.secrets/pull-secret.txt"
+      echo "    6. Test via:"
+      echo "       podman login --authfile ~/.secrets/pull-secret.txt registry.ci.openshift.org"
+      exit 1
     fi
 
     CLUSTER_ID=$(python3 -c "import uuid, sys;sys.stdout.write(str(uuid.uuid4()))")
@@ -208,6 +230,7 @@ function create() {
       fi
     fi
     cat $CLUSTER_DIR/install-config.yaml
+    touch ${BUILDING_FILE}
     ${INSTALLER} create cluster --dir="$CLUSTER_DIR"
 }
 

@@ -1,0 +1,35 @@
+[1mMon Dec  5 21:08:52 UTC 2022 Small scale scenario detected: #workers < 24[0m
+[1mMon Dec  5 21:08:52 UTC 2022 ###############################################[0m
+[1mMon Dec  5 21:08:52 UTC 2022 Routes: 500[0m
+[1mMon Dec  5 21:08:52 UTC 2022 Routers: 2[0m
+[1mMon Dec  5 21:08:52 UTC 2022 Service type: NodePort[0m
+[1mMon Dec  5 21:08:52 UTC 2022 Terminations: mix[0m
+[1mMon Dec  5 21:08:52 UTC 2022 Deployment replicas: 1[0m
+[1mMon Dec  5 21:08:52 UTC 2022 ###############################################[0m
+[1mMon Dec  5 21:08:52 UTC 2022 Deploying benchmark infrastructure[0m
+[1mMon Dec  5 21:08:52 UTC 2022 Downloading and extracting kube-burner binary[0m
+time="2022-12-05 16:09:12" level=info msg="🔥 Starting kube-burner (0.16.2@303205027d18a726bc9b11af39e80c2bb72cac63) with UUID c33235ea-53cf-4f19-a2ba-291a45f6ad97"
+time="2022-12-05 16:09:12" level=info msg="📈 Creating measurement factory"
+time="2022-12-05 16:09:12" level=info msg="Preparing create job: http-scale-http"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-http: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-http: 1 iterations with 500 Service replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-http: 1 iterations with 500 Route replicas"
+time="2022-12-05 16:09:12" level=info msg="Preparing create job: http-scale-edge"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-edge: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-edge: 1 iterations with 500 Service replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-edge: 1 iterations with 500 Route replicas"
+time="2022-12-05 16:09:12" level=info msg="Preparing create job: http-scale-passthrough"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Service replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Route replicas"
+time="2022-12-05 16:09:12" level=info msg="Preparing create job: http-scale-reencrypt"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Service replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Route replicas"
+time="2022-12-05 16:09:12" level=info msg="Preparing create job: http-scale-client"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-client: 1 iterations with 1 RoleBinding replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-client: 1 iterations with 1 ServiceAccount replicas"
+time="2022-12-05 16:09:12" level=info msg="Job http-scale-client: 1 iterations with 1 Deployment replicas"
+time="2022-12-05 16:09:12" level=info msg="Triggering job: http-scale-http"
+time="2022-12-05 16:09:12" level=info msg="Deleting namespaces with label kube-burner-job=http-scale-http"
+time="2022-12-05 16:09:12" level=info msg="Waiting for namespaces to be definitely deleted"

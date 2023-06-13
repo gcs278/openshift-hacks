@@ -1,0 +1,14 @@
+Andrey Lebedev12:16 PM
+coredns-upstream$ go mod graph | grep ' github.com/go-pg/pg/v10'
+gopkg.in/DataDog/dd-trace-go.v1@v1.41.0 github.com/go-pg/pg/v10@v10.0.0
+
+coredns-upstream$ go mod graph | grep ' mellium.im/sasl'
+github.com/go-pg/pg/v10@v10.0.0 mellium.im/sasl@v0.2.1
+
+coredns-upstream$ go mod graph | grep ' github.com/go-pg/pg/v10'                                         
+gopkg.in/DataDog/dd-trace-go.v1@v1.41.0 github.com/go-pg/pg/v10@v10.0.0
+
+coredns-upstream$ go mod graph | grep ' gopkg.in/DataDog/dd-trace-go.v
+https://coredns.io/plugins/trace/
+trace [ENDPOINT-TYPE] [ENDPOINT]
+ENDPOINT-TYPE is the type of tracing destination. Currently only zipkin and datadog are supported. Defaults to zipkin.

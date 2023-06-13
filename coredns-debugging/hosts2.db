@@ -1,0 +1,56 @@
+$ORIGIN example.org.
+@	3600 IN	SOA sns.dns.icann.org. noc.dns.icann.org. 2017042745 7200 3600 1209600 3600
+	3600 IN NS a.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS b.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+
+www     IN A     192.168.99.99
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:5e2f

@@ -1,0 +1,341 @@
+[1mMon Dec  5 23:42:04 UTC 2022 Small scale scenario detected: #workers < 24[0m
+[1mMon Dec  5 23:42:04 UTC 2022 ###############################################[0m
+[1mMon Dec  5 23:42:04 UTC 2022 Routes: 500[0m
+[1mMon Dec  5 23:42:04 UTC 2022 Routers: 2[0m
+[1mMon Dec  5 23:42:04 UTC 2022 Service type: NodePort[0m
+[1mMon Dec  5 23:42:04 UTC 2022 Terminations: mix[0m
+[1mMon Dec  5 23:42:04 UTC 2022 Deployment replicas: 1[0m
+[1mMon Dec  5 23:42:04 UTC 2022 ###############################################[0m
+[1mMon Dec  5 23:42:04 UTC 2022 Deploying benchmark infrastructure[0m
+[1mMon Dec  5 23:42:04 UTC 2022 Downloading and extracting kube-burner binary[0m
+time="2022-12-05 18:42:06" level=info msg="🔥 Starting kube-burner (0.16.2@303205027d18a726bc9b11af39e80c2bb72cac63) with UUID 29204a8a-74f1-4d98-bb5c-c19ed86b0d36"
+time="2022-12-05 18:42:06" level=info msg="📈 Creating measurement factory"
+time="2022-12-05 18:42:06" level=info msg="Preparing create job: http-scale-http"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-http: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-http: 1 iterations with 500 Service replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-http: 1 iterations with 500 Route replicas"
+time="2022-12-05 18:42:06" level=info msg="Preparing create job: http-scale-edge"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-edge: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-edge: 1 iterations with 500 Service replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-edge: 1 iterations with 500 Route replicas"
+time="2022-12-05 18:42:06" level=info msg="Preparing create job: http-scale-passthrough"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Service replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Route replicas"
+time="2022-12-05 18:42:06" level=info msg="Preparing create job: http-scale-reencrypt"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Service replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Route replicas"
+time="2022-12-05 18:42:06" level=info msg="Preparing create job: http-scale-client"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-client: 1 iterations with 1 RoleBinding replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-client: 1 iterations with 1 ServiceAccount replicas"
+time="2022-12-05 18:42:06" level=info msg="Job http-scale-client: 1 iterations with 1 Deployment replicas"
+time="2022-12-05 18:42:06" level=info msg="Triggering job: http-scale-http"
+time="2022-12-05 18:42:07" level=info msg="QPS: 20"
+time="2022-12-05 18:42:07" level=info msg="Burst: 20"
+time="2022-12-05 18:42:07" level=info msg="Running job http-scale-http"
+time="2022-12-05 18:43:21" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 18:43:25" level=info msg="Actions in namespace http-scale-http completed"
+time="2022-12-05 18:43:25" level=info msg="Finished the create job in 78 seconds"
+time="2022-12-05 18:43:25" level=info msg="Verifying created objects"
+time="2022-12-05 18:43:25" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 18:43:25" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 18:43:25" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 18:43:25" level=info msg="Job http-scale-http took 78.75 seconds"
+time="2022-12-05 18:43:25" level=info msg="Triggering job: http-scale-edge"
+time="2022-12-05 18:43:25" level=info msg="QPS: 20"
+time="2022-12-05 18:43:25" level=info msg="Burst: 20"
+time="2022-12-05 18:43:25" level=info msg="Running job http-scale-edge"
+time="2022-12-05 18:44:39" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 18:44:43" level=info msg="Actions in namespace http-scale-edge completed"
+time="2022-12-05 18:44:43" level=info msg="Finished the create job in 77 seconds"
+time="2022-12-05 18:44:43" level=info msg="Verifying created objects"
+time="2022-12-05 18:44:43" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 18:44:43" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 18:44:43" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 18:44:43" level=info msg="Job http-scale-edge took 77.73 seconds"
+time="2022-12-05 18:44:43" level=info msg="Triggering job: http-scale-passthrough"
+time="2022-12-05 18:44:43" level=info msg="QPS: 20"
+time="2022-12-05 18:44:43" level=info msg="Burst: 20"
+time="2022-12-05 18:44:43" level=info msg="Running job http-scale-passthrough"
+time="2022-12-05 18:45:57" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 18:46:01" level=info msg="Actions in namespace http-scale-passthrough completed"
+time="2022-12-05 18:46:01" level=info msg="Finished the create job in 79 seconds"
+time="2022-12-05 18:46:01" level=info msg="Verifying created objects"
+time="2022-12-05 18:46:01" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 18:46:02" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 18:46:02" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 18:46:02" level=info msg="Job http-scale-passthrough took 78.70 seconds"
+time="2022-12-05 18:46:02" level=info msg="Triggering job: http-scale-reencrypt"
+time="2022-12-05 18:46:02" level=info msg="QPS: 20"
+time="2022-12-05 18:46:02" level=info msg="Burst: 20"
+time="2022-12-05 18:46:02" level=info msg="Running job http-scale-reencrypt"
+time="2022-12-05 18:47:16" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 18:47:20" level=info msg="Actions in namespace http-scale-reencrypt completed"
+time="2022-12-05 18:47:20" level=info msg="Finished the create job in 79 seconds"
+time="2022-12-05 18:47:20" level=info msg="Verifying created objects"
+time="2022-12-05 18:47:20" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 18:47:21" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 18:47:21" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 18:47:21" level=info msg="Job http-scale-reencrypt took 79.12 seconds"
+time="2022-12-05 18:47:21" level=info msg="Triggering job: http-scale-client"
+time="2022-12-05 18:47:21" level=info msg="QPS or Burst rates not set, using default client-go values: 5 10"
+time="2022-12-05 18:47:21" level=info msg="Running job http-scale-client"
+W1205 18:47:21.364820  255029 warnings.go:70] unknown field "spec.template.spec.imagePullPolicy"
+time="2022-12-05 18:47:21" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 18:47:23" level=info msg="Actions in namespace http-scale-client completed"
+time="2022-12-05 18:47:23" level=info msg="Finished the create job in 2 seconds"
+time="2022-12-05 18:47:23" level=info msg="Verifying created objects"
+time="2022-12-05 18:47:23" level=info msg="rolebindings found: 1 Expected: 1"
+time="2022-12-05 18:47:23" level=info msg="serviceaccounts found: 1 Expected: 1"
+time="2022-12-05 18:47:23" level=info msg="deployments found: 1 Expected: 1"
+time="2022-12-05 18:47:23" level=info msg="Job http-scale-client took 2.28 seconds"
+time="2022-12-05 18:47:23" level=info msg="Finished execution with UUID: 29204a8a-74f1-4d98-bb5c-c19ed86b0d36"
+time="2022-12-05 18:47:23" level=info msg="👋 Exiting kube-burner"
+[1mMon Dec  5 23:47:23 UTC 2022 Creating configmap from workload.py file[0m
+configmap/workload created
+[1mMon Dec  5 23:47:28 UTC 2022 Adding workload.py to the client pod[0m
+info: Generated volume name: volume-22ps5
+deployment.apps/http-scale-client volume updated
+[1mMon Dec  5 23:47:28 UTC 2022 Waiting for http-scale-client rollout[0m
+Waiting for deployment "http-scale-client" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "http-scale-client" rollout to finish: 1 old replicas are pending termination...
+deployment "http-scale-client" successfully rolled out
+[1mMon Dec  5 23:47:29 UTC 2022 Apply tuned profile for node labeled with node-role.kubernetes.io/workload[0m
+tuned.tuned.openshift.io/openshift-ingress-performance created
+[1mMon Dec  5 23:47:30 UTC 2022 Disabling cluster version operator[0m
+deployment.apps/cluster-version-operator scaled
+[1mMon Dec  5 23:47:30 UTC 2022 Scaling ingress-operator up to 1[0m
+deployment.apps/ingress-operator scaled
+deployment "ingress-operator" successfully rolled out
+[1mMon Dec  5 23:47:30 UTC 2022 Replacing ingress-operator image with quay.io/openshift/origin-cluster-ingress-operator:4.13[0m
+deployment.apps/ingress-operator patched
+Waiting for deployment "ingress-operator" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "ingress-operator" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "ingress-operator" rollout to finish: 0 of 1 updated replicas are available...
+deployment "ingress-operator" successfully rolled out
+[1mMon Dec  5 23:47:36 UTC 2022 Replacing router with quay.io/openshift/origin-haproxy-router:4.13[0m
+deployment.apps/ingress-operator patched
+[1mMon Dec  5 23:47:36 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:37 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:38 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:39 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:41 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:42 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:43 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:44 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:45 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:47 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:48 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:49 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:50 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:51 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:52 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:53 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:55 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:56 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:57 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:58 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:47:59 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:00 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:02 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:03 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:04 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:05 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:06 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:08 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:09 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:10 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:11 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:12 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:13 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:15 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:16 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:17 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:18 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:19 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:20 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:22 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:23 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:24 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:25 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:26 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:27 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:29 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:30 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:31 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:32 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:33 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:34 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:36 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:37 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:38 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:39 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:40 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:41 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:43 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:44 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:45 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:46 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:48 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:49 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:50 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:51 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:52 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:53 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:55 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:56 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:57 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:58 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:48:59 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:00 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:01 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:03 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:04 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:05 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:06 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:07 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:08 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:10 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:11 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:12 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:13 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:14 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:15 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:17 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:18 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:19 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:20 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:21 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:22 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:23 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:25 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:26 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:27 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:28 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:29 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:30 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:31 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:33 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:34 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:35 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:36 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:38 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:39 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:40 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:41 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:42 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:43 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:45 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:46 UTC 2022 Waiting for all router images to become quay.io/openshift/origin-haproxy-router:4.13...[0m
+[1mMon Dec  5 23:49:47 UTC 2022 Scaling ingress-operator down to 0[0m
+deployment.apps/ingress-operator scaled
+[1mMon Dec  5 23:49:47 UTC 2022 Scaling number of routers to 2[0m
+deployment.apps/router-default scaled
+[1mMon Dec  5 23:49:47 UTC 2022 Increasing ingress controller liveness probe period to 120s[0m
+deployment.apps/router-default scaled
+deployment.apps/router-default probes updated
+[1mMon Dec  5 23:49:47 UTC 2022 Scaling number of routers to 2[0m
+deployment.apps/router-default scaled
+Waiting for deployment "router-default" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "router-default" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "router-default" rollout to finish: 0 of 2 updated replicas are available...
+deployment "router-default" successfully rolled out
+[1mMon Dec  5 23:50:23 UTC 2022 Testing all routes before triggering the workload[0m
+[1mMon Dec  5 23:54:41 UTC 2022 Generating config for termination mix with 20 clients 0 keep alive requests and path /1024.html[0m
+[1mMon Dec  5 23:54:42 UTC 2022 Copying mb config http-scale-mix.json to pod http-scale-client-fd9dcc8df-9mcmf[0m
+[1mMon Dec  5 23:54:43 UTC 2022 Executing sample 1/4 using termination mix with 20 clients and 0 keepalive requests[0m
+Executing 'mb -i /tmp/http-scale-mix.json -d 60 -o /tmp/results.csv'
+Workload finished, results:
+{
+    "termination": "mix",
+    "test_type": "mix",
+    "uuid": "29204a8a-74f1-4d98-bb5c-c19ed86b0d36",
+    "cluster.id": "cf9f094c-75ae-4314-807b-be748d0f98c1",
+    "cluster.name": "gspence-2022-12-05-08-xb5cc",
+    "cluster.ocp_version": "4.13.0-ec.0",
+    "cluster.kubernetes_version": "1.25",
+    "cluster.sdn": "OpenShiftSDN",
+    "cluster.platform": "AWS",
+    "requests_per_second": 11438,
+    "avg_latency": 669897,
+    "latency_95pctl": 1656932,
+    "latency_99pctl": 12736232,
+    "host_network": "true",
+    "sample": "1",
+    "runtime": 60,
+    "routes": 2000,
+    "conn_per_targetroute": 20,
+    "keepalive": 0,
+    "tls_reuse": true,
+    "number_of_routers": "2",
+    "200": 686322,
+    "0": 1977,
+    "504": 27
+}
+Indexing documents in router-test-results
+[1mMon Dec  5 23:56:14 UTC 2022 Sleeping for 60s before next test[0m
+[1mMon Dec  5 23:57:14 UTC 2022 Executing sample 2/4 using termination mix with 20 clients and 0 keepalive requests[0m
+Executing 'mb -i /tmp/http-scale-mix.json -d 60 -o /tmp/results.csv'
+Workload finished, results:
+{
+    "termination": "mix",
+    "test_type": "mix",
+    "uuid": "29204a8a-74f1-4d98-bb5c-c19ed86b0d36",
+    "cluster.id": "cf9f094c-75ae-4314-807b-be748d0f98c1",
+    "cluster.name": "gspence-2022-12-05-08-xb5cc",
+    "cluster.ocp_version": "4.13.0-ec.0",
+    "cluster.kubernetes_version": "1.25",
+    "cluster.sdn": "OpenShiftSDN",
+    "cluster.platform": "AWS",
+    "requests_per_second": 13196,
+    "avg_latency": 494756,
+    "latency_95pctl": 1687089,
+    "latency_99pctl": 5577826,
+    "host_network": "true",
+    "sample": "2",
+    "runtime": 60,
+    "routes": 2000,
+    "conn_per_targetroute": 20,
+    "keepalive": 0,
+    "tls_reuse": true,
+    "number_of_routers": "2",
+    "200": 791796,
+    "0": 23082,
+    "504": 124
+}
+Indexing documents in router-test-results
+[1mMon Dec  5 23:58:49 UTC 2022 Sleeping for 60s before next test[0m
+[1mMon Dec  5 23:59:49 UTC 2022 Executing sample 3/4 using termination mix with 20 clients and 0 keepalive requests[0m
+Executing 'mb -i /tmp/http-scale-mix.json -d 60 -o /tmp/results.csv'
+Workload finished, results:
+{
+    "termination": "mix",
+    "test_type": "mix",
+    "uuid": "29204a8a-74f1-4d98-bb5c-c19ed86b0d36",
+    "cluster.id": "cf9f094c-75ae-4314-807b-be748d0f98c1",
+    "cluster.name": "gspence-2022-12-05-08-xb5cc",
+    "cluster.ocp_version": "4.13.0-ec.0",
+    "cluster.kubernetes_version": "1.25",
+    "cluster.sdn": "OpenShiftSDN",
+    "cluster.platform": "AWS",
+    "requests_per_second": 15107,
+    "avg_latency": 477910,
+    "latency_95pctl": 1723596,
+    "latency_99pctl": 5062727,
+    "host_network": "true",
+    "sample": "3",
+    "runtime": 60,
+    "routes": 2000,
+    "conn_per_targetroute": 20,
+    "keepalive": 0,
+    "tls_reuse": true,
+    "number_of_routers": "2",
+    "200": 906426,
+    "0": 11796,
+    "504": 29
+}
+Indexing documents in router-test-results
+[1mTue Dec  6 00:01:18 UTC 2022 Sleeping for 60s before next test[0m
+[1mTue Dec  6 00:02:18 UTC 2022 Executing sample 4/4 using termination mix with 20 clients and 0 keepalive requests[0m
+error: error sending request: Post "https://api.gspence-2022-12-05-0859.devcluster.openshift.com:6443/api/v1/namespaces/http-scale-client/pods/http-scale-client-fd9dcc8df-9mcmf/exec?command=python3&command=%2Fworkload%2Fworkload.py&command=--mb-config&command=%2Ftmp%2Fhttp-scale-mix.json&command=--termination&command=mix&command=--runtime&command=60&command=--output&command=%2Ftmp%2Fresults.csv&command=--sample&command=4&container=mb&stdin=true&stdout=true&tty=true": read tcp 192.168.8.227:19270->3.219.37.32:6443: read: network is unreachable

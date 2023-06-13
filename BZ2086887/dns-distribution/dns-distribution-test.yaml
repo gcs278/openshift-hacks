@@ -36,7 +36,7 @@ spec:
           set -uo pipefail
           echo "Starting"
           while : ; do
-            dig +retry=0 +timeout=60 +tries=1 "https://docs.ci.openshift.org"
+            dig +vc +tcp +retry=0 +timeout=60 +tries=1 "https://docs.ci.openshift.org"
             sleep 0.5
           done
         image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3e630fcf3b3a8c3b78e6766eb1e71db69a9ccdae9014e32464390806e74eaca9

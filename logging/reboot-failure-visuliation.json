@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "350168e0-7666-11ed-9773-296fe004cd46",
+    "_type": "visualization",
+    "_source": {
+      "title": "Reboot vs. DNS Failures",
+      "visState": "{\n  \"title\": \"Reboot vs. DNS Failures\",\n  \"type\": \"histogram\",\n  \"params\": {\n    \"addLegend\": true,\n    \"addTimeMarker\": true,\n    \"addTooltip\": true,\n    \"categoryAxes\": [\n      {\n        \"id\": \"CategoryAxis-1\",\n        \"labels\": {\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"position\": \"bottom\",\n        \"scale\": {\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {},\n        \"type\": \"category\"\n      }\n    ],\n    \"grid\": {\n      \"categoryLines\": true,\n      \"style\": {\n        \"color\": \"#eee\"\n      },\n      \"valueAxis\": \"ValueAxis-1\"\n    },\n    \"legendPosition\": \"right\",\n    \"seriesParams\": [\n      {\n        \"data\": {\n          \"id\": \"1\",\n          \"label\": \"Count\"\n        },\n        \"drawLinesBetweenPoints\": true,\n        \"mode\": \"stacked\",\n        \"show\": \"true\",\n        \"showCircles\": true,\n        \"type\": \"histogram\",\n        \"valueAxis\": \"ValueAxis-1\"\n      }\n    ],\n    \"times\": [],\n    \"type\": \"histogram\",\n    \"valueAxes\": [\n      {\n        \"id\": \"ValueAxis-1\",\n        \"labels\": {\n          \"filter\": false,\n          \"rotate\": 0,\n          \"show\": true,\n          \"truncate\": 100\n        },\n        \"name\": \"LeftAxis-1\",\n        \"position\": \"left\",\n        \"scale\": {\n          \"mode\": \"normal\",\n          \"type\": \"linear\"\n        },\n        \"show\": true,\n        \"style\": {},\n        \"title\": {\n          \"text\": \"Count\"\n        },\n        \"type\": \"value\"\n      }\n    ]\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"count\",\n      \"schema\": \"metric\",\n      \"params\": {}\n    },\n    {\n      \"id\": \"2\",\n      \"enabled\": true,\n      \"type\": \"date_histogram\",\n      \"schema\": \"segment\",\n      \"params\": {\n        \"field\": \"@timestamp\",\n        \"timeRange\": {\n          \"from\": \"2022-12-07T17:50:02.892Z\",\n          \"to\": \"2022-12-07T18:07:12.896Z\",\n          \"mode\": \"absolute\"\n        },\n        \"useNormalizedEsInterval\": true,\n        \"interval\": \"auto\",\n        \"drop_partials\": false,\n        \"customInterval\": \"2h\",\n        \"min_doc_count\": 1,\n        \"extended_bounds\": {}\n      }\n    },\n    {\n      \"id\": \"6\",\n      \"enabled\": true,\n      \"type\": \"filters\",\n      \"schema\": \"group\",\n      \"params\": {\n        \"filters\": [\n          {\n            \"input\": {\n              \"query\": \"message:\\\"FAILURE\\\" and kubernetes.namespace_name:\\\"openshift-dns\\\"\"\n            },\n            \"label\": \"Failures\"\n          },\n          {\n            \"input\": {\n              \"query\": \"message:\\\"Starting Reboot...\\\"\"\n            },\n            \"label\": \"Reboot\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+      "uiStateJSON": "{\n  \"vis\": {\n    \"legendOpen\": true\n  }\n}",
+      "description": "",
+      "savedSearchId": "2a7e8d10-7663-11ed-9773-296fe004cd46",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"query\": {\n    \"language\": \"kuery\",\n    \"query\": \"\"\n  },\n  \"filter\": []\n}"
+      }
+    },
+    "_migrationVersion": {
+      "visualization": "6.7.2"
+    }
+  }
+]

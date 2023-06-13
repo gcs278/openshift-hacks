@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: router-service1
+spec:
+  to:
+    kind: Service
+    name: router-service1
+    weight: 10
+  tls:
+    termination: passthrough

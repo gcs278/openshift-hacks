@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: List
+metadata: {}
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: echo-sleeper
+    labels:
+      app: echo-sleeper
+  spec:
+    selector:
+      app: echo-sleeper
+    ports:
+      - port: 8676
+        name: echo-sleeper
+        protocol: TCP

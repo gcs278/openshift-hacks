@@ -1,0 +1,52 @@
+Reproducer:
+1. Install kibana (./logging/setup-kibana.sh)
+2. Configure kibana (oc_open_kibana)
+3. Import 
+
+Local DNS Preference was Introduced:
+Works in 4.9
+4.10.38
+4.11.10
+Works in 4.12
+
+4.9.45 -> 4.9.47, SDN, 6 Node = 38 DNS Errors
+ - Local DNS Preference, but forced to local endpoint that wasn't ready (just as bad).
+4.10.30 -> 4.10.31, SDN, 6 Node =  64 DNS errors.
+ - Missing Local DNS preference
+4.10.31 -> 4.10.38, SDN, 6 Node = 2 DNS errors.
+ - Still clearly showing small amount of "daemon set zombie" errors that we don't have a fix for.
+4.10.38 -> 4.10.39, SDN, 58 Nodes = 0 DNS errors
+ - Couldn't even get this to fail
+4.11.9 -> 4.11.12, SDN, 6 Nodes = 0 DNS Errors
+
+
+I've been doing a LOT of upgrades over the past couple of weeks and I feel more confident in understanding the problem. I've enhanced my DNS reproducer with Kibana so I can have persistent logs across node reboots and also superimpose node reboots counts over DNS failure counts, which really helps with establishing correlation. I'm going to do some recapping here so we all are on the same page.
+
+The DNS Local Preference Fix:
+  4.9: Preference worked, but preference was forced to local endpoint despite not ready*. Fixed in 4.9.51
+  4.10: Preference broke. Fixed in 4.10.38*.
+  4.11: Preference broke. Fixed in 4.11.10*.
+  4.12+: Works
+  *I was confused because there are two "fixes" in 4.10 and 4.11. In 4.10.36, they backported https://github.com/openshift/sdn/pull/457, which forced local DNS preference even if it's not ready, which also causes lot of problems on upgrade. Same for 4.11.5, they fixed in 4.11.10.
+- This is the #1 culprit in upgrade DNS failures, so it's important we know if we are upgrading **to** a OCP version that supports Local DNS Preference and the fix to not force DNS to a local endpoint.
+- Note the **to**: In all of my testing, SDN upgrades before DNS, so you can upgrade to a version that supports it and this issue won't be present during the upgrade (e.g. 4.10.30 -> 4.10.38 is fine)
+
+Simon - In your last test, you upgraded from 4.10.37 to 4.11.9, but 4.11.9 still exhibits DNS local preference issues in where I described above, it forces DNS local preference despite not being ready (fixed in 4.11.10 by https://github.com/openshift/sdn/pull/466). So your reproducer demonstrated a known issue.
+
+Here's my current data on upgrade errors. My reproducer is a dig daemonset on every node that curls about every second. I'm using Openshift SDN for everything. DNS Errors always happen during rebooting:
+
+4.9.45 -> 4.9.47, SDN, 6 Node = 38 DNS Errors
+ - Local DNS Preference, but forced to local endpoint that wasn't ready (just as bad as not having local dns preference).
+4.9.47 -> 4.9.52, SDN, 6 Node = 0 DNS Errors
+4.10.30 -> 4.10.31, 6 Node =  64 DNS errors.
+ - Missing Local DNS preference
+4.10.31 -> 4.10.38, 6 Node = 2 DNS errors.
+ - Still small amount of "daemon set zombie" errors (confirmed by log messages, I describe the zombie problem here https://bugzilla.redhat.com/show_bug.cgi?id=2087733#c22)
+4.10.38 -> 4.10.39, 58 Nodes = 0 DNS errors
+ - No failures
+4.11.9 -> 4.11.12, SDN, 6 Nodes = 0 DNS Errors
+ - No failures
+
+TLDR: All major DNS issues on upgrading is due to SDN local preference issues, but are fixed in 4.9.51, 4.10.38, 4.11.10. There is still what I call a DNS Pod "zombie" issue, where any Daemonset pod gets "zombified" when rebooting a node, that will be fixed by Graceful Node Shutdowns (see https://issues.redhat.com/browse/OCPNODE-549). However, these errors caused by the "zombie" pods are MUCH rarer than the local DNS preference issues.
+
+Simon - Do you agree with my assessment and data here? Feel free to confirm my results with DNS failures on an upgrade to 4.9.51+, 4.10.38+, 4.11.10+, 4.12+? I am not able to reproduce effectively myself on those versions, so I am going to close as NOT A BUG. Please open back up if you disagree or you find different results yourself.

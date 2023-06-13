@@ -17,7 +17,7 @@ spec:
   replicas: 1
   endpointPublishingStrategy:
     loadBalancer:
-      scope: External
+      scope: Internal
       dnsManagementPolicy: Managed
       providerParameters:
         type: AWS

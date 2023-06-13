@@ -45,7 +45,7 @@ items:
       - port: 8676
         name: echo-sleeper-edge
         protocol: TCP
-- apiVersion: v1
+- apiVersion: route.openshift.io/v1
   kind: Route
   metadata:
     name: echo-sleeper-edge

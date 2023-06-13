@@ -6,7 +6,7 @@ items:
     name: loadbalancer
     namespace: openshift-ingress-operator
   spec:
-    domain: test-apps.gspence-2022-02-14-1013.gcp.devcluster.openshift.com
+    domain: apps2.gspence-2023-01-26-0947.devcluster.openshift.com
     endpointPublishingStrategy:
       type: Private
     replicas: 1

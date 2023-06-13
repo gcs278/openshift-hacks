@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1678113921
+    service.beta.openshift.io/serving-cert-secret-name: dns-default-metrics-tls
+    service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1678113921
+    service.kubernetes.io/topology-aware-hints: auto
+  creationTimestamp: "2023-03-06T14:46:22Z"
+  labels:
+    dns.operator.openshift.io/owning-dns: default
+  name: dns-default
+  namespace: openshift-dns
+  ownerReferences:
+  - apiVersion: operator.openshift.io/v1
+    controller: true
+    kind: DNS
+    name: default
+    uid: 515aadd6-d516-44a2-8655-18ca999770b1
+  resourceVersion: "8812"
+  uid: 6e9e6fc6-cec1-43ec-a807-ebb27e793623
+spec:
+  clusterIP: 172.30.0.10
+  clusterIPs:
+  - 172.30.0.10
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: dns
+    port: 53
+    protocol: UDP
+    targetPort: dns
+  - name: dns-tcp
+    port: 53
+    protocol: TCP
+    targetPort: dns-tcp
+  - name: metrics
+    port: 9154
+    protocol: TCP
+    targetPort: metrics
+  selector:
+    dns.operator.openshift.io/daemonset-dns: default
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

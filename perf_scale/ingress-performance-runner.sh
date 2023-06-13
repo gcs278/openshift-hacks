@@ -83,6 +83,7 @@ function run() {
     runtime=$((end-start))
     hours=$((runtime / 3600)); minutes=$(( (runtime % 3600) / 60 )); seconds=$(( (runtime % 3600) % 60 ));
     log "Test Exitted. Runtime: $hours:$minutes:$seconds (hh:mm:ss)"
+    mv ${ROUTER_PERF_DIR}/results.csv ${TEST_LOG_DIR}/${test_name}-results.csv
     if [[ ! -f ${COMPARISON_OUTPUT_CFG} ]]; then
       log "ERROR: Test attempt #${ATTEMPT} failed. ${COMPARISON_OUTPUT_CFG} does not exist. Trying again."
       ATTEMPT=$((ATTEMPT+1))
@@ -94,7 +95,6 @@ function run() {
       sleep 120
     else
       log "Test attempt #${ATTEMPT} success!"
-      mv ${ROUTER_PERF_DIR}/results.csv ${TEST_LOG_DIR}/${test_name}-results.csv
       echo "Errors: $(grep -v ",$" ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" > ${TEST_LOG_DIR}/${test_name}-errors
       echo "Total Requests: $(cat ${TEST_LOG_DIR}/${test_name}-results.csv | wc -l)" >> ${TEST_LOG_DIR}/${test_name}-errors
       return
@@ -143,5 +143,7 @@ declare -A env_files
 #run ./tests/replicas1-baseline.env
 # Turn off probe tuning
 #cp -f ./ingress-performance.sh.prob ./ingress-performance.sh
-run ./tests/NE-709/replicas1-weights.env "456a8413-4d43-4ba3-9d42-fb4605ee0ee8"
-run ./tests/NE-709/replicas1-weights-random.env "456a8413-4d43-4ba3-9d42-fb4605ee0ee8"
+#run ./tests/replicas1-OCPBUGS-4236-20000.env
+#oc -n openshift-ingress-operator patch ingresscontroller/default --type=merge --patch='{"spec":{"tuningOptions":{"maxConnections":50000}}}'
+#sleep 60
+run ./tests/replicas1-OCPBUGS-4236-50000-router2.env

@@ -1,0 +1,269 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: dns-test
+  namespace: openshift-dns
+spec:
+  selector:
+    matchLabels:
+      name: dns-test
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/enable-ds-eviction: "true"
+        target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+      creationTimestamp: null
+      labels:
+        name: dns-test
+    spec:
+      containers:
+      - args:
+        - -conf
+        - /etc/coredns/Corefile
+        command:
+        - coredns
+        image: quay.io/gspence/coredns:v1.9.2
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: dns
+        ports:
+        - containerPort: 5353
+          name: dns
+          protocol: UDP
+        - containerPort: 5353
+          name: dns-tcp
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: 8181
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          requests:
+            cpu: 50m
+            memory: 70Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: FallbackToLogsOnError
+        volumeMounts:
+        - mountPath: /etc/coredns
+          name: config-volume
+          readOnly: true
+      - args:
+        - --logtostderr
+        - --secure-listen-address=:9154
+        - --tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+        - --upstream=http://127.0.0.1:9153/
+        - --tls-cert-file=/etc/tls/private/tls.crt
+        - --tls-private-key-file=/etc/tls/private/tls.key
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:eef3d1894656818ad393df61d3713115dce777e113b781c1d01bc285ee56ca2c
+        imagePullPolicy: IfNotPresent
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 9154
+          name: metrics
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 10m
+            memory: 40Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/tls/private
+          name: metrics-tls
+          readOnly: true
+      dnsPolicy: Default
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-node-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: dns
+      serviceAccountName: dns
+      terminationGracePeriodSeconds: 5
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+      volumes:
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: Corefile
+            path: Corefile
+          name: dns-test
+        name: config-volume
+      - name: metrics-tls
+        secret:
+          defaultMode: 420
+          secretName: dns-default-metrics-tls
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 10%
+    type: RollingUpdate
+---
+apiVersion: v1
+data:
+  Corefile: |
+    .:5353 {
+        bufsize 512
+        errors
+        log . {
+            class error
+        }
+        health {
+            lameduck 20s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+        }
+        prometheus 127.0.0.1:9153
+        forward . /etc/resolv.conf {
+            policy sequential
+        }
+        cache 900 {
+            denial 9984 30
+        }
+        reload
+    }
+    hostname.bind:5353 {
+        chaos
+    }
+kind: ConfigMap
+metadata:
+  name: dns-test
+  namespace: openshift-dns
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dns-test
+  namespace: openshift-dns
+spec:
+  clusterIP: 172.30.0.11
+  clusterIPs:
+  - 172.30.0.11
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: dns
+    port: 53
+    protocol: UDP
+    targetPort: dns
+  - name: dns-tcp
+    port: 53
+    protocol: TCP
+    targetPort: dns-tcp
+  - name: metrics
+    port: 9154
+    protocol: TCP
+    targetPort: metrics
+  sessionAffinity: None
+  type: ClusterIP
+  selector:
+    name: dns-test
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: dig-test
+  name: dig-test
+  namespace: openshift-dns
+spec:
+  selector:
+    matchLabels:
+      app: dig-test
+  template:
+    metadata:
+      labels:
+        app: dig-test
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          echo "Starting"
+          sleep 5
+          requests=0
+          fails=0
+          while : ; do
+            requests=$((requests+1))
+            OUT=$(dig +retry=0 +timeout=15 +tries=1 @172.30.0.11 "github.com" AAAA)
+            if [[ $? -ne 0 ]]; then
+              echo "FAIL: $OUT"
+              fails=$((fails+1))
+            else
+              echo -n "SUCCESS: "
+              echo "${OUT}" | grep -i "query time"
+              echo "Stats: Requests=${requests} Fails=${fails}"
+            fi
+            sleep 3
+          done
+        # oc adm release info --image-for=cli
+        image: quay.io/gspence/dig-test
+        name: curl
+      hostNetwork: false
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: dns-dumper
+  name: dns-dumper
+  namespace: openshift-dns
+spec:
+  selector:
+    matchLabels:
+      app: dns-dumper
+  template:
+    metadata:
+      labels:
+        app: dns-dumper
+    spec:
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -euo pipefail
+          /sbin/tcpdump -i any "udp port 53 or tcp port 53 or udp port 5353 or tcp port 5353" -C 20 -w "/tmp/tcpdump.pcap"
+        # oc adm release info --image-for=tools
+        image: quay.io/gspence/dumper
+        name: tcpdump
+        securityContext:
+          privileged: true
+      terminationGracePeriodSeconds: 30
+      hostNetwork: true
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      privileged: true
+      tolerations:
+      - operator: Exists

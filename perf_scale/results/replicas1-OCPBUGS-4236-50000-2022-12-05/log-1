@@ -1,0 +1,66 @@
+[1mMon Dec  5 17:56:33 UTC 2022 Small scale scenario detected: #workers < 24[0m
+[1mMon Dec  5 17:56:33 UTC 2022 ###############################################[0m
+[1mMon Dec  5 17:56:33 UTC 2022 Routes: 500[0m
+[1mMon Dec  5 17:56:33 UTC 2022 Routers: 1[0m
+[1mMon Dec  5 17:56:33 UTC 2022 Service type: NodePort[0m
+[1mMon Dec  5 17:56:33 UTC 2022 Terminations: mix[0m
+[1mMon Dec  5 17:56:33 UTC 2022 Deployment replicas: 1[0m
+[1mMon Dec  5 17:56:33 UTC 2022 ###############################################[0m
+[1mMon Dec  5 17:56:33 UTC 2022 Deploying benchmark infrastructure[0m
+[1mMon Dec  5 17:56:33 UTC 2022 Downloading and extracting kube-burner binary[0m
+time="2022-12-05 12:56:53" level=info msg="🔥 Starting kube-burner (0.16.2@303205027d18a726bc9b11af39e80c2bb72cac63) with UUID a94bf8b3-a15d-4a67-b14f-2a74d38f24ea"
+time="2022-12-05 12:56:53" level=info msg="📈 Creating measurement factory"
+time="2022-12-05 12:56:53" level=info msg="Preparing create job: http-scale-http"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-http: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-http: 1 iterations with 500 Service replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-http: 1 iterations with 500 Route replicas"
+time="2022-12-05 12:56:53" level=info msg="Preparing create job: http-scale-edge"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-edge: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-edge: 1 iterations with 500 Service replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-edge: 1 iterations with 500 Route replicas"
+time="2022-12-05 12:56:53" level=info msg="Preparing create job: http-scale-passthrough"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Service replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Route replicas"
+time="2022-12-05 12:56:53" level=info msg="Preparing create job: http-scale-reencrypt"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Service replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Route replicas"
+time="2022-12-05 12:56:53" level=info msg="Preparing create job: http-scale-client"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-client: 1 iterations with 1 RoleBinding replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-client: 1 iterations with 1 ServiceAccount replicas"
+time="2022-12-05 12:56:53" level=info msg="Job http-scale-client: 1 iterations with 1 Deployment replicas"
+time="2022-12-05 12:56:53" level=info msg="Triggering job: http-scale-http"
+time="2022-12-05 12:56:53" level=info msg="QPS: 20"
+time="2022-12-05 12:56:53" level=info msg="Burst: 20"
+time="2022-12-05 12:56:53" level=info msg="Running job http-scale-http"
+time="2022-12-05 12:58:07" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 12:58:11" level=info msg="Actions in namespace http-scale-http completed"
+time="2022-12-05 12:58:11" level=info msg="Finished the create job in 78 seconds"
+time="2022-12-05 12:58:11" level=info msg="Verifying created objects"
+time="2022-12-05 12:58:11" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 12:58:12" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 12:58:12" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 12:58:12" level=info msg="Job http-scale-http took 78.65 seconds"
+time="2022-12-05 12:58:12" level=info msg="Triggering job: http-scale-edge"
+time="2022-12-05 12:58:12" level=info msg="QPS: 20"
+time="2022-12-05 12:58:12" level=info msg="Burst: 20"
+time="2022-12-05 12:58:12" level=info msg="Running job http-scale-edge"
+time="2022-12-05 12:59:26" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 12:59:29" level=info msg="Actions in namespace http-scale-edge completed"
+time="2022-12-05 12:59:29" level=info msg="Finished the create job in 77 seconds"
+time="2022-12-05 12:59:29" level=info msg="Verifying created objects"
+time="2022-12-05 12:59:29" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 12:59:29" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 12:59:29" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 12:59:29" level=info msg="Job http-scale-edge took 77.56 seconds"
+time="2022-12-05 12:59:29" level=info msg="Triggering job: http-scale-passthrough"
+time="2022-12-05 12:59:29" level=info msg="QPS: 20"
+time="2022-12-05 12:59:29" level=info msg="Burst: 20"
+time="2022-12-05 12:59:29" level=info msg="Running job http-scale-passthrough"
+I1205 13:03:51.576420   50110 request.go:668] Waited for 1.025270011s due to client-side throttling, not priority and fairness, request: POST:https://api.gspence-2022-12-05-0859.devcluster.openshift.com:6443/apis/route.openshift.io/v1/namespaces/http-scale-passthrough/routes?timeout=15s
+I1205 13:04:01.576624   50110 request.go:668] Waited for 3.2150195s due to client-side throttling, not priority and fairness, request: POST:https://api.gspence-2022-12-05-0859.devcluster.openshift.com:6443/api/v1/namespaces/http-scale-passthrough/services?timeout=15s
+I1205 13:04:11.576887   50110 request.go:668] Waited for 3.215058885s due to client-side throttling, not priority and fairness, request: POST:https://api.gspence-2022-12-05-0859.devcluster.openshift.com:6443/api/v1/namespaces/http-scale-passthrough/services?timeout=15s
+I1205 13:04:21.626543   50110 request.go:668] Waited for 3.214371917s due to client-side throttling, not priority and fairness, request: POST:https://api.gspence-2022-12-05-0859.devcluster.openshift.com:6443/api/v1/namespaces/http-scale-passthrough/services?timeout=15s
+I1205 13:04:31.626796   50110 request.go:668] Waited for 3.218700782s due to client-side throttling, not priority and fairness, request: POST:https://api.gspence-2022-12-05-0859.devcluster.openshift.com:6443/apis/apps/v1/namespaces/http-scale-passthrough/deployments?timeout=15s
+I1205 13:04:41.676811   50110 request.go:668] Waited for 3.217799768s due to client-side throttling, not priority and fairness, request: POST:https://api.gspence-2022-12-05-0859.devcluster.openshift.com:6443/apis/apps/v1/namespaces/http-scale-passthrough/deployments?timeout=15s

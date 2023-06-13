@@ -1,0 +1,140 @@
+[1mMon Dec  5 22:34:02 UTC 2022 Small scale scenario detected: #workers < 24[0m
+[1mMon Dec  5 22:34:02 UTC 2022 ###############################################[0m
+[1mMon Dec  5 22:34:02 UTC 2022 Routes: 500[0m
+[1mMon Dec  5 22:34:02 UTC 2022 Routers: 2[0m
+[1mMon Dec  5 22:34:02 UTC 2022 Service type: NodePort[0m
+[1mMon Dec  5 22:34:02 UTC 2022 Terminations: mix[0m
+[1mMon Dec  5 22:34:02 UTC 2022 Deployment replicas: 1[0m
+[1mMon Dec  5 22:34:02 UTC 2022 ###############################################[0m
+[1mMon Dec  5 22:34:03 UTC 2022 Deploying benchmark infrastructure[0m
+[1mMon Dec  5 22:34:03 UTC 2022 Downloading and extracting kube-burner binary[0m
+time="2022-12-05 17:34:06" level=info msg="🔥 Starting kube-burner (0.16.2@303205027d18a726bc9b11af39e80c2bb72cac63) with UUID bf83366c-bfa5-4e41-9acd-99eb7986d2e3"
+time="2022-12-05 17:34:06" level=info msg="📈 Creating measurement factory"
+time="2022-12-05 17:34:06" level=info msg="Preparing create job: http-scale-http"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-http: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-http: 1 iterations with 500 Service replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-http: 1 iterations with 500 Route replicas"
+time="2022-12-05 17:34:06" level=info msg="Preparing create job: http-scale-edge"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-edge: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-edge: 1 iterations with 500 Service replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-edge: 1 iterations with 500 Route replicas"
+time="2022-12-05 17:34:06" level=info msg="Preparing create job: http-scale-passthrough"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Service replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-passthrough: 1 iterations with 500 Route replicas"
+time="2022-12-05 17:34:06" level=info msg="Preparing create job: http-scale-reencrypt"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Deployment replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Service replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-reencrypt: 1 iterations with 500 Route replicas"
+time="2022-12-05 17:34:06" level=info msg="Preparing create job: http-scale-client"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-client: 1 iterations with 1 RoleBinding replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-client: 1 iterations with 1 ServiceAccount replicas"
+time="2022-12-05 17:34:06" level=info msg="Job http-scale-client: 1 iterations with 1 Deployment replicas"
+time="2022-12-05 17:34:06" level=info msg="Triggering job: http-scale-http"
+time="2022-12-05 17:34:06" level=info msg="Deleting namespaces with label kube-burner-job=http-scale-http"
+time="2022-12-05 17:34:06" level=info msg="Waiting for namespaces to be definitely deleted"
+time="2022-12-05 17:40:49" level=info msg="QPS: 20"
+time="2022-12-05 17:40:49" level=info msg="Burst: 20"
+time="2022-12-05 17:40:49" level=info msg="Running job http-scale-http"
+time="2022-12-05 17:42:03" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 17:42:03" level=info msg="Actions in namespace http-scale-http completed"
+time="2022-12-05 17:42:03" level=info msg="Finished the create job in 75 seconds"
+time="2022-12-05 17:42:03" level=info msg="Verifying created objects"
+time="2022-12-05 17:42:03" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 17:42:04" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 17:42:04" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 17:42:04" level=info msg="Job http-scale-http took 477.92 seconds"
+time="2022-12-05 17:42:04" level=info msg="Triggering job: http-scale-edge"
+time="2022-12-05 17:42:04" level=info msg="Deleting namespaces with label kube-burner-job=http-scale-edge"
+time="2022-12-05 17:42:04" level=info msg="Waiting for namespaces to be definitely deleted"
+time="2022-12-05 17:43:23" level=info msg="QPS: 20"
+time="2022-12-05 17:43:23" level=info msg="Burst: 20"
+time="2022-12-05 17:43:23" level=info msg="Running job http-scale-edge"
+time="2022-12-05 17:44:37" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 17:44:41" level=info msg="Actions in namespace http-scale-edge completed"
+time="2022-12-05 17:44:41" level=info msg="Finished the create job in 79 seconds"
+time="2022-12-05 17:44:41" level=info msg="Verifying created objects"
+time="2022-12-05 17:44:41" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 17:44:42" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 17:44:42" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 17:44:42" level=info msg="Job http-scale-edge took 158.06 seconds"
+time="2022-12-05 17:44:42" level=info msg="Triggering job: http-scale-passthrough"
+time="2022-12-05 17:44:42" level=info msg="Deleting namespaces with label kube-burner-job=http-scale-passthrough"
+time="2022-12-05 17:44:42" level=info msg="Waiting for namespaces to be definitely deleted"
+time="2022-12-05 17:46:07" level=info msg="QPS: 20"
+time="2022-12-05 17:46:07" level=info msg="Burst: 20"
+time="2022-12-05 17:46:07" level=info msg="Running job http-scale-passthrough"
+time="2022-12-05 17:47:21" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 17:47:25" level=info msg="Actions in namespace http-scale-passthrough completed"
+time="2022-12-05 17:47:25" level=info msg="Finished the create job in 79 seconds"
+time="2022-12-05 17:47:25" level=info msg="Verifying created objects"
+time="2022-12-05 17:47:25" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 17:47:26" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 17:47:26" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 17:47:26" level=info msg="Job http-scale-passthrough took 163.88 seconds"
+time="2022-12-05 17:47:26" level=info msg="Triggering job: http-scale-reencrypt"
+time="2022-12-05 17:47:26" level=info msg="Deleting namespaces with label kube-burner-job=http-scale-reencrypt"
+time="2022-12-05 17:47:26" level=info msg="Waiting for namespaces to be definitely deleted"
+time="2022-12-05 17:48:52" level=info msg="QPS: 20"
+time="2022-12-05 17:48:52" level=info msg="Burst: 20"
+time="2022-12-05 17:48:52" level=info msg="Running job http-scale-reencrypt"
+time="2022-12-05 17:50:06" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 17:50:11" level=info msg="Actions in namespace http-scale-reencrypt completed"
+time="2022-12-05 17:50:11" level=info msg="Finished the create job in 80 seconds"
+time="2022-12-05 17:50:11" level=info msg="Verifying created objects"
+time="2022-12-05 17:50:11" level=info msg="deployments found: 500 Expected: 500"
+time="2022-12-05 17:50:11" level=info msg="services found: 500 Expected: 500"
+time="2022-12-05 17:50:12" level=info msg="routes found: 500 Expected: 500"
+time="2022-12-05 17:50:12" level=info msg="Job http-scale-reencrypt took 166.02 seconds"
+time="2022-12-05 17:50:12" level=info msg="Triggering job: http-scale-client"
+time="2022-12-05 17:50:12" level=info msg="Deleting namespaces with label kube-burner-job=http-scale-client"
+time="2022-12-05 17:50:12" level=info msg="Waiting for namespaces to be definitely deleted"
+time="2022-12-05 17:50:58" level=info msg="QPS or Burst rates not set, using default client-go values: 5 10"
+time="2022-12-05 17:50:58" level=info msg="Running job http-scale-client"
+W1205 17:50:58.307587  218093 warnings.go:70] unknown field "spec.template.spec.imagePullPolicy"
+time="2022-12-05 17:50:58" level=info msg="Waiting up to 3h0m0s all job actions to be completed"
+time="2022-12-05 17:50:59" level=info msg="Actions in namespace http-scale-client completed"
+time="2022-12-05 17:50:59" level=info msg="Finished the create job in 1 seconds"
+time="2022-12-05 17:50:59" level=info msg="Verifying created objects"
+time="2022-12-05 17:50:59" level=info msg="rolebindings found: 1 Expected: 1"
+time="2022-12-05 17:50:59" level=info msg="serviceaccounts found: 1 Expected: 1"
+time="2022-12-05 17:50:59" level=info msg="deployments found: 1 Expected: 1"
+time="2022-12-05 17:50:59" level=info msg="Job http-scale-client took 47.32 seconds"
+time="2022-12-05 17:50:59" level=info msg="Finished execution with UUID: bf83366c-bfa5-4e41-9acd-99eb7986d2e3"
+time="2022-12-05 17:50:59" level=info msg="👋 Exiting kube-burner"
+[1mMon Dec  5 22:50:59 UTC 2022 Creating configmap from workload.py file[0m
+configmap/workload created
+[1mMon Dec  5 22:50:59 UTC 2022 Adding workload.py to the client pod[0m
+info: Generated volume name: volume-bqg87
+deployment.apps/http-scale-client volume updated
+[1mMon Dec  5 22:50:59 UTC 2022 Waiting for http-scale-client rollout[0m
+Waiting for deployment "http-scale-client" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "http-scale-client" rollout to finish: 1 old replicas are pending termination...
+deployment "http-scale-client" successfully rolled out
+[1mMon Dec  5 22:51:01 UTC 2022 Apply tuned profile for node labeled with node-role.kubernetes.io/workload[0m
+tuned.tuned.openshift.io/openshift-ingress-performance unchanged
+[1mMon Dec  5 22:51:02 UTC 2022 Disabling cluster version operator[0m
+deployment.apps/cluster-version-operator scaled
+[1mMon Dec  5 22:51:02 UTC 2022 Scaling ingress-operator up to 1[0m
+deployment.apps/ingress-operator scaled
+Waiting for deployment "ingress-operator" rollout to finish: 0 of 1 updated replicas are available...
+deployment "ingress-operator" successfully rolled out
+[1mMon Dec  5 22:51:04 UTC 2022 Replacing ingress-operator image with quay.io/openshift/origin-cluster-ingress-operator:4.13[0m
+deployment.apps/ingress-operator patched (no change)
+deployment "ingress-operator" successfully rolled out
+[1mMon Dec  5 22:51:05 UTC 2022 Replacing router with quay.io/openshift/origin-haproxy-router:4.13[0m
+deployment.apps/ingress-operator patched (no change)
+[1mMon Dec  5 22:51:05 UTC 2022 Scaling ingress-operator down to 0[0m
+deployment.apps/ingress-operator scaled
+[1mMon Dec  5 22:51:05 UTC 2022 Scaling number of routers to 2[0m
+deployment.apps/router-default scaled
+[1mMon Dec  5 22:51:05 UTC 2022 Increasing ingress controller liveness probe period to 120s[0m
+deployment.apps/router-default scaled
+[1mMon Dec  5 22:51:06 UTC 2022 Scaling number of routers to 2[0m
+deployment.apps/router-default scaled
+Waiting for deployment "router-default" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "router-default" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "router-default" rollout to finish: 0 of 2 updated replicas are available...
+deployment "router-default" successfully rolled out
+[1mMon Dec  5 22:51:41 UTC 2022 Testing all routes before triggering the workload[0m
+curl: (52) Empty reply from server

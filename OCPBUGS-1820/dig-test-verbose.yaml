@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: dig-test
+  name: dig-test
+  namespace: openshift-dns
+spec:
+  selector:
+    matchLabels:
+      app: dig-test
+  template:
+    metadata:
+      labels:
+        app: dig-test
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          set -uo pipefail
+          echo "Starting"
+          requests=0
+          fails=0
+          export KUBECONFIG=/var/lib/kubelet/kubeconfig
+          MY_IP=$(hostname -i)
+          while : ; do
+            requests=$((requests+1))
+            localDnsPodState=$(chroot /host crictl ps --label=io.kubernetes.container.name=dns | tail -n +2 | awk '{print $3" "$4" "$5" "$6}')
+            endpoint=$(chroot /host oc get -n openshift-dns endpointslices.discovery.k8s.io -o json | chroot /host jq -r ".items[].endpoints[] | select(.nodeName==\"$MY_NODE_NAME\")")
+            endpointReady=$(echo $endpoint | chroot /host jq -r '.conditions.ready')
+            endpointServing=$(echo $endpoint | chroot /host jq -r '.conditions.serving')
+            endpointTerminating=$(echo $endpoint | chroot /host jq -r '.conditions.terminating')
+            endpointIP=$(echo $endpoint | chroot /host jq -r '.addresses[0]')
+            endpointsNumReady=$(chroot /host oc get endpointslices.discovery.k8s.io -n openshift-dns -o yaml | grep -i "ready: true" | wc -l)
+            nodeStatus=$(chroot /host oc get nodes | grep -i "^$MY_NODE_NAME" | awk '{print $2",role:"$3",age:"$4}')
+            localKubeDnsPodState=$(chroot /host oc get pods -n openshift-dns --field-selector spec.nodeName=${MY_NODE_NAME} --no-headers  | grep -i "^dns-")
+            localDNSPing=$(chroot /host ping -c 1 $endpointIP &> /dev/null && echo "SUCCESS" || echo "FAIL")
+            #dig=$(dig +retry=0 +timeout=5 +tries=1 +short +noall +answer CH TXT hostname.bind)
+            dig=$(dig +retry=0 +timeout=5 +tries=1 +short +noall +answer github.com)
+            if [[ $? -ne 0 ]]; then
+              fails=$((fails+1))
+              out="FAILURE:"
+            else
+              out="SUCCESS:"
+            fi
+            out="$out $dig / MYIP: $MY_IP / Node: ${MY_NODE_NAME},$nodeStatus / LocalDNSPod: $localDnsPodState / LocalDNSPodKube: $localKubeDnsPodState / numEpReady: $endpointsNumReady / epReady: $endpointReady / epServing: $endpointServing / epTerminating: $endpointTerminating / localDNSPing: $localDNSPing / Requests=${requests},Fails=${fails}"
+            echo $out
+            #sleep 0.5
+          done
+        # oc adm release info --image-for=cli
+        image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ba44dead03ea74107f90d58525106fb52d27a120b73c6cc8e2be31d37043ca1c
+        name: curl
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /host
+          name: host-slash
+          readOnly: true
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      hostNetwork: false
+      privileged: true
+      nodeSelector:
+        "kubernetes.io/os": "linux"
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: Exists
+      - key: node-role.kubernetes.io/ci-builds-worker
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/ci-tests-worker
+        operator: Exists
+      volumes:
+      - name: host-slash
+        hostPath:
+          path: /

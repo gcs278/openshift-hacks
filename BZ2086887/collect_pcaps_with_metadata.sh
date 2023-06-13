@@ -3,17 +3,19 @@
 DIR=/tmp/pcaps-metadata
 mkdir -p ${DIR}
 
-workers="$(oc get nodes --as system:admin | grep worker | awk '{print $1}')"
+#SYSADM="--as system:admin"
+
+workers="$(oc get nodes $SYSADM | grep worker | awk '{print $1}')"
 
 if [[ "$1" != '' ]]; then
   dumpers="$1"
 else
-  dumpers=$(oc get pods -n openshift-dns --as system:admin | grep dumper | awk '{print $1}')
+  dumpers=$(oc get pods -n openshift-dns $SYSADM | grep dumper | awk '{print $1}')
 fi
 
 for i in $dumpers; do
   echo $i
-  node=$(oc get pods $i -o wide -n openshift-dns --as system:admin --no-headers | awk '{print $7}')
+  node=$(oc get pods $i -o wide -n openshift-dns $SYSADM --no-headers | awk '{print $7}')
   #if echo "$workers" | grep -qi "$node"; then
     echo "Found that $i is on a worker node $node"
     WORKER_DIR=${DIR}/${i}
@@ -22,12 +24,12 @@ for i in $dumpers; do
     metadata=${WORKER_DIR}/metadata
     echo "This Node: $node" > $metadata
     echo "### DNS Pods: ###" >> $metadata
-    oc get pods -n openshift-dns -o wide --as system:admin | grep -i dns >> $metadata
+    oc get pods -n openshift-dns -o wide $SYSADM | grep -i dns >> $metadata
     echo "### Nodes: ###" >> $metadata
-    oc get nodes -o wide --as system:admin >> $metadata
+    oc get nodes -o wide $SYSADM >> $metadata
     echo "### Pods on $node: ###" >> $metadata
-    oc get pods -A --as system:admin -o wide | grep -i $node >> $metadata
-    rsync --rsh='oc rsh -n openshift-dns --as system:admin' -a -b --progress --suffix=-$(date +%s) ${i}:/tmp/ ${WORKER_DIR}/
+    oc get pods -A $SYSADM -o wide | grep -i $node >> $metadata
+    rsync --rsh='oc rsh -n openshift-dns' -a -b --progress --suffix=-$(date +%s) ${i}:/tmp/ ${WORKER_DIR}/
     if [[ $? -ne 0 ]]; then
       echo "failed to get pcaps from $i"
       continue
@@ -39,6 +41,6 @@ for i in $dumpers; do
     mergecap ${WORKER_DIR}/*.fixed.pcap -w ${WORKER_DIR}/$i.pcap
     rm -f ${WORKER_DIR}/*.fixed.pcap
     echo "### Pods on $node (Again): ###" >> $metadata
-    oc get pods -A --as system:admin -o wide | grep -i $node >> $metadata
+    oc get pods -A $SYSADM -o wide | grep -i $node >> $metadata
   #fi
 done
