@@ -1,15 +1,15 @@
 #!/bin/bash
 
-if [[ "$(find ~/.secrets/pull-secret.txt -mmin +18720)" != "" ]]; then
-  echo "WARNING: ~/.secrets/pull-secret.txt hasn't been touched in 13 days. Re-login into the CI registry"
-  echo "    1. Visit https://console.redhat.com/openshift/install/pull-secret and download pull-secret"
-  echo "    2. cp ~/Downloads/pull-secret to ~/.secrets/pull-secret.txt"
-  echo "    3. Visit https://console-openshift-console.apps.ci.l2s4.p1.openshiftapps.com/"
-  echo "    4. Log in -> Copy login command -> unset KUBECONFIG -> Use login command"
-  echo "    5. oc registry login --to=/home/$USER/.secrets/pull-secret.txt"
-  echo "    6. Test via:"
-  echo "       podman pull --authfile ~/.secrets/pull-secret.txt registry.ci.openshift.org/ocp/4.12:base"
-fi
+#if [[ "$(find ~/.secrets/pull-secret.txt -mmin +18720)" != "" ]]; then
+#  echo "WARNING: ~/.secrets/pull-secret.txt hasn't been touched in 13 days. Re-login into the CI registry"
+#  echo "    1. Visit https://console.redhat.com/openshift/install/pull-secret and download pull-secret"
+#  echo "    2. cp ~/Downloads/pull-secret to ~/.secrets/pull-secret.txt"
+#  echo "    3. Visit https://console-openshift-console.apps.ci.l2s4.p1.openshiftapps.com/"
+#  echo "    4. Log in -> Copy login command -> unset KUBECONFIG -> Use login command"
+#  echo "    5. oc registry login --to=/home/$USER/.secrets/pull-secret.txt"
+#  echo "    6. Test via:"
+#  echo "       podman pull --authfile ~/.secrets/pull-secret.txt registry.ci.openshift.org/ocp/4.12:base"
+#fi
 
 function ci_delete_cluster() {
   ~/clusters/cluster-installer.sh delete "$1"

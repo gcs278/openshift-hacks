@@ -143,7 +143,7 @@ EOF
   if ! aws --profile $PROFILE_A --region $REGION_A iam list-attached-role-policies --role-name $ROLE_NAME | grep -i "$POLICY_NAME"; then
     echo "Attaching policy $POLICY_NAME to role $ROLE_NAME"
     # Attach policy to role
-    aws --profile $PROFILE_A --region $REGION_A iam attach-role-policy --role-name ${ROLE_NAME} --policy-arn '${POLICY_ARN}'
+    aws --profile $PROFILE_A --region $REGION_A iam attach-role-policy --role-name ${ROLE_NAME} --policy-arn ${POLICY_ARN}
   else
     echo "Policy $POLICY_NAME is already attached to role $ROLE_NAME"
   fi
