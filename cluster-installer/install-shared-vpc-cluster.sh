@@ -203,6 +203,14 @@ function delete() {
   else
     echo "Private hosted zone already deleted"
   fi
+  
+  ## TODO: This is broken! 
+  echo "Deleting IAM Role"
+  if [[ $(aws --profile $PROFILE_A --region $REGION_A iam list-roles --output json | jq -r '.Roles[] | select(.RoleName=="'${ROLE_NAME}'").Arn') != "" ]]; then
+    aws --profile $PROFILE_A --region $REGION_A iam delete-role --role-name ${ROLE_NAME}
+  else
+    echo "IAM Role already deleted"
+  fi
 
   echo "Deleting IAM Policy..."
   POLICY_ARN=$(aws --profile $PROFILE_A --region $REGION_A iam list-policies --output json | jq -r '.Policies[] | select(.PolicyName=="'${POLICY_NAME}'").Arn')
@@ -212,12 +220,6 @@ function delete() {
     echo "IAM Policy already deleted"
   fi
   
-  echo "Deleting IAM Role"
-  if [[ $(aws --profile $PROFILE_A --region $REGION_A iam list-roles --output json | jq -r '.Roles[] | select(.RoleName=="'${ROLE_NAME}'").Arn') != "" ]]; then
-    aws --profile $PROFILE_A --region $REGION_A iam delete-role --role-name ${ROLE_NAME}
-  else
-    echo "IAM Role already deleted"
-  fi
 
   
 }

@@ -75,3 +75,25 @@ function ci_kubeconfiglastestcluster() {
   echo "+ export KUBECONFIG=${latestCluster}/auth/kubeconfig"
   export KUBECONFIG=${latestCluster}/auth/kubeconfig
 }
+
+function extractopenshiftinstaller() {
+  if [[ ! -f "$1" ]]; then
+    echo "ERROR: You must provide a openshift-installer tarball path"
+    return 1
+  fi
+  name=$(basename $1)
+  prefix="openshift-install-linux-"
+  version=${name#"$prefix"}
+  version=${version%".tar.gz"}
+  dir=~/clusters/${version}
+  echo "Creating ${dir}"
+  mkdir -p ${dir}
+  tar -xzvf $1 -C ${dir}
+  if [[ -f "${dir}/openshift-install" ]]; then
+    echo "Extraction was successful. Removing $1"
+    rm -f ${1}
+  else
+    echo "Extraction failed, ${dir}/openshift-install doesn't exist"
+    return 1
+  fi
+}
