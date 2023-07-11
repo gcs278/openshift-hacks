@@ -1,0 +1,15 @@
+# need to run
+# oc annotate service -n openshift-ingress router-default external-dns.alpha.kubernetes.io/hostname=externaldns.apps.gspence-demovpc1.devcluster.openshift.com
+apiVersion: externaldns.olm.openshift.io/v1beta1
+kind: ExternalDNS
+metadata:
+  name: sample-aws
+spec:
+  provider:
+    type: AWS
+    aws:
+      privateZoneIAMRole: arn:aws:iam::176500231253:role/gspence-rol1 # UPDATE THIS TO YOUR IAM ROLE
+  source:
+    hostnameAnnotation: Allow
+    type: Service
+

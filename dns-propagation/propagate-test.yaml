@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ci-infra-dns-propagate
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: propagate-test
+  name: propagate-test
+  namespace: ci-infra-dns-propagate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: propagate-test
+  template:
+    metadata:
+      labels:
+        app: propagate-test
+    spec:
+      containers:
+      - image: quay.io/gspence/dns-propagate
+        name: dns-propagate
+        imagePullPolicy: Always
+      dnsPolicy: Default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ci-infra-dns-propagate-cluster-reader
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: ci-infra-dns-propagate
+
