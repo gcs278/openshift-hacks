@@ -54,3 +54,14 @@ while ! oc get route -n test -o json route-nlb | jq '.status' | grep -q nlb-shar
   sleep 1
 done
 echo "Route admitted"
+
+# Get the node that single router pod is on
+sameNode=$(oc get pods -n openshift-ingress -l ingresscontroller.operator.openshift.io/deployment-ingresscontroller=nlb-shard -o wide --no-headers | awk '{print $7}')
+diffNode=$(oc get nodes --no-headers | grep -v $sameNode | awk '{print $1}' | head -1)
+
+echo "Attempting to curl from a different node...should work"
+oc debug node/${diffNode} -- curl test.$nlb_domain --connect-timeout 10
+
+echo "Attempting to curl from the same node...should fail"
+oc debug node/${sameNode} -- curl test.$nlb_domain --connect-timeout 10
+
