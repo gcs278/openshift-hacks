@@ -4,8 +4,8 @@ set -e
 
 PROFILE_A="openshift-shared-vpc"
 PROFILE_B="openshift-dev"
-REGION_A="us-east-1"
-REGION_B="us-east-1"
+REGION_A="us-east-2"
+REGION_B="us-east-2"
 
 USER_ARN_B=$(aws --profile $PROFILE_B --region $REGION_B sts get-caller-identity --output json | jq -r '.Arn')
 
@@ -18,7 +18,7 @@ ROLE_NAME=${USERNAME}-rol1
 
 # PHZ Variables
 CLUSTER_BASE_DOMAIN=devcluster.openshift.com # <- Public zone in cluster creator's account (Account B)
-CLUSTER_NAME=${USERNAME}-demovpc1
+CLUSTER_NAME="${USERNAME}-demovpc1"
 PRIVATE_HOSTED_ZONE_NAME=${CLUSTER_NAME}.${CLUSTER_BASE_DOMAIN}
 
 function print_usage_exit() {
@@ -184,35 +184,40 @@ EOF
 }
 
 function delete() {
-  echo "Deleting stack..."
+  echo "Deleting stack ${VPC_STACK_NAME}..."
   if aws --profile $PROFILE_A --region $REGION_A cloudformation describe-stacks --stack-name $VPC_STACK_NAME > /dev/null; then
     aws --profile $PROFILE_A --region $REGION_A cloudformation delete-stack --stack-name $VPC_STACK_NAME
   else
     echo "Stack already deleted"
   fi
 
-  echo "Deleting all resource-share (NOTE: takes 2 hours to be removed completely"
+  echo "Deleting all resource-shares (NOTE: takes 2 hours to be removed completely)"
   for i in $(aws --profile $PROFILE_A --region $REGION_A ram get-resource-shares --resource-owner SELF --output json | jq -r '.resourceShares[] | select(.name | startswith("'$USERNAME'"))' | jq -r '.resourceShareArn'); do
     aws --profile $PROFILE_A --region $REGION_A ram delete-resource-share --resource-share-arn $i
   done
 
-  echo "Deleting private hosted zone..."
-  if ! aws --profile $PROFILE_A --region $REGION_A route53 list-hosted-zones | grep -q ${PRIVATE_HOSTED_ZONE_NAME}; then
+  echo "Deleting private hosted zone ${PRIVATE_HOSTED_ZONE_NAME}..."
+  if aws --profile $PROFILE_A --region $REGION_A route53 list-hosted-zones | grep -q ${PRIVATE_HOSTED_ZONE_NAME}; then
     HOSTED_ZONE_ID=$(aws --profile $PROFILE_A --region $REGION_A route53 list-hosted-zones --output json | jq -r '.HostedZones[] | select(.Name=="'${PRIVATE_HOSTED_ZONE_NAME}'.").Id' | awk -F / '{printf $3}')
     aws --profile $PROFILE_A --region $REGION_A route53 delete-hosted-zone --id $HOSTED_ZONE_ID
   else
     echo "Private hosted zone already deleted"
   fi
   
-  ## TODO: This is broken! 
-  echo "Deleting IAM Role"
+  echo "Detaching policies from role ${ROLE_NAME}..."
+  for i in $(aws --profile $PROFILE_A --region $REGION_A iam list-attached-role-policies --role-name ${ROLE_NAME} --output json | jq -r '.AttachedPolicies[].PolicyArn'); do
+    echo "Detaching $i from $ROLE_NAME"
+    aws --profile $PROFILE_A --region $REGION_A iam detach-role-policy --role-name $ROLE_NAME --policy-arn $i
+  done
+
+  echo "Deleting IAM Role ${ROLE_NAME}..."
   if [[ $(aws --profile $PROFILE_A --region $REGION_A iam list-roles --output json | jq -r '.Roles[] | select(.RoleName=="'${ROLE_NAME}'").Arn') != "" ]]; then
     aws --profile $PROFILE_A --region $REGION_A iam delete-role --role-name ${ROLE_NAME}
   else
     echo "IAM Role already deleted"
   fi
 
-  echo "Deleting IAM Policy..."
+  echo "Deleting IAM Policy ${POLICY_NAME}..."
   POLICY_ARN=$(aws --profile $PROFILE_A --region $REGION_A iam list-policies --output json | jq -r '.Policies[] | select(.PolicyName=="'${POLICY_NAME}'").Arn')
   if [[ "$POLICY_ARN" != "" ]]; then
     aws --profile $PROFILE_A --region $REGION_A iam delete-policy --policy-arn $POLICY_ARN
@@ -220,8 +225,7 @@ function delete() {
     echo "IAM Policy already deleted"
   fi
   
-
-  
+  echo "Successfully deleted all Shared VPC objects for $USERNAME"
 }
 
 WHAT="${1:-}"
