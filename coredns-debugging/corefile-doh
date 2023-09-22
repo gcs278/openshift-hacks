@@ -1,0 +1,7 @@
+https://.:5353 {
+  log
+  tls ./certs/edge.crt ./certs/edge.key {
+   client_auth nocert
+  }
+  forward . 8.8.8.8
+}

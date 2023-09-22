@@ -8,9 +8,10 @@ spec:
   provider:
     type: AWS
     aws:
-      privateZoneIAMRole: arn:aws:iam::176500231253:role/gspence-rol1 # UPDATE THIS TO YOUR IAM ROLE
+      assumeRole:
+        arn: arn:aws:iam::176500231253:role/gspence-rol1 # UPDATE THIS TO YOUR IAM ROLE
       credentials:
-        name: externaldns-cloud-credentials
+        name: ""
   source:
     hostnameAnnotation: Allow
     type: Service

@@ -6,7 +6,7 @@ oc patch -n openshift-ingress-operator ingresscontroller/default --type merge --
 sleep 5
 
 echo "Switching default ingress controller to internal scope..."
-oc patch -n openshift-ingress-operator ingresscontroller/default --type merge --patch='{"spec":{"endpointPublishingStrategy":{"loadBalancer":{"scope":"Internal"},"type":"LoadBalancerService"}}}'
+oc patch -n openshift-ingress-operator ingresscontroller/default --type merge --patch='{"spec":{"endpointPublishingStrategy":{"loadBalancer":{"providerParameters":},"type":"LoadBalancerService"}}}'
 
 while ! oc get svc -n openshift-ingress router-default -o jsonpath={.status.loadBalancer.ingress[0].hostname} | grep -q "^internal-"; do
   echo "Waiting for router-default service to become internal"

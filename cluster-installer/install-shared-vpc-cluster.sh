@@ -10,7 +10,7 @@ REGION_B="us-east-2"
 USER_ARN_B=$(aws --profile $PROFILE_B --region $REGION_B sts get-caller-identity --output json | jq -r '.Arn')
 
 USERNAME="gspence"
-VPC_STACK_NAME=${USERNAME}-sharedvpc1
+VPC_STACK_NAME="${USERNAME}-sharedvpc1"
 VPC_TPL_PATH=/tmp/01_vpc.yaml
 VPC_TPL=file://${VPC_TPL_PATH}
 POLICY_NAME=${USERNAME}-pol1
@@ -18,7 +18,7 @@ ROLE_NAME=${USERNAME}-rol1
 
 # PHZ Variables
 CLUSTER_BASE_DOMAIN=devcluster.openshift.com # <- Public zone in cluster creator's account (Account B)
-CLUSTER_NAME="${USERNAME}-demovpc1"
+CLUSTER_NAME="${USERNAME}-demovpc2"
 PRIVATE_HOSTED_ZONE_NAME=${CLUSTER_NAME}.${CLUSTER_BASE_DOMAIN}
 
 function print_usage_exit() {

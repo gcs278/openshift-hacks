@@ -5,11 +5,13 @@ USER 0
 
 RUN apt-get update
 RUN echo deb http://deb.debian.org/debian bullseye-backports main  > /etc/apt/sources.list.d/backports.list && \
-    apt-get update && \
-    apt-get -y install haproxy=2.6.\* -t bullseye-backports
-#RUN apt-get -y install haproxy=2.2.\*
+    apt-get update 
+    #apt-get -y install haproxy=2.6.\* -t bullseye-backports
+# RUN apt-get -y install haproxy=2.2.\*
+COPY haproxy-2.8.1-debian /usr/sbin/haproxy
+RUN chmod +x /usr/sbin/haproxy
 RUN apt-get -y install libcap2-bin
-RUN apt-get -y install procps rsyslog util-linux curl
+RUN apt-get -y install procps rsyslog util-linux curl libpcre3
 
 #INSTALL_PKGS="haproxy22 rsyslog procps-ng util-linux" && \
 

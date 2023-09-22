@@ -2,13 +2,13 @@
 
 #domain=$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})
 domain=$(oc get dnses cluster -o jsonpath={.spec.baseDomain})
-export test_domain="test2.${domain}"
+export test_domain="demo.${domain}"
 
 oc apply -f - <<EOF
 apiVersion: operator.openshift.io/v1
 kind: IngressController
 metadata:
-  name: test2
+  name: demo
   namespace: openshift-ingress-operator
 spec:
   domain: $test_domain

@@ -1,0 +1,12 @@
+.:5053 {
+  log
+  kubernetes
+  forward . 127.0.0.1:8053 {
+    #force_tcp
+    #prefer_udp
+  }
+  bufsize 512
+  log . {
+    class all
+  }
+}

@@ -43,11 +43,7 @@ function oc_scale_cvo() {
 }
 
 function oc_ingress_scale_router_default() {
-  if [[ $1 = "" ]]; then
-    echo "ERROR: You need to provide a scale #"
-    return 1
-  fi
-  oc scale --replicas=$1 -n openshift-ingress deployment/router-default
+  oc_ingress_scale_router default $1
 }
 
 function oc_ingress_scale_router() {
@@ -59,7 +55,8 @@ function oc_ingress_scale_router() {
     echo "ERROR: You need to provide a scale #"
     return 1
   fi
-  oc scale --replicas=$2 -n openshift-ingress deployment/${1}
+  oc scale --replicas=$2 -n openshift-ingress deployment/router-${1}
+  oc -n openshift-ingress-operator patch ingresscontroller/$1 --type=merge --patch='{"spec":{"replicas":'${2}'}}'
 }
 
 function oc_ingress_scale_ingress_operator() {
@@ -490,8 +487,8 @@ function oc_ingress_revert_operator_image() {
 # Alternative to debuging C-I-O locally
 function oc_ingress_clusterbuild_operator(){
   tag=$(date +%s)
-  if [[ "$1" == "" ]]; then 
-    tag=$1
+  if [[ "$1" != "" ]]; then 
+    tag="$1"
   fi
   make
   if [[ $? -ne 0 ]]; then

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 function print_usage_exit() {
-    echo "usage: $(basename $0) create <VERSION_DIR> {aws|gcp|azure} [MOD_SCRIPT]"
+    echo "usage: $(basename $0) create <VERSION_DIR> {aws|gcp|azure|aws-sts} [MOD_SCRIPT]"
     echo "                      delete <CLUSTER_DIR>"
     echo "       e.g. $(basename $0) create 4.10.5 aws"
     exit 1
@@ -182,6 +182,63 @@ EOF
     #export ARM_TENANT_ID="$(jq -r '.tenantId' $sp_file)"
 }
 
+function create_aws_sts_config {
+    AWS_REGION=$(aws configure get region)
+    AWS_ACCOUNT=$(aws sts get-caller-identity | awk '{print $1}')
+
+    # Instructions: https://docs.openshift.com/container-platform/4.13/authentication/managing_cloud_provider_credentials/cco-mode-sts.html#sts-mode-installing_cco-mode-sts
+    RELEASE_IMAGE=$($INSTALLER version | awk '/release image/ {print $3}')
+    CCO_IMAGE=$(oc adm release info --image-for='cloud-credential-operator' $RELEASE_IMAGE -a ~/.secrets/pull-secret.txt)
+    oc image extract $CCO_IMAGE --path="/usr/bin/ccoctl:${CLUSTER_DIR}" -a ~/.secrets/pull-secret.txt
+    CCOCTL=${CLUSTER_DIR}/ccoctl
+    chmod 775 ${CCOCTL}
+    REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release extract --credentials-requests --cloud=aws --to=${CLUSTER_DIR}/credrequests --from=$RELEASE_IMAGE
+    ${CCOCTL} aws create-all --name=${NAME} --region=${AWS_REGION} --credentials-requests-dir=${CLUSTER_DIR}/credrequests --output-dir=${CLUSTER_DIR}/sts
+    ${CCOCTL} aws create-iam-roles --name=${NAME} --region=${AWS_REGION} --credentials-requests-dir=${CLUSTER_DIR}/credrequests --output-dir=${CLUSTER_DIR}/sts --identity-provider-arn=arn:aws:iam::${AWS_ACCOUNT}:oidc-provider/${NAME}-oidc.s3.${AWS_REGION}.amazonaws.com
+    
+    SSH_KEY=$(<$HOME/.ssh/id_rsa.pub)
+
+    cat << EOF > ${CLUSTER_DIR}/install-config.yaml
+apiVersion: v1
+baseDomain: devcluster.openshift.com
+credentialsMode: Manual
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 3
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  name: ${NAME}
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: ${SDN_TYPE}
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: ${AWS_REGION}
+publish: External
+pullSecret: '{"auths": ${AUTHS_JSON}}'
+sshKey: '${SSH_KEY}'
+EOF
+   
+   cat ${CLUSTER_DIR}/install-config.yaml
+   ${INSTALLER} create manifests --dir="${CLUSTER_DIR}"
+
+   cp ${CLUSTER_DIR}/sts/manifests/* ${CLUSTER_DIR}/manifests
+   cp -a ${CLUSTER_DIR}/sts/tls ${CLUSTER_DIR}/
+}
+
 function create() {
     if [ -d "$CLUSTER_DIR" ]; then
         echo "Error: ${CLUSTER_DIR} already exists"
@@ -206,6 +263,9 @@ function create() {
     if [ "$PLATFORM" == "aws" ]; then
         mkdir "$CLUSTER_DIR"
         create_aws_config
+    elif [ "$PLATFORM" == "aws-sts" ]; then
+        mkdir "$CLUSTER_DIR"
+        create_aws_sts_config
     elif [ "$PLATFORM" == "azure" ]; then
         mkdir "$CLUSTER_DIR"
         create_azure_config
@@ -229,7 +289,9 @@ function create() {
 	exit 1
       fi
     fi
-    cat $CLUSTER_DIR/install-config.yaml
+    if [[ -f $CLUSTER_DIR/install-config.yaml ]]; then
+      cat $CLUSTER_DIR/install-config.yaml
+    fi
     touch ${BUILDING_FILE}
     ${INSTALLER} create cluster --dir="$CLUSTER_DIR"
 }

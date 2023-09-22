@@ -1,0 +1,9 @@
+.:5053 {
+  log
+  forward . /etc/resolv.conf {
+    policy sequential
+  }
+  log . {
+    class all
+  }
+}
