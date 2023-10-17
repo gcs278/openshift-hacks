@@ -16,9 +16,13 @@ function oc_ingress_managed() {
 }
 
 function oc_ingress_unprivileged() {
+  router=default
+  if [[ "$1" != "" ]]; then
+    router="$1"
+  fi
   oc patch clusterrole/openshift-ingress-router --type=strategic --patch='{"rules":[{"apiGroups":[""],"resources":["endpoints","namespaces","services"],"verbs":["list","watch"]},{"apiGroups":["authentication.k8s.io"],"resources":["tokenreviews"],"verbs":["create"]},{"apiGroups":["authorization.k8s.io"],"resources":["subjectaccessreviews"],"verbs":["create"]},{"apiGroups":["route.openshift.io"],"resources":["routes"],"verbs":["list","watch"]},{"apiGroups":["route.openshift.io"],"resources":["routes/status"],"verbs":["update"]},{"apiGroups":["security.openshift.io"],"resourceNames":["hostnetwork"],"resources":["securitycontextconstraints"],"verbs":["use"]},{"apiGroups":["discovery.k8s.io"],"resources":["endpointslices"],"verbs":["list","watch"]}]}'
-  oc patch -n openshift-ingress deployment/router-default --patch='{"spec":{"template":{"spec":{"securityContext":{"runAsUser":null}}}}}'
-  oc patch -n openshift-ingress deployment/router-default --patch='{"spec":{"template":{"spec":{"hostNetwork":true}}}}'
+  oc patch -n openshift-ingress deployment/router-${router} --patch='{"spec":{"template":{"spec":{"securityContext":{"runAsUser":null}}}}}'
+  oc patch -n openshift-ingress deployment/router-${router} --patch='{"spec":{"template":{"spec":{"hostNetwork":true}}}}'
 }
 
 function oc_ingress_unmanaged() {
@@ -30,8 +34,12 @@ function oc_ingress_unmanaged() {
 }
 
 function oc_ingress_privileged() {
+  router=default
+  if [[ "$1" != "" ]]; then
+    router="$1"
+  fi
   oc patch clusterrole/openshift-ingress-router --type=strategic --patch='{"rules":[{"apiGroups":[""],"resources":["endpoints","namespaces","services"],"verbs":["list","watch"]},{"apiGroups":["authentication.k8s.io"],"resources":["tokenreviews"],"verbs":["create"]},{"apiGroups":["authorization.k8s.io"],"resources":["subjectaccessreviews"],"verbs":["create"]},{"apiGroups":["route.openshift.io"],"resources":["routes"],"verbs":["list","watch"]},{"apiGroups":["route.openshift.io"],"resources":["routes/status"],"verbs":["update"]},{"apiGroups":["security.openshift.io"],"resourceNames":["privileged"],"resources":["securitycontextconstraints"],"verbs":["use"]},{"apiGroups":["discovery.k8s.io"],"resources":["endpointslices"],"verbs":["list","watch"]}]}'
-  oc patch -n openshift-ingress deployment/router-default --patch='{"spec":{"template":{"spec":{"securityContext":{"runAsUser":0}}}}}'
+  oc patch -n openshift-ingress deployment/router-${router} --patch='{"spec":{"template":{"spec":{"securityContext":{"runAsUser":0}}}}}'
 }
 
 function oc_scale_cvo() {

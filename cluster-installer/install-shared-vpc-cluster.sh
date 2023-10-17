@@ -26,7 +26,35 @@ function print_usage_exit() {
     exit 1
 }
 
+function clearRoute53PublicZone() {
+  echo "Checking for old DNS records..."
+  ID=$(aws --profile ${PROFILE_B} --region ${REGION_B} route53 list-hosted-zones --output json | jq -r '.HostedZones[] | select(.Name=="'${CLUSTER_BASE_DOMAIN}'.").Id' | awk -F / '{printf $3}')
+  for name in "api" "*" "*.apps"; do
+    record=${name}.${CLUSTER_NAME}.${CLUSTER_BASE_DOMAIN}
+    recordData=$(aws --profile ${PROFILE_B} --region ${REGION_B} route53 list-resource-record-sets --hosted-zone-id ${ID} --output json | jq -r '.ResourceRecordSets[] | select(.Name=="'${record}'.")')
+    if [[ "$recordData" != "" ]]; then
+      type=$(echo "$recordData" | jq -r '.Type')
+      ttl=$(echo "$recordData" | jq -r '.Type')
+      cat <<EOL > /tmp/payload.json
+{
+    "Comment": "Delete single record set",
+    "Changes": [{
+        "Action": "DELETE",
+        "ResourceRecordSet":
+	$recordData
+    }]
+}
+EOL
+      aws --profile ${PROFILE_B} --region ${REGION_B} route53 change-resource-record-sets --hosted-zone-id ${ID} --change-batch file:///tmp/payload.json
+
+      echo "Succesfully deleted DNS Record: $record"
+    fi
+  done
+}
+
 function create() {
+  clearRoute53PublicZone
+
   # Download VPC Template from Github to /tmp
   if [[ ! -f $VPC_TPL_PATH ]]; then
     wget -P /tmp https://raw.githubusercontent.com/openshift/installer/master/upi/aws/cloudformation/01_vpc.yaml
@@ -184,6 +212,8 @@ EOF
 }
 
 function delete() {
+  clearRoute53PublicZone 
+  
   echo "Deleting stack ${VPC_STACK_NAME}..."
   if aws --profile $PROFILE_A --region $REGION_A cloudformation describe-stacks --stack-name $VPC_STACK_NAME > /dev/null; then
     aws --profile $PROFILE_A --region $REGION_A cloudformation delete-stack --stack-name $VPC_STACK_NAME

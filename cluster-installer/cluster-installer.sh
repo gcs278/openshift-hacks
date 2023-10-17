@@ -104,11 +104,16 @@ compute:
   hyperthreading: Enabled
   name: worker
   replicas: 3
+  platform:
+    aws:
+      type: t3a.xlarge
 controlPlane:
   architecture: amd64
   hyperthreading: Enabled
   name: master
-  platform: {}
+  platform:
+    aws:
+      type: t3a.xlarge
   replicas: 3
 metadata:
   name: ${NAME}
@@ -194,7 +199,8 @@ function create_aws_sts_config {
     chmod 775 ${CCOCTL}
     REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release extract --credentials-requests --cloud=aws --to=${CLUSTER_DIR}/credrequests --from=$RELEASE_IMAGE
     ${CCOCTL} aws create-all --name=${NAME} --region=${AWS_REGION} --credentials-requests-dir=${CLUSTER_DIR}/credrequests --output-dir=${CLUSTER_DIR}/sts
-    ${CCOCTL} aws create-iam-roles --name=${NAME} --region=${AWS_REGION} --credentials-requests-dir=${CLUSTER_DIR}/credrequests --output-dir=${CLUSTER_DIR}/sts --identity-provider-arn=arn:aws:iam::${AWS_ACCOUNT}:oidc-provider/${NAME}-oidc.s3.${AWS_REGION}.amazonaws.com
+    # This was only required for 4.14.0-ec.4, but was fixed later for some reason
+    #${CCOCTL} aws create-iam-roles --name=${NAME} --region=${AWS_REGION} --credentials-requests-dir=${CLUSTER_DIR}/credrequests --output-dir=${CLUSTER_DIR}/sts --identity-provider-arn=arn:aws:iam::${AWS_ACCOUNT}:oidc-provider/${NAME}-oidc.s3.${AWS_REGION}.amazonaws.com
     
     SSH_KEY=$(<$HOME/.ssh/id_rsa.pub)
 
@@ -272,7 +278,7 @@ function create() {
     elif [ "$PLATFORM" == "gcp" ]; then
         mkdir "$CLUSTER_DIR"
         create_gcp_config
-        export GOOGLE_APPLICATION_CREDENTIALS=~/src/github.com/openshift/shared-secrets/gce/aos-serviceaccount.json
+        export GOOGLE_APPLICATION_CREDENTIALS=~/.gcloud/ocp_installer_access_key.json
     else
         echo "unrecognized platform '$PLATFORM'"
         exit 1
@@ -298,7 +304,7 @@ function create() {
 
 function delete() {
   if [[ -f ${CLUSTER_DIR}/metadata.json ]]; then 
-    GOOGLE_APPLICATION_CREDENTIALS=~/src/github.com/openshift/shared-secrets/gce/aos-serviceaccount.json \
+    GOOGLE_APPLICATION_CREDENTIALS=~/.gcloud/ocp_installer_access_key.json \
       ${INSTALLER} destroy cluster --dir="$CLUSTER_DIR"
   else
     echo "Not a real cluster, just deleting dir"
