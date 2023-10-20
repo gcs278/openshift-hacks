@@ -1,0 +1,48 @@
+global
+  log stdout format raw local0 debug
+  nbthread 4
+
+defaults
+  log global
+
+  timeout connect 5s
+  timeout client 5s
+  timeout client-fin 1s
+  timeout server 10s
+  timeout server-fin 1s
+  timeout http-request 1s
+  timeout http-keep-alive 300s
+
+  option log-health-checks
+  option logasap
+  option httplog
+	
+frontend public
+  bind :8081
+  mode http
+  default_backend openshift_default
+
+listen stats
+  bind :1937
+  mode http
+  stats enable
+  stats refresh 1s
+  stats uri /stats
+  no log
+
+backend openshift_default
+  mode http
+  balance random
+  acl allowlist src -f /home/gspence/src/github.com/gcs278/openshift-hacks/RFE-3385/allowlist.txt
+  tcp-request content reject if !allowlist
+
+  server web00 127.0.0.1:4040
+  server web01 127.0.0.1:4040
+backend test-1
+  mode http
+  balance random
+  acl allowlist src -f /home/gspence/src/github.com/gcs278/openshift-hacks/RFE-3385/allowlists-ipv4/allowlist.txt1
+  tcp-request content reject if !allowlist
+
+  server web00 127.0.0.1:4040
+  server web01 127.0.0.1:4040
