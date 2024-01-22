@@ -1,0 +1,3 @@
+Address_Type  Backends  Cidrs  TotalCIDRFileSize_MB  VMSize_MB  VMPeak_MB  HaproxyStartupTime_S
+------------  --------  -----  --------------------  ---------  ---------  --------------------
+ipv4          1000      30000  395                   5829       5891       12.35

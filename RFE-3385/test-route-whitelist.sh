@@ -58,5 +58,4 @@ metadata:
 spec:
   to:
     kind: Service
-    name: router-service1
-EOF
+    name: router-service1OF

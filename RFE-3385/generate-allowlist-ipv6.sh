@@ -6,10 +6,10 @@ fi
 
 base="2001:0000:130F:0000:0000:09C0:876A:"
 
-rm whitelist.txt${name}
-whitelist=""
+rm allowlist.txt${name}
+allowlist=""
 for i in $(seq 1 $1); do
-  echo "${base}$(printf '%04x\n' $i)/128" >> whitelist.txt${name}
+  echo "${base}$(printf '%04x\n' $i)/128" >> allowlist.txt${name}
 done
 
-echo "whitelist.txt${name} generated"
+echo "allowlist.txt${name} generated"

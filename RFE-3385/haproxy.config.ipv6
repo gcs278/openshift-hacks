@@ -20,25 +20,6 @@ defaults
 frontend public
   bind :8081
   mode http
-  default_backend openshift_default
-
-backend openshift_default
-  mode http
-  balance random
-  acl allowlist src -f /home/gspence/src/github.com/gcs278/openshift-hacks/RFE-3385/allowlist.txt
-  tcp-request content reject if !allowlist
-
-  server web00 127.0.0.1:4040
-  server web01 127.0.0.1:4040
-
-backend openshift_default2
-  mode http
-  balance random
-  acl allowlist src -f /home/gspence/src/github.com/gcs278/openshift-hacks/RFE-3385/allowlist.txt2
-  tcp-request content reject if !allowlist
-
-  server web00 127.0.0.1:4040
-  server web01 127.0.0.1:4040
 
 listen stats
   bind :1937
@@ -47,6 +28,7 @@ listen stats
   stats refresh 1s
   stats uri /stats
   no log
+
 backend test-1
   mode http
   balance random
