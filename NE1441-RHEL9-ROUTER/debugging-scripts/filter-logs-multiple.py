@@ -2,20 +2,20 @@
 import re
 import sys
 import json
+import argparse
 from prettytable import PrettyTable
 import difflib
 
-# Check if at least one log file path is provided
-if len(sys.argv) < 2:
-    print("Usage: python script.py <path_to_log_file> [path_to_other_log_files...]")
-    sys.exit(1)
+# Set up command line argument parsing
+parser = argparse.ArgumentParser(description="Parse and filter log files.")
+parser.add_argument("log_files", nargs='+', help="Paths to log files")
+parser.add_argument("--route", help="Specific route name to filter logs by", default=None)
+args = parser.parse_args()
 
 # ANSI color codes for output
 colors = ['\033[92m', '\033[93m', '\033[94m', '\033[95m', '\033[96m']
 color_map = {}
 
-# Collect all log file paths
-log_file_paths = sys.argv[1:]
 
 # Function to extract the base name of the file (without extension)
 def get_router_name(file_path):
@@ -62,7 +62,7 @@ def get_admitted_statuses(route_data):
     return admitted_statuses
 
 # Function to parse the log file and enrich it with route names
-def parse_logs(file_paths, route_map):
+def parse_logs(file_paths, route_map, filter_route_name):
     all_logs = []
 
     table = PrettyTable()
@@ -82,12 +82,14 @@ def parse_logs(file_paths, route_map):
     route_pattern = re.compile(r'"route"=({.*})')
     duration_pattern = re.compile(r'"duration"=(\d+)')  # Pattern to capture content within msg=""
     action_in_key_pattern = re.compile(r'"key"="[^_]+_([^"]+)"')  # Pattern to capture content within msg=""
+    contention_removed_pattern = re.compile(r'"removed"=(\d+)')  # Pattern to capture content within msg=""
+    contention_expires_pattern = re.compile(r'"expires"=(\d+)')  # Pattern to capture content within msg=""
+    lease_expires_pattern = re.compile(r'"expires"="([^"]+)"')  # Pattern to capture content within msg=""
+    lease_time_remaining_pattern = re.compile(r'"leaseTimeRemaining"=(\d+)')
 
-    files_of_interest = ['writerlease.go', 'status.go', 'contention.go', 'router_controller.go']
+    files_of_interest = ['writerlease.go', 'status.go', 'contention.go', 'router_controller.go', 'forcing resync']
 
-    previous_lease_state = "Election"
-    lease_state = "Election"
-    line_count = 0
+
     follower_patterns = [
         "skipped update due to another process altering the route with a different ingress status value",
         "updating route status failed due to write conflict",
@@ -99,8 +101,11 @@ def parse_logs(file_paths, route_map):
 
     for index, file_path in enumerate(file_paths):
         contended_status_map = {}
+        previous_lease_state = "Election"
+        lease_state = "Election"
         max_contended = False
         contentions = 0
+        line_count = 0
         router_name = get_router_name(file_path)
         color_map[router_name] = colors[index % len(colors)]  # Assign a color to each router
         previous_route_data = {}  # To store previous data for comparison
@@ -124,7 +129,10 @@ def parse_logs(file_paths, route_map):
 
                         msg_content = msg_pattern.search(details)
                         event_content = event_pattern.search(details)
-                        msg_details = msg_content.group(1) if msg_content else "No message found"
+                        if 'forcing resync' in line:
+                            msg_details = 'forcing resync'
+                        else:
+                            msg_details = msg_content.group(1) if msg_content else "No message found"
                         duration_content = duration_pattern.search(details)
                         action_content = action_pattern.search(details)
                         action_in_key_content = action_in_key_pattern.search(details)
@@ -144,6 +152,23 @@ def parse_logs(file_paths, route_map):
                         # Further down in your code where you handle event details
                         if 'updated route status' in msg_details:
                             msg_details = f"{GREEN}{msg_details}{RESET}"
+
+                        lease_time_remaining_match = lease_time_remaining_pattern.search(details)
+                        lease_time_remaining = lease_time_remaining_match.group(1) if lease_time_remaining_match else None
+                        if lease_time_remaining:
+                            lease_time_remaining_seconds = float(lease_time_remaining) / 1_000_000_000
+                            msg_details += f" [Expires: {lease_time_remaining_seconds:.2f}s]" 
+
+                        if 'flushed contention tracker' in msg_details:
+                            removed_match = contention_removed_pattern.search(details)
+                            removed = int(removed_match.group(1)) if removed_match else 0
+                            msg_details += f" [Removed: {removed}]" 
+                            contentions = 0 # this is not quite right
+                            max_contended = False # TODO: This might be an assumption
+                            expires_match = contention_expires_pattern.search(details)
+                            expires = expires_match.group(1) if expires_match else 0
+                            expires_seconds = float(expires) / 1_000_000_000
+                            msg_details += f" [Expires: {expires_seconds:.2f}s]" 
 
                         event_details = event_content.group(1) if event_content else ""
                         if event_details:
@@ -180,6 +205,11 @@ def parse_logs(file_paths, route_map):
                         if action_in_key:
                             action_details = f"{action_in_key}"  
 
+                        lease_expires_match = lease_expires_pattern.search(details)
+                        lease_expires = lease_expires_match.group(1) if lease_expires_match else ""
+                        if lease_expires != "":
+                            msg_details += f" [Expires: {lease_expires}]" 
+
                         # Determine contended status based on log messages
                         if route_name not in contended_status_map:
                             contended_status_map[route_name] = "-"
@@ -201,10 +231,15 @@ def parse_logs(file_paths, route_map):
                         action_details = action_details.replace("UnservableInFutureVersions", "UIFV")
                         msg_details = msg_details.replace("skipped update due to another process altering the route with a different ingress status value", "skipped update another process altering the route")
                         
-                        row = [len(all_logs) + 1, timestamp, route_name, contended_status, contentions, display_lease_state, action_details, msg_details]
+
+                        row = [line_count, timestamp, route_name, contended_status, contentions, display_lease_state, action_details, msg_details]
                         if len(file_paths) > 1:
                             row.insert(2, f"{color_map[get_router_name(file_path)]}{get_router_name(file_path)}\033[0m")  # Append color code
                         previous_lease_state = lease_state  # Update the previous state
+
+                        if filter_route_name:
+                            if route_name != "N/A" and filter_route_name != route_name:
+                                continue
                         all_logs.append(row)
     
     # Sort logs by timestamp
@@ -215,6 +250,6 @@ def parse_logs(file_paths, route_map):
     return table
 
 # Parse logs and print the table
-global_route_map = build_global_route_map(log_file_paths)
-table = parse_logs(log_file_paths, global_route_map)
+global_route_map = build_global_route_map(args.log_files)
+table = parse_logs(args.log_files, global_route_map, args.route)
 print(table)
