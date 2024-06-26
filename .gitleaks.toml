@@ -1,2 +1,12 @@
-[whitelist]
-file='generic/echo-service-edge-tls-test.yaml'
+[allowlist]
+  description = "Global Allowlist"
+
+  # Ignore based on any subset of the file path
+  paths = [
+    # Ignore all example certs used for testing
+    '''cookies\/haproxy$''',
+    '''NE1441-RHEL9-ROUTER\/demo\/certs$''',
+    '''NE1441-RHEL9-ROUTER/demo/route-sha1.yaml$''',
+    '''NE1441-RHEL9-ROUTER$''',
+  ]
+       
