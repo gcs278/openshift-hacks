@@ -136,6 +136,11 @@ EOF
 }
 
 function create_azure_config {
+    if ! az vm list &> /dev/null; then
+      echo "Not logged into Azure. Follow the prompt to log in."
+      az login
+      mv ${HOME}/.azure/osServicePrincipal.json{,.bak}
+    fi
     local sp_file="${HOME}/.azure/osServicePrincipal.json"
     if [ ! -f $sp_file ]; then
         if ! az account show &> /dev/null; then
@@ -146,10 +151,11 @@ function create_azure_config {
         local SP=$(az ad sp create-for-rbac --role="Owner" --scopes="/subscriptions/${SUB_ID}" --name "${NAME}-installer")
         echo "created new service principal:"
         echo "$SP"
-        jq --arg SUB_ID "$SUB_ID" '{subscriptionId:$SUB_ID,clientId:.appId, clientSecret:.password,tenantId:.tenant}' <<< $SP >$sp_file
+        jq --arg SUB_ID "$SUB_ID" '{subscriptionId:$SUB_ID,clientId:.appId, clientSecret:.password,tenantId:.tenant,displayName:.displayName}' <<< $SP >$sp_file
         echo "created new credentials at $sp_file"
     fi
-    local AZURE_REGION="centralus"
+    #local AZURE_REGION="centralus"
+    local AZURE_REGION="eastus2"
     # TODO: jq -r '.auths | {"auths": .}' $HOME/.secrets/openshift-pull-secret.json
     local SSH_KEY=$(<$HOME/.ssh/id_rsa.pub)
 
@@ -199,6 +205,7 @@ function create_aws_sts_config {
     chmod 775 ${CCOCTL}
     REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release extract --credentials-requests --cloud=aws --to=${CLUSTER_DIR}/credrequests --from=$RELEASE_IMAGE
     ${CCOCTL} aws create-all --name=${NAME} --region=${AWS_REGION} --credentials-requests-dir=${CLUSTER_DIR}/credrequests --output-dir=${CLUSTER_DIR}/sts
+    echo "arn:aws:iam::${AWS_ACCOUNT}:oidc-provider/${NAME}-oidc.s3.${AWS_REGION}.amazonaws.com" > ${CLUSTER_DIR}/sts/OIDC_ARN
     # This was only required for 4.14.0-ec.4, but was fixed later for some reason
     #${CCOCTL} aws create-iam-roles --name=${NAME} --region=${AWS_REGION} --credentials-requests-dir=${CLUSTER_DIR}/credrequests --output-dir=${CLUSTER_DIR}/sts --identity-provider-arn=arn:aws:iam::${AWS_ACCOUNT}:oidc-provider/${NAME}-oidc.s3.${AWS_REGION}.amazonaws.com
     
@@ -245,6 +252,44 @@ EOF
    cp -a ${CLUSTER_DIR}/sts/tls ${CLUSTER_DIR}/
 }
 
+function create_ibmcloud_config {
+    SSH_KEY=$(<$HOME/.ssh/id_rsa.pub)
+    # Note: I had to log on to ibmcloud console and create gspence-dev CIS instance with domain of
+    # ocp-test.gspence.com
+    
+    cat << EOF > ${CLUSTER_DIR}/install-config.yaml
+apiVersion: v1
+baseDomain: ocp-test.gspence.com
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 3
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata:
+  name: ${NAME}
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: ${SDN_TYPE}
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  ibmcloud:
+    region: us-east
+publish: External
+pullSecret: '{"auths": ${AUTHS_JSON}}'
+sshKey: '${SSH_KEY}'
+EOF
+}
+
 function create() {
     if [ -d "$CLUSTER_DIR" ]; then
         echo "Error: ${CLUSTER_DIR} already exists"
@@ -275,6 +320,10 @@ function create() {
     elif [ "$PLATFORM" == "azure" ]; then
         mkdir "$CLUSTER_DIR"
         create_azure_config
+    elif [ "$PLATFORM" == "ibmcloud" ]; then
+        mkdir "$CLUSTER_DIR"
+        create_ibmcloud_config
+	export IC_API_KEY=$(cat ~/.ibmcloud/apiKey)
     elif [ "$PLATFORM" == "gcp" ]; then
         mkdir "$CLUSTER_DIR"
         create_gcp_config
