@@ -1,5 +1,9 @@
 #!/bin/bash
 
+DIR=./certs/selfSigned
+mkdir -p $DIR
+cd $DIR
+
 # Router rejects SHA1 self-signed cert, but HAProxy doesn't have any issues starting with self-signed SHA1
 # certs in 4.16...so it's a false rejection.
 
