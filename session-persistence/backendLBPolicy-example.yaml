@@ -1,0 +1,15 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: BackendLBPolicy
+metadata:
+  name: lb-policy
+spec:
+  targetRefs:
+  - group: core
+    kind: Service
+    name: echo-service
+  sessionPersistence:
+    sessionName: foo-session
+    absoluteTimeout: 1h
+    type: Cookie
+    cookieConfig:
+      lifetimeType: Permanent
