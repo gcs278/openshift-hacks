@@ -1,0 +1,12 @@
+.:5053 {
+  log
+  file hosts-alpine-downstream.db downstream.org
+  forward . 127.0.0.1:8053
+  bufsize 2048
+  log . {
+    class error
+  }
+  cache 900 {
+    denial 9984 30
+  }
+}

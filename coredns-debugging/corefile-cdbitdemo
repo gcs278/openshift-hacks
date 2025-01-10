@@ -1,0 +1,8 @@
+.:5053 {
+  forward . 8.8.8.8
+  bufsize 512
+  log . {
+    class all
+  }
+  cache 5
+}

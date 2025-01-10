@@ -1,0 +1,12 @@
+.:8053 {
+  log
+  file hosts-alpine-upstream.db upstream.org
+  file hosts-ns.db .
+  log . {
+    class error
+  }
+  template ANY ANY servfail.org {
+    rcode SERVFAIL
+  }
+  #bufsize 512
+}

@@ -1,0 +1,71 @@
+$ORIGIN upstream.org.
+@	3600 IN	SOA sns.dns.icann.org. noc.dns.icann.org. 2017042745 7200 3600 1209600 3600
+	3600 IN NS a.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS b.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS c.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS d.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS e.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS f.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS g.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS h.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS i.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS j.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS k.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS l.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS m.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS n.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS o.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+	3600 IN NS p.iana-servers.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.net.
+
+test    IN A     192.168.99.100
+
+www     IN A     192.168.99.99
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0001
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0002
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0003
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0004
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0005
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0006
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0007
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0008
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0009
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0010
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0011
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0012
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0013
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0014
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0015
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0016
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0017
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0018
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0019
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0020
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0021
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0022
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0023
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0024
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0025
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0026
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0027
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0028
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0029
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0030
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0031
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0032
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0033
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0034
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0035
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0036
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0037
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0038
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0039
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0040
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0042
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0043
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0044
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0045
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0046
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0047
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0048
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0049
+        IN AAAA  c10a:e209:509c:d61c:eed9:5734:1416:0050

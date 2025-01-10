@@ -1,6 +1,6 @@
 .:8053 {
   log
-  file hosts.db testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.c
+  file hosts.db testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttttt.testtesttesttesttesttesttttttttttttttttttttttttttttttttttttt.com
   file hosts2.db example.org
   #forward . 8.8.8.8
   log . {

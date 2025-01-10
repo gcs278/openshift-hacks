@@ -1,11 +1,16 @@
 .:5053 {
-  log
+  #log .
+  #debug
+  #errors
   forward . 127.0.0.1:8053 {
+  #forward . 66.123.123.123 {
+  #forward . 8.8.8.8 {
+    #max_fails 0
     #force_tcp
-    #prefer_udp
+    prefer_udp
+    #health_check 0.5s
   }
-  bufsize 512
-  log . {
-    class all
+  cache 900 {
+    denial 9984 30
   }
 }
