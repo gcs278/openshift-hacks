@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sleep-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sleep
+  template:
+    metadata:
+      annotations:
+        target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+      labels:
+        app: sleep
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: sleep-container
+        image: alpine:latest
+        command: ["sh", "-c", "sleep infinity"]

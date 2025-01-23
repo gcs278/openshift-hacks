@@ -3,7 +3,7 @@
 waitForServiceIP() {
   START1=$(date +%s.%N)
   echo "Waiting for router-$1..."
-  while [[ "$(oc get service -n openshift-ingress router-$1 -o jsonpath={.status.loadBalancer.ingress[0].ip})" == "" ]]; do
+  while [[ "$(oc get service -n openshift-ingress router-$1 -o jsonpath={.status.loadBalancer.ingress[0]})" == "" ]]; do
     sleep 5
   done
   END1=$(date +%s.%N)
@@ -45,15 +45,15 @@ for i in $(seq 1 $ICS); do
   waitForServiceIP demo${i} &
 done
 
+wait $(jobs -p)
+
 END=$(date +%s.%N)
 DIFF=$(echo "$END - $START" | bc)
 echo "Total Time: $DIFF"
 
-wait $(jobs -p)
-
 echo "Cleaning up..."
 for i in $(seq 1 $ICS); do
-  oc delete -n openshift-ingress-operator demo${i} &
+  oc delete ingresscontroller -n openshift-ingress-operator demo${i} &
 done
 
 wait $(jobs -p)

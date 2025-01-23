@@ -10,3 +10,11 @@ perf_scale/e2e-benchmarking
 pyenv
 
 *.pcap
+
+*.crt
+*.key
+*.srl
+*.pem
+*.csr
+openshift-router
+perf-test-hydra

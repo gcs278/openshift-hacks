@@ -27,13 +27,41 @@ spec:
       dnsPolicy: Default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ci-infra-dns-propagate-role
+rules:
+- apiGroups: ["config.openshift.io"]
+  resources: ["dnses"]
+  resourceNames: ["cluster"]
+  verbs: ["get", "list"]
+- apiGroups: ["operator.openshift.io"]
+  resources: ["ingresscontrollers","ingresscontrollers/status"]
+  verbs: ["create"]
+  namespaces: ["openshift-ingress-operator"]
+- apiGroups: ["operator.openshift.io"]
+  resources: ["ingresscontrollers","ingresscontrollers/status"]
+  resourceNames: ["dns-propagate"]
+  verbs: ["get", "list", "update", "delete", "watch"]
+  namespaces: ["openshift-ingress-operator"]
+- apiGroups: [""]
+  resources: ["services"]
+  resourceNames: ["dns-default"]
+  verbs: ["get", "list"]
+  namespaces: ["openshift-dns"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list"]
+  namespaces: ["openshift-ingress"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: ci-infra-dns-propagate-cluster-reader
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: cluster-admin
+  name: ci-infra-dns-propagate-role
 subjects:
 - kind: ServiceAccount
   name: default

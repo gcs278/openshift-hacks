@@ -69,7 +69,7 @@ spec:
       protocol: TCP
 EOF
 caCertSha1=$(cat exampleca.crt)
-caCertSha256Wrong=$(cat sha256/exampleca.crt)
+#caCertSha256Wrong=$(cat sha256/exampleca.crt)
 interCertSha1=$(cat example-inter.crt)
 caKeySha1=$(cat exampleca.key)
 certSha1=$(cat example.crt)

@@ -1,0 +1,35 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: deny-regex-meta-characters-in-route-path
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: deny-regex-meta-characters-in-route-path
+      match:
+        resources:
+          kinds:
+          - Route
+          operations:
+          - CREATE
+          - UPDATE
+      validate:
+        cel:
+          expressions:
+          - expression: >
+              !has(object.spec.path) || (
+              !object.spec.path.contains('.') &&
+              !object.spec.path.contains('\\') &&
+              !object.spec.path.contains('^') &&
+              !object.spec.path.contains('$') &&
+              !object.spec.path.contains('*') &&
+              !object.spec.path.contains('+') &&
+              !object.spec.path.contains('?') &&
+              !object.spec.path.contains('(') &&
+              !object.spec.path.contains(')') &&
+              !object.spec.path.contains('[') &&
+              !object.spec.path.contains('{') &&
+              !object.spec.path.contains('|') &&
+              !object.spec.path.contains('\'') &&
+              !object.spec.path.contains('#'))
+            message: "The route spec.path field must not contain any regex meta characters."

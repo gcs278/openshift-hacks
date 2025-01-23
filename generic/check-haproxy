@@ -1,0 +1,7 @@
+#!/bin/bash
+
+config_file=/var/lib/haproxy/conf/haproxy.config
+if [[ "$1" != "" ]]; then
+  config_file=$1
+fi
+/home/gspence/src/haproxy.org/haproxy-2.8/haproxy-2.8.10 -c -f $config_file

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 
-openssl req -newkey rsa:2048 -nodes -keyout nginx-ssl.key -out nginx-ssl.csr -subj '/CN=www.example.com/ST=SC/C=US/emailAddress=example@example.com/O=Example/OU=Example'
+domain=$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})
+openssl req -newkey rsa:2048 -nodes -keyout nginx-ssl.key -out nginx-ssl.csr -subj '/CN=*.'${domain}'/ST=SC/C=US/emailAddress=example@example.com/O=Example/OU=Example'
 openssl x509 -req -days 3650 -sha256 -in nginx-ssl.csr -CA exampleca.crt -CAcreateserial -CAkey exampleca.key -extensions ext -extfile <(echo $'[ext]\nbasicConstraints = CA:FALSE\nsubjectKeyIdentifier = none\nauthorityKeyIdentifier = none\nextendedKeyUsage=serverAuth,clientAuth\nkeyUsage=nonRepudiation, digitalSignature, keyEncipherment') -out nginx-ssl.crt
 
 oc delete secret server-certs
@@ -49,6 +50,8 @@ spec:
 
 EOF
 
+oc rollout restart deployment nginx-ssl-deployment
+
 oc apply -f - <<EOF
 apiVersion: v1
 kind: Service
@@ -66,6 +69,7 @@ spec:
 EOF
 caCertSha1=$(cat exampleca.crt)
 caCertSha256Wrong=$(cat sha256/exampleca.crt)
+interCertSha1=$(cat example-inter.crt)
 caKeySha1=$(cat exampleca.key)
 certSha1=$(cat example.crt)
 certKeySha1=$(cat example.key)

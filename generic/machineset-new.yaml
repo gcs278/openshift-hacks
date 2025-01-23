@@ -1,0 +1,57 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  labels:
+    machine.openshift.io/cluster-api-cluster: gspence-2024-12-02-17-pxtkq
+  name: gspence-2024-12-02-17-pxtkq-worker-us-east-2b
+  namespace: openshift-machine-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: gspence-2024-12-02-17-pxtkq
+      machine.openshift.io/cluster-api-machineset: gspence-2024-12-02-17-pxtkq-worker-us-east-2b
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: gspence-2024-12-02-17-pxtkq
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: gspence-2024-12-02-17-pxtkq-worker-us-east-2b
+    spec:
+      providerSpec:
+        value:
+          ami:
+            id: ami-0197c5c22c44c04f1
+          apiVersion: machine.openshift.io/v1beta1
+          blockDevices:
+          - ebs:
+              encrypted: true
+              iops: 0
+              kmsKey:
+                arn: ""
+              volumeSize: 120
+              volumeType: gp3
+          capacityReservationId: ""
+          credentialsSecret:
+            name: aws-cloud-credentials
+          deviceIndex: 0
+          iamInstanceProfile:
+            id: gspence-2024-12-02-17-pxtkq-worker-profile
+          instanceType: t3a.xlarge
+          kind: AWSMachineProviderConfig
+          placement:
+            availabilityZone: us-east-2b
+            region: us-east-2
+          securityGroups:
+            - filters:
+                - name: tag:Name
+                  values:
+                    - gspence-2024-12-02-17-pxtkq-node
+          subnet:
+            id: subnet-07672d5aa90bbc1ed
+          tags:
+            - name: kubernetes.io/cluster/gspence-2024-12-02-17-pxtkq 
+              value: owned
+          userDataSecret:
+            name: worker-user-data

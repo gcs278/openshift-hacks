@@ -1,0 +1,2 @@
+^perf-test-hydra-http-0\.?(:[0-9]+)?(/.*)?$ be_http:perf-test-hydra-http-0
+^perf-test-hydra-http-1\.?(:[0-9]+)?(/.*)?$ be_http:perf-test-hydra-http-1

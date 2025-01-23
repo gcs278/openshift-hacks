@@ -1,0 +1,1 @@
+^.*/foo#(/.*)?$ be_http:default:router-service1

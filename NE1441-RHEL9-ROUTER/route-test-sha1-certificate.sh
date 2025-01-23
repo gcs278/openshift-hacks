@@ -64,5 +64,6 @@ spec:
     termination: edge
     certificate: |-
 $(echo "${certSha1}" | awk '{print "        "$0}')
+    key: |-
 $(echo "${certKeySha1}" | awk '{print "        "$0}')
 EOF

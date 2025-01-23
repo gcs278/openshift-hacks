@@ -59,6 +59,13 @@ echo "Route admitted"
 sameNode=$(oc get pods -n openshift-ingress -l ingresscontroller.operator.openshift.io/deployment-ingresscontroller=nlb-shard -o wide --no-headers | awk '{print $7}')
 diffNode=$(oc get nodes --no-headers | grep -v $sameNode | awk '{print $1}' | head -1)
 
+echo "Waiting for DNS to resolve..."
+execPod=$(oc get pods -n openshift-ingress -o json | jq -r '.items[].metadata.name')
+while [[ "$(oc exec -n openshift-ingress $execPod -- dig test.$nlb_domain +noall +answer)" == "" ]]; do
+  echo "waiting for DNS name test.${nlb_domain} to resolve..."
+  sleep 5
+done
+
 echo "Attempting to curl from a different node...should work"
 oc debug node/${diffNode} -- curl test.$nlb_domain --connect-timeout 10
 

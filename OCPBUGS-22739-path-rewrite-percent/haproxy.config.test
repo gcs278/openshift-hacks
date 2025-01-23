@@ -1,0 +1,60 @@
+global
+  log stdout format raw local0 debug
+  nbthread 4
+  setenv IP 192.168.1.11
+
+defaults
+  log global
+
+  timeout connect 5s
+  timeout client 5s
+  timeout client-fin 1s
+  timeout server 10s
+  timeout server-fin 1s
+  timeout http-request 1s
+  timeout http-keep-alive 300s
+
+  option log-health-checks
+  option logasap
+  option httplog
+	
+frontend public
+  bind :8081
+  mode http
+  default_backend test
+
+backend test
+  mode http
+  balance random
+  # Breaks Haproxy:
+  #http-request replace-path ^/(.*)$  %test\1
+  #http-request replace-path ^/(.*)$  test test\1
+  #http-request replace-path ^/(.*)$  "test\1
+  #http-request replace-path ^/(.*)$  'test\1
+  #http-request replace-path ^/(.*)$ "${test"\1
+  #http-request replace-path ^/(.*)$ "$-test"\1
+  #http-request replace-path ^/(.*)$ 'test test'\1
+  #http-request replace-path ^/(.*)$ 'test"test'\1
+  #http-request replace-path ^/(old)$ /foo\ \1
+  #http-request replace-path ^(.*)$ /i532/app/#\1
+  #http-request replace-path ^(.*)$ /(.*?)/(.*)\ /\2\1
+  
+  # Quote fix:
+  #http-request replace-path ^/(.*)$ 'test test'\1
+  #http-request replace-path ^/(.*)$ '"${test"'\1
+  #http-request replace-path ^/(.*)$ '"$-test"'\1
+
+  # Path break
+  #http-request replace-path ^/bar\'(.*)$ '/foo\1'
+  #http-request replace-path '^\Q/bar\'\''\E(.*)$' /\1
+  #http-request replace-path ^/?$*?(.*)$ "/foo\1"
+
+  http-request replace-path ^/(.*)$ "/foo\1"
+  
+  #http-request replace-path ^/test()(.*)$ '/foo\1'
+  
+  # Unexpected result: $test evaluates
+  #http-request replace-path ^/(.*)$  test"$test"\1
+
+  server web00 127.0.0.1:8082
+

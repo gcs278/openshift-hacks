@@ -1,7 +1,7 @@
 #!/bin/bash
 
 oc delete secret -n openshift-ingress router-cert
-oc create secret -n openshift-ingress  tls router-cert --key=example.key --cert=example.crt
+oc create secret -n openshift-ingress tls router-cert --key=example.key --cert=example.crt
 
 #domain=$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})
 domain=$(oc get dnses cluster -o jsonpath={.spec.baseDomain})

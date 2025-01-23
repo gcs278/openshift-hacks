@@ -156,6 +156,30 @@ function oc_ingress_logs_operator() {
   oc logs -n openshift-ingress-operator -l name=ingress-operator
 }
 
+function oc_ingress_watch_ingresscontroller_progressing() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You must provide a ingresscontroller name"
+    return 1
+  fi
+  watch -n1 --color 'oc get ingresscontroller -n openshift-ingress-operator '$1' -o jsonpath="{.status.conditions[?(@.type==\"Progressing\")]}" | yq -PC'
+}
+
+function oc_ingress_watch_ingresscontroller_upgradable() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You must provide a ingresscontroller name"
+    return 1
+  fi
+  watch -n1 --color 'oc get ingresscontroller -n openshift-ingress-operator '$1' -o jsonpath="{.status.conditions[?(@.type==\"Upgradeable\")]}" | yq -PC'
+}
+
+function oc_ingress_watch_ingresscontroller_status_endpointPublishingStrategy() {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You must provide a ingresscontroller name"
+    return 1
+  fi
+  watch -n1 --color 'oc get -n openshift-ingress-operator ingresscontroller '$1' -o jsonpath="{.status.endpointPublishingStrategy}" | yq -PC'
+}
+
 function oc_dns_logs_operator() {
   oc logs -n openshift-dns-operator $(oc get -n openshift-dns-operator pods --no-headers | head -1 | awk '{print $1}') -c dns-operator $@
 }
@@ -562,6 +586,50 @@ function oc_ingress_clusterbuild_operator(){
   echo "Patched cluster-ingress-operator to $new_img"
 }
 
+function oc_ccm_azure_clusterbuild_ccm(){
+  tag=$(date +%s)
+  if [[ "$1" != "" ]]; then 
+    tag="$1"
+  fi
+  fix_makefile_cgo
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: fix_makefile_cgo failed"
+    return 1
+  fi
+  make
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Make failed"
+    return 1
+  fi
+  revert_makefile_cgo
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: revert_makefile_cgo failed"
+    return 1
+  fi
+
+  podman login quay.io
+  img=$(REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release info --pullspecs | grep azure-cloud-controller-manager | awk '{print $2}')
+  if [[ "$img" == "" ]]; then
+    echo "ERROR: Couldn't get current azure-cloud-controller-manager image"
+    return 1
+  fi
+
+  podman pull --authfile /home/${USER}/.secrets/pull-secret.txt $img
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Failed to pull $img"
+    return 1
+  fi
+
+  container=$(podman create $img)
+  podman cp ~/src/github.com/openshift/cloud-provider-azure/ ${container}:/usr/bin/
+  new_img="quay.io/${USER}/cluster-ingress-operator:${tag}"
+  podman commit $container $new_img
+  podman push $new_img
+
+  oc_ingress_patch_operator_image $new_img
+  echo "Patched cluster-ingress-operator to $new_img"
+}
+
 function fix_makefile_cgo() {
   if [[ ! -f Makefile ]]; then
     echo "Error: ./Makefile doesn't exist"
@@ -767,12 +835,268 @@ function oc_ingress_exec_router_all {
   done
 }
 
-function oc_apisever_patch_apiserver_image() {
+
+# GINKGO_EXTRA_ARGS="--focus=.*ingresscontroller*" make integration
+
+function oc_apiserver_clusterbuild_apiserver(){
+  tag=$(date +%s)
+  if [[ "$1" != "" ]]; then 
+    tag="$1"
+  fi
+  make
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Make failed"
+    return 1
+  fi
+
+  podman login quay.io
+  img=$(REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release info --pullspecs | grep openshift-apiserver | awk '{print $2}')
+  if [[ "$img" == "" ]]; then
+    echo "ERROR: Couldn't get current openshift-apiserver image"
+    return 1
+  fi
+
+  podman pull --authfile /home/${USER}/.secrets/pull-secret.txt $img
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Failed to pull $img"
+    return 1
+  fi
+
+  container=$(podman create $img)
+  podman cp ~/src/github.com/openshift/openshift-apiserver/openshift-apiserver ${container}:/usr/bin/
+  new_img="quay.io/${USER}/openshift-apiserver:${tag}"
+  podman commit $container $new_img
+  podman push $new_img
+
+  oc_apiserver_patch_apiserver_image $new_img
+  echo "Patched openshift-apiserver to $new_img"
+}
+
+function oc_apiserver_patch_apiserver_image() {
   if [[ "$1" == "" ]]; then
     echo "ERROR: You need to provide an image"
     return 1
   fi
   oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
-  oc -n openshift-apiserver patch deploy/apiserver --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"router","image":"'${1}'","imagePullPolicy":"Always"}]}}}}'
+  oc -n openshift-apiserver patch deploy/apiserver --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"openshift-apiserver","image":"'${1}'","imagePullPolicy":"Always"}]}}}}'
   oc -n openshift-apiserver-operator patch deploy/openshift-apiserver-operator --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"openshift-apiserver-operator","env":[{"name":"IMAGE","value":"'${1}'"}]}]}}}}'
+}
+
+function oc_apiserver_managed() {
+  oc patch clusterversions/version --type=json --patch='[{"op":"add","path":"/spec/overrides","value":[{"kind":"Deployment","group":"apps/v1","name":"openshift-apiserver-operator","namespace":"openshift-apiserver-operator","unmanaged":false}]}]'
+  oc_scale_cvo 1 
+  oc scale deployment/openshift-apiserver-operator -n openshift-apiserver-operator --replicas 1
+}
+
+function oc_apiserver_force_delete_terminating_apiserver_pods() {
+  for i in $(oc get pods -n openshift-apiserver --no-headers | grep Terminating | awk '{print $1}'); do
+    oc delete -n openshift-apiserver pod $i --force
+  done
+}
+
+function oc_ingress_enable_dcm() {
+  if [[ "$1" == "" ]]; then
+    echo "error: you must provide a IC name"
+    return 1
+  fi
+  oc patch deployment/router-default -n openshift-ingress --patch '{"spec": {"template": {"spec": {"containers": [{"name": "router", "args": ["--blueprint-route-pool-size=0"]}]}}}}'
+  oc -n openshift-ingress-operator patch ingresscontroller/$1 --type=merge --patch='{"spec":{"unsupportedConfigOverrides":{"dynamicConfigManager":"true"}}}'
+}
+
+
+function oc_ingress_disable_dcm() {
+  if [[ "$1" == "" ]]; then
+    echo "error: you must provide a IC name"
+    return 1
+  fi
+  oc -n openshift-ingress-operator patch ingresscontroller/$1 --type=merge --patch='{"spec":{"unsupportedConfigOverrides":{"dynamicConfigManager":null}}}'
+}
+
+function oc_ingress_enable_gatewayapi() {
+  # Enable feature gate
+  oc patch featuregates/cluster --type=merge --patch='{"spec":{"featureSet":"CustomNoUpgrade","customNoUpgrade":{"enabled":["GatewayAPI"]}}}'
+  
+  until oc get crd gatewayclasses.gateway.networking.k8s.io >/dev/null 2>&1; do
+    echo "Waiting for GatewayClass CRD to be installed..."
+    sleep 2
+  done
+  echo "GatewayClass CRD is now available."
+
+  # Create GatewayClass to install Istio
+  oc create -f -<<'EOF'
+    apiVersion: gateway.networking.k8s.io/v1beta1
+    kind: GatewayClass
+    metadata:
+      name: openshift-default
+    spec:
+      controllerName: openshift.io/gateway-controller
+EOF
+}
+
+function find_and_copy_dlv_from_goland_installation() {
+  # Took from https://github.com/frobware/router/blob/b80a6a209f2c195c34aaf2fa0c8e7ccb632b4a2b/hack/remote-debug/find-and-copy-dlv-from-goland-installation
+  # This script automates the process of locating and copying the Delve
+  # (dlv) debugger executable from a GoLand installation. The Dockerfile
+  # in hack/remote-debug/Dockerfile expects to find a dlv executable in
+  # the top-level directory.
+
+  ide_home="$HOME/.local/share/JetBrains/Toolbox/apps/goland"
+
+  if [[ ! -d "$ide_home" ]]; then
+    echo "The GoLand IDE home directory does not exist at $ide_home." >&2
+    return 1
+  fi
+
+  os_type=$(uname -s | tr '[:upper:]' '[:lower:]')
+  arch_type=$(uname -m)
+
+  # Set the architecture based on operating system and CPU type.
+  case "$os_type-$arch_type" in
+    "linux-x86_64"|"darwin-x86_64")
+        arch="linux"; [ "$os_type" = "darwin" ] && arch="mac"
+        ;;
+    "linux-arm"*|"darwin-arm"*)
+        arch="linuxarm"; [ "$os_type" = "darwin" ] && arch="macarm"
+        ;;
+    *)
+        echo "Unsupported architecture: $arch_type" >&2
+        return 1
+        ;;
+  esac
+
+  source_dlv="$ide_home/plugins/go-plugin/lib/dlv/$arch/dlv"
+  destination_dir="${1:-$(pwd)}"
+  destination_dlv="$destination_dir/dlv"
+
+  if [ -x "$source_dlv" ]; then
+    cp -v "$source_dlv" "$destination_dlv"
+  else
+    echo "The executable does not exist at $source_dlv." >&2
+    return 1
+  fi
+}
+
+function oc_ccm_aws_remotedebug {
+  oc_ccm_aws_unmanaged
+
+  find_and_copy_dlv_from_goland_installation
+  tag=$(date +%s)
+  if [[ "$1" != "" ]]; then 
+    tag="$1"
+  fi
+  VERSION=$(git describe --dirty --tags --match='v*')
+  LD_FLAGS="-w -s -X k8s.io/component-base/version.gitVersion=${VERSION} -X main.gitVersion=${VERSION}"
+  GO111MODULE=on CGO_ENABLED=1 go build \
+    -trimpath \
+    -ldflags="${LDFLAGS}" \
+    -gcflags "all=-N -l" \
+    -o=aws-cloud-controller-manager \
+    cmd/aws-cloud-controller-manager/main.go
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Make failed"
+    return 1
+  fi
+
+  podman login quay.io
+  img=$(REGISTRY_AUTH_FILE=/home/gspence/.secrets/pull-secret.txt oc adm release info --pullspecs | grep aws-cloud-controller-manager | awk '{print $2}')
+  if [[ "$img" == "" ]]; then
+    echo "ERROR: Couldn't get current aws-cloud-controller-manager image"
+    return 1
+  fi
+
+  podman pull --authfile /home/${USER}/.secrets/pull-secret.txt $img
+  if [[ $? -ne 0 ]]; then
+    echo "ERROR: Failed to pull $img"
+    return 1
+  fi
+
+  pwd
+  new_img="quay.io/${USER}/aws-cloud-controller-manager:${tag}"
+  cat > Dockerfile <<EOF
+FROM $img
+COPY aws-cloud-controller-manager /usr/bin/
+COPY dlv /usr/bin
+ENTRYPOINT ["dlv", "--listen=:7000", "--api-version=2", "--headless=true", "--accept-multiclient", "exec", "/bin/aws-cloud-controller-manager"]
+EOF
+  podman build -t $new_img -f Dockerfile .
+  rm -f Dockerfile
+  
+  podman push $new_img
+
+  oc_ccm_patch_aws_ccm $new_img
+  echo "Patched AWS CCM to $new_img"
+
+  oc_ccm_patch_aws_dlv_cmd
+
+  oc_ccm_port_forward_dlv_aws
+}
+
+function oc_ccm_patch_aws_dlv_cmd {
+  oc scale --replicas=1 deployment aws-cloud-controller-manager -n openshift-cloud-controller-manager
+  oc patch deployment aws-cloud-controller-manager -n openshift-cloud-controller-manager --type=json -p='[
+  {
+    "op": "replace",
+    "path": "/spec/template/spec/containers/0/command",
+    "value": [
+      "/bin/bash",
+      "-c",
+      "#!/bin/bash\nset -o allexport\nif [[ -f /etc/kubernetes/apiserver-url.env ]]; then\n  source /etc/kubernetes/apiserver-url.env\nfi\nexec dlv --listen=:7000 --api-version=2 --headless=true --accept-multiclient exec /bin/aws-cloud-controller-manager -- \\\n--cloud-provider=aws \\\n--use-service-account-credentials=true \\\n--configure-cloud-routes=false \\\n--leader-elect=false \\\n-v=10\n"
+    ]
+  }
+]'
+}
+
+
+function oc_ccm_aws_unmanaged {
+  oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+  oc scale -n openshift-cloud-controller-manager-operator deployments/cluster-cloud-controller-manager-operator --replicas 0
+}
+
+function oc_ccm_aws_managed {
+  oc scale --replicas 1 -n openshift-cluster-version deployments/cluster-version-operator
+  oc scale -n openshift-cloud-controller-manager-operator deployments/cluster-cloud-controller-manager-operator --replicas 1
+}
+
+function oc_ccm_patch_aws_ccm {
+  if [[ "$1" == "" ]]; then
+    echo "ERROR: You need to provide an image"
+    return 1
+  fi
+  oc scale --replicas 0 -n openshift-cluster-version deployments/cluster-version-operator
+  
+  oc patch -n openshift-cloud-controller-manager deployment/aws-cloud-controller-manager --type=strategic --patch='{"spec":{"template":{"spec":{"containers":[{"name":"cloud-controller-manager","image":"'${1}'","imagePullPolicy":"Always"}]}}}}'
+  
+  # If you want to patch while operator managed...
+  #oc get configmap cloud-controller-manager-images -n openshift-cloud-controller-manager-operator -o json | jq '.data["images.json"] |= fromjson | .data["images.json"].cloudControllerManagerAWS = "'$1'" | .data["images.json"] |= tojson' | kubectl apply -f -
+}
+
+function oc_ccm_port_forward_dlv_aws {
+  if [[ "$KUBECONFIG" == "" ]]; then
+    echo "ERROR: KUBECONFIG needs to be set"
+    return 1
+  fi
+
+  cat > /home/$USER/.config/systemd/user/oc-port-forward-delve.service <<EOF
+[Unit]
+Description=Persistent oc port-forward service for Delve debugger
+After=network.target
+
+[Service]
+RestartSec=1
+Restart=always
+ExecStart=/usr/local/bin/oc --kubeconfig ${KUBECONFIG} port-forward -n openshift-cloud-controller-manager deployment/aws-cloud-controller-manager --address 127.0.0.1 7000:7000
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
+EOF
+
+  systemctl --user daemon-reload
+  systemctl --user enable --now oc-port-forward-delve.service
+  systemctl restart --user oc-port-forward-delve.service
+}
+
+function oc_ccm_get_pods {
+  oc get pods -n openshift-cloud-controller-manager
 }

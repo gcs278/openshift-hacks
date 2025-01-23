@@ -2,7 +2,7 @@
 set -euo pipefail
 
 function print_usage_exit() {
-    echo "usage: $(basename $0) create <VERSION_DIR> {aws|gcp|azure|aws-sts} [MOD_SCRIPT]"
+    echo "usage: $(basename $0) create <VERSION_DIR> {aws|gcp|azure|aws-sts|aws-byovpc} [MOD_SCRIPT]"
     echo "                      delete <CLUSTER_DIR>"
     echo "       e.g. $(basename $0) create 4.10.5 aws"
     exit 1
@@ -50,7 +50,11 @@ if [ -z "$PLATFORM" ]; then print_usage_exit; fi
 # Always remove the building file on exit
 BUILDING_FILE=${CLUSTER_DIR}/building
 function cleanup {
+  rc=$?
   rm -f ${BUILDING_FILE}
+  if [[ $rc -ne 0 ]] && [[ "$PLATFORM" == "aws-byovpc" ]]; then
+    cleanup_byovpc
+  fi
 }
 trap cleanup EXIT
 
@@ -193,6 +197,92 @@ EOF
     #export ARM_TENANT_ID="$(jq -r '.tenantId' $sp_file)"
 }
 
+function create_aws_byovpc_config {
+    AWS_REGION=$(aws configure get region)
+    SSH_KEY=$(<$HOME/.ssh/id_rsa.pub)
+    VPC_TPL_PATH=/tmp/01_vpc.yaml
+    VPC_TPL=file://${VPC_TPL_PATH}
+    VPC_STACK_NAME="$NAME" # make VPC name the cluster name
+ 
+    # Download VPC Template from Github to /tmp
+    if [[ ! -f $VPC_TPL_PATH ]]; then
+      wget -P /tmp https://raw.githubusercontent.com/openshift/installer/master/upi/aws/cloudformation/01_vpc.yaml
+    fi
+    
+    if ! aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation describe-stacks --stack-name $VPC_STACK_NAME > /dev/null; then
+      echo "Creating stack $VPC_STACK_NAME..."
+      aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation create-stack --template-body ${VPC_TPL} --stack-name $VPC_STACK_NAME
+    else
+      echo "ERROR: Stack $VPC_STACK_NAME already exists"
+      echo "Consider deleting it via if it isn't already in use:"
+      echo "   aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation delete-stack --stack-name $VPC_STACK_NAME"
+      exit 1
+    fi
+      
+    # Wait for stack to finish creation
+    while [[ $(aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation describe-stacks --stack-name $VPC_STACK_NAME --output json | jq -r '.Stacks[].StackStatus') != "CREATE_COMPLETE" ]];    do
+      echo "Waiting for stack $VPC_STACK_NAME status to be CREATE_COMPLETE..."
+      sleep 5
+    done
+
+    ALL_SUBNET_IDS=$(aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation describe-stacks --stack-name ${VPC_STACK_NAME} --output json | jq -r '.Stacks[].Outputs[] | select(.OutputKey |   endswith("SubnetIds")).OutputValue')
+
+
+    echo "BYO Subnets: $ALL_SUBNET_IDS"
+    SUBNETS_FORMATTED=$(echo "$ALL_SUBNET_IDS" | tr ' ' '\n' | sed 's/^/    - /')
+
+    cat << EOF > ${CLUSTER_DIR}/install-config.yaml
+apiVersion: v1
+baseDomain: devcluster.openshift.com
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  replicas: 3
+  platform:
+    aws:
+      type: t3a.xlarge
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform:
+    aws:
+      type: t3a.xlarge
+  replicas: 3
+metadata:
+  name: ${NAME}
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: ${SDN_TYPE}
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: ${AWS_REGION}
+    subnets:
+${SUBNETS_FORMATTED}
+publish: External
+pullSecret: '{"auths": ${AUTHS_JSON}}'
+sshKey: '${SSH_KEY}'
+EOF
+}
+
+function cleanup_byovpc {
+  VPC_STACK_NAME="${NAME#aws-byovpc-}" # make VPC name the cluster name
+  AWS_REGION=$(aws configure get region)
+  echo "Deleting stack ${VPC_STACK_NAME}..."
+  if aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation describe-stacks --stack-name $VPC_STACK_NAME > /dev/null; then
+    aws --profile $AWS_PROFILE --region $AWS_REGION cloudformation delete-stack --stack-name $VPC_STACK_NAME
+  else
+    echo "Stack ${VPC_STACK_NAME} already deleted"
+  fi
+}
+
 function create_aws_sts_config {
     AWS_REGION=$(aws configure get region)
     AWS_ACCOUNT=$(aws sts get-caller-identity | awk '{print $1}')
@@ -259,7 +349,7 @@ function create_ibmcloud_config {
     
     cat << EOF > ${CLUSTER_DIR}/install-config.yaml
 apiVersion: v1
-baseDomain: ocp-test.gspence.com
+baseDomain: ibm.devcluster.openshift.com
 compute:
 - architecture: amd64
   hyperthreading: Enabled
@@ -317,6 +407,9 @@ function create() {
     elif [ "$PLATFORM" == "aws-sts" ]; then
         mkdir "$CLUSTER_DIR"
         create_aws_sts_config
+    elif [ "$PLATFORM" == "aws-byovpc" ]; then
+        mkdir "$CLUSTER_DIR"
+        create_aws_byovpc_config
     elif [ "$PLATFORM" == "azure" ]; then
         mkdir "$CLUSTER_DIR"
         create_azure_config
@@ -353,8 +446,10 @@ function create() {
 
 function delete() {
   if [[ -f ${CLUSTER_DIR}/metadata.json ]]; then 
+    export IC_API_KEY=$(cat ~/.ibmcloud/apiKey)
     GOOGLE_APPLICATION_CREDENTIALS=~/.gcloud/ocp_installer_access_key.json \
       ${INSTALLER} destroy cluster --dir="$CLUSTER_DIR"
+    cleanup_byovpc
   else
     echo "Not a real cluster, just deleting dir"
   fi
