@@ -55,7 +55,7 @@ metadata:
   annotations:
     haproxy.router.openshift.io/rewrite-target: '/foo'
 spec:
-  path: "/test#"
+  path: /test' '
   port:
     targetPort: 8676
   to:

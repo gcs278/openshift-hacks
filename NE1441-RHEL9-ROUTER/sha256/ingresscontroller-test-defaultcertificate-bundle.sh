@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cat example.crt example-inter.crt exampleca.crt > example-combo.crt
+#cat example.crt example-inter.crt exampleca.crt > example-combo.crt
+cat example.crt exampleca.crt > example-combo.crt
 oc delete secret -n openshift-ingress router-cert
 oc create secret -n openshift-ingress tls router-cert --key=example.key --cert=example-combo.crt
 

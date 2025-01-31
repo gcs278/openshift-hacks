@@ -49,7 +49,7 @@ backend test
   #http-request replace-path '^\Q/bar\'\''\E(.*)$' /\1
   #http-request replace-path ^/?$*?(.*)$ "/foo\1"
 
-  http-request replace-path ^/(.*)$ "/foo\1"
+  http-request replace-path ^/[a-Z](.*)$ "/foo\1"
   
   #http-request replace-path ^/test()(.*)$ '/foo\1'
   

@@ -1,12 +1,8 @@
 #!/bin/bash
 
-cat example.crt exampleca.crt > example-combo.crt
-#cat exampleca.crt example.crt > example-combo.crt
+cat example.crt example-inter.crt exampleca.crt > example-combo.crt
 oc delete secret -n openshift-ingress router-cert
 oc create secret -n openshift-ingress tls router-cert --key=example.key --cert=example-combo.crt
-#oc create secret generic router-cert -n openshift-ingress \
-#  --from-file=tls.key=example.key \
-#  --from-file=tls.crt=example-combo.crt
 
 #domain=$(oc get ingresses.config/cluster -o jsonpath={.spec.domain})
 domain=$(oc get dnses cluster -o jsonpath={.spec.baseDomain})

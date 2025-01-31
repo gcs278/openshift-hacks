@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-bind-capability
+  labels:
+    app: test-bind-capability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-bind-capability
+  template:
+    metadata:
+      labels:
+        app: test-bind-capability
+      annotations:
+        openshift.io/required-scc: restricted
+    spec:
+      containers:
+      - name: test-container
+        image: python:3.9-slim  # Python image with slim footprint
+        command:
+          - python3
+          - -c
+          - |
+            import ctypes, socket, time
+
+            # Check CAP_NET_BIND_SERVICE
+            def check_net_bind_service():
+                CAP_NET_BIND_SERVICE = 12  # Capability ID for NET_BIND_SERVICE
+
+                class CapHeader(ctypes.Structure):
+                    _fields_ = [("version", ctypes.c_uint32), ("pid", ctypes.c_int)]
+
+                class CapData(ctypes.Structure):
+                    _fields_ = [("effective", ctypes.c_uint32), ("permitted", ctypes.c_uint32), ("inheritable", ctypes.c_uint32)]
+
+                header = CapHeader(version=0x20080522, pid=0)  # Current process
+                data = CapData()
+
+                libc = ctypes.CDLL("libc.so.6", use_errno=True)
+
+                if libc.capget(ctypes.byref(header), ctypes.byref(data)) != 0:
+                    errno = ctypes.get_errno()
+                    raise OSError(errno, f"capget failed: {os.strerror(errno)}")
+
+                if data.effective & (1 << CAP_NET_BIND_SERVICE):
+                    print("CAP_NET_BIND_SERVICE is enabled.")
+                else:
+                    print("CAP_NET_BIND_SERVICE is NOT enabled.")
+
+            # Print capability
+            check_net_bind_service()
+
+            # Try binding to port 80
+            try:
+                s = socket.socket()
+                s.bind(('0.0.0.0', 80))
+                print("Bound to port 80 successfully!")
+                time.sleep(100000)
+            except PermissionError as e:
+                print(f"Permission denied: {e}")
+            except Exception as e:
+                print(f"Error: {e}")
+        securityContext:
+          runAsUser: 1001
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+              - NET_BIND_SERVICE

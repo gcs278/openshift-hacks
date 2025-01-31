@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-bind-privileged
+  labels:
+    app: test-bind
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-bind
+  template:
+    metadata:
+      labels:
+        app: test-bind
+    spec:
+      containers:
+      - name: test-container
+        image: python:3.9-slim
+        command: ["python3", "-c", "import socket,time; s=socket.socket(); s.bind(('0.0.0.0', 80)); print('Bound successfully!'); time.sleep(10000);"]
+        #image: busybox
+        #command: ["sh", "-c", "nc -l -p 80"]
+        securityContext:
+          #runAsNonRoot: true
+          #runAsUser: 1001
+          allowPrivilegeEscalation: false
+          capabilities:
+            add:
+              - NET_BIND_SERVICE
+            drop:
+              - All
