@@ -1,0 +1,85 @@
+# Example Istio CR
+# This mirrors what the OpenShift gatewayclass controller creates
+# Based on cluster-ingress-operator/pkg/operator/controller/gatewayclass/istio.go
+
+apiVersion: sailoperator.io/v1
+kind: Istio
+metadata:
+  name: openshift-gateway
+spec:
+  # Namespace where Istio control plane will be deployed
+  namespace: openshift-ingress
+
+  # Update strategy - InPlace means no rolling updates
+  updateStrategy:
+    type: InPlace
+
+  # Version of Istio to deploy
+  version: v1.27.3
+
+  values:
+    # Global Istio configuration
+    global:
+      # Disable default PodDisruptionBudget
+      defaultPodDisruptionBudget:
+        enabled: false
+
+      # Istio namespace
+      istioNamespace: openshift-ingress
+
+      # High priority for control plane pods
+      priorityClassName: system-cluster-critical
+
+      # CA bundle ConfigMap name
+      trustBundleName: openshift-gw-ca-root-cert
+
+    # Mesh-wide configuration
+    meshConfig:
+      # Enable access logs to stdout
+      accessLogFile: /dev/stdout
+
+      # Default proxy configuration
+      defaultConfig:
+        # Disable extra HTTP headers
+        proxyHeaders:
+          envoyDebugHeaders:
+            disabled: true
+          metadataExchangeHeaders:
+            mode: IN_MESH
+          server:
+            disabled: true
+
+      # Disable traditional ingress controller mode
+      ingressControllerMode: "OFF"
+
+    # Pilot (istiod) configuration
+    pilot:
+      # Disable CNI
+      cni:
+        enabled: false
+
+      # Enable pilot
+      enabled: true
+
+      # Environment variables for istiod
+      env:
+        ENABLE_GATEWAY_API_MANUAL_DEPLOYMENT: "false"
+        PILOT_ENABLE_ALPHA_GATEWAY_API: "false"
+        PILOT_ENABLE_GATEWAY_API: "true"
+        PILOT_ENABLE_GATEWAY_API_CA_CERT_ONLY: "true"
+        PILOT_ENABLE_GATEWAY_API_COPY_LABELS_ANNOTATIONS: "false"
+        PILOT_ENABLE_GATEWAY_API_DEPLOYMENT_CONTROLLER: "true"
+        PILOT_ENABLE_GATEWAY_API_GATEWAYCLASS_CONTROLLER: "false"
+        PILOT_ENABLE_GATEWAY_API_STATUS: "true"
+        PILOT_GATEWAY_API_CONTROLLER_NAME: openshift.io/gateway-controller/v1
+        PILOT_GATEWAY_API_DEFAULT_GATEWAYCLASS_NAME: openshift-default
+        PILOT_MULTI_NETWORK_DISCOVER_GATEWAY_API: "false"
+
+      # Pod annotations for workload partitioning
+      podAnnotations:
+        target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+
+    # Sidecar injector configuration
+    sidecarInjectorWebhook:
+      # Don't enable injection by default - require explicit opt-in
+      enableNamespacesByDefault: false

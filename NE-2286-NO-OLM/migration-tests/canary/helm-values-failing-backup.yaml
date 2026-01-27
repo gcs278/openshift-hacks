@@ -1,0 +1,41 @@
+USER-SUPPLIED VALUES:
+global:
+  istioNamespace: openshift-ingress
+  priorityClassName: system-cluster-critical
+meshConfig:
+  accessLogFile: /dev/stdout
+  defaultConfig:
+    discoveryAddress: istiod-openshift-gateway-helm.openshift-ingress.svc:15012
+    proxyHeaders:
+      attemptCount:
+        value: ""
+      envoyDebugHeaders:
+        value: ""
+      forwardedClientCert: SANITIZE
+      metadataExchangeHeaders:
+        mode: IN_MESH
+      requestId:
+        value: ""
+      server:
+        value: ""
+  ingressControllerMode: "Off"
+pilot:
+  env:
+    ENABLE_GATEWAY_API_MANUAL_DEPLOYMENT: "false"
+    PILOT_ENABLE_ALPHA_GATEWAY_API: "false"
+    PILOT_ENABLE_GATEWAY_API: "true"
+    PILOT_ENABLE_GATEWAY_API_CA_CERT_ONLY: "true"
+    PILOT_ENABLE_GATEWAY_API_COPY_LABELS_ANNOTATIONS: "false"
+    PILOT_ENABLE_GATEWAY_API_DEPLOYMENT_CONTROLLER: "true"
+    PILOT_ENABLE_GATEWAY_API_GATEWAYCLASS_CONTROLLER: "false"
+    PILOT_ENABLE_GATEWAY_API_STATUS: "true"
+    PILOT_GATEWAY_API_CONTROLLER_NAME: openshift.io/gateway-controller/v1
+    PILOT_GATEWAY_API_DEFAULT_GATEWAYCLASS_NAME: openshift-default
+    PILOT_MULTI_NETWORK_DISCOVER_GATEWAY_API: "false"
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+revision: openshift-gateway-helm
+sidecarInjectorWebhook:
+  enableNamespacesByDefault: false

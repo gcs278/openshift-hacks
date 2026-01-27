@@ -1,0 +1,46 @@
+# Helm values for the new helm-direct Istio control plane
+# This will be installed with a different revision to run alongside Sail-managed Istio
+
+# Global Istio configuration
+global:
+  # Istio namespace
+  istioNamespace: openshift-ingress
+
+# Pilot (istiod) configuration
+pilot:
+  enabled: true
+  # Environment variables for istiod - match OpenShift configuration
+  env:
+    # Enable Gateway API support
+    PILOT_ENABLE_GATEWAY_API: "true"
+    PILOT_ENABLE_ALPHA_GATEWAY_API: "false"
+    PILOT_ENABLE_GATEWAY_API_STATUS: "true"
+    PILOT_ENABLE_GATEWAY_API_DEPLOYMENT_CONTROLLER: "true"
+
+    # Disable default GatewayClass creation
+    PILOT_ENABLE_GATEWAY_API_GATEWAYCLASS_CONTROLLER: "false"
+
+    # Use our custom GatewayClass name
+    PILOT_GATEWAY_API_DEFAULT_GATEWAYCLASS_NAME: "openshift-default"
+
+    PILOT_GATEWAY_API_CONTROLLER_NAME: "openshift.io/gateway-controller/v1"
+
+    # Disable multi-network features
+    PILOT_MULTI_NETWORK_DISCOVER_GATEWAY_API: "false"
+
+    # Disable manual deployment mode
+    ENABLE_GATEWAY_API_MANUAL_DEPLOYMENT: "false"
+
+    # Only create CA bundle ConfigMap where needed
+    PILOT_ENABLE_GATEWAY_API_CA_CERT_ONLY: "true"
+
+    # Don't copy labels/annotations to created resources
+    PILOT_ENABLE_GATEWAY_API_COPY_LABELS_ANNOTATIONS: "false"
+
+# Sidecar injector configuration
+sidecarInjectorWebhook:
+  # Don't enable injection by default
+  enableNamespacesByDefault: false
+
+# Revision-specific settings (will be overridden by --set revision=...)
+revision: ""
