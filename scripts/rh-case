@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# Query Red Hat support cases via API.
+# Usage:
+#   rh-case <case-number>              View a case
+#   rh-case <case-number> comments    View case comments
+#   rh-case <case-number> attachments View case attachments
+#   rh-case --store-token             Store/refresh offline token in keychain
+
+set -euo pipefail
+
+CASE_NUMBER="${1:-}"
+
+usage() {
+    echo "Usage: rh-case <case-number> [comments|attachments]"
+    echo "       rh-case --store-token"
+    exit 1
+}
+
+store_token() {
+    echo "1. Go to: https://access.redhat.com/management/api"
+    echo "2. Log in and click 'Generate Token'"
+    echo "3. Paste the offline token below (input hidden):"
+    read -r -s TOKEN
+    echo
+    if [[ -z "$TOKEN" ]]; then
+        echo "ERROR: No token entered." >&2
+        exit 1
+    fi
+    echo -n "$TOKEN" | secret-tool store --label="RH API Offline Token" service redhat key RH_API_OFFLINE_TOKEN
+    echo "Token stored successfully."
+    exit 0
+}
+
+get_access_token() {
+    OFFLINE_TOKEN=$(secret-tool lookup service redhat key RH_API_OFFLINE_TOKEN 2>/dev/null || true)
+    if [[ -z "$OFFLINE_TOKEN" ]]; then
+        echo "ERROR: No offline token found in keychain." >&2
+        echo "Run: rh-case --store-token" >&2
+        exit 1
+    fi
+
+    RESPONSE=$(curl -s -X POST \
+        "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token" \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        --data-urlencode "grant_type=refresh_token" \
+        --data-urlencode "client_id=rhsm-api" \
+        --data-urlencode "refresh_token=$OFFLINE_TOKEN")
+
+    ACCESS_TOKEN=$(echo "$RESPONSE" | python3 -c \
+        "import sys,json; d=json.load(sys.stdin); print(d.get('access_token',''))" 2>/dev/null || true)
+
+    if [[ -z "$ACCESS_TOKEN" ]]; then
+        ERROR=$(echo "$RESPONSE" | python3 -c \
+            "import sys,json; d=json.load(sys.stdin); print(d.get('error_description', d.get('error','unknown')))" 2>/dev/null || echo "unknown")
+        echo "ERROR: Token exchange failed: $ERROR" >&2
+        echo "Your offline token may have expired. To refresh:" >&2
+        echo "  1. Go to https://access.redhat.com/management/api" >&2
+        echo "  2. Click 'Generate Token'" >&2
+        echo "  3. Run: rh-case --store-token" >&2
+        exit 1
+    fi
+
+    echo "$ACCESS_TOKEN"
+}
+
+if [[ "$CASE_NUMBER" == "--store-token" ]]; then
+    store_token
+fi
+
+if [[ -z "$CASE_NUMBER" ]]; then
+    usage
+fi
+
+SUBCOMMAND="${2:-}"
+ACCESS_TOKEN=$(get_access_token)
+BASE_URL="https://api.access.redhat.com/support/v1/cases/${CASE_NUMBER}"
+URL="${BASE_URL}${SUBCOMMAND:+/$SUBCOMMAND}"
+
+curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$URL" | python3 -m json.tool
